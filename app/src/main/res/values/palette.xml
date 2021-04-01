@@ -22,4 +22,7 @@
     <!--  altri colori  -->
     <color name="pearl_violet">#8673a1</color>
     <color name="sugar_paper">#e0ffff</color>
+    <color name="blue_grey">#546e7a</color>
+    <color name="dark_blue_grey">#29434e</color>
+    <color name="light_blue_grey">#819ca9</color>
 </resources>

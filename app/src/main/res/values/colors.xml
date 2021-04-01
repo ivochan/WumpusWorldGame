@@ -8,4 +8,5 @@
     <color name="darkColorPrimary">@color/dark_indigo_600</color>
     <color name="darkColorPrimaryVariant">@color/indigo_900</color>
     <color name="darkColorOnPrimary">@color/sugar_paper</color>
+    <!-- altri colori -->
 </resources>

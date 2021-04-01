@@ -17,6 +17,6 @@
     <string name="wumpus">WUMPUS</string>
     <string name="hero_text">Here you are! Let\'s go on adventure, brave hero!</string>
     <string name="wumpus_text"> Here you are! Hurry up, poor Wumpus, run away!</string>
-    <string name="hello">ciao</string>
-    <string name="textview">test</string>
+    <string name="hero_side_title">Welcome Hero!</string>
+    <string name="test">ciao</string>
 </resources>

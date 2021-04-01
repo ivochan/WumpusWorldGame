@@ -21,4 +21,6 @@
     <string name="wumpus">WUMPUS</string>
     <string name="hero_text">Inizia l\'avventura, coraggioso eroe!</string>
     <string name="wumpus_text">Presto, povero Wumpus, scappa!</string>
+    <string name="hero_side_title">Benvenuto Avventuriero!</string>
+    <string name="test">ciao</string>
 </resources>

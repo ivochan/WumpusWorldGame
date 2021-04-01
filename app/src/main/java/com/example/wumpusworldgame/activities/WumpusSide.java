@@ -1,8 +1,10 @@
-package com.example.wumpusworldgame;
+package com.example.wumpusworldgame.activities;
 
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.wumpusworldgame.R;
 
 /** class WumpusSide
  * classe che implementa la modalita' di gioco in cui

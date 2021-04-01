@@ -1,2 +1,5 @@
+include ':wumpus_world_game_backend'
+include ':wumpus_world_game'
+include ':wumpus_world_game_backend'
 include ':app'
 rootProject.name = "WumpusWorldGame"
