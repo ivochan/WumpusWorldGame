@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Il gioco del mondo del Wumpus</string>
+    <string name="dark_forest">foresta_oscura_immagine_main_activity</string>
+    <string name="game_title">Insegui il Wumpus... Oppure no?!?</string>
+    <string name="game_intro">
+        <br>Cia....aaaaargh...Ehm...Ciao!</br>
+        <br>Sei stato trasportato nel mondo del Wumpus,</br>
+        <br>una foresta oscura e pericolosa...</br>
+        <br>Vuoi metterti alla prova? Si?</br>
+        <br>Sei alla ricerca di gloria e ricchezze?</br>
+        <br>Scoprirai dove si nasconde il mostro e saccheggerai la sua caverna piena di tesori?</br>
+        <br>Riuscirai a sopravvivere alla sua ira?</br>
+        <br>Oppure sei proprio tu la creatura inseguita dal cacciatore? Si sei tu!</br>
+        <br>Riuscirai a difendere la tua tana?</br>
+        <br>Sopravviverai al cacciatore?</br>
+        <br>A te la scelta…</br>
+        <br>Vivi la storia come già è stata scritta oppure buttati a capofitto in un mondo del
+            Wumpus tutto sotto sopra!</br></string>
+    <string name="hero">AVVENTURIERO</string>
+    <string name="wumpus">WUMPUS</string>
+    <string name="hero_text">Inizia l\'avventura, coraggioso eroe!</string>
+    <string name="wumpus_text">Presto, povero Wumpus, scappa!</string>
+</resources>

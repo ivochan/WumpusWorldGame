@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">The Wumpus World Game</string>
+    <string name="dark_forest">dark_forest_main_activity_image</string>
+    <string name="game_title">Hunt the Wumpus...or not?</string>
+    <string name="game_intro">
+        <br> Hi...iiiiiih...Uh... Hello!</br>
+        <br> You have been carried in the Wumpus\' world, a dark and dangerous place...</br>
+        <br> Do you want to test yourself? Really?</br>
+        <br> Are you looking for glory and richness?</br>
+        <br> Will you find out where the monster is and steal its treasures?</br>
+        <br> Will you capable of survive his anger?</br>
+        <br> Or wait...Are you the creature that is been chased by the hunter?Yep, it is you!</br>
+        <br> Will you protect your lair? Will survive the hunt? The choice is yours…</br>
+        <br> Experience history as it has already been written or live into the world of the Wumpus
+            that now is upside down!</br></string>
+    <string name="hero">HERO</string>
+    <string name="wumpus">WUMPUS</string>
+    <string name="hero_text">Here you are! Let\'s go on adventure, brave hero!</string>
+    <string name="wumpus_text"> Here you are! Hurry up, poor Wumpus, run away!</string>
+    <string name="hello">ciao</string>
+    <string name="textview">test</string>
+</resources>
