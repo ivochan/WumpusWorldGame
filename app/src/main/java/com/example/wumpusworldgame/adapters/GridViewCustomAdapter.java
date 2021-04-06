@@ -1,4 +1,4 @@
-package com.example.wumpusworldgame.adapter;
+package com.example.wumpusworldgame.adapters;
 import java.util.ArrayList;
 import android.app.Activity;
 import android.content.Context;

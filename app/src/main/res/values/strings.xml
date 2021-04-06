@@ -17,6 +17,32 @@
     <string name="wumpus">WUMPUS</string>
     <string name="hero_text">Here you are! Let\'s go on adventure, brave hero!</string>
     <string name="wumpus_text"> Here you are! Hurry up, poor Wumpus, run away!</string>
-    <string name="hero_side_title">Welcome Hero!</string>
-    <string name="test">ciao</string>
+    <!--activities -->
+    <string name="hero_side_title">Hero Side</string>
+    <string name="wumpus_side_title">Wumpus Side</string>
+    <!-- main menu -->
+    <string name="menu1">Game information</string>
+    <string name="menu2">Score</string>
+    <string name="menu3">Settings</string>
+    <!-- regole del gioco da tradurre-->
+    <!-- regole del gioco -->
+    <string name="game_info">
+        <br>Questa applicazione è ispirata al videogioco \"Hunt the Wumpus\" di Gregory Yob.</br>
+        <br>Sono state realizzate due modalità di gioco, per consentire </br>
+        <br>a te, mio caro giocatore, di impersonare un coraggioso avventuriero,</br>
+        <br>oppure una creatura misteriosa.</br>
+        <br>Se ti troverai nei panni dell\'avventuriero, mi raccomando, evita di cadere nei fossati,</br>
+        <br>cerca di non venire divorato da un mostro spaventoso ,</br>
+        <br>ed anzi, scopri dove nasconde il suo immenso tesoro!</br>
+        <br>Se invece sarai il Wumpus, la creatura che si nasconde nei meandri della cupa foresta,</br>
+        <br>cerca di non venire ucciso, un cacciatore ti sta alle costole,</br>
+        <br>In ogni caso, che tu sia il Wumpus oppure l\'Avventuriero, divertiti!</br>
+        <br>Ah, dimenticavo... Se sei così pigro\\a che neanche giocare ti è sufficiente</br>
+        <br>per ottenere il \"Premio del Sommo Sovrano Poltrone\" allora lascia che sia io</br>
+        <br>a giocare per te, con la modalità di gioco automatica!</br>
+    </string>
+    <string name="dark_night">creepy_night_game_info_activity</string>
+    <string name="game_info_title">Game Information</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
