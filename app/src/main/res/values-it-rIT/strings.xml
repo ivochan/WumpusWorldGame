@@ -49,5 +49,6 @@
     <string name="game_mode">Modalità di gioco</string>
     <string name="automatic_mode">Giocatore automatico</string>
     <string name="human_mode">Gioco io</string>
-    <string name="map_button">Vedi la mappa di gioco</string>
+    <string name="map_button">Mappa</string>
+    <string name="candle">candela icona per informazioni sulla mappa di gioco</string>
 </resources>
