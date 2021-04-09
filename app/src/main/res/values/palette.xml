@@ -26,4 +26,6 @@
     <color name="dark_blue_grey">#29434e</color>
     <color name="light_blue_grey">#819ca9</color>
     <color name="dark_indigo_900">#000051</color>
+    <color name="light_indigo_100">#c5cae9</color>
+    <color name="dark_red_900">#7f0000</color>
 </resources>

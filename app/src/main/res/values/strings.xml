@@ -25,24 +25,25 @@
     <string name="menu2">Score</string>
     <string name="menu3">Settings</string>
     <!-- regole del gioco da tradurre-->
-    <!-- regole del gioco -->
     <string name="game_info">
-        <br>Questa applicazione è ispirata al videogioco \"Hunt the Wumpus\" di Gregory Yob.</br>
-        <br>Sono state realizzate due modalità di gioco, per consentire </br>
-        <br>a te, mio caro giocatore, di impersonare un coraggioso avventuriero,</br>
-        <br>oppure una creatura misteriosa.</br>
-        <br>Se ti troverai nei panni dell\'avventuriero, mi raccomando, evita di cadere nei fossati,</br>
-        <br>cerca di non venire divorato da un mostro spaventoso ,</br>
-        <br>ed anzi, scopri dove nasconde il suo immenso tesoro!</br>
-        <br>Se invece sarai il Wumpus, la creatura che si nasconde nei meandri della cupa foresta,</br>
-        <br>cerca di non venire ucciso, un cacciatore ti sta alle costole,</br>
-        <br>In ogni caso, che tu sia il Wumpus oppure l\'Avventuriero, divertiti!</br>
-        <br>Ah, dimenticavo... Se sei così pigro\\a che neanche giocare ti è sufficiente</br>
-        <br>per ottenere il \"Premio del Sommo Sovrano Poltrone\" allora lascia che sia io</br>
-        <br>a giocare per te, con la modalità di gioco automatica!</br>
+        Ispirato al videogioco \"<b>Hunt the Wumpus</b>\" di <b>Gregory Yob</b>,
+        questo gioco presenta due modalità, in modo che tu, mio caro giocatore, possa
+        impersonare un coraggioso avventuriero,oppure una creatura misteriosa.
+        Se ti troverai nei panni dell\'<b>Avventuriero</b> evita di cadere nei fossati,
+        non farti divorare dal mostro ed anzi, scopri dove nasconde il suo immenso tesoro!
+        Se invece sarai il <b>Wumpus</b>, la creatura che si nasconde nei meandri della cupa foresta,
+        fuggi dal cacciatore che ti sta alle costole, evitando le sue trappole e trova il passaggio
+        segreto che ti porterà in salvo.
+        In ogni caso, che tu sia il Wumpus oppure l\'Avventuriero, divertiti!
+        Ah, dimenticavo... Se sei così pigro-a da ottenere il \"Premio del Sommo Poltrone\"
+        allora lascia che sia io a giocare per te, con la modalità di gioco automatica!
     </string>
     <string name="dark_night">creepy_night_game_info_activity</string>
     <string name="game_info_title">Game Information</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="loading">Loading game data ...</string>
+    <string name="loading_image">loading bat image</string>
+    <string name="game_mode">Game Mode</string>
+    <string name="automatic_mode">Automatic Player</string>
+    <string name="human_mode">Human Player</string>
+    <string name="map_button">View Game map</string>
 </resources>
