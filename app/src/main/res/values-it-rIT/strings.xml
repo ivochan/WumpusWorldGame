@@ -51,4 +51,5 @@
     <string name="human_mode">Gioco io</string>
     <string name="map_button">Mappa</string>
     <string name="candle">candela icona per informazioni sulla mappa di gioco</string>
+    <string name="todo">TODO</string>
 </resources>

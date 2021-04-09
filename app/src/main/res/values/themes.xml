@@ -1,8 +1,8 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.AppCompat.DayNight" parent="Theme.AppCompat.Light" >
+    <style name="Theme.AppCompat.DayNight" parent="Theme.AppCompat.Light">
         <!-- Primary brand color. -->
-         <!-- color for the app bar and other primary UI elements -->
+        <!-- color for the app bar and other primary UI elements -->
         <item name="colorPrimary">@color/lightColorPrimary</item>
         <!-- a darker variant of the primary color, used for the status bar -->
         <item name="colorPrimaryVariant">@color/lightColorPrimaryVariant</item>
@@ -11,10 +11,16 @@
         <!-- colore del testo -->
         <item name="android:textColorPrimary">@color/lightColorOnPrimary</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">@color/lightColorPrimaryVariant</item>
+        <item name="android:statusBarColor" tools:targetApi="l">@color/lightColorPrimaryVariant
+        </item>
         <!-- Window background color -->
         <item name="android:windowBackground">@drawable/gradient_background</item>
         <!-- Menu colors -->
         <item name="android:itemBackground">@color/light_indigo_600</item>
+    </style>
+
+    <style name="ThemeOverlay.WumpusWorldGame.FullscreenContainer" parent="">
+        <item name="fullscreenBackgroundColor">@color/light_blue_600</item>
+        <item name="fullscreenTextColor">@color/light_blue_A200</item>
     </style>
 </resources>

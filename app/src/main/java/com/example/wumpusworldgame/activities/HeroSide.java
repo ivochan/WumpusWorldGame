@@ -1,5 +1,4 @@
 package com.example.wumpusworldgame.activities;
-import android.content.Context;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -10,12 +9,15 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.GridView;
-import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
+
 import com.example.wumpusworldgame.R;
 import com.example.wumpusworldgame.adapters.GridViewCustomAdapter;
+
 import java.util.ArrayList;
 import game.structure.map.GameMap;
 import game.structure.map.MapConfiguration;
@@ -47,9 +49,6 @@ public class HeroSide extends AppCompatActivity {
         mp = MediaPlayer.create(HeroSide.this,R.raw.the_good_fight);
 
         //##### schermata di caricamento #####
-       CharSequence text = "Hello toast!";
-        int duration = Toast.LENGTH_SHORT;
-
         LayoutInflater inflater = getLayoutInflater();
         //creazione del layout
         View load_layout = inflater.inflate(R.layout.loading_custom_toast, (ViewGroup)findViewById(R.id.loading_toast_container));
@@ -60,8 +59,7 @@ public class HeroSide extends AppCompatActivity {
         load_toast.setDuration(Toast.LENGTH_SHORT);
         load_toast.setView(load_layout);
         load_toast.show();
-
-        //##### schermata di gioco #####
+          //##### schermata di gioco #####
         //esecuzione clip audio
         mp.start();
         //creazione della matrice di gioco
@@ -139,5 +137,6 @@ public class HeroSide extends AppCompatActivity {
         }//end switch
         return false;
     }//onOptionsItemSelected(MenuItem)
+
 
 }//end HeroSide
