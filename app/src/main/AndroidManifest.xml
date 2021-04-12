@@ -18,7 +18,6 @@
         <activity android:name=".activities.HeroSide"
             android:label="@string/hero_side_title"
             android:parentActivityName=".activities.MainActivity">
-            <!-- navigazione all'indietro -->
         </activity>
 
         <activity android:name=".activities.WumpusSide"
@@ -27,7 +26,8 @@
         </activity>
 
         <activity android:name=".activities.GameInformation"
-            android:label="@string/game_info_title">
+            android:label="@string/game_info_title"
+            android:parentActivityName=".activities.MainActivity">
         </activity>
     </application>
 

@@ -20,10 +20,6 @@
     <!--activities -->
     <string name="hero_side_title">Hero Side</string>
     <string name="wumpus_side_title">Wumpus Side</string>
-    <!-- main menu -->
-    <string name="menu1">Game information</string>
-    <string name="menu2">Score</string>
-    <string name="menu3">Settings</string>
     <!-- regole del gioco da tradurre-->
     <string name="game_info">
         Ispirato al videogioco \"<b>Hunt the Wumpus</b>\" di <b>Gregory Yob</b>,
@@ -42,14 +38,16 @@
     <string name="game_info_title">Game Information</string>
     <string name="loading">Loading game data ...</string>
     <string name="loading_image">loading bat image</string>
-    <string name="game_mode">Game Mode</string>
-    <string name="automatic_mode">Automatic Player</string>
-    <string name="human_mode">Human Player</string>
-    <string name="map_button">Game map</string>
-    <string name="candle">candle icon for info on game map</string>
-    <string name="dummy_button">Dummy Button</string>
-    <string name="dummy_content">DUMMY\nCONTENT</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="todo">TODO</string>
+    <!-- main menu options -->
+    <string name="menu1">New Game</string>
+    <string name="menu2">Solve</string>
+    <string name="menu3">Information</string>
+    <string name="menu4">Score</string>
+    <string name="menu5">Settings</string>
+    <!-- others -->
+    <string name="score">Your score: </string>
+    <string name="shot">Remaining shots: </string>
+    <string name="shots_value">h</string>
+    <string name="score_value">s</string>
+    <string name="game_message">message</string>
 </resources>

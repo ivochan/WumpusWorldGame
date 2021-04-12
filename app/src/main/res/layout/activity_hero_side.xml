@@ -7,12 +7,37 @@
     android:background="@drawable/hero_background"
     tools:context=".activities.HeroSide">
 
+    <View
+        android:id="@+id/divider1"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/dark_indigo_600"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.069" />
+
+    <View
+        android:id="@+id/divider2"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/dark_indigo_600"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.029" />
+
     <TextView
         android:id="@+id/textView"
-        android:layout_width="329dp"
-        android:layout_height="25dp"
+        android:layout_width="351dp"
+        android:layout_height="44dp"
+        android:background="@drawable/game_message_box"
         android:gravity="center"
-        android:text="@string/hero_side_title"
+        android:text="@string/game_message"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -42,18 +67,64 @@
 
     </GridView>
 
-    <androidx.appcompat.widget.SwitchCompat
-        android:id="@+id/game_mode"
-        android:layout_width="128dp"
-        android:layout_height="38dp"
-        android:text="@string/game_mode"
-        android:textOff="@string/human_mode"
-        android:textOn="@string/automatic_mode"
+    <TextView
+        android:id="@+id/score"
+        android:layout_width="84dp"
+        android:layout_height="23dp"
+        android:text="@string/score"
+        android:textColor="@color/dark_indigo_900"
+        android:textSize="16sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.114"
+        app:layout_constraintHorizontal_bias="0.044"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.027" />
+        app:layout_constraintVertical_bias="0.031" />
+
+    <TextView
+        android:id="@+id/score_value"
+        android:layout_width="38dp"
+        android:layout_height="23dp"
+        android:gravity="center"
+        android:text="@string/score_value"
+        android:textColor="@color/dark_indigo_900"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.261"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.032" />
+
+    <TextView
+        android:id="@+id/shot"
+        android:layout_width="111dp"
+        android:layout_height="23dp"
+        android:text="@string/shot"
+        android:textColor="@color/dark_indigo_900"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.836"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.032" />
+
+    <TextView
+        android:id="@+id/shot_value"
+        android:layout_width="33dp"
+        android:layout_height="23dp"
+        android:text="@string/shots_value"
+        android:textColor="@color/dark_indigo_900"
+        android:textSize="16sp"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.957"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.031" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

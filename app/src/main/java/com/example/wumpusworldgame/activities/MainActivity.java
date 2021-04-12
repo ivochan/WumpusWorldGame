@@ -16,7 +16,9 @@ import com.example.wumpusworldgame.R;
  * Deve estendere la classe AppCompatActivity proprio per essere implementata come Activity.
  */
 public class MainActivity extends AppCompatActivity {
+
     //##### attributi di classe #####
+
     //riproduttore audio
     MediaPlayer mp;
     //pulsante modalita' eroe
@@ -42,7 +44,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         //si invoca il metodo della classe antenata
         super.onCreate(savedInstanceState);
-        /* impostazione del layout
+
+            /* impostazione del layout
          * la struttura grafica scelta per l'Activity e' specificata nel file
          * activity_main.xml nella directory res/layout
          * Gli ID delle risorse sono conservati in una classe Java denominata R,
@@ -102,4 +105,13 @@ public class MainActivity extends AppCompatActivity {
         mp.release();
     }//onPause()
 
+    /**
+     *
+     */
+    @Override
+    protected void onResume() {
+        if(mp != null && !mp.isPlaying())
+            mp.start();
+        super.onResume();
+    }
 }//end MainActivity

@@ -24,10 +24,6 @@
     <!--activity -->
     <string name="hero_side_title">Modalità Avventuriero</string>
     <string name="wumpus_side_title">Modalità Wumpus</string>
-    <!-- menu principale -->
-    <string name="menu1">Informazioni di gioco</string>
-    <string name="menu2">Punteggi</string>
-    <string name="menu3">Impostazioni</string>
     <string name="dark_night">notte_tetra_game_info_activity</string>
     <string name="game_info_title">Informazioni del gioco</string>
     <!-- regole del gioco -->
@@ -46,10 +42,16 @@
     </string>
     <string name="loading">Preparazione del terreno di gioco ...</string>
     <string name="loading_image">immagine di caricamento</string>
-    <string name="game_mode">Modalità di gioco</string>
-    <string name="automatic_mode">Giocatore automatico</string>
-    <string name="human_mode">Gioco io</string>
-    <string name="map_button">Mappa</string>
-    <string name="candle">candela icona per informazioni sulla mappa di gioco</string>
-    <string name="todo">TODO</string>
+    <!-- main menu options -->
+    <string name="menu1">Nuova partita</string>
+    <string name="menu2">Risolvi</string>
+    <string name="menu3">Informazioni</string>
+    <string name="menu4">Punteggi</string>
+    <string name="menu5">Impostazioni</string>
+    <!-- altro-->
+    <string name="score">Punteggio: </string>
+    <string name="shot">Colpi residui: </string>
+    <string name="shots_value">h</string>
+    <string name="score_value">s</string>
+    <string name="game_message">messaggio</string>
 </resources>

@@ -1,7 +1,9 @@
 package com.example.wumpusworldgame.activities;
 
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,6 +20,7 @@ import game.structure.text.GameTranslations;
  */
 public class GameInformation extends AppCompatActivity {
     //##### attributi di classe #####
+    public static int game_mode;
     //riproduttore audio
     MediaPlayer mp;
     //questo metodo viene invocato alla creazione dell'Activity
@@ -44,8 +47,10 @@ public class GameInformation extends AppCompatActivity {
         mp.start();
         //visualizzazione dei crediti
         tcredits.setText(GameMessages.credits);
+
     }//onCreate(Bundle)
     //##### altri metodi #####
+
 
     /** metodo onPause(): void
      * questo metodo blocca l'esecuzione della clip audio
@@ -58,5 +63,48 @@ public class GameInformation extends AppCompatActivity {
         //si ferma la clip audio quando l'app viene sospesa
         mp.release();
     }//onPause()
+
+    /**
+     *
+     */
+    @Override
+    protected void onResume() {
+        if(mp != null && !mp.isPlaying())
+            mp.start();
+        super.onResume();
+    }
+
+    @Override
+    public void onBackPressed(){
+        Intent myIntent;
+        if(game_mode==1) {
+            myIntent = new Intent(this, HeroSide.class);
+        }
+        else {
+            myIntent = new Intent(this, WumpusSide.class);
+        }
+        myIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);// clear back stack
+        startActivity(myIntent);
+        finish();
+        return;
+
+    }
+
+    /**
+     *
+     * @param value_game_mode
+     */
+    public static void setGameMode(int value_game_mode){
+        game_mode=value_game_mode;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public static int  getGameMode(){
+        return game_mode;
+    }
+
 
 }//end GameInformation

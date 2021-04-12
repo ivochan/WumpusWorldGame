@@ -11,34 +11,35 @@
 
     <TextView
         android:id="@+id/load_text"
-        android:layout_width="293dp"
-        android:layout_height="23dp"
+        android:layout_width="305dp"
+        android:layout_height="38dp"
         android:text="@string/loading"
         android:textColor="@color/dark_indigo_900"
-        android:textSize="16sp"
+        android:textSize="17sp"
+        android:textStyle="normal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.556"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.905" />
+        app:layout_constraintVertical_bias="0.929" />
 
     <ImageView
         android:id="@+id/load_image"
-        android:layout_width="357dp"
-        android:layout_height="448dp"
+        android:layout_width="358dp"
+        android:layout_height="607dp"
         android:contentDescription="@string/loading_image"
         android:src="@drawable/bat_idle"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.054" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ProgressBar
         android:id="@+id/progressBar"
         style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="299dp"
-        android:layout_height="31dp"
+        android:layout_width="316dp"
+        android:layout_height="39dp"
         android:indeterminate="true"
         android:indeterminateTint="@color/dark_red_900"
         android:indeterminateTintMode="src_in"
@@ -46,6 +47,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.818" />
+        app:layout_constraintVertical_bias="0.804" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -9,16 +9,18 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.GridView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentTransaction;
-
 import com.example.wumpusworldgame.R;
 import com.example.wumpusworldgame.adapters.GridViewCustomAdapter;
-
 import java.util.ArrayList;
+
+import game.player.agent.RandomAgent;
+import game.session.configuration.GameSession;
+import game.session.configuration.Starter;
+import game.session.score.Score;
+import game.session.score.ScoreMemo;
 import game.structure.map.GameMap;
 import game.structure.map.MapConfiguration;
 
@@ -28,6 +30,7 @@ import game.structure.map.MapConfiguration;
  */
 public class HeroSide extends AppCompatActivity {
     //##### attributi di classe #####
+    private final int game_mode = 1;
     //riproduttore audio
     MediaPlayer mp;
     //matrice di gioco
@@ -100,6 +103,25 @@ public class HeroSide extends AppCompatActivity {
         mp.release();
     }//onPause()
 
+    /**
+     *
+     */
+    @Override
+    protected void onResume() {
+        if(mp != null && !mp.isPlaying())
+            mp.start();
+        super.onResume();
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent myIntent = new Intent(this, MainActivity.class);
+        myIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);// clear back stack
+        startActivity(myIntent);
+        finish();
+        return;
+    }
+
     /** metodo onCreateOptionsMenu(Menu): boolean
      * questo metodo serve per visualizzare il menu
      * nella activity corrente     *
@@ -125,18 +147,85 @@ public class HeroSide extends AppCompatActivity {
         int id=item.getItemId();
         switch(id){
             case R.id.Menu1:
-                //gestione della prima voce
-                startActivity(new Intent(this, GameInformation.class));
+                //ritorno alla schermata iniziale
+                newGame();
                 return true;
             case R.id.Menu2:
-                //gestione della seconda voce
+                //risoluzione automatica della partita
+                solveGame();
                 break;
             case R.id.Menu3:
-                //gestione della terza voce
+                //informazioni di gioco
+                gameInfo();
+                return true;
+            case R.id.Menu4:
+                //elenco dei punteggi
+                viewScore();
                 break;
+            case R.id.Menu5:
+                //impostazioni
+                changeSettings();
+                break;
+            default:
+                return super.onOptionsItemSelected(item);
         }//end switch
         return false;
     }//onOptionsItemSelected(MenuItem)
+
+    private void changeSettings() {
+    }
+
+    private void viewScore() {
+    }
+
+    private void solveGame() {
+        //flag avvio partita
+        Starter.setGameStart(true);
+        //si inizializza il punteggio
+        Score.resetScoreData();
+        //si inizializza il file
+        ScoreMemo.createScoreFile();
+        //si istanzia il giocatore automatico
+        RandomAgent player = new RandomAgent();
+        //avvio della partita
+        while(Starter.getGameStart()){
+            //si effettua la mossa
+            player.chooseMove(em, gm);
+        }//end while sessione di gioco
+        //si stampa la mappa di esplorazione
+        System.out.println(em.gameMaptoString());
+        //si mostra il percorso compiuto
+        player.showRunPath();
+        //stato della partita attuale
+        Starter.setGameStart(false);
+        //si resetta la disponibilita' del colpo
+        Starter.setChanceToHit(true);
+        //punteggio
+        Score.totalScore();
+        System.out.println("Questo e' il tuo punteggio:\n"+Score.getScore());
+        //si memorizza il punteggio
+        ScoreMemo.saveScore(Score.ScoreToString());
+
+
+    }
+
+    private void gameInfo() {
+        //si specifica la modalita' di gioco
+        GameInformation.setGameMode(game_mode);
+        //si crea l'intent associato
+        Intent intent = new Intent(this, GameInformation.class);
+        //si apre la scheda delle informazioni del gioco
+        startActivity(intent);
+    }
+
+    //##### metodi per la gestione del menu #####
+    private void newGame() {
+        //si ritorna alla schermata iniziale
+        //per scegliere la modalita' di gioco
+        Intent intent = new Intent(this,MainActivity.class);
+        //si avvia l'activity
+        startActivity(intent);
+    }
 
 
 }//end HeroSide

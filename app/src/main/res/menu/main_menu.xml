@@ -10,5 +10,11 @@
     <item
         android:id="@+id/Menu3"
         android:title="@string/menu3"/>
+    <item
+        android:id="@+id/Menu4"
+        android:title="@string/menu4"/>
+    <item
+        android:id="@+id/Menu5"
+        android:title="@string/menu5"/>
 </menu>
 
