@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
     //##### attributi di classe #####
     //testo animato
     TypeWriter typeWriter;
-    final static int delay = 20;
+    final static int delay = 25;
     //riproduttore audio
     MediaPlayer mp;
     //pulsante modalita' eroe
@@ -55,7 +55,9 @@ public class MainActivity extends AppCompatActivity {
          * - con @tipo_risorsa/nome_risorsa, in XML;
          */
         setContentView(R.layout.activity_main);
+
         //##### inizializzazioni #####
+
         //testo animato
         typeWriter = findViewById(R.id.storia);
         //riproduttore audio
@@ -70,6 +72,7 @@ public class MainActivity extends AppCompatActivity {
         wumpus_game = new Intent(MainActivity.this, WumpusSide.class);
 
         //##### azioni della Activity #####
+
         //esecuzione del testo animato
         animatedText(typeWriter);
         //esecuzione clip audio
@@ -94,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }//onCreate()
 
-    //##### altri metodi #####
+    //##### metodi per la gestione della clip audio #####
 
     /** metodo onPause(): void
      * questo metodo blocca l'esecuzione della clip audio
@@ -108,24 +111,32 @@ public class MainActivity extends AppCompatActivity {
         mp.release();
     }//onPause()
 
-    /**
-     *
+    /** metodo onResume():void
+     * questo metodo riprende l'esecuzione della clip
+     * audio se e' gia' stato istanziato il riproduttore
+     * musicale, se cosi' non e', allora lo crea.
      */
     @Override
     protected void onResume() {
         if(mp != null && !mp.isPlaying())
             mp.start();
         super.onResume();
-    }
+    }//onResume()
 
-    /**
-     *
-     * @param tw
+    //##### altri metodi #####
+
+    /** metodo animatedText(TypeWriter): void
+     * questo metodo realizza l'animazione del
+     * testo che fornisce l'introduzione al gioco
+     * @param tw: TypeWriter
      */
     protected void animatedText(TypeWriter tw){
+        //corpo del testo
         tw.setText("");
+        //intervallo di tempo tra un carattere ed il successivo
         tw.setCharacterDelay(delay);
+        //testo da mostrare con l'animazione
         tw.animateText(""+getResources().getString(R.string.game_intro));
-    }
+    }//animatedText(TypeWriter)
 
 }//end MainActivity
