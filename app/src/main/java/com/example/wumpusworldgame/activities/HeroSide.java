@@ -14,10 +14,11 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.wumpusworldgame.R;
 import com.example.wumpusworldgame.adapters.GridViewCustomAdapter;
+import com.example.wumpusworldgame.services.MenuOptions;
+
 import java.util.ArrayList;
 
 import game.player.agent.RandomAgent;
-import game.session.configuration.GameSession;
 import game.session.configuration.Starter;
 import game.session.score.Score;
 import game.session.score.ScoreMemo;
@@ -30,18 +31,23 @@ import game.structure.map.MapConfiguration;
  */
 public class HeroSide extends AppCompatActivity {
     //##### attributi di classe #####
+    //costante che indica la modalita' di gioco Hero Side
     private final int game_mode = 1;
     //riproduttore audio
-    MediaPlayer mp;
+    private MediaPlayer mp;
     //matrice di gioco
-    GameMap gm;
+    private GameMap gm;
     //matrice di esplorazione
-    GameMap em;
+    private GameMap em;
     //per la matrice di esplorazione
-    GridView list;
+    private GridView list;
     //dati da mostrare nella matrice
-    ArrayList<String> data = new ArrayList<>();
-   //questo metodo viene invocato alla creazione dell'Activity
+    private ArrayList<String> data = new ArrayList<>();
+    //oggetto toast
+    private Toast loading_toast;
+    //layout del toast
+    private View loading_layout;
+    //questo metodo viene invocato alla creazione dell'Activity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //con super si invoca il metodo omonimo della classe antenata
@@ -50,19 +56,14 @@ public class HeroSide extends AppCompatActivity {
         setContentView(R.layout.activity_hero_side);
         //scelta della clip audio
         mp = MediaPlayer.create(HeroSide.this,R.raw.the_good_fight);
-
         //##### schermata di caricamento #####
         LayoutInflater inflater = getLayoutInflater();
         //creazione del layout
-        View load_layout = inflater.inflate(R.layout.loading_custom_toast, (ViewGroup)findViewById(R.id.loading_toast_container));
-        //creazione del toast
-        Toast load_toast = new Toast(getApplicationContext());
-        //applicazione del layout di caricamento
-        load_toast.setGravity(Gravity.CENTER, 0, 0);
-        load_toast.setDuration(Toast.LENGTH_SHORT);
-        load_toast.setView(load_layout);
-        load_toast.show();
-          //##### schermata di gioco #####
+        loading_layout = inflater.inflate(R.layout.loading_custom_toast,
+                (ViewGroup)findViewById(R.id.loading_toast_container));
+        //visualizzazione del toast
+        showLoadingToast();
+        //##### schermata di gioco #####
         //esecuzione clip audio
         mp.start();
         //creazione della matrice di gioco
@@ -86,13 +87,12 @@ public class HeroSide extends AppCompatActivity {
         //si visualizza la matrice di esplorazione
         list = (GridView) findViewById(R.id.grid_view);
         list.setAdapter(adapter);
-
     }//onCreate
 
-    //##### altri metodi #####
+    //##### metodi per il riproduttore audio #####
 
     /** metodo onPause(): void
-     * questo metodo blocca l'esecuzione della clip audio
+     * questo metodo mette in pausa l'esecuzione della clip audio
      * alla chiusura dell'app.
      */
     @Override
@@ -103,30 +103,29 @@ public class HeroSide extends AppCompatActivity {
         mp.release();
     }//onPause()
 
-    /**
-     *
+    /** metodo onResume(): void
+     * questo metodo riavvia l'esecuzione della clip audio
+     * quando viene mandata nuovamente in esecuzione
+     * l'activity corrente
      */
     @Override
     protected void onResume() {
-        if(mp != null && !mp.isPlaying())
+        //si controlla se si sta riproducendo la clip audio
+        if(mp != null && !mp.isPlaying()){
+            //se non si sta riproducendo allora viene avviata da capo
             mp.start();
+        }
+        //se si stava riproducendo ma e' stata messa in pausa allora viene ripresa
         super.onResume();
-    }
+    }//onResume()
 
-    @Override
-    public void onBackPressed() {
-        Intent myIntent = new Intent(this, MainActivity.class);
-        myIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);// clear back stack
-        startActivity(myIntent);
-        finish();
-        return;
-    }
+    //##### metodi per la gestione del menu #####
 
     /** metodo onCreateOptionsMenu(Menu): boolean
      * questo metodo serve per visualizzare il menu
-     * nella activity corrente     *
-     * @param menu
-     * @return true
+     * nella activity corrente
+     * @param menu: Menu, oggetto che costituisce il menu
+     * @return true: boolean
      */
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
@@ -139,93 +138,81 @@ public class HeroSide extends AppCompatActivity {
      * questo metodo si occupa di gestire le azioni che
      * devono essere svolte quando si seleziona una delle
      * voci del menu
-     * @param item
-     * @return
+     * @param item: MenuItem, voce del menu;
+     * @return true: boolean, per qualsiasi voce del menu che
+     *                        e' stata gestita, altrimenti
+     *                        super.onOptionsItemSelected(item).
      */
     @Override
-    public boolean onOptionsItemSelected(MenuItem item)    {
+    public boolean onOptionsItemSelected(MenuItem item){
+        //variabile ausiliaria
+        Intent intent;
+        //id della voce del menu che e' stata selezionata
         int id=item.getItemId();
+        //switch case sulle varie voci del menu
         switch(id){
             case R.id.Menu1:
+                //intent che riporta alla mainActivity
+                intent = new Intent(this, MenuOptions.newGame());
                 //ritorno alla schermata iniziale
-                newGame();
+                startActivity(intent);
+                //parametro da restituire dopo aver svolto le azioni richieste
                 return true;
             case R.id.Menu2:
                 //risoluzione automatica della partita
-                solveGame();
+                MenuOptions.solveGame();
                 break;
             case R.id.Menu3:
-                //informazioni di gioco
-                gameInfo();
+                //intent che riporta alla mainActivity
+                intent = new Intent(this, MenuOptions.gameInfo(game_mode));
+                //si apre l'activity delle informazioni di gioco
+                startActivity(intent);
+                //parametro da restituire dopo aver svolto le azioni richieste
                 return true;
             case R.id.Menu4:
                 //elenco dei punteggi
-                viewScore();
+                MenuOptions.viewScore();
                 break;
             case R.id.Menu5:
                 //impostazioni
-                changeSettings();
+                MenuOptions.changeSettings();
                 break;
             default:
+                //caso di default
                 return super.onOptionsItemSelected(item);
         }//end switch
         return false;
     }//onOptionsItemSelected(MenuItem)
 
-    private void changeSettings() {
-    }
+    //##### altri metodi #####
 
-    private void viewScore() {
-    }
+    /** metodo showLoadingToast(): void
+     * questo metodo visualizza la schermata di caricamento
+     * prima dell'avvio della sessione di gioco
+     * utilizzando il layout definito per il Toast
+     */
+    protected void showLoadingToast(){
+        loading_toast = new Toast(getApplicationContext());
+        loading_toast.setGravity(Gravity.CENTER, 0, 0);
+        loading_toast.setDuration(Toast.LENGTH_SHORT);
+        loading_toast.setView(loading_layout);
+        loading_toast.show();
+    }//showLoadingToast()
 
-    private void solveGame() {
-        //flag avvio partita
-        Starter.setGameStart(true);
-        //si inizializza il punteggio
-        Score.resetScoreData();
-        //si inizializza il file
-        ScoreMemo.createScoreFile();
-        //si istanzia il giocatore automatico
-        RandomAgent player = new RandomAgent();
-        //avvio della partita
-        while(Starter.getGameStart()){
-            //si effettua la mossa
-            player.chooseMove(em, gm);
-        }//end while sessione di gioco
-        //si stampa la mappa di esplorazione
-        System.out.println(em.gameMaptoString());
-        //si mostra il percorso compiuto
-        player.showRunPath();
-        //stato della partita attuale
-        Starter.setGameStart(false);
-        //si resetta la disponibilita' del colpo
-        Starter.setChanceToHit(true);
-        //punteggio
-        Score.totalScore();
-        System.out.println("Questo e' il tuo punteggio:\n"+Score.getScore());
-        //si memorizza il punteggio
-        ScoreMemo.saveScore(Score.ScoreToString());
-
-
-    }
-
-    private void gameInfo() {
-        //si specifica la modalita' di gioco
-        GameInformation.setGameMode(game_mode);
-        //si crea l'intent associato
-        Intent intent = new Intent(this, GameInformation.class);
-        //si apre la scheda delle informazioni del gioco
-        startActivity(intent);
-    }
-
-    //##### metodi per la gestione del menu #####
-    private void newGame() {
-        //si ritorna alla schermata iniziale
-        //per scegliere la modalita' di gioco
-        Intent intent = new Intent(this,MainActivity.class);
-        //si avvia l'activity
-        startActivity(intent);
-    }
-
+    /** metodo onBackPressed(): void
+     * questo metodo implementala navigazione all'indietro
+     * permettendo di ritornare dall'activity corrente a quella
+     * appena precedente, utilizzando il tasto di navigazione BACK.
+     * Le activity vengono conservate in memoria, quando non sono
+     * piu' in primo piano, secondo un ordine a Stack.
+     */
+    @Override
+    public void onBackPressed() {
+        Intent myIntent = new Intent(this, MainActivity.class);
+        myIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);// clear back stack
+        startActivity(myIntent);
+        finish();
+        return;
+    }//onBackPressed()
 
 }//end HeroSide
