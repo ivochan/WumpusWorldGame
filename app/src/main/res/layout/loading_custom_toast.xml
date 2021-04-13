@@ -26,8 +26,8 @@
 
     <ImageView
         android:id="@+id/load_image"
-        android:layout_width="358dp"
-        android:layout_height="607dp"
+        android:layout_width="355dp"
+        android:layout_height="697dp"
         android:contentDescription="@string/loading_image"
         android:src="@drawable/bat_idle"
         app:layout_constraintBottom_toBottomOf="parent"

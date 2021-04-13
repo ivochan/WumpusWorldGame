@@ -154,9 +154,11 @@ public class HeroSide extends AppCompatActivity {
                 //parametro da restituire dopo aver svolto le azioni richieste
                 return true;
             case R.id.Menu2:
-                //risoluzione automatica della partita
-                MenuOptions.solveGame();
-                break;
+                //creazione dell'intent per la risoluzione automatica della partita
+                intent = new Intent(this, MenuOptions.solveGame(game_mode,gm));
+                //avvio dell'intent
+                startActivity(intent);
+                return true;
             case R.id.Menu3:
                 //intent che riporta alla mainActivity
                 intent = new Intent(this, MenuOptions.gameInfo(game_mode));
@@ -165,13 +167,16 @@ public class HeroSide extends AppCompatActivity {
                 //parametro da restituire dopo aver svolto le azioni richieste
                 return true;
             case R.id.Menu4:
-                //elenco dei punteggi
-                MenuOptions.viewScore();
+                //comandi
+                MenuOptions.tutorial();
                 break;
             case R.id.Menu5:
+                //punteggi
+                MenuOptions.viewScore();
+                break;
+            case R.id.Menu6:
                 //impostazioni
                 MenuOptions.changeSettings();
-                break;
             default:
                 //caso di default
                 return super.onOptionsItemSelected(item);
