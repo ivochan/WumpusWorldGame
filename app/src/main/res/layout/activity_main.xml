@@ -68,7 +68,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.433" />
 
-    <TextView
+    <com.example.wumpusworldgame.services.TypeWriter
         android:background="@android:color/transparent"
         android:id="@+id/storia"
         android:layout_width="336dp"
@@ -142,5 +142,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.974" />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

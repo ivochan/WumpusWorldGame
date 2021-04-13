@@ -1,5 +1,5 @@
 package com.example.wumpusworldgame.activities;
-
+//serie di import
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -7,8 +7,8 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-
 import com.example.wumpusworldgame.R;
+import com.example.wumpusworldgame.services.TypeWriter;
 
 /** class MainActivity
  * questa classe rappresenta la finestra principale dell'applicazione,
@@ -18,7 +18,9 @@ import com.example.wumpusworldgame.R;
 public class MainActivity extends AppCompatActivity {
 
     //##### attributi di classe #####
-
+    //testo animato
+    TypeWriter typeWriter;
+    final static int delay = 20;
     //riproduttore audio
     MediaPlayer mp;
     //pulsante modalita' eroe
@@ -44,8 +46,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         //si invoca il metodo della classe antenata
         super.onCreate(savedInstanceState);
-
-            /* impostazione del layout
+        /* impostazione del layout
          * la struttura grafica scelta per l'Activity e' specificata nel file
          * activity_main.xml nella directory res/layout
          * Gli ID delle risorse sono conservati in una classe Java denominata R,
@@ -55,7 +56,8 @@ public class MainActivity extends AppCompatActivity {
          */
         setContentView(R.layout.activity_main);
         //##### inizializzazioni #####
-
+        //testo animato
+        typeWriter = findViewById(R.id.storia);
         //riproduttore audio
         mp = MediaPlayer.create(MainActivity.this,R.raw.fato_shadow_main_menu);
         //pulsante modalita' eroe
@@ -68,7 +70,8 @@ public class MainActivity extends AppCompatActivity {
         wumpus_game = new Intent(MainActivity.this, WumpusSide.class);
 
         //##### azioni della Activity #####
-
+        //esecuzione del testo animato
+        animatedText(typeWriter);
         //esecuzione clip audio
         mp.start();
         //verifica pressione del pulsante eroe
@@ -114,4 +117,15 @@ public class MainActivity extends AppCompatActivity {
             mp.start();
         super.onResume();
     }
+
+    /**
+     *
+     * @param tw
+     */
+    protected void animatedText(TypeWriter tw){
+        tw.setText("");
+        tw.setCharacterDelay(delay);
+        tw.animateText(""+getResources().getString(R.string.game_intro));
+    }
+
 }//end MainActivity

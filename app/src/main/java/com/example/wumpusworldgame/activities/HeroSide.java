@@ -1,4 +1,5 @@
 package com.example.wumpusworldgame.activities;
+//serie di import
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -15,13 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.wumpusworldgame.R;
 import com.example.wumpusworldgame.adapters.GridViewCustomAdapter;
 import com.example.wumpusworldgame.services.MenuOptions;
-
 import java.util.ArrayList;
-
-import game.player.agent.RandomAgent;
-import game.session.configuration.Starter;
-import game.session.score.Score;
-import game.session.score.ScoreMemo;
 import game.structure.map.GameMap;
 import game.structure.map.MapConfiguration;
 
