@@ -46,8 +46,9 @@
     <string name="menu1">Nuova partita</string>
     <string name="menu2">Risolvi</string>
     <string name="menu3">Informazioni</string>
-    <string name="menu4">Punteggi</string>
-    <string name="menu5">Impostazioni</string>
+    <string name="menu4">Tutorial</string>
+    <string name="menu5">Punteggi</string>
+    <string name="menu6">Impostazioni</string>
     <!-- altro-->
     <string name="score">Punteggio: </string>
     <string name="shot">Colpi residui: </string>
