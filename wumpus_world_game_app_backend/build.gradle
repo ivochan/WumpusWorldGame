@@ -1,2 +1,0 @@
-configurations.maybeCreate("default")
-artifacts.add("default", file('wumpus_world_game_app_backend.jar'))

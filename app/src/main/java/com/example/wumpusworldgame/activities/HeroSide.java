@@ -31,17 +31,20 @@ public class HeroSide extends AppCompatActivity {
     //riproduttore audio
     private MediaPlayer mp;
     //matrice di gioco
-    private GameMap gm;
+    private static final GameMap gm = new GameMap();
     //matrice di esplorazione
-    private GameMap em;
+    private static final GameMap em = new GameMap();
     //per la matrice di esplorazione
     private GridView list;
     //dati da mostrare nella matrice
-    private ArrayList<String> data = new ArrayList<>();
+    private static final ArrayList<String> data = new ArrayList<>();
+    private static ArrayList<String> BACKUP;
     //oggetto toast
     private Toast loading_toast;
     //layout del toast
     private View loading_layout;
+    //matrice
+    private GridViewCustomAdapter adapter;
     //questo metodo viene invocato alla creazione dell'Activity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,15 +59,16 @@ public class HeroSide extends AppCompatActivity {
         //creazione del layout
         loading_layout = inflater.inflate(R.layout.loading_custom_toast,
                 (ViewGroup)findViewById(R.id.loading_toast_container));
+        //si crea l'adapter per il gridlayout della matrice di esplorazione
+        adapter = new GridViewCustomAdapter(this, data);
+        //si visualizza la matrice di esplorazione
+        list = (GridView) findViewById(R.id.grid_view);
         //visualizzazione del toast
         showLoadingToast();
-        //##### schermata di gioco #####
-        //esecuzione clip audio
-        mp.start();
         //creazione della matrice di gioco
-        gm = new GameMap();
+        //gm = new GameMap();
         //creazione della matrice di esplorazione
-        em = new GameMap();
+        //em = new GameMap();
         //riempimento delle matrici
         MapConfiguration.init(gm,em);
         //dimensioni della matrice di gioco, analoghe a quelle della matrice di esplorazione
@@ -74,45 +78,87 @@ public class HeroSide extends AppCompatActivity {
         //si iterano le celle della matrice
         for (int i = 0; i < r; i++) {
             for(int j=0;j<c;j++) {
-                data.add(em.getMapCell(i,j).getCellStatusToString());
+                //si aggiunge la cella corrente all'arraylist
+                data.add(em.getMapCell(i,j).statusToString());
             }//for colonne
         }//for righe
-        //si crea l'adapter per il gridlayout della matrice di esplorazione
-        GridViewCustomAdapter adapter = new GridViewCustomAdapter(this, data);
-        //si visualizza la matrice di esplorazione
-        list = (GridView) findViewById(R.id.grid_view);
         list.setAdapter(adapter);
     }//onCreate
 
-    //##### metodi per il riproduttore audio #####
+    //##### metodi per la gestione dell'activity #####
 
-    /** metodo onPause(): void
-     * questo metodo mette in pausa l'esecuzione della clip audio
-     * alla chiusura dell'app.
+    /** metodo onStart(): void
+     * ACTIVITY VISIBILE
+     * questo metodo si occupa di attivare le funzionalita'
+     * ed i servizi che devono essere mostrati all'utente
      */
     @Override
-    protected void onPause() {
-        //metodo della classe antenata
-        super.onPause();
-        //si ferma la clip audio quando l'app viene sospesa
-        mp.release();
-    }//onPause()
+    public void onStart() {
+        //si invoca il metodo della super classe
+        super.onStart();
+        //si avvia la clip audio
+        mp.start();
+    }//onStart()
 
-    /** metodo onResume(): void
-     * questo metodo riavvia l'esecuzione della clip audio
-     * quando viene mandata nuovamente in esecuzione
-     * l'activity corrente
+    /** metodo onResume():void
+     * ACTIVITY RICEVE INTERAZIONE
      */
     @Override
     protected void onResume() {
-        //si controlla se si sta riproducendo la clip audio
-        if(mp != null && !mp.isPlaying()){
-            //se non si sta riproducendo allora viene avviata da capo
-            mp.start();
-        }
-        //se si stava riproducendo ma e' stata messa in pausa allora viene ripresa
+        //si invoca il metodo della super classe
         super.onResume();
     }//onResume()
+
+    /** metodo onPause(): void
+     * metodo opposto di onResume()
+     * ACTIVITY CESSA INTERAZIONE
+     * questo metodo viene invocato per notificare la cessata
+     * interruzione dell'utente con l'activity corrente
+     */
+    @Override
+    protected void onPause() {
+        //si invoca il metodo della super classe
+        super.onPause();
+        //si ferma la clip audio quando l'app viene sospesa
+        mp.pause();
+    }//onPause()
+
+    /** metodo onStop(): void
+     * metodo opposto di onStart()
+     * ACTIVITY NON VISIBILE
+     *
+     */
+    @Override
+    public void onStop(){
+        //si invoca il metodo della super classe
+        super.onStop();
+    }//onStop()
+
+    /** metodo onDestroy(): void
+     * metodo opposto di onCreate()
+     * ACTIVITY DISTRUTTA
+     *
+     */
+    @Override
+    public void onDestroy(){
+        //si invoca il metodo della super classe
+        super.onDestroy();
+        //si rilascia la risorsa del mediaplayer
+        mp.release();
+    }//onDestroy()
+
+    /** metodo onRestart(): void
+     * l'utente ritorna all'activity
+     * viene invocato prima di onCreate()
+     */
+    @Override
+    public void onRestart(){
+        //si invoca il metodo della super classe
+        super.onRestart();
+    }//onRestart()
+
+    //##### metodi per la gestione dei dati dell'activity #####
+
 
     //##### metodi per la gestione del menu #####
 

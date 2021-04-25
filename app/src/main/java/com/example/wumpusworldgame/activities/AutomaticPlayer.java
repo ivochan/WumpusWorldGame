@@ -62,7 +62,7 @@ public class AutomaticPlayer extends AppCompatActivity {
         //si iterano le celle della matrice
         for (int i = 0; i < r; i++) {
             for(int j=0;j<c;j++) {
-                data.add(em.getMapCell(i,j).getCellStatusToString());
+                data.add(em.getMapCell(i,j).getCellStatus().toString());
             }//for colonne
         }//for righe
         //si crea l'adapter per il gridlayout della matrice di esplorazione

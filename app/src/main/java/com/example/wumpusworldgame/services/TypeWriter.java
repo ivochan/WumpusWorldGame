@@ -44,4 +44,4 @@ public class TypeWriter extends androidx.appcompat.widget.AppCompatTextView {
     public void setCharacterDelay(long m) {
         mDelay = m;
     }
-}
+}//end TypeWriter

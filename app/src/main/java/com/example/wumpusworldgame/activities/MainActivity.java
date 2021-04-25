@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
     //##### attributi di classe #####
     //testo animato
     TypeWriter typeWriter;
-    final static int delay = 25;
+    final static int delay = 5;
     //riproduttore audio
     MediaPlayer mp;
     //pulsante modalita' eroe
@@ -38,9 +38,11 @@ public class MainActivity extends AppCompatActivity {
 
     //##### struttura dell'Activity #####
 
-    /** metodo onCreate()
+    /** metodo onCreate(): void
+     * ACTIVITY CREATA
      * questo metodo viene invocato alla creazione
-     * dell'Activity corrente
+     * dell'Activity e si utilizza per definire
+     * le configurazioni di base e definire il layout dell'interfaccia
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,8 +62,10 @@ public class MainActivity extends AppCompatActivity {
 
         //testo animato
         typeWriter = findViewById(R.id.storia);
+
         //riproduttore audio
         mp = MediaPlayer.create(MainActivity.this,R.raw.fato_shadow_main_menu);
+
         //pulsante modalita' eroe
         button_hero = findViewById(R.id.button_hero);
         //pulsante modalita' wumpus
@@ -71,13 +75,7 @@ public class MainActivity extends AppCompatActivity {
         //dichiarazione dell'activity che realizza la modalita' di gioco del wumpus
         wumpus_game = new Intent(MainActivity.this, WumpusSide.class);
 
-        //##### azioni della Activity #####
-
-        //esecuzione del testo animato
-        animatedText(typeWriter);
-        //esecuzione clip audio
-        mp.start();
-        //verifica pressione del pulsante eroe
+       //verifica pressione del pulsante eroe
         button_hero.setOnClickListener(new View.OnClickListener(){
             //il pulsante e' stato premuto
             @Override
@@ -97,31 +95,81 @@ public class MainActivity extends AppCompatActivity {
         });
     }//onCreate()
 
-    //##### metodi per la gestione della clip audio #####
+    //##### metodi per la gestione dell'activity #####
 
-    /** metodo onPause(): void
-     * questo metodo blocca l'esecuzione della clip audio
-     * alla chiusura dell'app.
+    /** metodo onStart(): void
+     * ACTIVITY VISIBILE
+     * questo metodo si occupa di attivare le funzionalita'
+     * ed i servizi che devono essere mostrati all'utente
      */
     @Override
-    protected void onPause() {
-        //metodo della classe antenata
-        super.onPause();
-        //si ferma la clip audio quando l'app viene sospesa
-        mp.release();
-    }//onPause()
+    public void onStart() {
+        //si invoca il metodo della super classe
+        super.onStart();
+        //si avvia la clip audio
+        mp.start();
+        //si assegna la velocita' di visualizzazione del testo
+        typeWriter.setCharacterDelay(delay);
+        //si anima il testo
+        animatedText(typeWriter);
+    }//onStart()
 
     /** metodo onResume():void
-     * questo metodo riprende l'esecuzione della clip
-     * audio se e' gia' stato istanziato il riproduttore
-     * musicale, se cosi' non e', allora lo crea.
+     * ACTIVITY RICEVE INTERAZIONE
      */
     @Override
     protected void onResume() {
-        if(mp != null && !mp.isPlaying())
-            mp.start();
+        //si invoca il metodo della super classe
         super.onResume();
     }//onResume()
+
+    /** metodo onPause(): void
+     * metodo opposto di onResume()
+     * ACTIVITY CESSA INTERAZIONE
+     * questo metodo viene invocato per notificare la cessata
+     * interruzione dell'utente con l'activity corrente
+     */
+    @Override
+    protected void onPause() {
+        //si invoca il metodo della super classe
+        super.onPause();
+        //si ferma la clip audio quando l'app viene sospesa
+        mp.pause();
+    }//onPause()
+
+    /** metodo onStop(): void
+     * metodo opposto di onStart()
+     * ACTIVITY NON VISIBILE
+     *
+     */
+    @Override
+    public void onStop(){
+        //si invoca il metodo della super classe
+        super.onStop();
+    }//onStop()
+
+    /** metodo onDestroy(): void
+     * metodo opposto di onCreate()
+     * ACTIVITY DISTRUTTA
+     *
+     */
+    @Override
+    public void onDestroy(){
+        //si invoca il metodo della super classe
+        super.onDestroy();
+        //si rilascia la risorsa del mediaplayer
+        mp.release();
+    }//onDestroy()
+
+    /** metodo onRestart(): void
+     * l'utente ritorna all'activity
+     * viene invocato prima di onCreate()
+     */
+    @Override
+    public void onRestart(){
+        super.onRestart();
+        //si assegna la velocita' di visualizzazione del testo
+    }//onRestart()
 
     //##### altri metodi #####
 
