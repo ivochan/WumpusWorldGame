@@ -1,7 +1,6 @@
 package com.example.wumpusworldgame.activities;
 //serie di import
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -9,32 +8,34 @@ import android.view.View;
 import android.widget.Button;
 import com.example.wumpusworldgame.R;
 import com.example.wumpusworldgame.services.TypeWriter;
-
 /** class MainActivity
  * questa classe rappresenta la finestra principale dell'applicazione,
  * quella che si apre al suo avvio.
  * Deve estendere la classe AppCompatActivity proprio per essere implementata come Activity.
  */
 public class MainActivity extends AppCompatActivity {
-
     //##### attributi di classe #####
+
     //testo animato
-    TypeWriter typeWriter;
-    final static int delay = 5;
+    private TypeWriter typeWriter;
+    //velocita' di scorrimento
+    private final static int delay = 5;
+
     //riproduttore audio
-    MediaPlayer mp;
+    private MediaPlayer mp;
+
     //pulsante modalita' eroe
-    Button button_hero;
+    private Button button_hero;
     //pulsante modalita' wumpus
-    Button button_wumpus;
+    private Button button_wumpus;
     /* le Intent che servono per passare da un'Activity all'altra
      * devono essere create sulla classe che realizza l'activity corrente
      * e ricevere come ulteriore paramentro l'activity che devono eseguire
      */
     //intent modalita' eroe
-    Intent hero_game;
+    private Intent hero_game;
     //intent modalita' wumpus
-    Intent wumpus_game;
+    private Intent wumpus_game;
 
     //##### struttura dell'Activity #####
 
@@ -62,20 +63,25 @@ public class MainActivity extends AppCompatActivity {
 
         //testo animato
         typeWriter = findViewById(R.id.storia);
+        //si assegna la velocita' di visualizzazione del testo
+        typeWriter.setCharacterDelay(delay);
 
         //riproduttore audio
         mp = MediaPlayer.create(MainActivity.this,R.raw.fato_shadow_main_menu);
 
         //pulsante modalita' eroe
         button_hero = findViewById(R.id.button_hero);
-        //pulsante modalita' wumpus
-        button_wumpus = findViewById(R.id.button_wumpus);
         //dichiarazione dell'activity che realizza la modalita' di gioco dell'avventuriero
         hero_game = new Intent(MainActivity.this, HeroSide.class);
+
+        //pulsante modalita' wumpus
+        button_wumpus = findViewById(R.id.button_wumpus);
         //dichiarazione dell'activity che realizza la modalita' di gioco del wumpus
         wumpus_game = new Intent(MainActivity.this, WumpusSide.class);
 
-       //verifica pressione del pulsante eroe
+        //##### gestione dei pulsanti #####
+
+        //verifica pressione del pulsante eroe
         button_hero.setOnClickListener(new View.OnClickListener(){
             //il pulsante e' stato premuto
             @Override
@@ -84,6 +90,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(hero_game);
             }//onClick
         });
+
         //verifica pressione pulsante wumpus
         button_wumpus.setOnClickListener(new View.OnClickListener(){
             //dichiarazione dell'activity che realizza la modalita' di gioco dell'avventuriero
@@ -93,6 +100,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(wumpus_game);
             }//onClick
         });
+
     }//onCreate()
 
     //##### metodi per la gestione dell'activity #####
@@ -108,8 +116,6 @@ public class MainActivity extends AppCompatActivity {
         super.onStart();
         //si avvia la clip audio
         mp.start();
-        //si assegna la velocita' di visualizzazione del testo
-        typeWriter.setCharacterDelay(delay);
         //si anima il testo
         animatedText(typeWriter);
     }//onStart()

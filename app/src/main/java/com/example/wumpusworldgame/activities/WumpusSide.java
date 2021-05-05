@@ -14,6 +14,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.wumpusworldgame.R;
 import com.example.wumpusworldgame.adapters.GridViewCustomAdapter;
+import com.example.wumpusworldgame.services.MenuOptions;
 import java.util.ArrayList;
 import game.structure.map.GameMap;
 import game.structure.map.MapConfiguration;
@@ -32,9 +33,23 @@ public class WumpusSide extends AppCompatActivity {
     GameMap em;
     //per la matrice di esplorazione
     GridView list;
-    //dati da mostrare nella matrice
+    //dati da mostrare nella matrice di esplorazione
     ArrayList<String> data = new ArrayList<>();
-    //questo metodo viene invocato alla creazione dell'Activity
+    //dati della matrice di gioco
+    ArrayList<String> game_data = new ArrayList<String>();
+    //oggetto toast
+    Toast loading_toast;
+    //layout del toast
+    View loading_layout;
+
+    /** metodo onCreate(Bunde): void
+     * ACTIVITY CREATA
+     * questo metodo viene invocato alla creazione dell'Activity,
+     * definendo le operazioni principali che deve svolgere ed
+     * il layout che la caratterizza.
+     * @param savedInstanceState
+     *
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //con super si invoca il metodo omonimo della classe antenata
@@ -49,16 +64,14 @@ public class WumpusSide extends AppCompatActivity {
         //##### schermata di caricamento #####
         LayoutInflater inflater = getLayoutInflater();
         //creazione del layout
-        View load_layout = inflater.inflate(R.layout.loading_custom_toast,
+        loading_layout = inflater.inflate(R.layout.loading_custom_toast,
                 (ViewGroup)findViewById(R.id.loading_toast_container));
+
         //creazione del toast
-        Toast load_toast = new Toast(getApplicationContext());
-        //applicazione del layout di caricamento
-        load_toast.setGravity(Gravity.CENTER, 0, 0);
-        load_toast.setDuration(Toast.LENGTH_SHORT);
-        load_toast.setView(load_layout);
-        load_toast.show();
+        showLoadingToast();
+
         //##### schermata di gioco #####
+
         //esecuzione clip audio
         mp.start();
         //creazione della matrice di gioco
@@ -70,14 +83,26 @@ public class WumpusSide extends AppCompatActivity {
         //dimensioni della matrice di gioco, analoghe a quelle della matrice di esplorazione
         int r = gm.getRows();
         int c = gm.getColumns();
-        //##### visualizzazione della matrice di esplorazione #####
+
+        //##### salvataggio della matrice di gioco #####
         //si iterano le celle della matrice
         for (int i = 0; i < r; i++) {
             for(int j=0;j<c;j++) {
                 //si aggiunge la cella corrente all'arraylist
-                data.add(gm.getMapCell(i,j).statusToString());
+                game_data.add(gm.getMapCell(i,j).statusToString());
             }//for colonne
         }//for righe
+
+        //##### visualizzazione della matrice di esplorazione #####
+
+        //si iterano le celle della matrice
+        for (int i = 0; i < r; i++) {
+            for(int j=0;j<c;j++) {
+                //si aggiunge la cella corrente all'arraylist
+                data.add(em.getMapCell(i,j).statusToString());
+            }//for colonne
+        }//for righe
+
         //si crea l'adapter per il gridlayout della matrice di esplorazione
         GridViewCustomAdapter adapter = new GridViewCustomAdapter(this, data);
         //si visualizza la matrice di esplorazione
@@ -85,42 +110,107 @@ public class WumpusSide extends AppCompatActivity {
         list.setAdapter(adapter);
 
 
-    }//onCreate()
+    }//onCreate(Bundle)
 
-    //##### altri metodi #####
+    //##### metodi per la gestione dell'activity #####
 
-    /** metodo onPause(): void
-     * questo metodo blocca l'esecuzione della clip audio
-     * alla chiusura dell'app.
+    /** metodo onStart(): void
+     * ACTIVITY VISIBILE
+     * questo metodo si occupa di attivare le funzionalita'
+     * ed i servizi che devono essere mostrati all'utente
      */
     @Override
-    protected void onPause() {
-        //metodo della classe antenata
-        super.onPause();
-        //si ferma la clip audio quando l'app viene sospesa
-        mp.release();
-    }//onPause()
+    public void onStart() {
+        //si invoca il metodo della super classe
+        super.onStart();
+        //si avvia la clip audio
+        mp.start();
+    }//onStart()
 
-    /**
-     *
+    /** metodo onResume():void
+     * ACTIVITY RICEVE INTERAZIONE
      */
     @Override
     protected void onResume() {
-        if(mp != null && !mp.isPlaying())
-            mp.start();
+        //si invoca il metodo della super classe
         super.onResume();
-    }
+    }//onResume()
+
+    /** metodo onPause(): void
+     * metodo opposto di onResume()
+     * ACTIVITY CESSA INTERAZIONE
+     * questo metodo viene invocato per notificare la cessata
+     * interruzione dell'utente con l'activity corrente
+     */
+    @Override
+    protected void onPause() {
+        //si invoca il metodo della super classe
+        super.onPause();
+        //si ferma la clip audio quando l'app viene sospesa
+        mp.pause();
+    }//onPause()
+
+    /** metodo onStop(): void
+     * metodo opposto di onStart()
+     * ACTIVITY NON VISIBILE
+     */
+    @Override
+    public void onStop(){
+        //si invoca il metodo della super classe
+        super.onStop();
+    }//onStop()
+
+    /** metodo onDestroy(): void
+     * metodo opposto di onCreate()
+     * ACTIVITY DISTRUTTA
+     *
+     */
+    @Override
+    public void onDestroy(){
+        //si invoca il metodo della super classe
+        super.onDestroy();
+        //si rilascia la risorsa del mediaplayer
+        mp.release();
+    }//onDestroy()
+
+    /** metodo onRestart(): void
+     * l'utente ritorna all'activity
+     * viene invocato prima di onCreate()
+     */
+    @Override
+    public void onRestart(){
+        //si invoca il metodo della super classe
+        super.onRestart();
+    }//onRestart()
+
+    /** metodo onBackPressed(): void
+     * questo metodo implementala navigazione all'indietro
+     * permettendo di ritornare dall'activity corrente a quella
+     * appena precedente, utilizzando il tasto di navigazione BACK.
+     * Le activity vengono conservate in memoria, quando non sono
+     * piu' in primo piano, secondo un ordine a Stack.
+     */
+    @Override
+    public void onBackPressed() {
+        //si invoca il metodo della super classe
+        super.onBackPressed();
+    }//onBackPressed()
+
+    //##### metodi per la gestione del menu #####
 
     /** metodo onCreateOptionsMenu(Menu): boolean
      * questo metodo serve per visualizzare il menu
-     * nella activity corrente     *
-     * @param menu
-     * @return true
+     * nella activity corrente
+     * @param menu: Menu, oggetto che costituisce il menu
+     * @return true: boolean
      */
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
-        MenuInflater inflater=getMenuInflater();
+        //si preleva l'oggetto inflater associato al menu
+        MenuInflater inflater = getMenuInflater();
+        //si definisce il layout del menu
         inflater.inflate(R.menu.main_menu,menu);
+        //si visualizza il menu nel layout (tre puntini in alto a destra)
         return true;
     }//onCreateOptionsMenu(Menu)
 
@@ -128,47 +218,56 @@ public class WumpusSide extends AppCompatActivity {
      * questo metodo si occupa di gestire le azioni che
      * devono essere svolte quando si seleziona una delle
      * voci del menu
-     * @param item
-     * @return
+     * Quasi tutte le voci del menu verranno definite come
+     * Alert Dialog.
+     *
+     * @param item: MenuItem, voce del menu;
+     * @return true: boolean, per qualsiasi voce del menu che
+     *                        e' stata gestita, altrimenti
+     *                        super.onOptionsItemSelected(item).
      */
     @Override
-    public boolean onOptionsItemSelected(MenuItem item)    {
-        int id=item.getItemId();
-        switch(id){
-            case R.id.Menu1:
+    public boolean onOptionsItemSelected(MenuItem item){
+        //variabile ausiliaria per la nuova activity
+        Intent intent;
+        //id della voce del menu che e' stata selezionata
+        int itemId = item.getItemId();
+        //switch case sulle varie voci del menu
+        switch(itemId){
+            case R.id.Menu1: //NUOVA PARTITA
+                //creazione dell'intent
+                intent = new Intent(this, MenuOptions.newGame());
+                //avvio dell'activity corrispondente
+                startActivity(intent);
                 //ritorno alla schermata iniziale
-                newGame();
                 return true;
-            case R.id.Menu2:
-                //risoluzione automatica della partita
-                solveGame();
-                break;
-            case R.id.Menu3:
-                //informazioni di gioco
+            case R.id.Menu2: //RISOLVI
+                //creazione dell'intent per la risoluzione automatica della partita
+                //TODO
+                return true;
+            case R.id.Menu3: //INFORMAZIONI
                 gameInfo();
                 return true;
             case R.id.Menu4:
-                //elenco dei punteggi
-                viewScore();
+                //comandi
+
                 break;
             case R.id.Menu5:
-                //impostazioni
-                changeSettings();
+                //punteggi
+
                 break;
+            case R.id.Menu6:
+                //impostazioni
+
             default:
+                //caso di default
                 return super.onOptionsItemSelected(item);
         }//end switch
         return false;
+
     }//onOptionsItemSelected(MenuItem)
 
-    private void changeSettings() {
-    }
-
-    private void viewScore() {
-    }
-
-    private void solveGame() {
-    }
+    //##### metodi per le voci del menu #####
 
     private void gameInfo() {
         //si specifica la modalita' di gioco
@@ -177,25 +276,21 @@ public class WumpusSide extends AppCompatActivity {
         Intent intent = new Intent(this, GameInformation.class);
         //si apre la scheda delle informazioni del gioco
         startActivity(intent);
-    }
+    }//gameInfo()
 
-    //##### metodi per la gestione del menu #####
-    private void newGame() {
-        //si ritorna alla schermata iniziale
-        //per scegliere la modalita' di gioco
-        Intent intent = new Intent(this,MainActivity.class);
-        //si avvia l'activity
-        startActivity(intent);
-    }
+    //##### altri metodi #####
 
+    /** metodo showLoadingToast(): void
+     * questo metodo visualizza la schermata di caricamento
+     * prima dell'avvio della sessione di gioco
+     * utilizzando il layout definito per il Toast
+     */
+    private void showLoadingToast(){
+        loading_toast = new Toast(getApplicationContext());
+        loading_toast.setGravity(Gravity.CENTER, 0, 0);
+        loading_toast.setDuration(Toast.LENGTH_SHORT);
+        loading_toast.setView(loading_layout);
+        loading_toast.show();
+    }//showLoadingToast()
 
-    @Override
-    public void onBackPressed() {
-        Intent myIntent = new Intent(this, MainActivity.class);
-        myIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);// clear back stack
-        startActivity(myIntent);
-        finish();
-        return;
-    }
-
-}
+}//end WumpusSide

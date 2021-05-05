@@ -3,17 +3,13 @@ package com.example.wumpusworldgame.activities;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.view.KeyEvent;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.wumpusworldgame.R;
 
-import org.w3c.dom.Text;
-
 import game.structure.text.GameMessages;
-import game.structure.text.GameTranslations;
 
 /** class GameInformation
  * questa classe fornisce delle informazioni sul gioco
@@ -33,7 +29,7 @@ public class GameInformation extends AppCompatActivity {
         //con super si invoca il metodo omonimo della classe antenata
         super.onCreate(savedInstanceState);
         //si specifica il file che descrive il layout
-        setContentView(R.layout.game_info_activity);
+        setContentView(R.layout.game_info);
          //##### inizializzazioni #####
 
         //riproduttore audio

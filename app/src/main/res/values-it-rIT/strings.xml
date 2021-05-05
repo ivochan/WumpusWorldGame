@@ -40,6 +40,7 @@
         Ah, dimenticavo... Se sei così pigro-a da ottenere il \"Premio del Sommo Poltrone\"
         allora lascia che sia io a giocare per te, con la modalità di gioco automatica!
     </string>
+    <string name="game_credits">E\' Ivonne che ha tentato di sviluppare questo gioco...</string>
     <string name="loading">Preparazione del terreno di gioco ...</string>
     <string name="loading_image">immagine di caricamento</string>
     <!-- main menu options -->

@@ -34,6 +34,7 @@
         Ah, dimenticavo... Se sei così pigro-a da ottenere il \"Premio del Sommo Poltrone\"
         allora lascia che sia io a giocare per te, con la modalità di gioco automatica!
     </string>
+    <string name="game_credits">It\'s me, Ivonne! I\'ve tried to develop this game...</string>
     <string name="dark_night">creepy_night_game_info_activity</string>
     <string name="game_info_title">Game Information</string>
     <string name="loading">Loading game data ...</string>
