@@ -1,9 +1,9 @@
 package com.example.wumpusworldgame.services;
 //serie di import
-import com.example.wumpusworldgame.menuItems.AutomaticPlayer;
-import com.example.wumpusworldgame.menuItems.GameInformation;
+import com.example.wumpusworldgame.menuItems.GameInformationActivity;
 import com.example.wumpusworldgame.activities.MainActivity;
-import game.structure.map.GameMap;
+import com.example.wumpusworldgame.menuItems.GameSettingsActivity;
+
 /** class MenuOptions
  * questa classe fornisce dei metodi che permettono di
  * gestire le voci del menu principale, che verranno
@@ -24,26 +24,31 @@ public class MenuOptions {
         return MainActivity.class;
     }//newGame()
 
-    /** metodo gameInfo(int): Class<GameInformation>
-     * questa metodo restituisce la classe GameInformation,
+    /** metodo gameInfo(int): Class<GameInformationActivity>
+     * questa metodo restituisce la classe GameInformationActivity,
      * che racchiude le informazioni del gioco ed imposta
      * la modalita' di gioco attuale, in modo da garantire
      * la corretta navigazione all'indietro, dopo che e'
      * gia'stata avviata la sessione di gioco.
      * @param game_mode: int, costante indicativa della
      *                   modalita'di gioco.
-     * @return  Class<GameInformation>.
+     * @return  Class<GameInformationActivity>.
      */
-    public static Class<GameInformation> gameInfo(int game_mode) {
+    public static Class<GameInformationActivity> gameInfo(int game_mode) {
         //si specifica la modalita' di gioco
-        GameInformation.setGameMode(game_mode);
+        GameInformationActivity.setGameMode(game_mode);
         //si restituisce la scheda delle informazioni del gioco
-        return GameInformation.class;
+        return GameInformationActivity.class;
     }//gameInfo(int)
 
-    public static void changeSettings() {
+    //TODO controllare se e' possibile inserire i metodi accessori in un'unica classe
 
-    }
+    public static Class<GameSettingsActivity> changeSettings(int game_mode) {
+        //si specifica la modalita' di gioco
+        GameSettingsActivity.setGameMode(game_mode);
+        //si restituisce l'activity delle impostazioni di gioco
+        return GameSettingsActivity.class;
+    }//chanceSettings(int)
 
 
     public static void viewScore() {
@@ -53,10 +58,11 @@ public class MenuOptions {
 
     public static void tutorial() {
     }
+
 /*
     public static Class<AutomaticPlayer> solveGame(int game_mode, GameMap gm) {
         //si specifica la modalita' di gioco
-        GameInformation.setGameMode(game_mode);
+        GameInformationActivity.setGameMode(game_mode);
         //risoluzione del gioco
         AutomaticPlayer.gameSessionSolving(game_mode, gm);
         //si restituisce la classe in cui verra' risolto il gioco

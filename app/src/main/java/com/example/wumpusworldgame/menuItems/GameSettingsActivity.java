@@ -1,75 +1,42 @@
 package com.example.wumpusworldgame.menuItems;
 //serie di import
 import android.content.Intent;
-import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.widget.TextView;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.PreferenceFragmentCompat;
 import com.example.wumpusworldgame.R;
 import com.example.wumpusworldgame.activities.HeroSide;
 import com.example.wumpusworldgame.activities.WumpusSide;
-import game.structure.text.GameMessages;
-/** class GameInformation
- * questa classe fornisce delle informazioni sul gioco
+
+/** class GameSettingsActivity
+ *
  */
-public class GameInformation extends AppCompatActivity {
+public class GameSettingsActivity extends AppCompatActivity {
     //##### attributi di classe #####
 
+    //intero che specifica la modalita' di gioco
     public static int game_mode;
-    //riproduttore audio
-    MediaPlayer mp;
-    //questo metodo viene invocato alla creazione dell'Activity
-    /** metodo onCreate()
-     * questo metodo viene invocato alla creazione
-     * dell'Activity corrente
+
+    /** metodo onCreate(Bunde): void
+     *
+     * @param savedInstanceState
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        //con super si invoca il metodo omonimo della classe antenata
         super.onCreate(savedInstanceState);
-        //si specifica il file che descrive il layout
-        setContentView(R.layout.game_info_activity);
-
-         //##### inizializzazioni #####
-
-        //riproduttore audio
-        mp = MediaPlayer.create(GameInformation.this,R.raw.menu_music);
-        //campo di testo dei crediti
-        TextView tcredits = (TextView)findViewById(R.id.textCredits);
-
-        //##### esecuzione delle azioni #####
-
-        //esecuzione clip audio
-        mp.start();
-        //visualizzazione dei crediti
-        tcredits.setText(GameMessages.credits);
-
-    }//onCreate(Bundle)
-
-    //##### metodi accessori #####
-
-    /** metodo setGameMode(int): void
-     * questo metodo assegna il valore dell'intero,
-     * ricevuta come parametro, all'attributo di classe.
-     * @param value_game_mode: int, intero che indica da quale
-     *                       activity e' stata avviata quella corrente.
-     */
-    public static void setGameMode(int value_game_mode){
-        //si assegna il parametro alla variabile di classe
-        game_mode=value_game_mode;
-    }//setGameMode(int)
-
-    /** metodo getGameMode(): int
-     * questo metodo restituisce l'intero che identifica
-     * la modalita' di gioco, ovvero l'activity da cui e'
-     * stata avviata quella corrente.
-     * @return game_mode: int, intero che rappresenta la
-     *                  modalita' di gioco.
-     */
-    public static int getGameMode(){
-        //si restituisce il valore dell'attributo di classe
-        return game_mode;
-    }//getGameMode()
+        setContentView(R.layout.game_settings_activity);
+        if (savedInstanceState == null) {
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.settings, new GameSettingsFragment())
+                    .commit();
+        }
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
+    }
 
     //##### metodi per la gestione dell'activity #####
 
@@ -83,7 +50,7 @@ public class GameInformation extends AppCompatActivity {
         //si invoca il metodo della super classe
         super.onStart();
         //si avvia la clip audio
-        mp.start();
+        //mp.start();
     }//onStart()
 
     /** metodo onResume():void
@@ -106,7 +73,7 @@ public class GameInformation extends AppCompatActivity {
         //si invoca il metodo della super classe
         super.onPause();
         //si ferma la clip audio quando l'activity viene sospesa
-        mp.pause();
+        //mp.pause();
     }//onPause()
 
     /** metodo onStop(): void
@@ -128,7 +95,7 @@ public class GameInformation extends AppCompatActivity {
         //si invoca il metodo della super classe
         super.onDestroy();
         //si rilascia la risorsa del mediaplayer
-        mp.release();
+        //mp.release();
     }//onDestroy()
 
     /** metodo onRestart(): void
@@ -181,4 +148,47 @@ public class GameInformation extends AppCompatActivity {
         return;
     }//onBackPressed()
 
-}//end GameInformation
+    //##### metodi accessori #####
+
+    /** metodo setGameMode(int): void
+     * questo metodo assegna il valore dell'intero,
+     * ricevuta come parametro, all'attributo di classe.
+     * @param value_game_mode: int, intero che indica da quale
+     *                       activity e' stata avviata quella corrente.
+     */
+    public static void setGameMode(int value_game_mode){
+        //si assegna il parametro alla variabile di classe
+        game_mode=value_game_mode;
+    }//setGameMode(int)
+
+    /** metodo getGameMode(): int
+     * questo metodo restituisce l'intero che identifica
+     * la modalita' di gioco, ovvero l'activity da cui e'
+     * stata avviata quella corrente.
+     * @return game_mode: int, intero che rappresenta la
+     *                  modalita' di gioco.
+     */
+    public static int getGameMode(){
+        //si restituisce il valore dell'attributo di classe
+        return game_mode;
+    }//getGameMode()
+
+
+    //##### inner class #####
+
+    /** class GameSettingsFragments
+     *
+     */
+    public static class GameSettingsFragment extends PreferenceFragmentCompat {
+        /**
+         *
+         * @param savedInstanceState
+         * @param rootKey
+         */
+        @Override
+        public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+            setPreferencesFromResource(R.xml.game_settings_root_preferences, rootKey);
+        }
+    }//end GameSettingsFragment
+
+}//end GameSettingsActivity

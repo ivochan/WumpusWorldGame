@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.DayNight">
         <activity
-            android:name=".menuItems.settings.SettingsActivity"
+            android:name=".menuItems.GameSettingsActivity"
             android:label="@string/title_activity_settings"></activity>
         <activity android:name=".activities.MainActivity">
             <intent-filter>
@@ -30,7 +30,7 @@
             android:launchMode="singleTop"
             android:parentActivityName=".activities.MainActivity"></activity>
         <activity
-            android:name=".menuItems.GameInformation"
+            android:name=".menuItems.GameInformationActivity"
             android:label="@string/game_info_title"
             android:parentActivityName=".activities.MainActivity"></activity>
     </application>

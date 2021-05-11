@@ -69,6 +69,8 @@ public class HeroSide extends AppCompatActivity {
         loading_layout = inflater.inflate(R.layout.loading_custom_toast,
                 (ViewGroup)findViewById(R.id.loading_toast_container));
 
+        //TODO vedere se e' possibile inserire il metodo del toast in un'unica
+        //TODO classe e verificare quale sia il metodo non deprecato
         //creazione del toast
         showLoadingToast();
 
@@ -216,6 +218,8 @@ public class HeroSide extends AppCompatActivity {
         return true;
     }//onCreateOptionsMenu(Menu)
 
+    //TODO vedere se e' possibile inserirlo in un'unica classe
+
     /** metodo onOptionsItemSelected(MenuItem): boolean
      * questo metodo si occupa di gestire le azioni che
      * devono essere svolte quando si seleziona una delle
@@ -266,9 +270,12 @@ public class HeroSide extends AppCompatActivity {
                 break;
             //IMPOSTAZIONI
             case R.id.Menu6:
-                //impostazioni
-                break;
-
+                //creazione dell'intent
+                intent = new Intent(this,MenuOptions.changeSettings(game_mode));
+                //avvio dell'activity corrispondente
+                startActivity(intent);
+                //si apre la schermata delle informazioni sul gioco
+                return true;
             default:
                 //caso di default
                 return super.onOptionsItemSelected(item);

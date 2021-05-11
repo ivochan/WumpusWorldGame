@@ -33,6 +33,14 @@ In questa versione del gioco è stata prevista, per il giocatore, la possibilit�
   - ~~schermata di informazioni sul gioco~~;
   - elenco dei punteggi;
   - tutorial;
+  - impostazioni:
+    - abilitare/disabilitare suoni
+    - cambiare nome del giocatore
+    - attivare dark mode,
+    - cancellare file dei punteggi
+    - esportare file dei punteggi
+    - accesso all'account
+    - inviare feedback
 
 - clip audio per la modalità wumpus;
 
