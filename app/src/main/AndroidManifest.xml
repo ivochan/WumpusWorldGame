@@ -9,30 +9,34 @@
         android:roundIcon="@mipmap/ic_launcher_red_monster_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.DayNight">
-        <activity
-            android:name=".menuItems.GameSettingsActivity"
-            android:label="@string/title_activity_settings"></activity>
+
         <activity android:name=".activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".activities.HeroSide"
             android:label="@string/hero_side_title"
             android:launchMode="singleTop"
             android:parentActivityName=".activities.MainActivity"></activity>
+
         <activity
             android:name=".activities.WumpusSide"
             android:label="@string/wumpus_side_title"
             android:launchMode="singleTop"
             android:parentActivityName=".activities.MainActivity"></activity>
+
         <activity
             android:name=".menuItems.GameInformationActivity"
             android:label="@string/game_info_title"
             android:parentActivityName=".activities.MainActivity"></activity>
+
+        <activity
+            android:name=".menuItems.GameSettingsActivity"
+            android:label="@string/game_settings_title"></activity>
     </application>
 
 </manifest>

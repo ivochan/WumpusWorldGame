@@ -1,6 +1,11 @@
 <resources>
     <string name="app_name">The Wumpus World Game</string>
-    <string name="dark_forest">dark_forest_main_activity_image</string>
+    <!-- Activity Titles -->
+    <string name="hero_side_title">Hero Side</string>
+    <string name="wumpus_side_title">Wumpus Side</string>
+    <string name="game_info_title">Game Information</string>
+    <string name="game_settings_title">Settings</string>
+    <!-- MainActivity -->
     <string name="game_title">Hunt the Wumpus...or not?</string>
     <string name="game_intro">
         <br> Hi...iiiiiih...Uh... Hello!</br>
@@ -14,12 +19,10 @@
         <br> Experience history as it has already been written or live into the world of the Wumpus
             that now is upside down!</br></string>
     <string name="hero">HERO</string>
-    <string name="wumpus">WUMPUS</string>
     <string name="hero_text">Here you are! Let\'s go on adventure, brave hero!</string>
+    <string name="wumpus">WUMPUS</string>
     <string name="wumpus_text"> Here you are! Hurry up, poor Wumpus, run away!</string>
-    <!--activities -->
-    <string name="hero_side_title">Hero Side</string>
-    <string name="wumpus_side_title">Wumpus Side</string>
+    <!-- GameInfoActivity -->
     <!-- regole del gioco da tradurre-->
     <string name="game_info">
         Ispirato al videogioco \"<b>Hunt the Wumpus</b>\" di <b>Gregory Yob</b>,
@@ -35,8 +38,7 @@
         allora lascia che sia io a giocare per te, con la modalità di gioco automatica!
     </string>
     <string name="game_credits">It\'s me, Ivonne! I\'ve tried to develop this game...</string>
-    <string name="dark_night">creepy_night_game_info_activity</string>
-    <string name="game_info_title">Game Information</string>
+    <!-- Loading Window -->
     <string name="loading">Loading game data ...</string>
     <string name="loading_image">loading bat image</string>
     <!-- main menu options -->
@@ -46,26 +48,21 @@
     <string name="menu4">Tutorial</string>
     <string name="menu5">Score</string>
     <string name="menu6">Settings</string>
-    <!-- others -->
+
+    <!-- HeroSide and Wumpus Side Activities-->
     <string name="score">Your score: </string>
+    <string name="score_value">s</string>
     <string name="shot">Remaining shots: </string>
     <string name="shots_value">h</string>
-    <string name="score_value">s</string>
     <string name="game_message">message</string>
-    <string name="title_activity_settings">SettingsActivity</string>
 
     <!-- Preference Titles -->
-    <string name="messages_header">Messages</string>
-    <string name="sync_header">Sync</string>
+    <string name="game" translatable="false">Game</string>
+    <string name="sound" translatable="false">Sound Effects</string>
+    <string name="theme" translatable="false">Theme</string>
+    <!-- Images -->
+    <string name="dark_forest">dark_forest_main_activity_image</string>
+    <string name="dark_night">creepy_night_game_info_activity</string>
+    <!-- contentDescriptions -->
 
-    <!-- Messages Preferences -->
-    <string name="signature_title">Your signature</string>
-    <string name="reply_title">Default reply action</string>
-
-    <!-- Sync Preferences -->
-    <string name="sync_title">Sync email periodically</string>
-    <string name="attachment_title">Download incoming attachments</string>
-    <string name="attachment_summary_on">Automatically download attachments for incoming emails
-    </string>
-    <string name="attachment_summary_off">Only download attachments when manually requested</string>
 </resources>

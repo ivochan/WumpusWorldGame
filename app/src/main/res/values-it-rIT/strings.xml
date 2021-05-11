@@ -56,4 +56,5 @@
     <string name="shots_value">h</string>
     <string name="score_value">s</string>
     <string name="game_message">messaggio</string>
+    <string name="game_settings_title">Impostazioni</string>
 </resources>
