@@ -1,7 +1,7 @@
 package com.example.wumpusworldgame.services;
 //serie di import
-import com.example.wumpusworldgame.activities.AutomaticPlayer;
-import com.example.wumpusworldgame.activities.GameInformation;
+import com.example.wumpusworldgame.menuItems.AutomaticPlayer;
+import com.example.wumpusworldgame.menuItems.GameInformation;
 import com.example.wumpusworldgame.activities.MainActivity;
 import game.structure.map.GameMap;
 /** class MenuOptions
@@ -41,12 +41,19 @@ public class MenuOptions {
         return GameInformation.class;
     }//gameInfo(int)
 
+    public static void changeSettings() {
 
+    }
 
 
     public static void viewScore() {
     }
 
+
+
+    public static void tutorial() {
+    }
+/*
     public static Class<AutomaticPlayer> solveGame(int game_mode, GameMap gm) {
         //si specifica la modalita' di gioco
         GameInformation.setGameMode(game_mode);
@@ -55,9 +62,8 @@ public class MenuOptions {
         //si restituisce la classe in cui verra' risolto il gioco
         return AutomaticPlayer.class;
     }//solveGame()
+    */
 
-    public static void changeSettings() {
-    }
 
 /*
     private void solveGame(Intent intent) {
@@ -91,8 +97,4 @@ public class MenuOptions {
 
     }
 */
-
-
-    public static void tutorial() {
-    }
 }//end MenuOptions

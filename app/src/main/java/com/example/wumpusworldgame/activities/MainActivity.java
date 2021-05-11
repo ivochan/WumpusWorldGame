@@ -11,7 +11,8 @@ import com.example.wumpusworldgame.services.TypeWriter;
 /** class MainActivity
  * questa classe rappresenta la finestra principale dell'applicazione,
  * quella che si apre al suo avvio.
- * Deve estendere la classe AppCompatActivity proprio per essere implementata come Activity.
+ * Deve estendere la classe AppCompatActivity proprio
+ * per essere implementata come Activity.
  */
 public class MainActivity extends AppCompatActivity {
     //##### attributi di classe #####
@@ -51,13 +52,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         /* impostazione del layout
          * la struttura grafica scelta per l'Activity e' specificata nel file
-         * activity_main.xml nella directory res/layout
+         * main_activity.xml nella directory res/layout
          * Gli ID delle risorse sono conservati in una classe Java denominata R,
          * Si puo' accedere ad una risorsa:
          * - tramite R.tipo_risorsa.nome_risorsa, in Java;
          * - con @tipo_risorsa/nome_risorsa, in XML;
          */
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.main_activity);
 
         //##### inizializzazioni #####
 
@@ -146,7 +147,6 @@ public class MainActivity extends AppCompatActivity {
     /** metodo onStop(): void
      * metodo opposto di onStart()
      * ACTIVITY NON VISIBILE
-     *
      */
     @Override
     public void onStop(){
@@ -157,7 +157,6 @@ public class MainActivity extends AppCompatActivity {
     /** metodo onDestroy(): void
      * metodo opposto di onCreate()
      * ACTIVITY DISTRUTTA
-     *
      */
     @Override
     public void onDestroy(){
@@ -173,8 +172,8 @@ public class MainActivity extends AppCompatActivity {
      */
     @Override
     public void onRestart(){
+        //si invoca il metodo della super classe
         super.onRestart();
-        //si assegna la velocita' di visualizzazione del testo
     }//onRestart()
 
     //##### altri metodi #####

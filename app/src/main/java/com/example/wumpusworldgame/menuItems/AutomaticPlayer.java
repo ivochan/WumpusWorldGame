@@ -1,22 +1,13 @@
-package com.example.wumpusworldgame.activities;
+package com.example.wumpusworldgame.menuItems;
 //serie di import
 import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.GridView;
-import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.example.wumpusworldgame.R;
 import com.example.wumpusworldgame.adapters.GridViewCustomAdapter;
-
 import java.util.ArrayList;
-
 import game.structure.map.GameMap;
-import game.structure.map.MapConfiguration;
 
 /** class AutomaticPlayer
  * activity che realizza la risoluzione della partita corrente
@@ -42,7 +33,7 @@ public class AutomaticPlayer extends AppCompatActivity {
         //con super si invoca il metodo omonimo della classe antenata
         super.onCreate(savedInstanceState);
         //si specifica il file che descrive il layout
-        setContentView(R.layout.activity_automatic_game);
+        setContentView(R.layout.automatic_game_activity);
         //scelta della clip audio
         //TODO scegliere la musica
         mp = MediaPlayer.create(AutomaticPlayer.this,R.raw.the_good_fight);

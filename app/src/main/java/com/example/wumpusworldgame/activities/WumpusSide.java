@@ -1,12 +1,11 @@
 package com.example.wumpusworldgame.activities;
-import android.content.Intent;
+//serie di import
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
@@ -14,7 +13,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.wumpusworldgame.R;
 import com.example.wumpusworldgame.adapters.GridViewCustomAdapter;
-import com.example.wumpusworldgame.services.MenuOptions;
+
 import java.util.ArrayList;
 import game.structure.map.GameMap;
 import game.structure.map.MapConfiguration;
@@ -23,20 +22,22 @@ import game.structure.map.MapConfiguration;
  * il personaggio giocabile e' il Wumpus
  */
 public class WumpusSide extends AppCompatActivity {
+
     //##### attributi di classe #####
     private final int game_mode = 0;
+
     //riproduttore audio
-    MediaPlayer mp;
+    private MediaPlayer mp;
     //matrice di gioco
-    GameMap gm;
+    private GameMap gm;
     //matrice di esplorazione
-    GameMap em;
+    private GameMap em;
     //per la matrice di esplorazione
-    GridView list;
+    private GridView list;
     //dati da mostrare nella matrice di esplorazione
-    ArrayList<String> data = new ArrayList<>();
+    private ArrayList<String> data = new ArrayList<>();
     //dati della matrice di gioco
-    ArrayList<String> game_data = new ArrayList<String>();
+    private ArrayList<String> game_data = new ArrayList<String>();
     //oggetto toast
     Toast loading_toast;
     //layout del toast
@@ -48,7 +49,6 @@ public class WumpusSide extends AppCompatActivity {
      * definendo le operazioni principali che deve svolgere ed
      * il layout che la caratterizza.
      * @param savedInstanceState
-     *
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,12 +56,13 @@ public class WumpusSide extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         //si mostra la schermata di gioco
-        setContentView(R.layout.activity_wumpus_side);
+        setContentView(R.layout.wumpus_side_activity);
 
         //scelta della clip audio
         mp = MediaPlayer.create(WumpusSide.this,R.raw.the_good_fight);
 
         //##### schermata di caricamento #####
+
         LayoutInflater inflater = getLayoutInflater();
         //creazione del layout
         loading_layout = inflater.inflate(R.layout.loading_custom_toast,
@@ -85,6 +86,7 @@ public class WumpusSide extends AppCompatActivity {
         int c = gm.getColumns();
 
         //##### salvataggio della matrice di gioco #####
+
         //si iterano le celle della matrice
         for (int i = 0; i < r; i++) {
             for(int j=0;j<c;j++) {
@@ -108,7 +110,6 @@ public class WumpusSide extends AppCompatActivity {
         //si visualizza la matrice di esplorazione
         list = (GridView) findViewById(R.id.grid_view);
         list.setAdapter(adapter);
-
 
     }//onCreate(Bundle)
 
@@ -163,7 +164,6 @@ public class WumpusSide extends AppCompatActivity {
     /** metodo onDestroy(): void
      * metodo opposto di onCreate()
      * ACTIVITY DISTRUTTA
-     *
      */
     @Override
     public void onDestroy(){
@@ -226,57 +226,6 @@ public class WumpusSide extends AppCompatActivity {
      *                        e' stata gestita, altrimenti
      *                        super.onOptionsItemSelected(item).
      */
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item){
-        //variabile ausiliaria per la nuova activity
-        Intent intent;
-        //id della voce del menu che e' stata selezionata
-        int itemId = item.getItemId();
-        //switch case sulle varie voci del menu
-        switch(itemId){
-            case R.id.Menu1: //NUOVA PARTITA
-                //creazione dell'intent
-                intent = new Intent(this, MenuOptions.newGame());
-                //avvio dell'activity corrispondente
-                startActivity(intent);
-                //ritorno alla schermata iniziale
-                return true;
-            case R.id.Menu2: //RISOLVI
-                //creazione dell'intent per la risoluzione automatica della partita
-                //TODO
-                return true;
-            case R.id.Menu3: //INFORMAZIONI
-                gameInfo();
-                return true;
-            case R.id.Menu4:
-                //comandi
-
-                break;
-            case R.id.Menu5:
-                //punteggi
-
-                break;
-            case R.id.Menu6:
-                //impostazioni
-
-            default:
-                //caso di default
-                return super.onOptionsItemSelected(item);
-        }//end switch
-        return false;
-
-    }//onOptionsItemSelected(MenuItem)
-
-    //##### metodi per le voci del menu #####
-
-    private void gameInfo() {
-        //si specifica la modalita' di gioco
-        GameInformation.setGameMode(game_mode);
-        //si crea l'intent associato
-        Intent intent = new Intent(this, GameInformation.class);
-        //si apre la scheda delle informazioni del gioco
-        startActivity(intent);
-    }//gameInfo()
 
     //##### altri metodi #####
 

@@ -21,27 +21,28 @@ import game.structure.map.GameMap;
 import game.structure.map.MapConfiguration;
 /** class HeroSide
  * classe che implementa la modalita' di gioco in cui il personaggio
- * giocabile e' l'Avventuriero
+ * giocabile e' l'Avventuriero.
  */
 public class HeroSide extends AppCompatActivity {
+
     //##### attributi di classe #####
     private final int game_mode = 1;
     //riproduttore audio
-    MediaPlayer mp;
+    private MediaPlayer mp;
     //matrice di gioco
-    GameMap gm;
+    private GameMap gm;
     //matrice di esplorazione
-    GameMap em;
+    private GameMap em;
     //per la matrice di esplorazione
-    GridView list;
+    private GridView list;
     //dati da mostrare nella matrice di esplorazione
-    ArrayList<String> data = new ArrayList<>();
+    private ArrayList<String> data = new ArrayList<>();
     //dati della matrice di gioco
-    ArrayList<String> game_data = new ArrayList<String>();
+    private ArrayList<String> game_data = new ArrayList<String>();
     //oggetto toast
-    Toast loading_toast;
+    private Toast loading_toast;
     //layout del toast
-    View loading_layout;
+    private View loading_layout;
 
     /** metodo onCreate(Bunde): void
      * ACTIVITY CREATA
@@ -49,7 +50,6 @@ public class HeroSide extends AppCompatActivity {
      * definendo le operazioni principali che deve svolgere ed
      * il layout che la caratterizza.
      * @param savedInstanceState
-     *
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,12 +57,13 @@ public class HeroSide extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         //si mostra la schermata di gioco
-        setContentView(R.layout.activity_hero_side);
+        setContentView(R.layout.hero_side_activity);
 
         //scelta della clip audio
         mp = MediaPlayer.create(HeroSide.this,R.raw.the_good_fight);
 
         //##### schermata di caricamento #####
+
         LayoutInflater inflater = getLayoutInflater();
         //creazione del layout
         loading_layout = inflater.inflate(R.layout.loading_custom_toast,
@@ -86,6 +87,7 @@ public class HeroSide extends AppCompatActivity {
         int c = gm.getColumns();
 
         //##### salvataggio della matrice di gioco #####
+
         //si iterano le celle della matrice
         for (int i = 0; i < r; i++) {
             for(int j=0;j<c;j++) {
@@ -164,7 +166,6 @@ public class HeroSide extends AppCompatActivity {
     /** metodo onDestroy(): void
      * metodo opposto di onCreate()
      * ACTIVITY DISTRUTTA
-     *
      */
     @Override
     public void onDestroy(){
@@ -218,10 +219,7 @@ public class HeroSide extends AppCompatActivity {
     /** metodo onOptionsItemSelected(MenuItem): boolean
      * questo metodo si occupa di gestire le azioni che
      * devono essere svolte quando si seleziona una delle
-     * voci del menu
-     * Quasi tutte le voci del menu verranno definite come
-     * Alert Dialog.
-     *
+     * voci del menu.
      * @param item: MenuItem, voce del menu;
      * @return true: boolean, per qualsiasi voce del menu che
      *                        e' stata gestita, altrimenti
@@ -235,30 +233,41 @@ public class HeroSide extends AppCompatActivity {
         int itemId = item.getItemId();
         //switch case sulle varie voci del menu
         switch(itemId){
-            case R.id.Menu1: //NUOVA PARTITA
+            //NUOVA PARTITA
+            case R.id.Menu1:
                 //creazione dell'intent
                 intent = new Intent(this, MenuOptions.newGame());
                 //avvio dell'activity corrispondente
                 startActivity(intent);
                 //ritorno alla schermata iniziale
                 return true;
-            case R.id.Menu2: //RISOLVI
+            //RISOLVI
+            case R.id.Menu2:
                 //creazione dell'intent per la risoluzione automatica della partita
                 //TODO
+                break;
+            //INFORMAZIONI
+            case R.id.Menu3:
+                //creazione dell'intent
+                intent = new Intent(this,MenuOptions.gameInfo(game_mode));
+                //avvio dell'activity corrispondente
+                startActivity(intent);
+                //si apre la schermata delle informazioni sul gioco
                 return true;
-            case R.id.Menu3: //INFORMAZIONI
-                gameInfo();
-                return true;
+            //TUTORIAL
             case R.id.Menu4:
                 //comandi
 
                 break;
+            //PUNTEGGI
             case R.id.Menu5:
                 //punteggi
 
                 break;
+            //IMPOSTAZIONI
             case R.id.Menu6:
                 //impostazioni
+                break;
 
             default:
                 //caso di default
@@ -268,18 +277,7 @@ public class HeroSide extends AppCompatActivity {
 
     }//onOptionsItemSelected(MenuItem)
 
-    //##### metodi per le voci del menu #####
-
-    private void gameInfo() {
-        //si specifica la modalita' di gioco
-        GameInformation.setGameMode(game_mode);
-        //si crea l'intent associato
-        Intent intent = new Intent(this, GameInformation.class);
-        //si apre la scheda delle informazioni del gioco
-        startActivity(intent);
-    }//gameInfo()
-
-    //##### altri metodi #####
+       //##### altri metodi #####
 
     /** metodo showLoadingToast(): void
      * questo metodo visualizza la schermata di caricamento

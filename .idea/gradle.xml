@@ -10,9 +10,11 @@
         <option name="gradleJvm" value="1.8" />
         <option name="modules">
           <set>
-            <option value="$PROJECT_DIR$/../../HuntTheWumpus_App/WumpusWorldGame" />
-            <option value="$PROJECT_DIR$/../../HuntTheWumpus_App/WumpusWorldGame/app" />
-            <option value="$PROJECT_DIR$/../../HuntTheWumpus_App/WumpusWorldGame/wumpus_world_game_java" />
+            <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/hunt_the_wumpus" />
+            <option value="$PROJECT_DIR$/huntthewumpus" />
+            <option value="$PROJECT_DIR$/wumpus_world_game_java" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
