@@ -57,12 +57,39 @@
     <string name="game_message">message</string>
 
     <!-- Preference Titles -->
-    <string name="game" translatable="false">Game</string>
-    <string name="sound" translatable="false">Sound Effects</string>
-    <string name="theme" translatable="false">Theme</string>
+    <string name="game" translatable="false">Game Mode</string>
+    <string name="sound" translatable="false">Enable sound effects</string>
+    <string name="theme" translatable="false">Enable dark theme</string>
+    <string name="about" translatable="false">About</string>
+    <string name="feedback" translatable="false">Send feedback</string>
+
     <!-- Images -->
     <string name="dark_forest">dark_forest_main_activity_image</string>
     <string name="dark_night">creepy_night_game_info_activity</string>
+    <string name="account">Account</string>
+    <string name="player">Nome del giocatore</string>
+    <string name="player_info">Inserisci il nome che vuoi venga visualizzato nella classifica</string>
+    <string name="login">Login</string>
+    <string name="login_info">Accedi al tuo account</string>
+    <string name="scores">Punteggi</string>
+    <string name="delete_score">Cancella la classifica attuale</string>
+    <string name="export_score">Esporta la classifica dei punteggi</string>
+    <string name="title_activity_settings">SettingsActivity</string>
+
+    <!-- Preference Titles -->
+    <string name="messages_header">Messages</string>
+    <string name="sync_header">Sync</string>
+
+    <!-- Messages Preferences -->
+    <string name="signature_title">Your signature</string>
+    <string name="reply_title">Default reply action</string>
+
+    <!-- Sync Preferences -->
+    <string name="sync_title">Sync email periodically</string>
+    <string name="attachment_title">Download incoming attachments</string>
+    <string name="attachment_summary_on">Automatically download attachments for incoming emails
+    </string>
+    <string name="attachment_summary_off">Only download attachments when manually requested</string>
     <!-- contentDescriptions -->
 
 </resources>

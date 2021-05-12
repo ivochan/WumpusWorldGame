@@ -57,4 +57,12 @@
     <string name="score_value">s</string>
     <string name="game_message">messaggio</string>
     <string name="game_settings_title">Impostazioni</string>
+    <string name="account" />
+    <string name="player" />
+    <string name="player_info" />
+    <string name="login" />
+    <string name="login_info" />
+    <string name="scores" />
+    <string name="delete_score" />
+    <string name="export_score" />
 </resources>

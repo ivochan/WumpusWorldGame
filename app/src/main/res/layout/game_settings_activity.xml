@@ -1,10 +1,30 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:padding="4dp"
+    android:id="@+id/settings">
 
-    <FrameLayout
-        android:id="@+id/settings"
+    <TextView
+        android:id="@android:id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/light_purple_600"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:textAlignment="gravity"/>
+
+    <TextView
+        android:id="@android:id/summary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/darker_gray"
+        />
+
+    <LinearLayout
+        android:id="@android:id/widget_frame"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="0dp"
+        android:minWidth="10dp"
+        android:orientation="vertical" />
+</FrameLayout>
 
-</LinearLayout>

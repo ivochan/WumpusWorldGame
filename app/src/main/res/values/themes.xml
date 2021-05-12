@@ -17,5 +17,7 @@
         <item name="android:windowBackground">@drawable/gradient_background</item>
         <!-- Menu colors -->
         <item name="android:itemBackground">@color/light_indigo_600</item>
+        <!-- Preference Screen colors -->
+        <item name="colorAccent">@color/sugar_paper</item>
     </style>
 </resources>

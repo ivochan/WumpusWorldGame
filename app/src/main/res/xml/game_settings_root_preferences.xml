@@ -1,24 +1,64 @@
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <PreferenceCategory
-        app:key="notifications_category"
-        app:title="Notifications">
+        android:layout="@layout/game_settings_activity"
+        android:title="@string/game"
+        app:key="game_settings_category"
+        app:title="@string/game">
 
         <SwitchPreferenceCompat
-            app:key="notifications"
-            app:title="Enable message notifications"/>
+            android:layout="@layout/game_settings_preferences"
+            app:key="sound"
+            app:title="@string/sound" />
+
+        <SwitchPreferenceCompat
+            app:key="theme"
+            app:title="@string/theme" />
 
     </PreferenceCategory>
 
     <PreferenceCategory
-        app:key="help_category"
-        app:title="Help">
+        android:layout="@layout/game_settings_activity"
+        app:key="account_category"
+        app:title="@string/account">
+
+        <EditTextPreference
+            android:layout="@layout/game_settings_preferences"
+            app:key="player"
+            app:title="@string/player"
+            app:summary="@string/player_info"/>
+
+        <Preference
+            app:key="login"
+            app:title="@string/login"
+            app:summary="@string/login_info"/>
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        app:key="score_category"
+        app:title="@string/scores">
+
+        <Preference
+            app:key="delete"
+            app:title="@string/delete_score"/>
+
+        <Preference
+            app:key="export"
+            app:title="@string/export_score"/>
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        app:key="about_category"
+        app:title="@string/about">
 
         <Preference
             app:key="feedback"
-            app:summary="Report technical issues or suggest new features"
-            app:title="Send feedback"/>
+            app:title="@string/feedback"
+            app:summary="Report technical issues or suggest new features!"/>
 
     </PreferenceCategory>
 
