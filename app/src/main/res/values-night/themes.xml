@@ -18,7 +18,6 @@
         <item name="android:windowBackground">@drawable/gradient_background_night</item>
         <!-- Menu colors -->
         <item name="android:itemBackground">@color/darkColorPrimary</item>
-
     </style>
 
 </resources>

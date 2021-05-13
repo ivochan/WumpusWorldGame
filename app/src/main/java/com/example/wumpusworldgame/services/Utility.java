@@ -1,36 +1,47 @@
 package com.example.wumpusworldgame.services;
 //serie di import
-import android.content.Context;
-import android.content.Intent;
-import android.view.Gravity;
-import android.view.MenuItem;
+import android.app.Activity;
+import android.app.Dialog;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Toast;
-
+import android.view.WindowManager;
 import com.example.wumpusworldgame.R;
-
+import java.util.Timer;
+import java.util.TimerTask;
 /** class  Utility
  * classe di utilita' che contiene una serie di metodi statici da
  * richiamare in entrambe le modalita' di gioco perche' comuni.
  */
 public class Utility {
 
-    /** metodo showLoadingScreen(): void
-     * questo metodo visualizza la schermata di caricamento
-     * prima dell'avvio della sessione di gioco
-     * utilizzando il layout definito per il Toast
-     * @param context
-     * @param loading_layout
+    /** metodo showLoadingScreen(Activity, LayoutInflater)
+     *
+     * @param inflater
+     * @param activity
      */
-    public static void showLoadingScreen(Context context, View loading_layout){
-        //si crea il toast
-        Toast loading_toast = new Toast(context);
-        //si imposta la sua disposizione nella finestra
-        loading_toast.setGravity(Gravity.CENTER, 0, 0);
-        //si imposta il tempo per cui dovra' essere visualizzato
-        loading_toast.setDuration(Toast.LENGTH_SHORT);
-        loading_toast.setView(loading_layout);
-        loading_toast.show();
-    }//showLoadingScreen(Context, View)
+    public static void showLoadingScreen(Activity activity, LayoutInflater inflater){
+        //
+        Dialog customDialog;
+        View customView = inflater.inflate(R.layout.loading_screen_dialog, null);
 
+        // Build the dialog
+        customDialog = new Dialog(activity, R.style.CustomDialog);
+        customDialog.getWindow().setLayout(1080,2000);
+        WindowManager.LayoutParams params = customDialog.getWindow().getAttributes(); // change this to your dialog.
+
+        params.y = 120; // Here is the param to set your dialog position. Same with params.x
+        customDialog.getWindow().setAttributes(params);
+
+        customDialog.setContentView(customView);
+        customDialog.show();
+
+        final Timer t = new Timer();
+        t.schedule(new TimerTask() {
+            public void run() {
+                customDialog.dismiss(); // when the task active then close the dialog
+                t.cancel(); // also just top the timer thread, otherwise, you may receive a crash report
+            }
+        }, 2000);
+
+    }
 }// end class Utility

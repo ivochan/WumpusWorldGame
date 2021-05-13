@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/hero_background"
-    tools:context=".activities.HeroSide">
+    tools:context=".activities.HeroSide"
+    android:id="@+id/hero_mode">
 
     <View
         android:id="@+id/divider1"
@@ -138,7 +139,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.777"
-        app:srcCompat="@drawable/hit_button" />
+        app:srcCompat="@drawable/hit_button"
+        android:contentDescription="TODO" />
 
     <ImageButton
         android:id="@+id/imageButtonDOWN"

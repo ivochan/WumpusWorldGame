@@ -63,10 +63,10 @@ public class WumpusSide extends AppCompatActivity {
         //si preleva il puntatore al layout del contesto corrente, dell'activity attuale
         LayoutInflater inflater = getLayoutInflater();
         //si definisce il layout del toast che implementa la schermata di caricamento
-        View loading_layout = inflater.inflate(R.layout.loading_custom_toast,
-                (ViewGroup)findViewById(R.id.loading_toast_container));
+        //View loading_layout = inflater.inflate(R.layout.loading_custom_toast,
+         //       (ViewGroup)findViewById(R.id.loading_toast_container));
         //si visualizza la schermata di caricamento
-        Utility.showLoadingScreen(getApplicationContext(),loading_layout);
+       // Utility.showLoadingScreen(getApplicationContext(),loading_layout);
 
         //##### schermata di gioco #####
 

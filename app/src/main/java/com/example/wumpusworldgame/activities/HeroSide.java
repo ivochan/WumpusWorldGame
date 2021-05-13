@@ -1,22 +1,35 @@
 package com.example.wumpusworldgame.activities;
 //serie di import
+import android.app.ActionBar;
+import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Rect;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.GridView;
-import android.widget.Toast;
+
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.wumpusworldgame.R;
 import com.example.wumpusworldgame.adapters.GridViewCustomAdapter;
 import com.example.wumpusworldgame.services.MenuOptions;
 import com.example.wumpusworldgame.services.Utility;
+
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
+
 import game.structure.map.GameMap;
 import game.structure.map.MapConfiguration;
 /** class HeroSide
@@ -54,18 +67,13 @@ public class HeroSide extends AppCompatActivity {
         //si mostra la schermata di gioco
         setContentView(R.layout.hero_side_activity);
 
+
         //scelta della clip audio
         mp = MediaPlayer.create(HeroSide.this,R.raw.the_good_fight);
 
         //##### schermata di caricamento #####
 
-        //si preleva il puntatore al layout del contesto corrente, dell'activity attuale
-        LayoutInflater inflater = getLayoutInflater();
-        //si definisce il layout del toast che implementa la schermata di caricamento
-        View loading_layout = inflater.inflate(R.layout.loading_custom_toast,
-                 (ViewGroup)findViewById(R.id.loading_toast_container));
-        //si visualizza la schermata di caricamento
-        Utility.showLoadingScreen(getApplicationContext(),loading_layout);
+        Utility.showLoadingScreen(this, getLayoutInflater());
 
         //##### schermata di gioco #####
 
