@@ -13,6 +13,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.wumpusworldgame.R;
 import com.example.wumpusworldgame.adapters.GridViewCustomAdapter;
+import com.example.wumpusworldgame.services.Utility;
 
 import java.util.ArrayList;
 import game.structure.map.GameMap;
@@ -38,10 +39,6 @@ public class WumpusSide extends AppCompatActivity {
     private ArrayList<String> data = new ArrayList<>();
     //dati della matrice di gioco
     private ArrayList<String> game_data = new ArrayList<String>();
-    //oggetto toast
-    Toast loading_toast;
-    //layout del toast
-    View loading_layout;
 
     /** metodo onCreate(Bunde): void
      * ACTIVITY CREATA
@@ -63,13 +60,13 @@ public class WumpusSide extends AppCompatActivity {
 
         //##### schermata di caricamento #####
 
+        //si preleva il puntatore al layout del contesto corrente, dell'activity attuale
         LayoutInflater inflater = getLayoutInflater();
-        //creazione del layout
-        loading_layout = inflater.inflate(R.layout.loading_custom_toast,
+        //si definisce il layout del toast che implementa la schermata di caricamento
+        View loading_layout = inflater.inflate(R.layout.loading_custom_toast,
                 (ViewGroup)findViewById(R.id.loading_toast_container));
-
-        //creazione del toast
-        showLoadingToast();
+        //si visualizza la schermata di caricamento
+        Utility.showLoadingScreen(getApplicationContext(),loading_layout);
 
         //##### schermata di gioco #####
 
@@ -228,18 +225,5 @@ public class WumpusSide extends AppCompatActivity {
      */
 
     //##### altri metodi #####
-
-    /** metodo showLoadingToast(): void
-     * questo metodo visualizza la schermata di caricamento
-     * prima dell'avvio della sessione di gioco
-     * utilizzando il layout definito per il Toast
-     */
-    private void showLoadingToast(){
-        loading_toast = new Toast(getApplicationContext());
-        loading_toast.setGravity(Gravity.CENTER, 0, 0);
-        loading_toast.setDuration(Toast.LENGTH_SHORT);
-        loading_toast.setView(loading_layout);
-        loading_toast.show();
-    }//showLoadingToast()
 
 }//end WumpusSide

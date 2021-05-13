@@ -3,7 +3,6 @@ package com.example.wumpusworldgame.activities;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -16,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.wumpusworldgame.R;
 import com.example.wumpusworldgame.adapters.GridViewCustomAdapter;
 import com.example.wumpusworldgame.services.MenuOptions;
+import com.example.wumpusworldgame.services.Utility;
 import java.util.ArrayList;
 import game.structure.map.GameMap;
 import game.structure.map.MapConfiguration;
@@ -24,7 +24,6 @@ import game.structure.map.MapConfiguration;
  * giocabile e' l'Avventuriero.
  */
 public class HeroSide extends AppCompatActivity {
-
     //##### attributi di classe #####
     private final int game_mode = 1;
     //riproduttore audio
@@ -39,10 +38,6 @@ public class HeroSide extends AppCompatActivity {
     private ArrayList<String> data = new ArrayList<>();
     //dati della matrice di gioco
     private ArrayList<String> game_data = new ArrayList<String>();
-    //oggetto toast
-    private Toast loading_toast;
-    //layout del toast
-    private View loading_layout;
 
     /** metodo onCreate(Bunde): void
      * ACTIVITY CREATA
@@ -64,15 +59,13 @@ public class HeroSide extends AppCompatActivity {
 
         //##### schermata di caricamento #####
 
+        //si preleva il puntatore al layout del contesto corrente, dell'activity attuale
         LayoutInflater inflater = getLayoutInflater();
-        //creazione del layout
-        loading_layout = inflater.inflate(R.layout.loading_custom_toast,
-                (ViewGroup)findViewById(R.id.loading_toast_container));
-
-        //TODO vedere se e' possibile inserire il metodo del toast in un'unica
-        //TODO classe e verificare quale sia il metodo non deprecato
-        //creazione del toast
-        showLoadingToast();
+        //si definisce il layout del toast che implementa la schermata di caricamento
+        View loading_layout = inflater.inflate(R.layout.loading_custom_toast,
+                 (ViewGroup)findViewById(R.id.loading_toast_container));
+        //si visualizza la schermata di caricamento
+        Utility.showLoadingScreen(getApplicationContext(),loading_layout);
 
         //##### schermata di gioco #####
 
@@ -283,20 +276,5 @@ public class HeroSide extends AppCompatActivity {
         return false;
 
     }//onOptionsItemSelected(MenuItem)
-
-       //##### altri metodi #####
-
-    /** metodo showLoadingToast(): void
-     * questo metodo visualizza la schermata di caricamento
-     * prima dell'avvio della sessione di gioco
-     * utilizzando il layout definito per il Toast
-     */
-    private void showLoadingToast(){
-        loading_toast = new Toast(getApplicationContext());
-        loading_toast.setGravity(Gravity.CENTER, 0, 0);
-        loading_toast.setDuration(Toast.LENGTH_SHORT);
-        loading_toast.setView(loading_layout);
-        loading_toast.show();
-    }//showLoadingToast()
 
 }//end HeroSide
