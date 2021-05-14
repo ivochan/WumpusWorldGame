@@ -9,7 +9,6 @@
         app:title="@string/game">
 
         <SwitchPreferenceCompat
-            android:layout="@layout/game_settings_preferences"
             app:key="sound"
             app:title="@string/sound" />
 
@@ -25,7 +24,6 @@
         app:title="@string/account">
 
         <EditTextPreference
-            android:layout="@layout/game_settings_preferences"
             app:key="player"
             app:title="@string/player"
             app:summary="@string/player_info"/>
