@@ -72,7 +72,6 @@ public class HeroSide extends AppCompatActivity {
         mp = MediaPlayer.create(HeroSide.this,R.raw.the_good_fight);
 
         //##### schermata di caricamento #####
-
         Utility.showLoadingScreen(this, getLayoutInflater());
 
         //##### schermata di gioco #####
@@ -113,8 +112,8 @@ public class HeroSide extends AppCompatActivity {
         GridViewCustomAdapter adapter = new GridViewCustomAdapter(this, data);
         //si visualizza la matrice di esplorazione
         list = (GridView) findViewById(R.id.grid_view);
+        //oggetto che permette di visualizzare i dati
         list.setAdapter(adapter);
-
 
     }//onCreate(Bundle)
 
@@ -282,7 +281,6 @@ public class HeroSide extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }//end switch
         return false;
-
     }//onOptionsItemSelected(MenuItem)
 
 }//end HeroSide
