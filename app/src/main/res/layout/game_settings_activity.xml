@@ -1,30 +1,31 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="4dp"
+    android:padding="10dp"
     android:id="@+id/settings">
 
     <TextView
         android:id="@android:id/title"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textAlignment="gravity"
         android:textColor="@color/light_purple_600"
-        android:textStyle="bold"
         android:textSize="20sp"
-        android:textAlignment="gravity"/>
+        android:textStyle="bold" />
 
     <TextView
         android:id="@android:id/summary"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@android:color/darker_gray"
-        />
-
-    <LinearLayout
-        android:id="@android:id/widget_frame"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:minWidth="10dp"
-        android:orientation="vertical" />
+        android:layout_height="wrap_content"
+        android:textColor="@color/dark_red_900" />
+    <!--aggiustare
+         <LinearLayout
+            android:id="@android:id/widget_frame"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:minWidth="10dp"
+            android:background="@color/dark_red_900"
+            android:orientation="vertical" />
+            -->
 </FrameLayout>
 

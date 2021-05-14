@@ -24,8 +24,11 @@ public class GameSettingsActivity extends AppCompatActivity {
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //si richiama il metodo della super classe
         super.onCreate(savedInstanceState);
+        //si imposta il layout
         setContentView(R.layout.game_settings_activity);
+
         if (savedInstanceState == null) {
             getSupportFragmentManager()
                     .beginTransaction()
@@ -36,7 +39,7 @@ public class GameSettingsActivity extends AppCompatActivity {
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
-    }
+    }//onCreate(Bundle)
 
     //##### metodi per la gestione dell'activity #####
 

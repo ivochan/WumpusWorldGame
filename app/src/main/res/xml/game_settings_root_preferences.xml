@@ -1,25 +1,37 @@
 <PreferenceScreen
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <PreferenceCategory
-        android:layout="@layout/game_settings_activity"
-        android:title="@string/game"
+        app:layout="@layout/game_settings_activity"
         app:key="game_settings_category"
         app:title="@string/game">
 
         <SwitchPreferenceCompat
             app:key="sound"
-            app:title="@string/sound" />
+            app:title="@string/sound"/>
 
         <SwitchPreferenceCompat
             app:key="theme"
-            app:title="@string/theme" />
-
+            app:title="@string/theme"/>
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:layout="@layout/game_settings_activity"
+        app:layout="@layout/game_settings_activity"
+        app:key="about_category"
+        app:title="@string/about">
+
+        <Preference
+            app:key="feedback"
+            app:title="@string/feedback"
+            app:summary="@string/feedback_info"/>
+
+    </PreferenceCategory>
+
+</PreferenceScreen>
+
+<!--
+ <PreferenceCategory
         app:key="account_category"
         app:title="@string/account">
 
@@ -32,10 +44,8 @@
             app:key="login"
             app:title="@string/login"
             app:summary="@string/login_info"/>
-
     </PreferenceCategory>
-
-    <PreferenceCategory
+           <PreferenceCategory
         app:key="score_category"
         app:title="@string/scores">
 
@@ -46,19 +56,7 @@
         <Preference
             app:key="export"
             app:title="@string/export_score"/>
-
-    </PreferenceCategory>
-
-    <PreferenceCategory
-        app:key="about_category"
-        app:title="@string/about">
-
-        <Preference
-            app:key="feedback"
-            app:title="@string/feedback"
-            app:summary="Report technical issues or suggest new features!"/>
-
     </PreferenceCategory>
 
 
-</PreferenceScreen>
+-->
