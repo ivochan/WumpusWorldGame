@@ -41,12 +41,12 @@
     <string name="loading">Loading game data ...</string>
     <string name="loading_image">loading bat image</string>
     <!-- main menu options -->
-    <string name="menu1">New Game</string>
-    <string name="menu2">Solve</string>
-    <string name="menu3">Information</string>
-    <string name="menu4">Tutorial</string>
-    <string name="menu5">Score</string>
-    <string name="menu6">Settings</string>
+    <string name="ItemNewGame">New Game</string>
+    <string name="ItemSolveGame">Solve</string>
+    <string name="ItemGameInfo">Information</string>
+    <string name="ItemTutorial">Tutorial</string>
+    <string name="ItemScore">Score</string>
+    <string name="ItemSettings">Settings</string>
 
     <!-- HeroSide and Wumpus Side Activities-->
     <string name="score">Your score: </string>

@@ -195,35 +195,5 @@ public class WumpusSide extends AppCompatActivity {
 
     //##### metodi per la gestione del menu #####
 
-    /** metodo onCreateOptionsMenu(Menu): boolean
-     * questo metodo serve per visualizzare il menu
-     * nella activity corrente
-     * @param menu: Menu, oggetto che costituisce il menu
-     * @return true: boolean
-     */
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu){
-        //si preleva l'oggetto inflater associato al menu
-        MenuInflater inflater = getMenuInflater();
-        //si definisce il layout del menu
-        inflater.inflate(R.menu.main_menu,menu);
-        //si visualizza il menu nel layout (tre puntini in alto a destra)
-        return true;
-    }//onCreateOptionsMenu(Menu)
-
-    /** metodo onOptionsItemSelected(MenuItem): boolean
-     * questo metodo si occupa di gestire le azioni che
-     * devono essere svolte quando si seleziona una delle
-     * voci del menu
-     * Quasi tutte le voci del menu verranno definite come
-     * Alert Dialog.
-     *
-     * @param item: MenuItem, voce del menu;
-     * @return true: boolean, per qualsiasi voce del menu che
-     *                        e' stata gestita, altrimenti
-     *                        super.onOptionsItemSelected(item).
-     */
-
-    //##### altri metodi #####
 
 }//end WumpusSide

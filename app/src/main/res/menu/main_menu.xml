@@ -1,23 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:actionLayout="@layout/hero_side_activity"
-        android:id="@+id/Menu1"
-        android:title="@string/menu1"/>
+        android:id="@+id/item_game_info"
+        android:title="@string/ItemGameInfo"/>
     <item
-        android:id="@+id/Menu2"
-        android:title="@string/menu2"/>
+        android:id="@+id/item_tutorial"
+        android:title="@string/ItemTutorial"/>
     <item
-        android:id="@+id/Menu3"
-        android:title="@string/menu3"/>
-    <item
-        android:id="@+id/Menu4"
-        android:title="@string/menu4"/>
-    <item
-        android:id="@+id/Menu5"
-        android:title="@string/menu5"/>
-    <item
-        android:id="@+id/Menu6"
-        android:title="@string/menu6"/>
+        android:id="@+id/item_settings"
+        android:title="@string/ItemSettings"/>
+
 </menu>
 

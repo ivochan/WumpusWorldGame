@@ -41,13 +41,14 @@
     <string name="game_credits">E\' Ivonne che ha tentato di sviluppare questo gioco...</string>
     <string name="loading">Preparazione del terreno di gioco ...</string>
     <string name="loading_image">immagine di caricamento</string>
+
     <!-- main menu options -->
-    <string name="menu1">Nuova partita</string>
-    <string name="menu2">Risolvi</string>
-    <string name="menu3">Informazioni</string>
-    <string name="menu4">Tutorial</string>
-    <string name="menu5">Punteggi</string>
-    <string name="menu6">Impostazioni</string>
+    <string name="ItemNewGame">Nuova partita</string>
+    <string name="ItemSolveGame">Risolvi</string>
+    <string name="ItemGameInfo">Informazioni</string>
+    <string name="ItemTutorial">Tutorial</string>
+    <string name="ItemScore">Punteggi</string>
+    <string name="ItemSettings">Impostazioni</string>
     <!-- altro-->
     <string name="score">Punteggio: </string>
     <string name="shot">Colpi residui: </string>

@@ -4,9 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import com.example.wumpusworldgame.R;
+import com.example.wumpusworldgame.menuItems.GameInformationActivity;
 import com.example.wumpusworldgame.services.TypeWriter;
 /** class MainActivity
  * questa classe rappresenta la finestra principale dell'applicazione,
@@ -20,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
     //testo animato
     private TypeWriter typeWriter;
     //velocita' di scorrimento
-    private final static int delay = 30;
+    private final static int delay = 25;
 
     //riproduttore audio
     private MediaPlayer mp;
@@ -191,5 +195,60 @@ public class MainActivity extends AppCompatActivity {
         tw.animateText(""+getResources().getString(R.string.game_intro));
     }//animatedText(TypeWriter)
 
+    //##### metodi per la gestione del menu #####
+
+    /** metodo onCreateOptionsMenu(Menu): boolean
+     * questo metodo serve per visualizzare il menu
+     * nella activity corrente
+     * @param menu: Menu, oggetto che costituisce il menu
+     * @return true: boolean
+     */
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        //si preleva l'oggetto inflater associato al menu
+        MenuInflater inflater = getMenuInflater();
+        //si definisce il layout del menu
+        inflater.inflate(R.menu.main_menu,menu);
+        //si visualizza il menu nel layout (tre puntini in alto a destra)
+        return true;
+    }//onCreateOptionsMenu(Menu)
+
+    /** metodo onOptionsItemSelected(MenuItem): boolean
+     * questo metodo si occupa di gestire le azioni che
+     * devono essere svolte quando si seleziona una delle
+     * voci del menu.
+     * @param item: MenuItem, voce del menu;
+     * @return true: boolean, per qualsiasi voce del menu che
+     *                        e' stata gestita, altrimenti
+     *                        super.onOptionsItemSelected(item).
+     */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        //variabile ausiliaria per la nuova activity
+        Intent intent;
+        //id della voce del menu che e' stata selezionata
+        int itemId = item.getItemId();
+        //switch case sulle varie voci del menu
+        switch(itemId){
+            //INFORMAZIONI
+            case R.id.item_game_info:
+                //creazione dell'intent
+                intent = new Intent(this, GameInformationActivity.class);
+                //avvio dell'activity corrispondente
+                startActivity(intent);
+                //viene aperta l'activity
+                return true;
+            //IMPOSTAZIONI
+            case R.id.item_settings:
+                break;
+            //TUTORIAL
+            case R.id.item_tutorial:
+                break;
+            default:
+                //caso di default
+                return super.onOptionsItemSelected(item);
+        }//end switch
+        return false;
+    }//onOptionsItemSelected(MenuItem)
 
 }//end MainActivity

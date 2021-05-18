@@ -152,35 +152,34 @@ public class GameInformationActivity extends AppCompatActivity {
      */
     @Override
     public void onBackPressed(){
-        //variabile ausiliaria
-        Intent myIntent;
-        //HERO SIDE
-        if(game_mode==1) {
-            //ritorno all'activity HeroSide, quella precedente
-            myIntent = new Intent(this, HeroSide.class);
-        }//fi
-        //WUMPUS SIDE
-        else { //game_mode==0
-            //ritorno all'activity WumpusSide, quella precedente
-            myIntent = new Intent(this, WumpusSide.class);
-        }//esle
-        /*si imposta questo flag in modo che se l'activity che sta per essere
-         *avviata e' gia' in esecuzione nel task corrente, allora, invece di
-         *di lanciare una nuova istanza, tutte le altre activity che si trovano
-         *in cima allo stack verrano chiuse, in modo che questa Intent venga
-         *riportata all'activity precendete, che ora si trova in cima allo stack.
-         *CLEAR BACK STACK
-         */
-        myIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        //avvio dell'activity
-        startActivity(myIntent);
-        //chiusura dell'activity corrente, verra' eseguito il metodo onDestroy()
-        finish();
-        /*per ritornare all'activity precedente
-         *e' stato aggiunto nel manifest
-         *android:launchMode="singleTop"
-         */
-        return;
+        //si rischiama il metodo della super classe
+        super.onBackPressed();
     }//onBackPressed()
 
 }//end GameInformationActivity
+/*
+ @Override
+ public void onBackPressed(){
+    //variabile ausiliaria
+    Intent myIntent;
+    //HERO SIDE
+    if(game_mode==1) {
+        //ritorno all'activity HeroSide, quella precedente
+        myIntent = new Intent(this, HeroSide.class);
+    }//fi
+    //WUMPUS SIDE
+    else { //game_mode==0
+       //ritorno all'activity WumpusSide, quella precedente
+        myIntent = new Intent(this, WumpusSide.class);
+    }//esle
+    myIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+    //avvio dell'activity
+    startActivity(myIntent);
+    //chiusura dell'activity corrente, verra' eseguito il metodo onDestroy()
+    finish();
+    //per ritornare all'activity precedente
+    //e' stato aggiunto nel manifest
+    //android:launchMode="singleTop"
+    return;
+}//onBackPressed()
+*/

@@ -1,34 +1,20 @@
 package com.example.wumpusworldgame.activities;
 //serie di import
-import android.app.ActionBar;
-import android.app.Dialog;
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Rect;
 import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.GridView;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.wumpusworldgame.R;
 import com.example.wumpusworldgame.adapters.GridViewCustomAdapter;
-import com.example.wumpusworldgame.services.MenuOptions;
 import com.example.wumpusworldgame.services.Utility;
 
 import java.util.ArrayList;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import game.structure.map.GameMap;
 import game.structure.map.MapConfiguration;
@@ -213,12 +199,10 @@ public class HeroSide extends AppCompatActivity {
         //si preleva l'oggetto inflater associato al menu
         MenuInflater inflater = getMenuInflater();
         //si definisce il layout del menu
-        inflater.inflate(R.menu.main_menu,menu);
+        inflater.inflate(R.menu.game_menu,menu);
         //si visualizza il menu nel layout (tre puntini in alto a destra)
         return true;
     }//onCreateOptionsMenu(Menu)
-
-    //TODO vedere se e' possibile inserirlo in un'unica classe
 
     /** metodo onOptionsItemSelected(MenuItem): boolean
      * questo metodo si occupa di gestire le azioni che
@@ -240,9 +224,9 @@ public class HeroSide extends AppCompatActivity {
             //NUOVA PARTITA
             case R.id.Menu1:
                 //creazione dell'intent
-                intent = new Intent(this, MenuOptions.newGame());
+               // intent = new Intent(this, MenuOptions.newGame());
                 //avvio dell'activity corrispondente
-                startActivity(intent);
+               // startActivity(intent);
                 //ritorno alla schermata iniziale
                 return true;
             //RISOLVI
@@ -253,11 +237,11 @@ public class HeroSide extends AppCompatActivity {
             //INFORMAZIONI
             case R.id.Menu3:
                 //creazione dell'intent
-                intent = new Intent(this,MenuOptions.gameInfo(game_mode));
+               // intent = new Intent(this,MenuOptions.gameInfo(game_mode));
                 //avvio dell'activity corrispondente
-                startActivity(intent);
+               // startActivity(intent);
                 //si apre la schermata delle informazioni sul gioco
-                return true;
+                break;
             //TUTORIAL
             case R.id.Menu4:
                 //comandi
@@ -271,11 +255,11 @@ public class HeroSide extends AppCompatActivity {
             //IMPOSTAZIONI
             case R.id.Menu6:
                 //creazione dell'intent
-                intent = new Intent(this,MenuOptions.changeSettings(game_mode));
+                //intent = new Intent(this,MenuOptions.changeSettings(game_mode));
                 //avvio dell'activity corrispondente
-                startActivity(intent);
+                //startActivity(intent);
                 //si apre la schermata delle informazioni sul gioco
-                return true;
+                break;
             default:
                 //caso di default
                 return super.onOptionsItemSelected(item);
