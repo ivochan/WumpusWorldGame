@@ -9,6 +9,9 @@
     <item
         android:id="@+id/item_settings"
         android:title="@string/ItemSettings"/>
+    <item
+        android:id="@+id/item_score"
+        android:title="@string/ItemScore"/>
 
 </menu>
 

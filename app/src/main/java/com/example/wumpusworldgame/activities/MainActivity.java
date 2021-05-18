@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import com.example.wumpusworldgame.R;
 import com.example.wumpusworldgame.menuItems.GameInformationActivity;
+import com.example.wumpusworldgame.menuItems.TutorialActivity;
 import com.example.wumpusworldgame.services.TypeWriter;
 /** class MainActivity
  * questa classe rappresenta la finestra principale dell'applicazione,
@@ -243,6 +244,15 @@ public class MainActivity extends AppCompatActivity {
                 break;
             //TUTORIAL
             case R.id.item_tutorial:
+                //creazione dell'intent
+                intent = new Intent(this, TutorialActivity.class);
+                //avvio dell'activity corrispondente
+                startActivity(intent);
+                //viene aperta l'activity
+                return true;
+            //PUNTEGGI
+            case R.id.item_score:
+                //classifica
                 break;
             default:
                 //caso di default

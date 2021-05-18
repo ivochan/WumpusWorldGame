@@ -12,9 +12,7 @@ import game.structure.text.GameMessages;
 public class GameInformationActivity extends AppCompatActivity {
     //##### attributi di classe #####
 
-    //intero che specifica la modalita' di gioco
-    public static int game_mode;
-    //riproduttore audio
+   //riproduttore audio
     MediaPlayer mp;
 
     //questo metodo viene invocato alla creazione dell'Activity
@@ -38,13 +36,11 @@ public class GameInformationActivity extends AppCompatActivity {
 
         //##### esecuzione delle azioni #####
 
-        //esecuzione clip audio
-        mp.start();
         //visualizzazione dei crediti
         tcredits.setText(GameMessages.credits);
 
     }//onCreate(Bundle)
-    
+
     //##### metodi per la gestione dell'activity #####
 
     /** metodo onStart(): void
