@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import com.example.wumpusworldgame.R;
 import com.example.wumpusworldgame.menuItems.GameInformationActivity;
+import com.example.wumpusworldgame.menuItems.GameSettingsActivity;
 import com.example.wumpusworldgame.menuItems.TutorialActivity;
 import com.example.wumpusworldgame.services.TypeWriter;
 /** class MainActivity
@@ -241,7 +242,12 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             //IMPOSTAZIONI
             case R.id.item_settings:
-                break;
+                //creazione dell'intent
+                intent = new Intent(this, GameSettingsActivity.class);
+                //avvio dell'activity corrispondente
+                startActivity(intent);
+                //viene aperta l'activity
+                return true;
             //TUTORIAL
             case R.id.item_tutorial:
                 //creazione dell'intent

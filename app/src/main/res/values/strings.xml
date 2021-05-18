@@ -71,7 +71,7 @@
     <string name="login">Login</string>
     <string name="login_info">Accedi al tuo account</string>
     <string name="scores">Punteggi</string>
-    <string name="delete_score">Cancella la classifica attuale</string>
+    <string name="import_score" translatable="false">Importa la classifica attuale</string>
     <string name="export_score">Esporta la classifica dei punteggi</string>
     <string name="feedback_info" translatable="false">Report technical issues or suggest new features!</string>
 </resources>
