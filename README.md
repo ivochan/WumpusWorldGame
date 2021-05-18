@@ -41,14 +41,30 @@ In questa versione del gioco è stata prevista, per il giocatore, la possibilit�
     - esportare file dei punteggi
     - accesso all'account
     - inviare feedback
-
-- clip audio per la modalità wumpus;
-
+- scegliere clip audio per la modalità wumpus;
 - memorizzazione della matrice di gioco per la risoluzione;
-
 - test del giocatore automatico;
-
-  
+- inserire nella main activity il menu con:
+  - le impostazioni di gioco, quali:
+    - abilitare i suoni,
+    - scelta del nome del giocatore
+    - tutorial,
+    - informazioni di gioco
+- togliere le voci che sono state inserite nel menu della main activity dalle classi hero_side e wumpus_side
+- gestire il tasto di navigazione -> in modo che punti all'activity precedente
+- rendere a schermo intero la schermata di caricamento della partita;
+- fare in modo che all'avvio di una nuova partita si mantenga la modalità di gioco scelta in precedenza, ovvero se il pg sarà l'avventuriero oppure il wumpus
+- ~~togliere l'autosize al testo animato della schermata iniziale~~
+- ~~rallentare la velocità di scorrimento del testo animato ed inserire una scroll bar~~
+- inserire una la scroll bar che scorra automaticamente fino all'ultimo carattere del testo animato visualizzato;
+- allineare il valore del punteggio con l'etichetta che indica il rispettivo campo, nella schermata di gioco
+- spostare la box dei messaggi sopra la matrice di gioco e dargli una forma rettangolare
+- inserire nella finestra di gioco un menu con i seguenti campi:
+  - scelta del nome del giocatore,
+  - esportare i dati di gioco
+  - importare i dati di gioco
+  - inviare feedback
+- fare una ricerca sulla grandezza dello schermo, in pollici, dei dispositivi più comuni.
 
 
 

@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
     //testo animato
     private TypeWriter typeWriter;
     //velocita' di scorrimento
-    private final static int delay = 5;
+    private final static int delay = 30;
 
     //riproduttore audio
     private MediaPlayer mp;
@@ -64,8 +64,6 @@ public class MainActivity extends AppCompatActivity {
 
         //testo animato
         typeWriter = findViewById(R.id.storia);
-        //si assegna la velocita' di visualizzazione del testo
-        typeWriter.setCharacterDelay(delay);
 
         //riproduttore audio
         mp = MediaPlayer.create(MainActivity.this,R.raw.fato_shadow_main_menu);
@@ -119,6 +117,7 @@ public class MainActivity extends AppCompatActivity {
         mp.start();
         //si anima il testo
         animatedText(typeWriter);
+
     }//onStart()
 
     /** metodo onResume():void
@@ -191,5 +190,6 @@ public class MainActivity extends AppCompatActivity {
         //testo da mostrare con l'animazione
         tw.animateText(""+getResources().getString(R.string.game_intro));
     }//animatedText(TypeWriter)
+
 
 }//end MainActivity
