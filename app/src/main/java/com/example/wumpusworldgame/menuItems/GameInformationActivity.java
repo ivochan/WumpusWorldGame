@@ -1,13 +1,10 @@
 package com.example.wumpusworldgame.menuItems;
 //serie di import
-import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.wumpusworldgame.R;
-import com.example.wumpusworldgame.activities.HeroSide;
-import com.example.wumpusworldgame.activities.WumpusSide;
 import game.structure.text.GameMessages;
 /** class GameInformationActivity
  * questa classe fornisce delle informazioni sul gioco
@@ -47,32 +44,7 @@ public class GameInformationActivity extends AppCompatActivity {
         tcredits.setText(GameMessages.credits);
 
     }//onCreate(Bundle)
-
-    //##### metodi accessori #####
-
-    /** metodo setGameMode(int): void
-     * questo metodo assegna il valore dell'intero,
-     * ricevuta come parametro, all'attributo di classe.
-     * @param value_game_mode: int, intero che indica da quale
-     *                       activity e' stata avviata quella corrente.
-     */
-    public static void setGameMode(int value_game_mode){
-        //si assegna il parametro alla variabile di classe
-        game_mode=value_game_mode;
-    }//setGameMode(int)
-
-    /** metodo getGameMode(): int
-     * questo metodo restituisce l'intero che identifica
-     * la modalita' di gioco, ovvero l'activity da cui e'
-     * stata avviata quella corrente.
-     * @return game_mode: int, intero che rappresenta la
-     *                  modalita' di gioco.
-     */
-    public static int getGameMode(){
-        //si restituisce il valore dell'attributo di classe
-        return game_mode;
-    }//getGameMode()
-
+    
     //##### metodi per la gestione dell'activity #####
 
     /** metodo onStart(): void
@@ -157,29 +129,3 @@ public class GameInformationActivity extends AppCompatActivity {
     }//onBackPressed()
 
 }//end GameInformationActivity
-/*
- @Override
- public void onBackPressed(){
-    //variabile ausiliaria
-    Intent myIntent;
-    //HERO SIDE
-    if(game_mode==1) {
-        //ritorno all'activity HeroSide, quella precedente
-        myIntent = new Intent(this, HeroSide.class);
-    }//fi
-    //WUMPUS SIDE
-    else { //game_mode==0
-       //ritorno all'activity WumpusSide, quella precedente
-        myIntent = new Intent(this, WumpusSide.class);
-    }//esle
-    myIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-    //avvio dell'activity
-    startActivity(myIntent);
-    //chiusura dell'activity corrente, verra' eseguito il metodo onDestroy()
-    finish();
-    //per ritornare all'activity precedente
-    //e' stato aggiunto nel manifest
-    //android:launchMode="singleTop"
-    return;
-}//onBackPressed()
-*/
