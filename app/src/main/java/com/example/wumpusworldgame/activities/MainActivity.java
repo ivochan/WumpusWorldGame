@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
     //testo animato
     private TypeWriter typeWriter;
     //velocita' di scorrimento
-    private final static int delay = 25;
+    private final static int delay = 35;
 
     //riproduttore audio
     private MediaPlayer mp;
