@@ -67,4 +67,11 @@
     <string name="export_score" />
     <!-- Immagini -->
     <string name="dark_forest">foresta_oscura_immagine_main_activity</string>
+    <string name="general_settings">General</string>
+    <string name="enable_sounds">Suoni abilitati</string>
+    <string name="disable_sounds">suoni disabilitati</string>
+    <string name="name_dialog">Inserisci il tuo nome:</string>
+    <string name="data"><![CDATA[Data & Sync]]></string>
+    <string name="player_name_request">Inserisci il tuo nome:</string>
+    <string name="default_player_name">Giocatore</string>
 </resources>

@@ -75,4 +75,11 @@
     <string name="import_score" translatable="false">Importa la classifica attuale</string>
     <string name="export_score">Esporta la classifica dei punteggi</string>
     <string name="feedback_info" translatable="false">Report technical issues or suggest new features!</string>
+    <string name="general_settings">General</string>
+    <string name="enable_sounds">Suoni abilitati</string>
+    <string name="disable_sounds">suoni disabilitati</string>
+    <string name="name_dialog">Inserisci il tuo nome:</string>
+    <string name="data"><![CDATA[Data & Sync]]></string>
+    <string name="player_name_request">Inserisci il tuo nome:</string>
+    <string name="default_player_name">Giocatore</string>
 </resources>

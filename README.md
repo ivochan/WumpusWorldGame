@@ -44,7 +44,7 @@ In questa versione del gioco è stata prevista, per il giocatore, la possibilit�
 - fare in modo che all'avvio di una nuova partita si mantenga la modalità di gioco scelta in precedenza, ovvero se il pg sarà l'avventuriero oppure il wumpus
 - ~~togliere l'autosize al testo animato della schermata iniziale~~
 - ~~rallentare la velocità di scorrimento del testo animato ed inserire una scroll bar~~
-- inserire una la scroll bar che scorra automaticamente fino all'ultimo carattere del testo animato visualizzato;
+- ~~inserire una la scroll bar che scorra automaticamente fino all'ultimo carattere del testo animato visualizzato;~~
 - allineare il valore del punteggio con l'etichetta che indica il rispettivo campo, nella schermata di gioco
 - spostare la box dei messaggi sopra la matrice di gioco e dargli una forma rettangolare
 - fare una ricerca sulla grandezza dello schermo, in pollici, dei dispositivi più comuni.

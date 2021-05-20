@@ -31,7 +31,8 @@
             android:parentActivityName=".activities.MainActivity" />
         <activity
             android:name=".menuItems.GameSettingsActivity"
-            android:label="@string/game_settings_title" />
+            android:label="@string/game_settings_title"
+            android:parentActivityName=".activities.MainActivity"/>
     </application>
 
 </manifest>

@@ -9,6 +9,18 @@
     android:configChanges="uiMode"
     tools:context=".activities.MainActivity">
 
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="410dp"
+        android:layout_height="210dp"
+        android:contentDescription="@string/dark_night"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/dark_forest" />
+
     <View
         android:id="@+id/divider2"
         android:layout_width="match_parent"
@@ -69,7 +81,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:background="@android:color/transparent"
-            android:paddingStart="4dp"
             android:text="@string/game_intro"
             android:textColor="?attr/colorOnPrimary"
             android:textSize="18sp"
@@ -80,7 +91,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.81" />
-
     </ScrollView>
 
     <View
@@ -134,17 +144,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.99" />
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="410dp"
-        android:layout_height="210dp"
-        android:contentDescription="@string/dark_night"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/dark_forest" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

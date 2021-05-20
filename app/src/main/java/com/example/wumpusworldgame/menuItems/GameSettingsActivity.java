@@ -1,15 +1,13 @@
 package com.example.wumpusworldgame.menuItems;
 //serie di import
-import android.content.Intent;
 import android.os.Bundle;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceFragmentCompat;
 import com.example.wumpusworldgame.R;
-import com.example.wumpusworldgame.activities.HeroSide;
-import com.example.wumpusworldgame.activities.WumpusSide;
 /** class GameSettingsActivity
- *
+ * questa classe contiene una serie di impostazioni,
+ * modificabili dall'utente.
  */
 public class GameSettingsActivity extends AppCompatActivity {
     //##### attributi di classe #####
@@ -23,17 +21,19 @@ public class GameSettingsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         //si imposta il layout
         setContentView(R.layout.game_settings_activity);
-
+        //
         if (savedInstanceState == null) {
             getSupportFragmentManager()
                     .beginTransaction()
                     .replace(R.id.settings, new GameSettingsFragment())
                     .commit();
-        }
+        }//fi
+        //
         ActionBar actionBar = getSupportActionBar();
+        //
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
-        }
+        }//fi
     }//onCreate(Bundle)
 
     //##### metodi per la gestione dell'activity #####
@@ -122,18 +122,18 @@ public class GameSettingsActivity extends AppCompatActivity {
    //##### inner class #####
 
     /** class GameSettingsFragments
-     *
+     * questo fragmente implementa, effettivamente, la serie di impostazioni
      */
     public static class GameSettingsFragment extends PreferenceFragmentCompat {
-        /**
-         *
+        /** metodo onCreatePreferences(Bundle, String)
          * @param savedInstanceState
          * @param rootKey
          */
         @Override
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
             setPreferencesFromResource(R.xml.game_settings_root_preferences, rootKey);
-        }
+        }//onCreate(Bundle, String)
+
     }//end GameSettingsFragment
 
 }//end GameSettingsActivity

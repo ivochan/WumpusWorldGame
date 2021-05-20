@@ -11,14 +11,25 @@
         <!-- colore del testo -->
         <item name="android:textColorPrimary">@color/lightColorOnPrimary</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">@color/lightColorPrimaryVariant
-        </item>
+        <item name="android:statusBarColor" tools:targetApi="l">
+            @color/lightColorPrimaryVariant</item>
         <!-- Window background color -->
         <item name="android:windowBackground">@drawable/gradient_background</item>
         <!-- Menu colors -->
         <item name="android:itemBackground">@color/indigo_600</item>
         <!-- Preference Screen colors -->
-        <item name="colorAccent">@color/sugar_paper</item>
+        <!-- preference category title -->
+        <item name="colorAccent">@color/purple_600</item>
+        <!-- summary text -->
+        <item name="android:textColorSecondary">@color/blue_grey</item>
+        <!-- text size -->
+        <item name="android:textSize">16dp</item>
+        <!-- edit text -->
+        <item name="android:editTextColor">@color/dark_indigo_900</item>
+
+
+        <item name="colorBackgroundFloating">@color/dark_red_900</item>
+
 
     </style>
 
