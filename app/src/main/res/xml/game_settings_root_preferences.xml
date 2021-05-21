@@ -20,7 +20,6 @@
             android:selectAllOnFocus="true"
             android:title="Nome del giocatore"
             android:summary="@string/player_info"
-            android:dialogMessage="@string/player_name_request"
             app:enableCopying="true"/>
 
 
