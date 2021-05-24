@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- App Name -->
     <string name="app_name">Il gioco del mondo del Wumpus</string>
     <!-- Activity Titles -->
     <string name="hero_side_title">Modalità Avventuriero</string>
     <string name="wumpus_side_title">Modalità Wumpus</string>
-    <string name="dark_night">notte_tetra_game_info_activity</string>
     <string name="game_info_title">Informazioni del gioco</string>
+    <string name="game_settings_title">Impostazioni</string>
     <!-- MainActivity -->
     <string name="game_title">Insegui il Wumpus... Oppure no?!?</string>
     <string name="game_intro">
@@ -23,10 +24,10 @@
         in un mondo del Wumpus tutto sotto sopra!
     </string>
     <string name="hero">AVVENTURIERO</string>
-    <string name="wumpus">WUMPUS</string>
     <string name="hero_text">Inizia l\'avventura, coraggioso eroe!</string>
+    <string name="wumpus">WUMPUS</string>
     <string name="wumpus_text">Presto, povero Wumpus, scappa!</string>
-    <!-- regole del gioco -->
+    <!-- GameInfoActivity -->
     <string name="game_info">
         Ispirato al videogioco \"<b>Hunt the Wumpus</b>\" di <b>Gregory Yob</b>,
         questo gioco presenta due modalità, in modo che tu, mio caro giocatore, possa
@@ -41,37 +42,41 @@
         allora lascia che sia io a giocare per te, con la modalità di gioco automatica!
     </string>
     <string name="game_credits">E\' Ivonne che ha tentato di sviluppare questo gioco...</string>
+    <!-- Schermata di caricamento -->
     <string name="loading">Preparazione del terreno di gioco ...</string>
     <string name="loading_image">immagine di caricamento</string>
-
-    <!-- main menu options -->
-    <string name="ItemNewGame">Nuova partita</string>
-    <string name="ItemSolveGame">Risolvi</string>
+    <!-- Opzioni del menu principale, nella MainActivity-->
     <string name="ItemGameInfo">Informazioni</string>
     <string name="ItemTutorial">Tutorial</string>
-    <string name="ItemScore">Punteggi</string>
     <string name="ItemSettings">Impostazioni</string>
-    <!-- altro-->
+    <string name="ItemScore">Punteggi</string>
+    <!-- Impostazioni -->
+    <string name="general_settings">Generali</string>
+    <!-- per ora si intende la musica -->
+    <string name="sound_effects">Effetti sonori</string>
+    <string name="enable_sounds">suoni attivati</string>
+    <string name="disable_sounds">suoni disattivati</string>
+    <!-- nome del giocatore -->
+    <string name="player_name">Nome del giocatore</string>
+    <string name="player_info">Scegli un nickname per la classifica!</string>
+    <!-- Dati di gioco -->
+    <string name="data_sync">Dati e Sincronizzazione</string>
+    <string name="import_data">Importa i dati di gioco</string>
+    <string name="export_data">Esporta i dati di gioco</string>
+    <!-- about -->
+    <string name="feed">Feedback</string>
+    <string name="feedback_info">Segnala dei bug o suggerisci delle nuove features!</string>
+
+    <!-- HeroSide and Wumpus Side Activities: schermata di gioco -->
     <string name="score">Punteggio: </string>
     <string name="shot">Colpi residui: </string>
     <string name="shots_value">h</string>
     <string name="score_value">s</string>
     <string name="game_message">messaggio</string>
-    <string name="game_settings_title">Impostazioni</string>
-    <string name="account" />
-    <string name="player" />
-    <string name="player_info" />
-    <string name="login" />
-    <string name="login_info" />
-    <string name="scores" />
-    <string name="export_score" />
     <!-- Immagini -->
     <string name="dark_forest">foresta_oscura_immagine_main_activity</string>
-    <string name="general_settings">General</string>
-    <string name="enable_sounds">Suoni abilitati</string>
-    <string name="disable_sounds">suoni disabilitati</string>
-    <string name="name_dialog">Inserisci il tuo nome:</string>
-    <string name="data"><![CDATA[Data & Sync]]></string>
-    <string name="player_name_request">Inserisci il tuo nome:</string>
-    <string name="default_player_name">Giocatore</string>
+    <string name="dark_night">notte_tetra_game_info_activity</string>
+    <!-- altro -->
+    <string name="ItemNewGame">New Game</string>
+    <string name="ItemSolveGame">Risolvi</string>
 </resources>

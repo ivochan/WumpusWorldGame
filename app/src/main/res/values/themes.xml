@@ -22,7 +22,7 @@
         <!-- Preference screen: category title -->
         <item name="colorAccent">@color/light_purple_600</item>
         <!-- summary text -->
-        <item name="android:textColorSecondary">@color/blue_grey</item>
+        <item name="android:textColorSecondary">@color/light_blue_grey</item>
         <!-- text size -->
         <item name="android:textSize">16dp</item>
         <!-- edit text -->
@@ -44,4 +44,3 @@
 </resources>
     <!-- colore senza nessuna azione -->
     <!--<item name="colorControlNormal">@color/light_purple_600</item>-->
-   

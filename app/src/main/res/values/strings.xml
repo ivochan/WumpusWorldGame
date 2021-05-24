@@ -1,4 +1,5 @@
 <resources>
+    <!-- App Name -->
     <string name="app_name">The Wumpus World Game</string>
     <!-- Activity Titles -->
     <string name="hero_side_title">Hero Side</string>
@@ -23,7 +24,6 @@
     <string name="wumpus">WUMPUS</string>
     <string name="wumpus_text"> Here you are! Hurry up, poor Wumpus, run away!</string>
     <!-- GameInfoActivity -->
-    <!-- regole del gioco da tradurre-->
     <string name="game_info">
         Ispirato al videogioco \"<b>Hunt the Wumpus</b>\" di <b>Gregory Yob</b>,
         questo gioco presenta due modalità, in modo che tu, mio caro giocatore, possa
@@ -41,14 +41,11 @@
     <!-- Loading Window -->
     <string name="loading">Loading game data ...</string>
     <string name="loading_image">loading bat image</string>
-    <!-- main menu options -->
-    <string name="ItemNewGame">New Game</string>
-    <string name="ItemSolveGame">Solve</string>
+    <!-- main menu options (MainActivity Menu) -->
     <string name="ItemGameInfo">Information</string>
     <string name="ItemTutorial">Tutorial</string>
-    <string name="ItemScore">Score</string>
     <string name="ItemSettings">Settings</string>
-
+    <string name="ItemScore">Score</string>
     <!-- HeroSide and Wumpus Side Activities-->
     <string name="score">Your score: </string>
     <string name="score_value">s</string>
@@ -57,29 +54,27 @@
     <string name="game_message">message</string>
 
     <!-- Preference Titles -->
-    <string name="game" translatable="false">Game Mode</string>
-    <string name="sound" translatable="false">Enable sound effects</string>
-    <string name="theme" translatable="false">Enable dark theme</string>
-    <string name="about" translatable="false">About</string>
-    <string name="feedback" translatable="false">Send feedback</string>
+    <string name="general_settings">General</string>
+    <!-- sounds -->
+    <string name="sound_effects">Sound effects</string>
+    <string name="enable_sounds">enabled sounds</string>
+    <string name="disable_sounds">disable sounds</string>
+    <!-- player name -->
+    <string name="player_name">Player\'s name</string>
+    <string name="player_info">Set your nickname for the ranking table!</string>
+    <!-- game data -->
+    <string name="data_sync"><![CDATA[Data & Sync]]></string>
+    <string name="import_data">Import game data</string>
+    <string name="export_data">Export game data</string>
+    <!-- about -->
+    <string name="feed">Feedback</string>
+    <string name="feedback_info">Report technical issues or suggest new features!</string>
 
     <!-- Images -->
     <string name="dark_forest">dark_forest_main_activity_image</string>
     <string name="dark_night">creepy_night_game_info_activity</string>
-    <string name="account">Account</string>
-    <string name="player">Nome del giocatore</string>
-    <string name="player_info">Inserisci il nome che vuoi venga visualizzato nella classifica</string>
-    <string name="login">Login</string>
-    <string name="login_info">Accedi al tuo account</string>
-    <string name="scores">Punteggi</string>
-    <string name="import_score" translatable="false">Importa la classifica attuale</string>
-    <string name="export_score">Esporta la classifica dei punteggi</string>
-    <string name="feedback_info" translatable="false">Report technical issues or suggest new features!</string>
-    <string name="general_settings">General</string>
-    <string name="enable_sounds">Suoni abilitati</string>
-    <string name="disable_sounds">suoni disabilitati</string>
-    <string name="name_dialog">Inserisci il tuo nome:</string>
-    <string name="data"><![CDATA[Data & Sync]]></string>
-    <string name="player_name_request">Inserisci il tuo nome:</string>
-    <string name="default_player_name">Giocatore</string>
+    <!-- altro -->
+    <string name="ItemNewGame">New Game</string>
+    <string name="ItemSolveGame">Risolvi</string>
+
 </resources>

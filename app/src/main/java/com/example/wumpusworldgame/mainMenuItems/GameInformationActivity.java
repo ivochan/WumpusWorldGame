@@ -1,39 +1,44 @@
-package com.example.wumpusworldgame.menuItems;
+package com.example.wumpusworldgame.mainMenuItems;
 //serie di import
+import android.media.MediaPlayer;
 import android.os.Bundle;
-import androidx.appcompat.app.ActionBar;
+import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.preference.PreferenceFragmentCompat;
 import com.example.wumpusworldgame.R;
-/** class GameSettingsActivity
- * questa classe contiene una serie di impostazioni,
- * modificabili dall'utente.
+import game.structure.text.GameMessages;
+/** class GameInformationActivity
+ * questa classe fornisce delle informazioni sul gioco
  */
-public class GameSettingsActivity extends AppCompatActivity {
+public class GameInformationActivity extends AppCompatActivity {
     //##### attributi di classe #####
 
-    /** metodo onCreate(Bunde): void
-     * @param savedInstanceState
+   //riproduttore audio
+    MediaPlayer mp;
+
+    //questo metodo viene invocato alla creazione dell'Activity
+    /** metodo onCreate()
+     * questo metodo viene invocato alla creazione
+     * dell'Activity corrente
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        //si richiama il metodo della super classe
+        //con super si invoca il metodo omonimo della classe antenata
         super.onCreate(savedInstanceState);
-        //si imposta il layout
-        setContentView(R.layout.game_settings_activity);
-        //
-        if (savedInstanceState == null) {
-            getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.settings, new GameSettingsFragment())
-                    .commit();
-        }//fi
-        //
-        ActionBar actionBar = getSupportActionBar();
-        //
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
-        }//fi
+        //si specifica il file che descrive il layout
+        setContentView(R.layout.game_info_activity);
+
+         //##### inizializzazioni #####
+
+        //riproduttore audio
+        mp = MediaPlayer.create(GameInformationActivity.this,R.raw.menu_music);
+        //campo di testo dei crediti
+        TextView tcredits = (TextView)findViewById(R.id.textCredits);
+
+        //##### esecuzione delle azioni #####
+
+        //visualizzazione dei crediti
+        tcredits.setText(GameMessages.credits);
+
     }//onCreate(Bundle)
 
     //##### metodi per la gestione dell'activity #####
@@ -48,7 +53,7 @@ public class GameSettingsActivity extends AppCompatActivity {
         //si invoca il metodo della super classe
         super.onStart();
         //si avvia la clip audio
-        //mp.start();
+        mp.start();
     }//onStart()
 
     /** metodo onResume():void
@@ -71,7 +76,7 @@ public class GameSettingsActivity extends AppCompatActivity {
         //si invoca il metodo della super classe
         super.onPause();
         //si ferma la clip audio quando l'activity viene sospesa
-        //mp.pause();
+        mp.pause();
     }//onPause()
 
     /** metodo onStop(): void
@@ -93,7 +98,7 @@ public class GameSettingsActivity extends AppCompatActivity {
         //si invoca il metodo della super classe
         super.onDestroy();
         //si rilascia la risorsa del mediaplayer
-        //mp.release();
+        mp.release();
     }//onDestroy()
 
     /** metodo onRestart(): void
@@ -115,25 +120,8 @@ public class GameSettingsActivity extends AppCompatActivity {
      */
     @Override
     public void onBackPressed(){
-       //si richiama il metodo della super classe
+        //si rischiama il metodo della super classe
         super.onBackPressed();
     }//onBackPressed()
 
-   //##### inner class #####
-
-    /** class GameSettingsFragments
-     * questo fragmente implementa, effettivamente, la serie di impostazioni
-     */
-    public static class GameSettingsFragment extends PreferenceFragmentCompat {
-        /** metodo onCreatePreferences(Bundle, String)
-         * @param savedInstanceState
-         * @param rootKey
-         */
-        @Override
-        public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
-            setPreferencesFromResource(R.xml.game_settings_root_preferences, rootKey);
-        }//onCreate(Bundle, String)
-
-    }//end GameSettingsFragment
-
-}//end GameSettingsActivity
+}//end GameInformationActivity

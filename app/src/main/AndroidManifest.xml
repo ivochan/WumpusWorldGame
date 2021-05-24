@@ -26,11 +26,11 @@
             android:launchMode="singleTop"
             android:parentActivityName=".activities.MainActivity" />
         <activity
-            android:name=".menuItems.GameInformationActivity"
+            android:name=".mainMenuItems.GameInformationActivity"
             android:label="@string/game_info_title"
             android:parentActivityName=".activities.MainActivity" />
         <activity
-            android:name=".menuItems.GameSettingsActivity"
+            android:name=".mainMenuItems.GameSettingsActivity"
             android:label="@string/game_settings_title"
             android:parentActivityName=".activities.MainActivity"/>
     </application>

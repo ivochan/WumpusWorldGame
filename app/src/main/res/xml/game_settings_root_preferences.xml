@@ -7,43 +7,44 @@
         app:allowDividerAbove="true"
         app:allowDividerBelow="true">
 
-
-    <SwitchPreference
+        <SwitchPreference
+            android:id="@+id/sound_switch"
             android:defaultValue="false"
             android:key="sound"
-            android:title="@string/sound"
+            android:title="@string/sound_effects"
             android:summaryOn="@string/enable_sounds"
             android:summaryOff="@string/disable_sounds"/>
 
         <EditTextPreference
             android:key="player"
             android:selectAllOnFocus="true"
-            android:title="Nome del giocatore"
-            android:summary="@string/player_info"
-            app:enableCopying="true"/>
-
+            android:title="@string/player_name"
+            app:enableCopying="true"
+            android:summary="@string/player_info"/>
 
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:title="@string/data">
+        android:title="@string/data_sync">
 
         <Preference
-            android:title="Import"
-            android:key="data import"
-            />
+            android:title="@string/import_data"
+            android:key="data import"/>
+
         <Preference
-            android:title="export"
-            android:key="data export"
-            />
+            android:title="@string/export_data"
+            android:key="data export_data"/>
 
     </PreferenceCategory>
 
     <PreferenceCategory
         android:title="About">
+
         <Preference
-            android:title="feedback"
-            android:key="feed"/>
+            android:title="@string/feed"
+            android:key="feed"
+            android:summary="@string/feedback_info"/>
+
     </PreferenceCategory>
 
 

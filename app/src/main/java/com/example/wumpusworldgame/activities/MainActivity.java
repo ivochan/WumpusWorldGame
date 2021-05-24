@@ -10,9 +10,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import com.example.wumpusworldgame.R;
-import com.example.wumpusworldgame.menuItems.GameInformationActivity;
-import com.example.wumpusworldgame.menuItems.GameSettingsActivity;
-import com.example.wumpusworldgame.menuItems.TutorialActivity;
+import com.example.wumpusworldgame.mainMenuItems.GameInformationActivity;
+import com.example.wumpusworldgame.mainMenuItems.GameSettingsActivity;
+import com.example.wumpusworldgame.mainMenuItems.TutorialActivity;
 import com.example.wumpusworldgame.services.TypeWriter;
 /** class MainActivity
  * questa classe rappresenta la finestra principale dell'applicazione,
