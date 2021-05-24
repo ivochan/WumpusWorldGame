@@ -19,8 +19,7 @@
         <!-- Menu colors -->
         <item name="android:itemBackground">@color/indigo_600</item>
 
-        <!-- Preference Screen colors -->
-        <!-- preference category title -->
+        <!-- Preference screen: category title -->
         <item name="colorAccent">@color/light_purple_600</item>
         <!-- summary text -->
         <item name="android:textColorSecondary">@color/blue_grey</item>
@@ -31,19 +30,18 @@
         <!-- dialog background -->
         <item name="colorBackgroundFloating">@color/light_indigo_100</item>
         <!-- dialog corner -->
-        <item name="cornerRadius">20dp</item>
+        <item name="dialogCornerRadius">20dp</item>
         <!-- colore alla selezione -->
         <item name="colorControlHighlight">@color/purple_600</item>
+        <!-- colore all'attivazione (anche barra della dialog editText) -->
+        <item name="colorControlActivated">@color/light_purple_600</item>
+        <!-- pulsante switch -->
+        <item name="colorSwitchThumbNormal">@color/light_purple_600</item>
 
-        <!-- altro
-        <item name="colorControlActivated">@color/dark_red_900</item>
-        <item name="colorControlNormal">@color/dark_red_900</item>
-
-        <item name="android:colorForeground">@color/dark_red_900</item>
-
-        <item name="colorPrimaryDark">@color/dark_red_900</item>
-        <item name="colorSwitchThumbNormal">@color/dark_red_900</item>
-        -->
     </style>
 
+
 </resources>
+    <!-- colore senza nessuna azione -->
+    <!--<item name="colorControlNormal">@color/light_purple_600</item>-->
+   
