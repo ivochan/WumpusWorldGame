@@ -30,7 +30,7 @@
             android:label="@string/game_info_title"
             android:parentActivityName=".activities.MainActivity" />
         <activity
-            android:name=".mainMenuItems.GameSettingsActivity"
+            android:name=".mainMenuItems.settings.GameSettingsActivity"
             android:label="@string/game_settings_title"
             android:parentActivityName=".activities.MainActivity"/>
     </application>

@@ -1,12 +1,10 @@
-package com.example.wumpusworldgame.mainMenuItems;
+package com.example.wumpusworldgame.mainMenuItems.settings;
 //serie di import
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.View;
 
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.preference.PreferenceFragmentCompat;
-import androidx.preference.SwitchPreference;
+import androidx.preference.PreferenceManager;
 
 import com.example.wumpusworldgame.R;
 /** class GameSettingsActivity
@@ -15,7 +13,7 @@ import com.example.wumpusworldgame.R;
  */
 public class GameSettingsActivity extends AppCompatActivity {
     //##### attributi di classe #####
-
+    private static final String TAG = GameSettingsActivity.class.getSimpleName();
     /** metodo onCreate(Bunde): void
      * @param savedInstanceState
      */
@@ -23,23 +21,23 @@ public class GameSettingsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         //si richiama il metodo della super classe
         super.onCreate(savedInstanceState);
+
         //si imposta il layout
         setContentView(R.layout.game_settings_activity);
-        //
-        if (savedInstanceState == null) {
-            getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.settings, new GameSettingsFragment())
-                    .commit();
-        }//fi
-        //
-        ActionBar actionBar = getSupportActionBar();
-        //
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
+
+        // si verifica se il frame layout e' vuoto o no
+        if (findViewById(R.id.settings) != null) {
+            //si verifica se sono stati conservati dei dati
+            if (savedInstanceState != null) {
+                //se l'istanza e' stata salvata e recuperata si interrompe qui
+                return;
+            }//fi
+            //si inserisce nel layout questo fragment
+            getSupportFragmentManager().beginTransaction().replace(R.id.settings,new GameSettingsFragment()).commit();
+
+
         }//fi
 
-        
     }//onCreate(Bundle)
 
     //##### metodi per la gestione dell'activity #####
@@ -124,22 +122,5 @@ public class GameSettingsActivity extends AppCompatActivity {
        //si richiama il metodo della super classe
         super.onBackPressed();
     }//onBackPressed()
-
-   //##### inner class #####
-
-    /** class GameSettingsFragments
-     * questo fragmente implementa, effettivamente, la serie di impostazioni
-     */
-    public static class GameSettingsFragment extends PreferenceFragmentCompat {
-        /** metodo onCreatePreferences(Bundle, String)
-         * @param savedInstanceState
-         * @param rootKey
-         */
-        @Override
-        public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
-            setPreferencesFromResource(R.xml.game_settings_root_preferences, rootKey);
-        }//onCreate(Bundle, String)
-
-    }//end GameSettingsFragment
 
 }//end GameSettingsActivity

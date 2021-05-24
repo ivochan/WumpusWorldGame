@@ -8,19 +8,18 @@
         app:allowDividerBelow="true">
 
         <SwitchPreference
-            android:id="@+id/sound_switch"
-            android:defaultValue="false"
-            android:key="sound"
+            android:defaultValue="true"
             android:title="@string/sound_effects"
             android:summaryOn="@string/enable_sounds"
-            android:summaryOff="@string/disable_sounds"/>
+            android:summaryOff="@string/disable_sounds"
+            android:key="prefSounds"/>
 
         <EditTextPreference
-            android:key="player"
             android:selectAllOnFocus="true"
             android:title="@string/player_name"
             app:enableCopying="true"
-            android:summary="@string/player_info"/>
+            android:summary="@string/player_info"
+            android:key="prefUsername"/>
 
     </PreferenceCategory>
 
@@ -29,11 +28,11 @@
 
         <Preference
             android:title="@string/import_data"
-            android:key="data import"/>
+            android:key="prefImportData"/>
 
         <Preference
             android:title="@string/export_data"
-            android:key="data export_data"/>
+            android:key="prefExportData"/>
 
     </PreferenceCategory>
 
@@ -42,8 +41,8 @@
 
         <Preference
             android:title="@string/feed"
-            android:key="feed"
-            android:summary="@string/feedback_info"/>
+            android:summary="@string/feedback_info"
+            android:key="prefFeedback"/>
 
     </PreferenceCategory>
 

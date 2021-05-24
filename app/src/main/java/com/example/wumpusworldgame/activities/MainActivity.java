@@ -1,7 +1,10 @@
 package com.example.wumpusworldgame.activities;
 //serie di import
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.PreferenceManager;
+
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.Menu;
@@ -11,7 +14,7 @@ import android.view.View;
 import android.widget.Button;
 import com.example.wumpusworldgame.R;
 import com.example.wumpusworldgame.mainMenuItems.GameInformationActivity;
-import com.example.wumpusworldgame.mainMenuItems.GameSettingsActivity;
+import com.example.wumpusworldgame.mainMenuItems.settings.GameSettingsActivity;
 import com.example.wumpusworldgame.mainMenuItems.TutorialActivity;
 import com.example.wumpusworldgame.services.TypeWriter;
 /** class MainActivity
@@ -105,6 +108,20 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(wumpus_game);
             }//onClick
         });
+
+        //si preleva il file di salvataggio delle preferenze dell'activity che contiene questo fragment
+        SharedPreferences sharedPrefs = PreferenceManager
+                .getDefaultSharedPreferences(this);
+
+        boolean music_on = sharedPrefs.getBoolean("prefSounds",true);
+
+        if(music_on){
+            mp.start();
+        }
+        else {
+            mp.stop();
+        }
+
 
     }//onCreate()
 

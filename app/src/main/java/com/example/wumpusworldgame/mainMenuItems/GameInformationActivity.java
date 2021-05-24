@@ -1,9 +1,12 @@
 package com.example.wumpusworldgame.mainMenuItems;
 //serie di import
+import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.PreferenceManager;
+
 import com.example.wumpusworldgame.R;
 import game.structure.text.GameMessages;
 /** class GameInformationActivity
@@ -38,6 +41,20 @@ public class GameInformationActivity extends AppCompatActivity {
 
         //visualizzazione dei crediti
         tcredits.setText(GameMessages.credits);
+
+        //si preleva il file di salvataggio delle preferenze dell'activity che contiene questo fragment
+        SharedPreferences sharedPrefs = PreferenceManager
+                .getDefaultSharedPreferences(this);
+
+        boolean music_on = sharedPrefs.getBoolean("prefSounds",true);
+
+        if(music_on){
+            mp.start();
+        }
+        else {
+            mp.stop();
+        }
+
 
     }//onCreate(Bundle)
 
