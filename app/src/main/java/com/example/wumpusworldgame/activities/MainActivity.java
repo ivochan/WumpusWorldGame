@@ -17,6 +17,8 @@ import com.example.wumpusworldgame.mainMenuItems.GameInformationActivity;
 import com.example.wumpusworldgame.mainMenuItems.settings.GameSettingsActivity;
 import com.example.wumpusworldgame.mainMenuItems.TutorialActivity;
 import com.example.wumpusworldgame.services.TypeWriter;
+import com.example.wumpusworldgame.services.Utility;
+
 /** class MainActivity
  * questa classe rappresenta la finestra principale dell'applicazione,
  * quella che si apre al suo avvio.
@@ -109,19 +111,8 @@ public class MainActivity extends AppCompatActivity {
             }//onClick
         });
 
-        //si preleva il file di salvataggio delle preferenze dell'activity che contiene questo fragment
-        SharedPreferences sharedPrefs = PreferenceManager
-                .getDefaultSharedPreferences(this);
-
-        boolean music_on = sharedPrefs.getBoolean("prefSounds",true);
-
-        if(music_on){
-            mp.start();
-        }
-        else {
-            mp.stop();
-        }
-
+        //verifica della traccia audio
+        Utility.musicPlaying(mp, this);
 
     }//onCreate()
 

@@ -5,7 +5,8 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.wumpusworldgame.R;
 /** class TutorialActivity
- *
+ * questa classe rapprensenta il tutorial a cui l'utente e quindi il
+ * giocatore dovra' riferirsi per apprendere i comandi di gioco
  */
 public class TutorialActivity extends AppCompatActivity {
     //##### attributi di classe #####

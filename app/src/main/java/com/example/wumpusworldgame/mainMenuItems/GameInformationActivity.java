@@ -1,13 +1,11 @@
 package com.example.wumpusworldgame.mainMenuItems;
 //serie di import
-import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.preference.PreferenceManager;
-
 import com.example.wumpusworldgame.R;
+import com.example.wumpusworldgame.services.Utility;
 import game.structure.text.GameMessages;
 /** class GameInformationActivity
  * questa classe fornisce delle informazioni sul gioco
@@ -35,26 +33,15 @@ public class GameInformationActivity extends AppCompatActivity {
         //riproduttore audio
         mp = MediaPlayer.create(GameInformationActivity.this,R.raw.menu_music);
         //campo di testo dei crediti
-        TextView tcredits = (TextView)findViewById(R.id.textCredits);
+        TextView tcredits = findViewById(R.id.textCredits);
 
         //##### esecuzione delle azioni #####
 
         //visualizzazione dei crediti
         tcredits.setText(GameMessages.credits);
 
-        //si preleva il file di salvataggio delle preferenze dell'activity che contiene questo fragment
-        SharedPreferences sharedPrefs = PreferenceManager
-                .getDefaultSharedPreferences(this);
-
-        boolean music_on = sharedPrefs.getBoolean("prefSounds",true);
-
-        if(music_on){
-            mp.start();
-        }
-        else {
-            mp.stop();
-        }
-
+        //rirpoduzione della traccia audio
+        Utility.musicPlaying(mp, this);
 
     }//onCreate(Bundle)
 

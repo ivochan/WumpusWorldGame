@@ -36,10 +36,7 @@ public class GameSettingsFragment extends PreferenceFragmentCompat {
         //si identifica la preference associata al nome del giocatore
         usernameEditText = findPreference("prefUsername");
         //si aggiorna il nome del giocatore
-        //updateUsername(usernameEditText);
-
-        boolean music_on = sharedPrefs.getBoolean("prefSounds",true);
-
+        updateUsername(usernameEditText);
 
     }//onCreatePreference
 

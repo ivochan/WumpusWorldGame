@@ -24,18 +24,24 @@
     <string name="wumpus">WUMPUS</string>
     <string name="wumpus_text"> Here you are! Hurry up, poor Wumpus, run away!</string>
     <!-- GameInfoActivity -->
-    <string name="game_info">
-        Ispirato al videogioco \"<b>Hunt the Wumpus</b>\" di <b>Gregory Yob</b>,
-        questo gioco presenta due modalità, in modo che tu, mio caro giocatore, possa
-        impersonare un coraggioso avventuriero,oppure una creatura misteriosa.
-        Se ti troverai nei panni dell\'<b>Avventuriero</b> evita di cadere nei fossati,
-        non farti divorare dal mostro ed anzi, scopri dove nasconde il suo immenso tesoro!
-        Se invece sarai il <b>Wumpus</b>, la creatura che si nasconde nei meandri della cupa foresta,
-        fuggi dal cacciatore che ti sta alle costole, evitando le sue trappole e trova il passaggio
+    <string name="game_info">Ispirato al videogioco \"<b>Hunt the Wumpus</b>\"
+        di <b>Gregory Yob</b>, questo gioco presenta due modalità,
+        in modo che tu, mio caro giocatore, possa impersonare
+        un coraggioso avventuriero,
+        oppure una creatura misteriosa.
+        \n\nSe ti troverai nei panni dell\'<b>Avventuriero</b> evita
+        di cadere nei fossati, non farti divorare dal mostro
+        ed anzi, scopri dove nasconde il suo immenso tesoro!
+        \n\nSe invece sarai il <b>Wumpus</b>,
+        la creatura che si nasconde nei meandri della cupa foresta,
+        fuggi dal cacciatore che ti sta alle costole,
+        evitando le sue trappole e trova il passaggio
         segreto che ti porterà in salvo.
-        In ogni caso, che tu sia il Wumpus oppure l\'Avventuriero, divertiti!
-        Ah, dimenticavo... Se sei così pigro-a da ottenere il \"Premio del Sommo Poltrone\"
-        allora lascia che sia io a giocare per te, con la modalità di gioco automatica!
+        \n\nIn ogni caso, che tu sia il Wumpus oppure l\'Avventuriero, divertiti!
+        \n\nAh, dimenticavo...
+        \nSe sei così pigro-a da ottenere il \"Premio del Sommo Poltrone\"
+        allora lascia che sia io a giocare per te,
+        con la modalità di gioco automatica!
     </string>
     <string name="game_credits">It\'s me, Ivonne! I\'ve tried to develop this game...</string>
     <!-- Loading Window -->
@@ -76,7 +82,6 @@
     <!-- altro -->
     <string name="ItemNewGame">New Game</string>
     <string name="ItemSolveGame">Risolvi</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 
 </resources>

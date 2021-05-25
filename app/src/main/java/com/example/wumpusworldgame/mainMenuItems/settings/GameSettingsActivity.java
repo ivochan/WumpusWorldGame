@@ -1,11 +1,7 @@
 package com.example.wumpusworldgame.mainMenuItems.settings;
 //serie di import
-import android.content.SharedPreferences;
 import android.os.Bundle;
-
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.preference.PreferenceManager;
-
 import com.example.wumpusworldgame.R;
 /** class GameSettingsActivity
  * questa classe contiene una serie di impostazioni,
@@ -33,9 +29,8 @@ public class GameSettingsActivity extends AppCompatActivity {
                 return;
             }//fi
             //si inserisce nel layout questo fragment
-            getSupportFragmentManager().beginTransaction().replace(R.id.settings,new GameSettingsFragment()).commit();
-
-
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.settings,new GameSettingsFragment()).commit();
         }//fi
 
     }//onCreate(Bundle)

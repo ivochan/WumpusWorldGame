@@ -2,9 +2,14 @@ package com.example.wumpusworldgame.services;
 //serie di import
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.SharedPreferences;
+import android.media.MediaPlayer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
+
+import androidx.preference.PreferenceManager;
+
 import com.example.wumpusworldgame.R;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -58,5 +63,29 @@ public class Utility {
         }, 2000);
     }//showLoadingScreen(Activity, LayoutInflater)
 
+    /** metodo musicPlaying(MediaPlayer, Activity): void
+     * questo metodo imposta la riproduzione della traccia musicale
+     * scelta come colonna sonora di ogni activity, in base
+     * al valore della preference relativa.
+     * @param mp: MediaPlayer, riproduttore musicale;
+     * @param activity: Activity, activity corrente per cui impostare
+     *                la riproduzione della traccia audio.
+     */
+    public static void musicPlaying(MediaPlayer mp, Activity activity){
+        //si prelevano le preferenze dell'activity ricevuta come parametro
+        SharedPreferences sharedPrefs = PreferenceManager
+                .getDefaultSharedPreferences(activity);
+        //si preleva la preference relativa alla traccia audio
+        boolean music_on = sharedPrefs.getBoolean("prefSounds",true);
+        //si controlla la preferenza
+        if(music_on){
+            //l'audio e' abilitato, allora si esegue la traccia musicale
+            mp.start();
+        }//fi
+        else {
+            //l'audio e' disabilitato, allora si stoppa la riproduzione musicale
+            mp.stop();
+        }//esle
+    }//musicPlaying(MediaPlayer,Activity)
 
 }// end class Utility

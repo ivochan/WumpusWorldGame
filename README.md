@@ -48,6 +48,12 @@ In questa versione del gioco è stata prevista, per il giocatore, la possibilit�
 - allineare il valore del punteggio con l'etichetta che indica il rispettivo campo, nella schermata di gioco
 - spostare la box dei messaggi sopra la matrice di gioco e dargli una forma rettangolare
 - fare una ricerca sulla grandezza dello schermo, in pollici, dei dispositivi più comuni.
+- azione di invio di un feedback;
+- disabilita/abilita traccia audio per ogni activity;
+- layout del testo nella game info activity;
+- richiesta permessi all'utente per l'utilizzo dell'app;
+- tradurre il testo della game info activity in inglese
+- 
 
 
 

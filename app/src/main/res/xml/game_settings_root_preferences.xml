@@ -5,7 +5,9 @@
     <PreferenceCategory
         android:title="@string/general_settings"
         app:allowDividerAbove="true"
-        app:allowDividerBelow="true">
+        app:allowDividerBelow="true"
+        app:iconSpaceReserved="true"
+        app:icon="@drawable/ic_videogame_asset">
 
         <SwitchPreference
             android:defaultValue="true"
@@ -24,7 +26,9 @@
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:title="@string/data_sync">
+        android:title="@string/data_sync"
+        app:iconSpaceReserved="true"
+        app:icon="@drawable/ic_sync">
 
         <Preference
             android:title="@string/import_data"
@@ -37,7 +41,10 @@
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:title="About">
+        android:title="About"
+        app:iconSpaceReserved="true"
+        app:icon="@drawable/ic_info">
+
 
         <Preference
             android:title="@string/feed"

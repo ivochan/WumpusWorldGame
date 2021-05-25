@@ -9,9 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_red_monster_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.DayNight">
+        <activity android:name=".ScoreActivity"></activity>
         <activity android:name=".activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -32,7 +34,7 @@
         <activity
             android:name=".mainMenuItems.settings.GameSettingsActivity"
             android:label="@string/game_settings_title"
-            android:parentActivityName=".activities.MainActivity"/>
+            android:parentActivityName=".activities.MainActivity" />
     </application>
 
 </manifest>
