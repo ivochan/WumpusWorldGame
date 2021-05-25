@@ -6,17 +6,18 @@ import androidx.preference.EditTextPreference;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceManager;
 import com.example.wumpusworldgame.R;
-
 /** class GameSettingsFragments
  * questo fragment implementa, effettivamente, la serie di impostazioni
  */
 public class GameSettingsFragment extends PreferenceFragmentCompat {
-    //##### attributi #####
+    //##### attributi di classe #####
+
     //file di salvataggio delle preferenze
     SharedPreferences sharedPrefs;
+    //campo editabile per il nome del giocatore
+    EditTextPreference editUsername;
     //nome del giocatore
-    EditTextPreference usernameEditText;
-
+    String username;
 
     /** metodo onCreatePreferences(Bundle, String)
      * @param savedInstanceState
@@ -30,28 +31,26 @@ public class GameSettingsFragment extends PreferenceFragmentCompat {
         //##### inizializzazioni #####
 
         //si preleva il file di salvataggio delle preferenze dell'activity che contiene questo fragment
-        sharedPrefs = PreferenceManager
-                .getDefaultSharedPreferences(getActivity());
+        sharedPrefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
 
-        //si identifica la preference associata al nome del giocatore
-        usernameEditText = findPreference("prefUsername");
-        //si aggiorna il nome del giocatore
-        updateUsername(usernameEditText);
-
-    }//onCreatePreference
-
-    private static void updateUsername(EditTextPreference editTextPreference) {
-        //si rpeleva il contenuto del campo di testo editabile
-        String username = editTextPreference.getText();
-        //si verica se e' vuoto
+        //##### nome del giocatore #####
+        //si identifica la preference relativa al nome del giocatore
+        editUsername = findPreference("prefUsername");
+        //si preleva il nome inserito
+        username = sharedPrefs.getString("prefUsername",null);
+        //si verifica il contenuto
         if(username.isEmpty()){
-            //se vuoto si mostra la stringa informativa
-           editTextPreference.setSummary(R.string.player_info);
+            //la stringa e' nulla, percio' si visualizza il messaggio di info
+            editUsername.setSummary(R.string.player_info);
         }//fi
         else {
-            //se non e' vuoto si visualizza il contenuto
-            editTextPreference.setSummary(username);
-        }//esle
-    }//updateUsername(EditTextPreference)
+            //e' stato inserito il nome percio' si visualizza nel campo summary
+            editUsername.setSummary(username);
+        }//else
+
+        //##### #####
+
+
+    }//onCreatePreference
 
 }//end GameSettingsFragment

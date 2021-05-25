@@ -46,8 +46,6 @@ public class GameSettingsActivity extends AppCompatActivity {
     public void onStart() {
         //si invoca il metodo della super classe
         super.onStart();
-        //si avvia la clip audio
-        //mp.start();
     }//onStart()
 
     /** metodo onResume():void
@@ -69,8 +67,6 @@ public class GameSettingsActivity extends AppCompatActivity {
     protected void onPause() {
         //si invoca il metodo della super classe
         super.onPause();
-        //si ferma la clip audio quando l'activity viene sospesa
-        //mp.pause();
     }//onPause()
 
     /** metodo onStop(): void
@@ -91,8 +87,6 @@ public class GameSettingsActivity extends AppCompatActivity {
     public void onDestroy(){
         //si invoca il metodo della super classe
         super.onDestroy();
-        //si rilascia la risorsa del mediaplayer
-        //mp.release();
     }//onDestroy()
 
     /** metodo onRestart(): void
