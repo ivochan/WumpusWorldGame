@@ -49,11 +49,12 @@ In questa versione del gioco è stata prevista, per il giocatore, la possibilit�
 - spostare la box dei messaggi sopra la matrice di gioco e dargli una forma rettangolare
 - fare una ricerca sulla grandezza dello schermo, in pollici, dei dispositivi più comuni.
 - azione di invio di un feedback;
-- disabilita/abilita traccia audio per ogni activity;
-- layout del testo nella game info activity;
-- richiesta permessi all'utente per l'utilizzo dell'app;
+- ~~scelta del gestore mail per inviare il feedback;~~
+- ~~disabilita/abilita traccia audio per ogni activity;~~
+- ~~sistemare layout del testo nella game info activity;~~
 - tradurre il testo della game info activity in inglese
-- 
+- ~~definire tema per il layout della alert dialog~~
+- ~~inserire nome del giocatore dalle impostazioni~~
 
 
 

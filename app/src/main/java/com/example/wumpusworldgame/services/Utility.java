@@ -7,9 +7,7 @@ import android.media.MediaPlayer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
-
 import androidx.preference.PreferenceManager;
-
 import com.example.wumpusworldgame.R;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -18,7 +16,6 @@ import java.util.TimerTask;
  * richiamare in entrambe le modalita' di gioco perche' comuni.
  */
 public class Utility {
-
     /** metodo showLoadingScreen(Activity, LayoutInflater)
      * questo metodo realizza una schermata di caricamento
      * che viene mostrata appena si decide la modalita' di

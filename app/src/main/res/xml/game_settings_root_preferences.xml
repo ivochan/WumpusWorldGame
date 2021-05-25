@@ -17,6 +17,7 @@
             android:key="prefSounds"/>
 
         <EditTextPreference
+            android:defaultValue=""
             android:selectAllOnFocus="true"
             android:title="@string/player_name"
             app:enableCopying="true"

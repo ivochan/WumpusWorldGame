@@ -2,7 +2,6 @@ package com.example.wumpusworldgame.activities;
 //serie di import
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceManager;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.MediaPlayer;
@@ -18,7 +17,6 @@ import com.example.wumpusworldgame.mainMenuItems.settings.GameSettingsActivity;
 import com.example.wumpusworldgame.mainMenuItems.TutorialActivity;
 import com.example.wumpusworldgame.services.TypeWriter;
 import com.example.wumpusworldgame.services.Utility;
-
 /** class MainActivity
  * questa classe rappresenta la finestra principale dell'applicazione,
  * quella che si apre al suo avvio.
@@ -31,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
     //testo animato
     private TypeWriter typeWriter;
     //velocita' di scorrimento
-    private final static int delay = 35;
+    private final static int delay = 60;
 
     //riproduttore audio
     private MediaPlayer mp;
@@ -111,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
             }//onClick
         });
 
-        //verifica della traccia audio
+        //verifica dell'esecuzione della traccia audio
         Utility.musicPlaying(mp, this);
 
     }//onCreate()
@@ -127,11 +125,10 @@ public class MainActivity extends AppCompatActivity {
     public void onStart() {
         //si invoca il metodo della super classe
         super.onStart();
-        //si avvia la clip audio
-        mp.start();
         //si anima il testo
         animatedText(typeWriter);
-
+        //si avvia la clip audio
+        mp.start();
     }//onStart()
 
     /** metodo onResume():void

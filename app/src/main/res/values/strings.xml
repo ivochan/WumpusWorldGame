@@ -82,6 +82,9 @@
     <!-- altro -->
     <string name="ItemNewGame">New Game</string>
     <string name="ItemSolveGame">Risolvi</string>
+    <string name="feedback_subtitle">Insert your message below :</string>
+    <string name="cancel">cancel</string>
+    <string name="send">send</string>
 
 
 </resources>

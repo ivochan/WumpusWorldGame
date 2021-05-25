@@ -62,8 +62,6 @@ public class HeroSide extends AppCompatActivity {
 
         //##### schermata di gioco #####
 
-        //esecuzione clip audio
-        mp.start();
         //creazione della matrice di gioco
         gm = new GameMap();
         //creazione della matrice di esplorazione
@@ -101,6 +99,9 @@ public class HeroSide extends AppCompatActivity {
         //oggetto che permette di visualizzare i dati
         list.setAdapter(adapter);
 
+        //verifica dell'esecuzione della traccia audio
+        Utility.musicPlaying(mp, this);
+
     }//onCreate(Bundle)
 
     //##### metodi per la gestione dell'activity #####
@@ -114,8 +115,6 @@ public class HeroSide extends AppCompatActivity {
     public void onStart() {
         //si invoca il metodo della super classe
         super.onStart();
-        //si avvia la clip audio
-        mp.start();
     }//onStart()
 
     /** metodo onResume():void
