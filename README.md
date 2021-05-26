@@ -47,14 +47,27 @@ In questa versione del gioco è stata prevista, per il giocatore, la possibilit�
 - ~~inserire una la scroll bar che scorra automaticamente fino all'ultimo carattere del testo animato visualizzato;~~
 - allineare il valore del punteggio con l'etichetta che indica il rispettivo campo, nella schermata di gioco
 - spostare la box dei messaggi sopra la matrice di gioco e dargli una forma rettangolare
-- fare una ricerca sulla grandezza dello schermo, in pollici, dei dispositivi più comuni.
-- azione di invio di un feedback;
+- ~~azione di invio di un feedback;~~
 - ~~scelta del gestore mail per inviare il feedback;~~
 - ~~disabilita/abilita traccia audio per ogni activity;~~
 - ~~sistemare layout del testo nella game info activity;~~
 - tradurre il testo della game info activity in inglese
 - ~~definire tema per il layout della alert dialog~~
 - ~~inserire nome del giocatore dalle impostazioni~~
+- creare l'activity che si occupa di visualizzare i punteggi di gioco:
+  - definire il layout
+  - visualizzare i contenuti
+  - visualizzare il punteggio più' alto
+  - ordinare in ordine decrescente i punteggi
+  - mantenere fino a dieci punteggi
+  - ogni punteggio e' preceduto dal nome scelto dal giocatore
+  - permettere la condivisione del punteggio piu' alto
+- esportare il file dei punteggi ed il nome attuale del giocatore
+- importare il file dei punteggi ed il nome del giocatore
+- scrivere e leggere il file dei punteggi,:
+  - aggiornandolo dopo ogni partita
+  - ordinando i dieci punteggi in ordine decrescente
+  - tenendo memorizzato l'ultimo nome del giocatore
 
 
 

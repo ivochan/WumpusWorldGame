@@ -1,16 +1,19 @@
 package com.example.wumpusworldgame.mainMenuItems.settings;
 //serie di import
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.icu.text.CaseMap;
+import android.graphics.Point;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AlertDialog;
 import androidx.preference.EditTextPreference;
 import androidx.preference.Preference;
@@ -18,6 +21,8 @@ import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceManager;
 import com.example.wumpusworldgame.R;
 import com.example.wumpusworldgame.services.Utility;
+
+import java.util.ArrayList;
 
 /** class GameSettingsFragments
  * questo fragment implementa, effettivamente, la serie di impostazioni
@@ -51,7 +56,6 @@ public class GameSettingsFragment extends PreferenceFragmentCompat {
         Preference sendFeedback = findPreference("prefFeedback");
         //si gestisce l'invio del feeedback
         sendFeedbackRequest(sendFeedback);
-
 
 
     }//onCreatePreference
@@ -127,26 +131,31 @@ public class GameSettingsFragment extends PreferenceFragmentCompat {
                     public void onClick(DialogInterface dialog, int which) {
                         //si inizializza l'intent che gestisce l'invio di una mail
                         Intent intent = new Intent(Intent.ACTION_SENDTO);
-                        intent.setData(Uri.parse("mailto:")); // only email apps should handle this
                         //si specifica il tipo di applicazione che interessa questa azione (email)
-                        //intent.setType("message/rfc822");
+                        intent.setData(Uri.parse("mailto:"));
                         //si specifica l'indirizzo a cui inviare la mail
                         intent.putExtra(Intent.EXTRA_EMAIL, new String[] {Utility.SUPPORT_EMAIL});
                         //si specifica il contenuto dell'oggetto
                         intent.putExtra(Intent.EXTRA_SUBJECT,Utility.EMAIL_SUBJECT );
+                        //variabile ausiliaria che conterra' le informazioni sul dispositivo
+                        String info = null;
+                        //si determina la dimensione dello schermo
+                        String screen_inch = getScreenSize();
+                        //si raccolgono informazioni sul dispositivo in uso
+                        info = Utility.collectDeviceInfo(screen_inch);
                         //si imposta il corpo della mail
-                        intent.putExtra(Intent.EXTRA_TEXT, "mail body");
+                        intent.putExtra(android.content.Intent.EXTRA_TEXT, info);
                         //blocco try-catch
                         try {
                             //si apre il gestore per scegliere l'app con cui inviare la mail
                             startActivity(Intent.createChooser(intent, "Send mail using ..."));
                             //si scrive nel file di log che l'invio e' riuscito
-                            Log.i("email sended", "Finished sending email...");
-                        }
+                            Log.i("email sended", "Email's been sended!");
+                        }//try
                         catch (android.content.ActivityNotFoundException ex) {
                             //si visualizza un messaggio se non ci sono app per inviare la mail
                             Toast.makeText(getActivity(), "There are no email clients installed.", Toast.LENGTH_SHORT).show();
-                        }
+                        }//catch
                     }//onClick(Dialog Interface, int)
                 });//setPositiveButton(String, DialogInterface)
 
@@ -186,4 +195,22 @@ public class GameSettingsFragment extends PreferenceFragmentCompat {
         builder.setCancelable(true);
     }//settingDialog(AlertDialog.Builder)
 
+    /**
+     *
+     * @return
+     */
+    private String getScreenSize() {
+        //TODO documentazione
+        Context context =getContext();
+        Point point = new Point();
+        ((WindowManager) context.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay().getRealSize(point);
+        DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
+        int width=point.x;
+        int height=point.y;
+        double wi=(double)width/(double)displayMetrics.xdpi;
+        double hi=(double)height/(double)displayMetrics.ydpi;
+        double x = Math.pow(wi,2);
+        double y = Math.pow(hi,2);
+        return String.valueOf(Math.round((Math.sqrt(x+y)) * 10.0) / 10.0);
+    }
 }//end GameSettingsFragment

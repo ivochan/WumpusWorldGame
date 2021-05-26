@@ -1,23 +1,44 @@
 package com.example.wumpusworldgame.services;
 //serie di import
 import android.app.Activity;
+import android.app.ActivityManager;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Point;
 import android.media.MediaPlayer;
+import android.os.Build;
+import android.os.Debug;
+import android.os.Environment;
+import android.os.StatFs;
+import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
 import androidx.preference.PreferenceManager;
 import com.example.wumpusworldgame.R;
+
+import java.io.File;
+import java.io.IOException;
+import java.io.RandomAccessFile;
+import java.text.DecimalFormat;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import static androidx.core.content.ContextCompat.getSystemService;
+
 /** class  Utility
  * classe di utilita' che contiene una serie di metodi statici da
  * richiamare in entrambe le modalita' di gioco perche' comuni.
  */
 public class Utility {
     //##### attributi di classe #####
+    //email dello sviluppatore
     public final static String SUPPORT_EMAIL = "ivochan17@gmail.com";
+    //oggetto della mail per il feedback
     public final static String EMAIL_SUBJECT = "WUMPUS WORLD GAME application feedback";
 
     /** metodo showLoadingScreen(Activity, LayoutInflater)
@@ -88,5 +109,178 @@ public class Utility {
             mp.pause();
         }//esle
     }//musicPlaying(MediaPlayer,Activity)
+
+    /** metodo collectDeviceInfo(): String
+     * questo metodo raccoglie tutte le informazioni sul dispositivo in
+     * uso che verranno poi inviate allo sviluppatore per il feedback.
+     * @param screen_size: String, la dimensione del display del dispositivo
+     *                   in uso, e' ricevuta come parametro perche' per
+     *                   calcolarla e' necessario essere all'interno di
+     *                   un'activity.
+     * @return info: String, stringa che contiene tutte le informazioni
+     *              tecniche che riguardano il dispositivo su cui sta
+     *              girando l'applicazione.
+     */
+    public static String collectDeviceInfo(String screen_size){
+        //variabile ausiliaria
+        String info = null;
+        //stringa che identifica l'inizio delle specifiche del dispositivo
+        String start = "###      DEVICE INFO      ###\n\n";
+        //marca del dispositivo
+        String brand = Build.BRAND.toString();
+        //modello del dispositivo
+        String model = Build.MODEL.toString();
+        //chipset del dispositivo
+        String hardware = Build.HARDWARE.toString();
+        //processore del dispositivo
+        String cpu = Build.CPU_ABI.toString();
+        //versione del sistema operativo
+        String os = Build.VERSION.BASE_OS.toString();
+        String os1 = os.replace(brand,"");
+        String os2 = os1.replace(model,"");
+        String os3 = os2.replace("//","");
+        //display del dispositivo
+        String display = Build.DISPLAY.toString();
+        String display1 = display.replace(model,"");
+        //memoria interna del dispositivo
+        String memory = getMemoryCapacity();
+        //memoria RAM del dispositivo
+        String ram = getTotalRAM();
+        //dimensione del display
+
+
+        //stringa che identifica la fine del corpo di testo riservato alle informazioni
+        //del dispositivo e l'inizio dello spazio in cui l'utente puo' scrivere il messaggio
+        String end = "###       MESSAGE     ###\n\n";
+        //stringa da restituire, che concatena tutte le precedenti
+        info = start+ "Model:  "+brand+" "+model+
+                "\nHardware:  "+hardware+"\nCPU:  "+cpu+
+                "\nBase OS:  "+os3+
+                "\nDisplay:  "+display1+
+                "\nScreen size:  "+screen_size+" \""+
+                "\nMemory:  "+memory+
+                "\nRAM:  "+ram+
+                "\n\n"+end;
+        //si restituisce la stringa contenente tutte le info sul dispositivo
+        return info;
+    }//collectDeviceInfo()
+
+    /** metodo getMemoryCapacity(): String
+     * //TODO documentazione
+     * @return
+     */
+    private static String getMemoryCapacity(){
+        //variabile ausiliaria
+        String memory = new String();
+        //si preleva il path della memoria del dispositivo
+        StatFs stat = new StatFs(Environment.getExternalStorageDirectory().getPath());
+        //memoria totale
+        //la parte di memoria che non viene contata e' una partizione riservata al sistema
+        long totalBytes = (stat.getBlockSizeLong()*stat.getBlockCountLong());
+        //conversione da byte a gb
+        String internalTotalSpace = byteConversion(totalBytes);
+        //memoria disponibile
+        long availableBytes = stat.getBlockSizeLong()*stat.getAvailableBlocksLong();
+        //conversione da byte in gb
+        String internalAvailableSpace = byteConversion(availableBytes);
+        //memoria utilizzata
+        long bytesUsed = totalBytes - availableBytes;
+        //conversione da byte a gb
+        String internalUsedSpace = byteConversion(bytesUsed);
+        //si compone la stringa da restituire
+        memory = ""+internalAvailableSpace+"/"+internalTotalSpace;
+        //si restituisce
+        return memory;
+    }//getMemoryCapacity()
+
+    /** metodo byteConversion(long): String
+     * questo metodo converte il valore ricevuto il byte
+     * in un0altra unita' di misura in base al parametro size
+     * @param size
+     * @return String
+     */
+    public static String byteConversion(long size){
+        //tabella dei valori
+        long Kb = 1  * 1024;
+        long Mb = Kb * 1024;
+        long Gb = Mb * 1024;
+        long Tb = Gb * 1024;
+        long Pb = Tb * 1024;
+        long Eb = Pb * 1024;
+        //conversione
+        if (size <  Kb)
+            return floatForm(size) + " byte";
+        else if (size >= Kb && size < Mb)
+            return floatForm((double)size / Kb) + " KB";
+        else if (size >= Mb && size < Gb)
+            return floatForm((double)size / Mb) + " MB";
+        else if (size >= Gb && size < Tb)
+            return floatForm((double)size / Gb) + " GB";
+        else if (size >= Tb && size < Pb)
+            return floatForm((double)size / Tb) + " TB";
+        else if (size >= Pb && size < Eb)
+            return floatForm((double)size / Pb) + " PB";
+        else if (size >= Eb)
+            return floatForm((double)size / Eb) + " EB";
+        else
+            return "";
+    }//byteConversion(long)
+
+    /** metodo floatForm(double): String
+     * questo metodo restiuisce la stringa che rappresenta
+     * il numero double convertito in forma decimale
+     * @param d
+     * @return
+     */
+    public static String floatForm (double d)    {
+        //TODO documentazione
+        return new DecimalFormat("#.##").format(d);
+    }//floatForm(double)
+
+    /**
+     * TODO documentazione
+     * @return
+     */
+    public static String getTotalRAM() {
+        RandomAccessFile reader = null;
+        String load = null;
+        DecimalFormat twoDecimalForm = new DecimalFormat("#.##");
+        double totRam = 0;
+        String lastValue = "";
+        try {
+            reader = new RandomAccessFile("/proc/meminfo", "r");
+            load = reader.readLine();
+            // Get the Number value from the string
+            Pattern p = Pattern.compile("(\\d+)");
+            Matcher m = p.matcher(load);
+            String value = "";
+            while (m.find()) {
+                value = m.group(1);
+                // System.out.println("Ram : " + value);
+            }
+            reader.close();
+            totRam = Double.parseDouble(value);
+            // totRam = totRam / 1024;
+            double mb = totRam / 1024.0;
+            double gb = totRam / 1048576.0;
+            double tb = totRam / 1073741824.0;
+
+            if (tb > 1) {
+                lastValue = twoDecimalForm.format(tb).concat(" TB");
+            } else if (gb > 1) {
+                lastValue = twoDecimalForm.format(gb).concat(" GB");
+            } else if (mb > 1) {
+                lastValue = twoDecimalForm.format(mb).concat(" MB");
+            } else {
+                lastValue = twoDecimalForm.format(totRam).concat(" KB");
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        } finally {
+            // Streams.close(reader);
+        }
+        return lastValue;
+    }//getTotalRAM()
+
 
 }// end class Utility
