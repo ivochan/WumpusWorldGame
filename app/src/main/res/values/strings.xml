@@ -82,9 +82,10 @@
     <!-- altro -->
     <string name="ItemNewGame">New Game</string>
     <string name="ItemSolveGame">Risolvi</string>
-    <string name="feedback_subtitle">Insert your message below :</string>
+    <string name="feedback_request">Do you really want to send your feedback?</string>
     <string name="cancel">cancel</string>
-    <string name="send">send</string>
+    <string name="confirm">confirm</string>
+    <string name="feedback_subject">application feedback</string>
 
 
 </resources>

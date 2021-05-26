@@ -108,6 +108,9 @@ public class WumpusSide extends AppCompatActivity {
         list = (GridView) findViewById(R.id.grid_view);
         list.setAdapter(adapter);
 
+        //verifica dell'esecuzione della traccia audio
+        Utility.musicPlaying(mp, this);
+
     }//onCreate(Bundle)
 
     //##### metodi per la gestione dell'activity #####
@@ -121,8 +124,6 @@ public class WumpusSide extends AppCompatActivity {
     public void onStart() {
         //si invoca il metodo della super classe
         super.onStart();
-        //si avvia la clip audio
-        mp.start();
     }//onStart()
 
     /** metodo onResume():void

@@ -16,6 +16,10 @@ import java.util.TimerTask;
  * richiamare in entrambe le modalita' di gioco perche' comuni.
  */
 public class Utility {
+    //##### attributi di classe #####
+    public final static String SUPPORT_EMAIL = "ivochan17@gmail.com";
+    public final static String EMAIL_SUBJECT = "WUMPUS WORLD GAME application feedback";
+
     /** metodo showLoadingScreen(Activity, LayoutInflater)
      * questo metodo realizza una schermata di caricamento
      * che viene mostrata appena si decide la modalita' di
@@ -81,7 +85,7 @@ public class Utility {
         }//fi
         else {
             //l'audio e' disabilitato, allora si stoppa la riproduzione musicale
-            mp.stop();
+            mp.pause();
         }//esle
     }//musicPlaying(MediaPlayer,Activity)
 
