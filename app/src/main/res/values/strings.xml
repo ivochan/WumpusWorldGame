@@ -73,8 +73,18 @@
     <string name="import_data">Import game data</string>
     <string name="export_data">Export game data</string>
     <!-- about -->
+    <string name="team">Team</string>
+    <string name="team_info">I\'m Ivonne and this is my first app :)
+                            Thanks to Lula and Dady for precious advices!
+                            Sounds and images are taken from
+                            https://opengameart.org</string>
+    <!-- Feedback -->
     <string name="feed">Feedback</string>
     <string name="feedback_info">Report technical issues or suggest new features!</string>
+    <string name="feedback_request">Do you want to send your feedback?</string>
+    <string name="cancel">cancel</string>
+    <string name="confirm">confirm</string>
+
 
     <!-- Images -->
     <string name="dark_forest">dark_forest_main_activity_image</string>
@@ -82,10 +92,6 @@
     <!-- altro -->
     <string name="ItemNewGame">New Game</string>
     <string name="ItemSolveGame">Risolvi</string>
-    <string name="feedback_request">Do you really want to send your feedback?</string>
-    <string name="cancel">cancel</string>
-    <string name="confirm">confirm</string>
-    <string name="feedback_subject">application feedback</string>
     <string name="main_tutorial_title">Tutorial</string>
     <string name="score_title">Score</string>
 

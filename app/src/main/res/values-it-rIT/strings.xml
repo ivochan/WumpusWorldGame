@@ -70,8 +70,15 @@
     <string name="import_data">Importa i dati di gioco</string>
     <string name="export_data">Esporta i dati di gioco</string>
     <!-- about -->
+    <string name="team">Team</string>
+    <string name="team_info">Mi chiamo Ivonne e questa è la mia prima app :)\nGrazie a Dady e Lula per i preziosi consigli!\nLe immagini ed i suoni sono presi da
+        https://opengameart.org</string>
+    <!-- feedback -->
     <string name="feed">Feedback</string>
     <string name="feedback_info">Segnala dei bug o suggerisci delle nuove features!</string>
+    <string name="feedback_request">Vuoi inviare il tuo feedback?</string>
+    <string name="cancel">annulla</string>
+    <string name="confirm">accetta</string>
 
     <!-- HeroSide and Wumpus Side Activities: schermata di gioco -->
     <string name="score">Punteggio: </string>
@@ -85,11 +92,8 @@
     <!-- altro -->
     <string name="ItemNewGame">New Game</string>
     <string name="ItemSolveGame">Risolvi</string>
-    <!-- feedback -->
-    <string name="feedback_request">Vuoi davvero inviare il tuo feedback?</string>
-    <string name="cancel">annulla</string>
-    <string name="confirm">accetta</string>
-    <string name="feedback_subject">application feedback</string>
+
     <string name="main_tutorial_title">Tutorial</string>
     <string name="score_title">Score</string>
+
 </resources>

@@ -46,13 +46,16 @@
         app:iconSpaceReserved="true"
         app:icon="@drawable/ic_info">
 
-
         <Preference
             android:title="@string/feed"
             android:summary="@string/feedback_info"
             android:key="prefFeedback"/>
 
-    </PreferenceCategory>
+        <Preference
+            android:title="@string/team"
+            android:summary="@string/team_info"
+            android:key="prefTeam"/>
 
+    </PreferenceCategory>
 
 </PreferenceScreen>

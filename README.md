@@ -39,6 +39,7 @@ In questa versione del gioco è stata prevista, per il giocatore, la possibilit�
     - feedback
   - tutorial
   - informazioni di gioco
+  - punteggi (da visualizzare)
 - gestire il tasto di navigazione -> in modo che punti all'activity precedente
 - rendere a schermo intero la schermata di caricamento della partita;
 - fare in modo che all'avvio di una nuova partita si mantenga la modalità di gioco scelta in precedenza, ovvero se il pg sarà l'avventuriero oppure il wumpus
