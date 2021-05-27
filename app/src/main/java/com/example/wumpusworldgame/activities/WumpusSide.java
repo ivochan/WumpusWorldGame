@@ -2,19 +2,12 @@ package com.example.wumpusworldgame.activities;
 //serie di import
 import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.GridView;
-import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.wumpusworldgame.R;
 import com.example.wumpusworldgame.adapters.GridViewCustomAdapter;
 import com.example.wumpusworldgame.services.Utility;
-
 import java.util.ArrayList;
 import game.structure.map.GameMap;
 import game.structure.map.MapConfiguration;
@@ -23,9 +16,10 @@ import game.structure.map.MapConfiguration;
  * il personaggio giocabile e' il Wumpus
  */
 public class WumpusSide extends AppCompatActivity {
-
     //##### attributi di classe #####
-    private final int game_mode = 0;
+
+    //id della modalita' di gioco
+    public final static int WUMPUS = 1;
 
     //riproduttore audio
     private MediaPlayer mp;

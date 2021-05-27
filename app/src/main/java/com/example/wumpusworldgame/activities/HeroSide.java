@@ -7,15 +7,11 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.GridView;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.example.wumpusworldgame.R;
 import com.example.wumpusworldgame.adapters.GridViewCustomAdapter;
 import com.example.wumpusworldgame.services.Utility;
-
 import java.util.ArrayList;
-
 import game.structure.map.GameMap;
 import game.structure.map.MapConfiguration;
 /** class HeroSide
@@ -24,7 +20,9 @@ import game.structure.map.MapConfiguration;
  */
 public class HeroSide extends AppCompatActivity {
     //##### attributi di classe #####
-    private final int game_mode = 1;
+
+    //id della modalita' di gioco
+    public final static int HERO = 0;
     //riproduttore audio
     private MediaPlayer mp;
     //matrice di gioco

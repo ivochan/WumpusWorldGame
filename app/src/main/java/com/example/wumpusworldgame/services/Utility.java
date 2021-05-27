@@ -1,25 +1,17 @@
 package com.example.wumpusworldgame.services;
 //serie di import
 import android.app.Activity;
-import android.app.ActivityManager;
 import android.app.Dialog;
-import android.content.Context;
 import android.content.SharedPreferences;
-import android.graphics.Point;
 import android.media.MediaPlayer;
 import android.os.Build;
-import android.os.Debug;
 import android.os.Environment;
 import android.os.StatFs;
-import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
 import androidx.preference.PreferenceManager;
 import com.example.wumpusworldgame.R;
-
-import java.io.File;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.text.DecimalFormat;
@@ -27,15 +19,14 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import static androidx.core.content.ContextCompat.getSystemService;
-
 /** class  Utility
  * classe di utilita' che contiene una serie di metodi statici da
  * richiamare in entrambe le modalita' di gioco perche' comuni.
+ * //TODO revisionare tutti i metodi e scrivere la documentazione
  */
 public class Utility {
     //##### attributi di classe #####
+
     //email dello sviluppatore
     public final static String SUPPORT_EMAIL = "ivochan17@gmail.com";
     //oggetto della mail per il feedback
@@ -146,9 +137,6 @@ public class Utility {
         String memory = getMemoryCapacity();
         //memoria RAM del dispositivo
         String ram = getTotalRAM();
-        //dimensione del display
-
-
         //stringa che identifica la fine del corpo di testo riservato alle informazioni
         //del dispositivo e l'inizio dello spazio in cui l'utente puo' scrivere il messaggio
         String end = "###       MESSAGE     ###\n\n";
@@ -166,8 +154,11 @@ public class Utility {
     }//collectDeviceInfo()
 
     /** metodo getMemoryCapacity(): String
-     * //TODO documentazione
-     * @return
+     * metodo che si occupa di calcolare la capacita' della memoria
+     * interna del dispositivo in uso.
+     * @return memory: String, stringa che contiene le informazioni sulla
+     *              memoria del dispositivo occupata e totale, secondo
+     *              il seguente formato <spazio_occupato>GB / <spazio_totale>GB
      */
     private static String getMemoryCapacity(){
         //variabile ausiliaria
@@ -233,12 +224,12 @@ public class Utility {
      * @return
      */
     public static String floatForm (double d)    {
-        //TODO documentazione
+        //
         return new DecimalFormat("#.##").format(d);
     }//floatForm(double)
 
-    /**
-     * TODO documentazione
+    /** metodo getTotalRAM(): String
+     *
      * @return
      */
     public static String getTotalRAM() {
@@ -281,6 +272,5 @@ public class Utility {
         }
         return lastValue;
     }//getTotalRAM()
-
 
 }// end class Utility
