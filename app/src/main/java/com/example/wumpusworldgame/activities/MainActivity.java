@@ -12,7 +12,6 @@ import android.widget.Button;
 import com.example.wumpusworldgame.R;
 import com.example.wumpusworldgame.mainMenuItems.GameInformationActivity;
 import com.example.wumpusworldgame.mainMenuItems.settings.GameSettingsActivity;
-import com.example.wumpusworldgame.mainMenuItems.TutorialActivity;
 import com.example.wumpusworldgame.services.TypeWriter;
 import com.example.wumpusworldgame.services.Utility;
 /** class MainActivity

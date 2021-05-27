@@ -35,7 +35,7 @@ public class Utility {
     /** metodo showLoadingScreen(Activity, LayoutInflater)
      * questo metodo realizza una schermata di caricamento
      * che viene mostrata appena si decide la modalita' di
-     * gioc, prima che all'utente venga mostrata la mappa.
+     * gioco, prima che all'utente venga mostrata la mappa.
      * @param inflater
      * @param activity
      */
@@ -48,14 +48,6 @@ public class Utility {
         View customView = inflater.inflate(R.layout.loading_screen_dialog, null);
         //si costruisce la dialog specificandone lo stile personalizzato
         customDialog = new Dialog(activity, R.style.CustomDialog);
-        //si definisce la dimensione della finestra sul display
-        customDialog.getWindow().setLayout(1080,2000);
-        //si prelevano i valori stabiliti come attributi della finestra
-        WindowManager.LayoutParams params = customDialog.getWindow().getAttributes();
-        //si defisce l'ordinata della posizione della dialog sullo schermo
-        params.y = 120;
-        //si assegna il valore aggiornato come parametro della dialog
-        customDialog.getWindow().setAttributes(params);
 
         //##### visualizzazione della dialog #####
 
