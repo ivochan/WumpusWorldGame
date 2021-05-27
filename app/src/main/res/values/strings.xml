@@ -86,6 +86,8 @@
     <string name="cancel">cancel</string>
     <string name="confirm">confirm</string>
     <string name="feedback_subject">application feedback</string>
+    <string name="main_tutorial_title">Tutorial</string>
+    <string name="score_title">Score</string>
 
 
 </resources>

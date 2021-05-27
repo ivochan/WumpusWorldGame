@@ -90,4 +90,6 @@
     <string name="cancel">annulla</string>
     <string name="confirm">accetta</string>
     <string name="feedback_subject">application feedback</string>
+    <string name="main_tutorial_title">Tutorial</string>
+    <string name="score_title">Score</string>
 </resources>

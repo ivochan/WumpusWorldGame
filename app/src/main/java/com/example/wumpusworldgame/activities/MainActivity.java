@@ -11,6 +11,8 @@ import android.view.View;
 import android.widget.Button;
 import com.example.wumpusworldgame.R;
 import com.example.wumpusworldgame.mainMenuItems.GameInformationActivity;
+import com.example.wumpusworldgame.mainMenuItems.MainTutorialActivity;
+import com.example.wumpusworldgame.mainMenuItems.ScoreActivity;
 import com.example.wumpusworldgame.mainMenuItems.settings.GameSettingsActivity;
 import com.example.wumpusworldgame.services.TypeWriter;
 import com.example.wumpusworldgame.services.Utility;
@@ -253,20 +255,23 @@ public class MainActivity extends AppCompatActivity {
             //TUTORIAL
             case R.id.item_tutorial:
                 //creazione dell'intent
-                intent = new Intent(this, TutorialActivity.class);
+                intent = new Intent(this, MainTutorialActivity.class);
                 //avvio dell'activity corrispondente
                 startActivity(intent);
                 //viene aperta l'activity
                 return true;
             //PUNTEGGI
             case R.id.item_score:
-                //classifica
-                break;
+                //creazione dell'intent
+                intent = new Intent(this, ScoreActivity.class);
+                //avvio dell'activity corrispondente
+                startActivity(intent);
+                //viene aperta l'activity
+                return true;
             default:
                 //caso di default
                 return super.onOptionsItemSelected(item);
         }//end switch
-        return false;
     }//onOptionsItemSelected(MenuItem)
 
 }//end MainActivity
