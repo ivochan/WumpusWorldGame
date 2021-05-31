@@ -2,9 +2,7 @@ package com.example.wumpusworldgame.mainMenuItems;
 //serie di import
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-
 import com.example.wumpusworldgame.R;
-
 /**
  *
  */

@@ -4,8 +4,11 @@
     <!-- Activity Titles -->
     <string name="hero_side_title">Hero Side</string>
     <string name="wumpus_side_title">Wumpus Side</string>
+    <!-- Main Menu activity titles -->
     <string name="game_info_title">Game Information</string>
     <string name="game_settings_title">Settings</string>
+    <string name="main_tutorial_title">Tutorial</string>
+    <string name="score_title">Score</string>
     <!-- MainActivity -->
     <string name="game_title">Hunt the Wumpus...or not?</string>
     <string name="game_intro">Hi...iiiiiih...Uh... Hello!
@@ -58,6 +61,18 @@
     <string name="shot">Remaining shots: </string>
     <string name="shots_value">h</string>
     <string name="game_message">message</string>
+    <!-- Main Tutorial Activity -->
+    <string name="tutorial_intro">Per prima cosa dovrai scegliere il tuo personaggio!</string>
+    <string name="hero_description">Sarai un coraggioso avventuriero, che ucciderà il terribile mostro della foresta oscura?</string>
+    <string name="hero_mode_intro">Nella <b>modalità eroe</b> dovrai:</string>
+    <string name="hero_danger_intro">evitare di cadere negli insidiosi fossati, disseminati per il bosco,</string>
+    <string name="hero_mission_intro">compiere il tuo destino, uccidendo il terribile mostro, scoccando una freccia</string>
+    <string name="hero_award_intro">appena ne avverti il tanfo e rubando il suo immenso tesoro!</string>
+    <string name="wumpus_description">Oppure la creatura misteriosa che si nasconde nei boschi, per sfuggire al crudele cacciatore?</string>
+    <string name="wumpus_mode_intro">Nella <b>modalità wumpus</b> dovrai:</string>
+    <string name="wumpus_danger_intro">evitare le trappole disseminate nella foresta</string>
+    <string name="wumpus_mission_intro">cercare di colpire il cacciatore con un masso, non appena pensi sia vicino</string>
+    <string name="wumpus_award_intro">oppure trovare una via di fuga prima che ti raggiunga!</string>
 
     <!-- Preference Titles -->
     <string name="general_settings">General</string>
@@ -84,16 +99,22 @@
     <string name="feedback_request">Do you want to send your feedback?</string>
     <string name="cancel">cancel</string>
     <string name="confirm">confirm</string>
-
-
     <!-- Images -->
     <string name="dark_forest">dark_forest_main_activity_image</string>
     <string name="dark_night">creepy_night_game_info_activity</string>
-    <!-- altro -->
+    <string name="hero_icon">image of hero pg</string>
+    <string name="wumpus_icon">image of wumpus pg</string>
+
+    <!-- other -->
     <string name="ItemNewGame">New Game</string>
     <string name="ItemSolveGame">Risolvi</string>
-    <string name="main_tutorial_title">Tutorial</string>
-    <string name="score_title">Score</string>
-
-
+    <string name="gold_image">image of gold</string>
+    <string name="arch_image">image of balestr</string>
+    <string name="pit_image">pit image about hero danger</string>
+    <string name="trap_image">trap image about wumpus danger</string>
+    <string name="stone_image">image of a stone</string>
+    <string name="exit_image">exit image about wumpus award</string>
+    <string name="top_score_title">Top Score</string>
+    <string name="top_player_name">Player/\'s name :</string>
+    <string name="top_player_title">Player/\'s name :</string>
 </resources>
