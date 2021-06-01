@@ -6,23 +6,37 @@
     android:layout_height="match_parent"
     tools:context=".mainMenuItems.MainTutorialActivity">
 
+    <!-- TITLE -->
     <TextView
         android:id="@+id/into_title"
-        android:layout_width="342dp"
-        android:layout_height="42dp"
+        android:layout_width="344dp"
+        android:layout_height="47dp"
         android:layout_marginStart="18dp"
         android:layout_marginTop="1dp"
         android:layout_marginEnd="17dp"
         android:layout_marginBottom="561dp"
+        android:gravity="center"
         android:text="@string/tutorial_intro"
+        android:textColor="@color/purple_600"
+        android:textSize="18dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.49"
+        app:layout_constraintHorizontal_bias="0.514"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
-
+    <View
+        android:id="@+id/title_divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/pearl_violet"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/into_title"
+        app:layout_constraintVertical_bias="0.079" />
 
     <ImageView
         android:id="@+id/imageView3"
@@ -36,18 +50,19 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.108"
         app:srcCompat="@drawable/phantasmal_warrior" />
-
     <TextView
-        android:id="@+id/textView3"
-        android:layout_width="256dp"
-        android:layout_height="60dp"
-        android:text="@string/hero_description"
+        android:id="@+id/textView4"
+        android:layout_width="282dp"
+        android:layout_height="57dp"
+        android:layout_marginEnd="10dp"
+        android:text="@string/wumpus_description"
+        android:textColor="@color/light_blue_grey"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.896"
+        app:layout_constraintHorizontal_bias="0.134"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.106" />
+        app:layout_constraintVertical_bias="0.219" />
 
     <ImageView
         android:id="@+id/imageView4"
@@ -61,69 +76,45 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.223"
         app:srcCompat="@drawable/treant" />
-
     <TextView
-        android:id="@+id/textView4"
-        android:layout_width="282dp"
-        android:layout_height="57dp"
-        android:layout_marginEnd="10dp"
-        android:text="@string/wumpus_description"
+        android:id="@+id/textView3"
+        android:layout_width="256dp"
+        android:layout_height="60dp"
+        android:text="@string/hero_description"
+        android:textColor="@color/light_blue_grey"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.134"
+        app:layout_constraintHorizontal_bias="0.896"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.219" />
+        app:layout_constraintVertical_bias="0.106" />
+
+    <!-- HERO -->
+    <View
+        android:id="@+id/hero_divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/pearl_violet"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.315" />
 
     <TextView
         android:id="@+id/textView5"
         android:layout_width="332dp"
         android:layout_height="29dp"
         android:text="@string/hero_mode_intro"
+        android:textColor="@color/light_blue_grey"
+        android:textSize="18dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.332" />
-
-    <ImageView
-        android:id="@+id/imageView6"
-        android:layout_width="53dp"
-        android:layout_height="49dp"
-        android:contentDescription="@string/gold_image"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.952"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.57"
-        app:srcCompat="@drawable/chest" />
-
-    <TextView
-        android:id="@+id/textView6"
-        android:layout_width="276dp"
-        android:layout_height="50dp"
-        android:text="@string/hero_award_intro"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.125"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.573" />
-
-    <ImageView
-        android:id="@+id/imageView7"
-        android:layout_width="56dp"
-        android:layout_height="43dp"
-        android:contentDescription="@string/arch_image"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.047"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.487"
-        app:srcCompat="@drawable/arbalest_3" />
 
     <ImageView
         android:id="@+id/imageView8"
@@ -137,12 +128,12 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.4"
         app:srcCompat="@drawable/mask_deep_water_shoals" />
-
     <TextView
         android:id="@+id/textView7"
         android:layout_width="284dp"
         android:layout_height="52dp"
         android:text="@string/hero_danger_intro"
+        android:textColor="@color/light_blue_grey"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.133"
@@ -150,6 +141,18 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.399" />
 
+    <ImageView
+        android:id="@+id/imageView7"
+        android:layout_width="56dp"
+        android:layout_height="43dp"
+        android:contentDescription="@string/arch_image"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.047"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.487"
+        app:srcCompat="@drawable/arbalest_3" />
     <TextView
         android:id="@+id/textView8"
         android:layout_width="284dp"
@@ -157,6 +160,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
         android:text="@string/hero_mission_intro"
+        android:textColor="@color/light_blue_grey"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.874"
@@ -164,31 +168,57 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.487" />
 
+    <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="53dp"
+        android:layout_height="49dp"
+        android:contentDescription="@string/gold_image"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.952"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.57"
+        app:srcCompat="@drawable/chest" />
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="276dp"
+        android:layout_height="50dp"
+        android:text="@string/hero_award_intro"
+        android:textColor="@color/light_blue_grey"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.125"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.573" />
+
+
+    <!-- WUMPUS -->
     <View
-        android:id="@+id/divider6"
+        android:id="@+id/wumpus_divider"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginTop="375dp"
-        android:layout_marginBottom="227dp"
-        android:background="@color/light_blue_grey"
+        android:background="@color/pearl_violet"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.656" />
 
     <TextView
-        android:id="@+id/textView9"
-        android:layout_width="259dp"
-        android:layout_height="43dp"
-        android:text="@string/wumpus_danger_intro"
+        android:id="@+id/textView12"
+        android:layout_width="325dp"
+        android:layout_height="28dp"
+        android:text="@string/wumpus_mode_intro"
+        android:textSize="18dp"
+        android:textColor="@color/light_blue_grey"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.888"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.773" />
+        app:layout_constraintVertical_bias="0.69" />
 
     <ImageView
         android:id="@+id/imageView10"
@@ -202,18 +232,18 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.772"
         app:srcCompat="@drawable/blood_green_2" />
-
     <TextView
-        android:id="@+id/textView10"
-        android:layout_width="315dp"
-        android:layout_height="52dp"
-        android:text="@string/wumpus_mission_intro"
+        android:id="@+id/textView9"
+        android:layout_width="259dp"
+        android:layout_height="43dp"
+        android:text="@string/wumpus_danger_intro"
+        android:textColor="@color/light_blue_grey"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.177"
+        app:layout_constraintHorizontal_bias="0.888"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.867" />
+        app:layout_constraintVertical_bias="0.773" />
 
     <ImageView
         android:id="@+id/imageView11"
@@ -227,18 +257,18 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.867"
         app:srcCompat="@drawable/misc_stone_old" />
-
     <TextView
-        android:id="@+id/textView11"
-        android:layout_width="273dp"
-        android:layout_height="56dp"
-        android:text="@string/wumpus_award_intro"
+        android:id="@+id/textView10"
+        android:layout_width="315dp"
+        android:layout_height="52dp"
+        android:text="@string/wumpus_mission_intro"
+        android:textColor="@color/light_blue_grey"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.876"
+        app:layout_constraintHorizontal_bias="0.177"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.97" />
+        app:layout_constraintVertical_bias="0.867" />
 
     <ImageView
         android:id="@+id/imageView12"
@@ -247,34 +277,22 @@
         android:contentDescription="@string/exit_image"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.048"
+        app:layout_constraintHorizontal_bias="0.045"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.97"
+        app:layout_constraintVertical_bias="0.961"
         app:srcCompat="@drawable/enter_lair" />
-
     <TextView
-        android:id="@+id/textView12"
-        android:layout_width="325dp"
-        android:layout_height="28dp"
-        android:text="@string/wumpus_mode_intro"
+        android:id="@+id/textView11"
+        android:layout_width="273dp"
+        android:layout_height="56dp"
+        android:text="@string/wumpus_award_intro"
+        android:textColor="@color/light_blue_grey"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.876"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.69" />
-
-    <View
-        android:id="@+id/divider10"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/light_blue_grey"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.315" />
-
+        app:layout_constraintVertical_bias="0.97" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
