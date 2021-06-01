@@ -74,6 +74,19 @@
     <string name="wumpus_mission_intro">cercare di colpire il cacciatore con un masso, non appena pensi sia vicino</string>
     <string name="wumpus_award_intro">oppure trovare una via di fuga prima che ti raggiunga!</string>
 
+    <!-- ScoreActivity -->
+    <string name="top_score_title">High Score</string>
+    <string name="top_player_title">Player\'s name :</string>
+    <string name="top_player_name">name</string>
+    <string name="top_ten">Top Ten</string>
+    <string name="top_ten_list">[ ... ]</string>
+    <string name="top_ten_subtitle">Elenco dei dieci migliori punteggi...</string>
+    <string name="current_score_title">Current Score</string>
+    <string name="current_score_value">none</string>
+    <string name="points">points</string>
+    <string name="score_value_title">Score : </string>
+    <string name="top_score_value">none</string>
+
     <!-- Preference Titles -->
     <string name="general_settings">General</string>
     <!-- sounds -->
@@ -104,17 +117,17 @@
     <string name="dark_night">creepy_night_game_info_activity</string>
     <string name="hero_icon">image of hero pg</string>
     <string name="wumpus_icon">image of wumpus pg</string>
-
-    <!-- other -->
-    <string name="ItemNewGame">New Game</string>
-    <string name="ItemSolveGame">Risolvi</string>
     <string name="gold_image">image of gold</string>
     <string name="arch_image">image of balestr</string>
     <string name="pit_image">pit image about hero danger</string>
     <string name="trap_image">trap image about wumpus danger</string>
     <string name="stone_image">image of a stone</string>
     <string name="exit_image">exit image about wumpus award</string>
-    <string name="top_score_title">Top Score</string>
-    <string name="top_player_name">Player/\'s name :</string>
-    <string name="top_player_title">Player/\'s name :</string>
+
+    <!-- other -->
+    <string name="ItemNewGame">New Game</string>
+    <string name="ItemSolveGame">Risolvi</string>
+
+
+
 </resources>
