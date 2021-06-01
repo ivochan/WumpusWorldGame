@@ -7,7 +7,6 @@
     tools:context=".mainMenuItems.ScoreActivity">
 
     <!-- Top Score -->
-
     <View
         android:id="@+id/title_divider_top"
         android:layout_width="match_parent"
@@ -19,7 +18,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/top_score_title"
         app:layout_constraintVertical_bias="0.063" />
-
     <TextView
         android:id="@+id/top_score_title"
         android:layout_width="235dp"
@@ -37,24 +35,12 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
 
-    <View
-        android:id="@+id/title_divider_botton"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/sugar_paper"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.279" />
-
     <TextView
         android:id="@+id/top_player_title"
         android:layout_width="99dp"
         android:layout_height="42dp"
         android:text="@string/top_player_title"
-        android:textColor="@color/pearl_violet"
+        android:textColor="@color/deep_purple_100a"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -62,14 +48,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.11" />
-
     <TextView
         android:id="@+id/top_player_name"
         android:layout_width="92dp"
         android:layout_height="41dp"
         android:gravity="center_vertical"
         android:text="@string/top_player_name"
-        android:textColor="@color/sugar_paper"
+        android:textColor="@color/blue200"
+        android:textStyle="italic"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.94"
@@ -77,21 +63,31 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.11" />
 
-    <ImageButton
-        android:id="@+id/record_share"
-        android:layout_width="55dp"
-        android:layout_height="39dp"
-        android:background="@android:color/transparent"
+    <TextView
+        android:id="@+id/score_value_title"
+        android:layout_width="102dp"
+        android:layout_height="32dp"
+        android:text="@string/score_value_title"
+        android:textColor="@color/deep_purple_100a"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.946"
+        app:layout_constraintHorizontal_bias="0.559"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        tools:srcCompat="@android:drawable/ic_menu_share"
-        android:contentDescription="TODO" />
-
-    <!-- top ten -->
+        app:layout_constraintVertical_bias="0.201" />
+    <TextView
+        android:id="@+id/score_value"
+        android:layout_width="89dp"
+        android:layout_height="32dp"
+        android:text="@string/top_score_value"
+        android:textColor="@color/blue200"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.94"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.199" />
 
     <ImageView
         android:id="@+id/trophy"
@@ -106,35 +102,18 @@
         app:layout_constraintVertical_bias="0.114"
         app:srcCompat="@drawable/golden_trophy" />
 
-    <TextView
-        android:id="@+id/score_value_title"
-        android:layout_width="102dp"
-        android:layout_height="32dp"
-        android:text="@string/score_value_title"
-        android:textColor="@color/pearl_violet"
-        android:textStyle="bold"
+    <!-- TOP TEN -->
+    <View
+        android:id="@+id/top_ten_divider_top"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/sugar_paper"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.559"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.201" />
-
-    <!-- current score -->
-
-    <TextView
-        android:id="@+id/score_value"
-        android:layout_width="89dp"
-        android:layout_height="32dp"
-        android:text="@string/top_score_value"
-        android:textColor="@color/sugar_paper"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.94"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.199" />
-
+        app:layout_constraintVertical_bias="0.294" />
     <TextView
         android:id="@+id/top_ten_title"
         android:layout_width="222dp"
@@ -151,6 +130,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.312" />
+    <View
+        android:id="@+id/top_ten_divider_buttom"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/sugar_paper"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.347" />
 
     <ScrollView
         android:id="@+id/scrollView"
@@ -162,20 +152,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.536">
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-
             <TextView
                 android:id="@+id/top_ten_subtitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="@string/top_ten_subtitle"
-                android:textColor="@color/pearl_violet" />
-
+                android:textColor="@color/deep_purple_100a" />
             <TextView
                 android:id="@+id/top_ten_list"
                 android:layout_width="match_parent"
@@ -183,9 +170,7 @@
                 android:gravity="center"
                 android:text="@string/top_ten_list"
                 android:textColor="@color/light_blue_grey" />
-
         </LinearLayout>
-
     </ScrollView>
 
     <View
@@ -199,7 +184,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.7" />
-
     <TextView
         android:id="@+id/current_score_title"
         android:layout_width="197dp"
@@ -214,35 +198,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.75" />
-
-    <TextView
-        android:id="@+id/current_score_value"
-        android:layout_width="52dp"
-        android:layout_height="34dp"
-        android:gravity="center"
-        android:text="@string/current_score_value"
-        android:textColor="@color/light_blue_grey"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.261"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.936" />
-
-    <TextView
-        android:id="@+id/points"
-        android:layout_width="86dp"
-        android:layout_height="35dp"
-        android:gravity="center"
-        android:text="@string/points"
-        android:textColor="@color/light_blue_grey"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.707"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.934" />
-
     <View
         android:id="@+id/current_divider_bottom"
         android:layout_width="match_parent"
@@ -260,7 +215,7 @@
         android:layout_width="99dp"
         android:layout_height="42dp"
         android:text="@string/top_player_title"
-        android:textColor="@color/pearl_violet"
+        android:textColor="@color/deep_purple_100a"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -268,14 +223,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.857" />
-
     <TextView
         android:id="@+id/current_player_name"
         android:layout_width="96dp"
         android:layout_height="42dp"
         android:gravity="center"
         android:text="@string/top_player_name"
-        android:textColor="@color/light_blue_grey"
+        android:textStyle="italic"
+        android:textColor="@color/blue200"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.73"
@@ -283,30 +238,30 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.857" />
 
-    <View
-        android:id="@+id/top_ten_divider_buttom"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/sugar_paper"
+    <TextView
+        android:id="@+id/points"
+        android:layout_width="86dp"
+        android:layout_height="35dp"
+        android:text="@string/points"
+        android:textStyle="bold"
+        android:textColor="@color/deep_purple_100a"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.289"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.365" />
-
-    <ImageButton
-        android:id="@+id/current_share"
-        android:layout_width="55dp"
-        android:layout_height="39dp"
-        android:background="@android:color/transparent"
+        app:layout_constraintVertical_bias="0.933" />
+    <TextView
+        android:id="@+id/current_score_value"
+        android:layout_width="52dp"
+        android:layout_height="34dp"
+        android:text="@string/current_score_value"
+        android:textColor="@color/blue200"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.946"
+        app:layout_constraintHorizontal_bias="0.763"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.753"
-        tools:srcCompat="@android:drawable/ic_menu_share"
-        android:contentDescription="TODO" />
+        app:layout_constraintVertical_bias="0.931" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

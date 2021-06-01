@@ -83,7 +83,7 @@
     <string name="top_ten_subtitle">Elenco dei dieci migliori punteggi...</string>
     <string name="current_score_title">Current Score</string>
     <string name="current_score_value">none</string>
-    <string name="points">points</string>
+    <string name="points">Points : </string>
     <string name="score_value_title">Score : </string>
     <string name="top_score_value">none</string>
 
@@ -127,7 +127,7 @@
     <!-- other -->
     <string name="ItemNewGame">New Game</string>
     <string name="ItemSolveGame">Risolvi</string>
-
+    <string name="share_icon">image of share action</string>
 
 
 </resources>
