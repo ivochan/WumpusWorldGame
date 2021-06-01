@@ -90,18 +90,17 @@
     <string name="score_value">s</string>
     <string name="game_message">messaggio</string>
     <!-- Main Tutorial Activity -->
-    <string name="tutorial_intro">Per prima cosa dovrai scegliere il tuo personaggio!</string>
+    <string name="tutorial_intro">Per prima cosa scegli il tuo personaggio!</string>
     <string name="hero_description">Sarai un coraggioso avventuriero, che ucciderà il terribile mostro della foresta oscura?</string>
-    <string name="hero_mode_intro">Nella <b>modalità eroe</b> dovrai:</string>
-    <string name="hero_danger_intro">evitare di cadere negli insidiosi fossati, disseminati per il bosco,</string>
-    <string name="hero_mission_intro">compiere il tuo destino, uccidendo il terribile mostro, scoccando una freccia</string>
-    <string name="hero_award_intro">appena ne avverti il tanfo e rubando il suo immenso tesoro!</string>
     <string name="wumpus_description">Oppure la creatura misteriosa che si nasconde nei boschi, per sfuggire al crudele cacciatore?</string>
-    <string name="wumpus_mode_intro">Nella <b>modalità wumpus</b> dovrai:</string>
-    <string name="wumpus_danger_intro">evitare le trappole disseminate nella foresta</string>
-    <string name="wumpus_mission_intro">cercare di colpire il cacciatore con un masso, non appena pensi sia vicino</string>
-    <string name="wumpus_award_intro">oppure trovare una via di fuga prima che ti raggiunga!</string>
-
+    <string name="wumpus_mode_intro">Grrr, sono il Wumpus.</string>
+    <string name="hero_mode_intro">Yeah, sono l\'eroe della storia.</string>
+    <string name="hero_danger_intro">Evita di cadere negli insidiosi fossati, disseminati per il bosco,</string>
+    <string name="hero_mission_intro">compi il tuo destino, uccidendo il terribile mostro, scoccando una freccia</string>
+    <string name="hero_award_intro">appena ne avverti il tanfo e rubando il suo immenso tesoro!</string>
+   <string name="wumpus_danger_intro">Scansa le trappole celate da cumuli di foglie,</string>
+    <string name="wumpus_mission_intro">cerca di colpire il cacciatore con un masso, non appena pensi sia vicino</string>
+    <string name="wumpus_award_intro">oppure trova una via di fuga prima che ti raggiunga!</string>
     <!-- ScoreActivity -->
     <string name="top_score_title">Record</string>
     <string name="top_player_title">Nome del giocatore: </string>

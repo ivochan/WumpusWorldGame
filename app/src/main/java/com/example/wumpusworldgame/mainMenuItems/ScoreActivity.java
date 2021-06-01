@@ -1,13 +1,10 @@
 package com.example.wumpusworldgame.mainMenuItems;
 //serie di import
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.preference.EditTextPreference;
 import androidx.preference.PreferenceManager;
-
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.TextView;
-
 import com.example.wumpusworldgame.R;
 /** class ScoreActivity
  *

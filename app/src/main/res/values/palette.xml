@@ -28,4 +28,7 @@
     <color name="dark_indigo_900">#000051</color>
     <color name="light_indigo_100">#c5cae9</color>
     <color name="dark_red_900">#7f0000</color>
+    <color name="dark_purple_100a">#b64fc8</color>
+    <color name="deep_purple_100a">#b388ff</color>
+    <color name="blue200">#90caf9</color>
 </resources>
