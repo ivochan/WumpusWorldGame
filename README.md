@@ -69,7 +69,7 @@ In questa versione del gioco √® stata prevista, per il giocatore, la possibilit√
   - mantenere fino a dieci punteggi
   - ogni punteggio e' preceduto dal nome scelto dal giocatore
   - ~~permettere la condivisione del punteggio piu' alto~~
-  - visualizzare il punteggio corrente;
+  - ~~visualizzare il punteggio corrente~~;
   - ~~condividere il punteggio attuale;~~
 - esportare il file dei punteggi ed il nome attuale del giocatore (dati di gioco)
 - importare il file dei punteggi ed il nome attuale del giocatore (dati di gioco)

@@ -4,10 +4,11 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceManager;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import com.example.wumpusworldgame.R;
@@ -25,22 +26,19 @@ public class ScoreActivity extends AppCompatActivity {
     private SharedPreferences sharedPreferences;
     //pulsante di condivisione del record
     private Button record_share_button;
-    //messaggio di condivisione delrecord
-    public static String record_share_message = "Hey, sfida i tuoi amici al gioco del mondo del Wumpus!"
-            +"\nSaranno in grado di battere il tuo record?"+"\n\nEcco il tuo miglior punteggio:\n";
+
     //nome del giocatore che ha effettuato il record
     private String best_player;
     //valore del punteggio record
     private String highscore;
     //pulsante di condivisione de punteggio corrente
     private Button score_share_button;
-    //messaggio di condivisione del punteggio attuale
-    public static String score_share_message = "Hey, sfida i tuoi amici al gioco del mondo del Wumpus!"
-            +"\n\nEcco il tuo punteggio:\n";
+
     //valore del punteggio attuale
     private String score;
     //nome del giocatore del punteggio attuale
     private String player;
+
 
     /** metodo onCreate(Bundle): void
      * metodo di CREAZIONE dell'ACTIVITY
@@ -87,12 +85,15 @@ public class ScoreActivity extends AppCompatActivity {
 
         //##### gestione dei pulsanti #####
 
+        //##### condivisione del punteggio record #####
         //verifica pressione del pulsante di condivisione del punteggio record
         record_share_button.setOnClickListener(view -> {
             //si apre una dialog che mostra i dati da condividere
             //si crea una alert dialog
             AlertDialog.Builder builder = new AlertDialog.Builder(ScoreActivity.this,
                     R.style.AlertDialogTheme);
+            //si preleva la stringa da visualizzare come messaggio della dialog
+            String record_share_message= getResources().getString(R.string.record_share_message);
             //si configura il layout della dialog
             settingDialog(builder, record_share_message, best_player, highscore);
 
@@ -125,8 +126,25 @@ public class ScoreActivity extends AppCompatActivity {
                  */
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-
-                }
+                    //creazione dell'intent
+                    Intent shareIntent = new Intent();
+                    //si specifica l'azione da svolgere
+                    shareIntent.setAction(Intent.ACTION_SEND);
+                    //selezione dell'immagine da condividere
+                    Uri imageUri = Uri.parse("android.resource://" + getPackageName()+ "/drawable/" + "red_little_monster_blue");
+                    //si crea la stringa che conterra' il punteggio
+                    String record_score = best_player+", "+highscore+" pt";
+                    //si inserisce la stringa complessiva da condividere come testo
+                    shareIntent.putExtra(Intent.EXTRA_TEXT, getResources().getString(R.string.record_send_message)+"\n"+record_score);
+                    //si inserisce l'immagine da condividere
+                    shareIntent.putExtra(Intent.EXTRA_STREAM, imageUri);
+                    //si specifa il tipo file da condividere (immagine/estensione)
+                    shareIntent.setType("image/png");
+                    //si forniscono i permessi di lettura dell'immagine
+                    shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                    //si visualizzano le app con cui effettuare questa azione
+                    startActivity(Intent.createChooser(shareIntent,null));
+                }//onClick(DialogInterface, int)
             });//setPositiveButton(String, DialogInterface)
 
             //si crea la dialog
@@ -135,11 +153,14 @@ public class ScoreActivity extends AppCompatActivity {
             dialog.show();
         });//setOnClickListener(View)
 
+        //##### condivisione punteggio attuale #####
         //verifica pressione pulsante di condivisione del punteggio attuale
         score_share_button.setOnClickListener(view -> {
             //si crea una alert dialog
             AlertDialog.Builder builder = new AlertDialog.Builder(ScoreActivity.this,
                     R.style.AlertDialogTheme);
+            //si preleva la stringa da visualizzare come messaggio della dialog
+            String score_share_message = getResources().getString(R.string.score_share_message);
             //si configura il layout della dialog
             settingDialog(builder, score_share_message, player, score);
 
@@ -172,25 +193,25 @@ public class ScoreActivity extends AppCompatActivity {
                  */
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-
-                    /*
-                    //intestazione
-                    String text = "Hey ho effettuato questo punteggio";
-                    Uri pictureUri = Uri.parse("@mipmap/ic_launcher_red_monster.png");
-                    //si crea l'intent che gestisce l'azione di condivisione delle info
+                    //creazione dell'intent
                     Intent shareIntent = new Intent();
-                    //si definisce il tipo di azione
+                    //si specifica l'azione da svolgere
                     shareIntent.setAction(Intent.ACTION_SEND);
-                    //si inserisce il testo
-                    shareIntent.putExtra(Intent.EXTRA_TEXT, text);
-                    //si inserisce l'immagine
-                    shareIntent.putExtra(Intent.EXTRA_STREAM, pictureUri);
-                    shareIntent.setType("image/*");
+                    //selezione dell'immagine da condividere
+                    Uri imageUri = Uri.parse("android.resource://" + getPackageName()+ "/drawable/" + "red_little_monster_blue");
+                    //si crea la stringa che conterra' il punteggio
+                    String current_score = player+", "+score+" pt";
+                    //si inserisce la stringa complessiva da condividere come testo
+                    shareIntent.putExtra(Intent.EXTRA_TEXT, getResources().getString(R.string.score_send_message)+"\n"+current_score);
+                    //si inserisce l'immagine da condividere
+                    shareIntent.putExtra(Intent.EXTRA_STREAM, imageUri);
+                    //si specifa il tipo file da condividere (immagine/estensione)
+                    shareIntent.setType("image/png");
+                    //si forniscono i permessi di lettura dell'immagine
                     shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                    startActivity(Intent.createChooser(shareIntent, "Share images..."));
-                    */
-
-                }
+                    //si visualizzano le app con cui effettuare questa azione
+                    startActivity(Intent.createChooser(shareIntent,null));
+                }//onClick(DialogInterface, int)
             });//setPositiveButton(String, DialogInterface)
 
             //si crea la dialog
@@ -289,11 +310,11 @@ public class ScoreActivity extends AppCompatActivity {
      * impostando il testo e l'immagine.
      * Il testo cambia in base ai parametri ricevuti.
      * @param builder: Alert.Builder, costruttore della dialog;
-     * @param score_message: String, messaggio da visualizzare nella dialog;
+     * @param share_message: String, messaggio da visualizzare nella dialog;
      * @param player: String, nome del giocatore;
      * @param score: String, valore del punteggio;
      */
-    private void settingDialog(AlertDialog.Builder builder, String score_message, String player, String score){
+    private void settingDialog(AlertDialog.Builder builder, String share_message, String player, String score){
         //si inserisce l'immagine nel layout della dialog
         builder.setView(R.layout.alert_share_image);
         //si definisce il testo del titolo
@@ -311,7 +332,7 @@ public class ScoreActivity extends AppCompatActivity {
         //si imposta il titolo della dialog
         builder.setCustomTitle(textView);
         //si imposta il messaggio della dialog
-        String message = score_message+"\n"+player+", "+score+" pt";
+        String message = share_message+"\n"+player+", "+score+" pt";
         //si visualizza il messaggio nella dialog
         builder.setMessage(message);
         //la dialog si chiude cliccando al di fuori della sua area

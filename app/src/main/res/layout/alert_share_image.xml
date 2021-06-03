@@ -13,7 +13,7 @@
         android:layout_width="144dp"
         android:layout_height="137dp"
         android:contentDescription="@string/red_monster_image"
-        android:src="@drawable/red_little_monster_argh"
+        android:src="@drawable/little_red_monster"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"

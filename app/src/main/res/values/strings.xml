@@ -86,6 +86,20 @@
     <string name="points">Points : </string>
     <string name="score_value_title">Score : </string>
     <string name="top_score_value">none</string>
+    <string name="share">condividi</string>
+    <string name="share_score_title">Condividi il tuo punteggio!</string>
+    <!-- messaggio della dialog di condivisione del record -->
+    <string name="record_share_message">Hey, sfida i tuoi amici al gioco del mondo del Wumpus!
+        \nSaranno in grado di battere il tuo record?\n\nEcco il tuo miglior punteggio:\n</string>
+    <!-- messaggio da visualizzare alla condivisione del record -->
+    <string name="record_send_message">Hey, riuscirai a battere il mio record al gioco del mondo del Wumpus?
+        \nEcco il mio miglior punteggio:\n</string>
+    <!-- messaggio della dialog condivisione del punteggio attuale -->
+    <string name="score_share_message">Hey, sfida i tuoi amici al gioco del mondo del Wumpus!
+        \n\nEcco il tuo punteggio:\n</string>;
+    <!-- messaggio da visualizzare alla condivisione del punteggio attuale -->
+    <string name="score_send_message">Hey, sfidami al gioco del mondo del Wumpus!
+        \nQuesto è il mio punteggio:\n</string>;
 
     <!-- Preference Titles -->
     <string name="general_settings">General</string>
@@ -123,14 +137,13 @@
     <string name="trap_image">trap image about wumpus danger</string>
     <string name="stone_image">image of a stone</string>
     <string name="exit_image">exit image about wumpus award</string>
+    <string name="red_monster_image">little red monster with open mouth</string>
 
     <!-- other -->
     <string name="ItemNewGame">New Game</string>
     <string name="ItemSolveGame">Risolvi</string>
     <string name="share_icon">image of share action</string>
     <string name="trophy">image of a golden trophy using in score activity</string>
-    <string name="share">condividi</string>
-    <string name="share_score_title">Condividi il tuo punteggio!</string>
-    <string name="red_monster_image">little red monster with open mouth</string>
+
 
 </resources>
