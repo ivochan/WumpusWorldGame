@@ -31,15 +31,20 @@ In questa versione del gioco è stata prevista, per il giocatore, la possibilit�
 - test del giocatore automatico;
 - inserire nella main activity il menu con:
   - le impostazioni di gioco, quali:
-    - abilitare i suoni
-    - scelta del nome del giocatore
-    - punteggi:
-      - importa dati di gioco
-      - esporta dati di gioco
-    - feedback
-  - tutorial
-  - informazioni di gioco
-  - punteggi (da visualizzare)
+    - ~~abilitare i suoni~~
+    - ~~scelta del nome del giocatore~~
+    - importa dati di gioco
+    - esporta dati di gioco
+    - about
+      - ~~feedback~~
+      - ~~team~~
+  - ~~tutorial~~
+  - ~~informazioni di gioco~~
+  - punteggi:
+    - record
+    - classifica
+    - attuale
+    - condivisione
 - gestire il tasto di navigazione -> in modo che punti all'activity precedente
 - rendere a schermo intero la schermata di caricamento della partita;
 - fare in modo che all'avvio di una nuova partita si mantenga la modalità di gioco scelta in precedenza, ovvero se il pg sarà l'avventuriero oppure il wumpus
