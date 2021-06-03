@@ -74,7 +74,7 @@
     <string name="export_data">Esporta i dati di gioco</string>
     <!-- about -->
     <string name="team">Team</string>
-    <string name="team_info">Mi chiamo Ivonne e questa è la mia prima app :)\nGrazie a Dady e Lula per i preziosi consigli!\nLe immagini ed i suoni sono presi da
+    <string name="team_info">Mi chiamo Ivonne e questa è la mia prima app :)\nGrazie a Dady e Lula per i consigli!\nLe immagini ed i suoni sono presi da
         https://opengameart.org</string>
     <!-- feedback -->
     <string name="feed">Feedback</string>
@@ -133,9 +133,7 @@
     <string name="trophy">image of a golden trophy using in score activity</string>
     <string name="share">condividi</string>
     <string name="share_score_title">Condividi il tuo punteggio!</string>
-    <string name="game_request">Puoi fare di meglio?\nSfidami al gioco del mondo del Wumpus!</string>
     <string name="red_monster_image">little red monster with open mouth</string>
-    <string name="score_message">Hey, ho ottenuto questo punteggio al gioco del mondo del Wumpus:\n</string>
 
 
 </resources>

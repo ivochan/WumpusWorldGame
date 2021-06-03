@@ -131,9 +131,6 @@
     <string name="trophy">image of a golden trophy using in score activity</string>
     <string name="share">condividi</string>
     <string name="share_score_title">Condividi il tuo punteggio!</string>
-    <string name="game_request">Puoi fare di meglio?\nAllora sfidami al gioco del mondo del Wumpus!</string>
     <string name="red_monster_image">little red monster with open mouth</string>
-    <string name="score_message">Hey, ho ottenuto questo punteggio al gioco del mondo del Wumpus:\n</string>
-
 
 </resources>

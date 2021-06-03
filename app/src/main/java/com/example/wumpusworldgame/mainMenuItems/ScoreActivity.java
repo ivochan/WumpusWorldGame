@@ -284,12 +284,14 @@ public class ScoreActivity extends AppCompatActivity {
 
     //##### altri metodi #####
 
-    /**
-     *
-     * @param builder
-     * @param score_message
-     * @param player
-     * @param score
+    /** metodo settingDialog(Alert.Builder, String, String, String)
+     * questo emtodo si occupa di configurare il layout della dialog
+     * impostando il testo e l'immagine.
+     * Il testo cambia in base ai parametri ricevuti.
+     * @param builder: Alert.Builder, costruttore della dialog;
+     * @param score_message: String, messaggio da visualizzare nella dialog;
+     * @param player: String, nome del giocatore;
+     * @param score: String, valore del punteggio;
      */
     private void settingDialog(AlertDialog.Builder builder, String score_message, String player, String score){
         //si inserisce l'immagine nel layout della dialog
