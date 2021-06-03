@@ -10,6 +10,10 @@
     <string name="game_settings_title">Impostazioni</string>
     <string name="main_tutorial_title">Tutorial</string>
     <string name="score_title">Punteggi</string>
+    <!-- game menu options (Hero/Wumpus Side) -->
+    <string name="ItemNewGame">Nuova partita</string>
+    <string name="ItemSolveGame">Risolvi</string>
+    <string name="ItemGameTutorial">Comandi</string>
     <!-- MainActivity -->
     <string name="game_title">Insegui il Wumpus... Oppure no?!?</string>
     <string name="game_intro">
@@ -82,6 +86,7 @@
     <string name="feedback_request">Vuoi inviare il tuo feedback?</string>
     <string name="cancel">annulla</string>
     <string name="confirm">accetta</string>
+    <string name="email_subject">feedback dell\'applicazione WUMPUS WORLD GAME</string>
 
     <!-- HeroSide and Wumpus Side Activities: schermata di gioco -->
     <string name="score">Punteggio: </string>
@@ -140,13 +145,9 @@
     <string name="stone_image">image of a stone</string>
     <string name="exit_image">exit image about wumpus award</string>
     <string name="red_monster_image">little red monster with open mouth</string>
-
-    <!-- altro -->
-    <string name="ItemNewGame">New Game</string>
-    <string name="ItemSolveGame">Risolvi</string>
     <string name="share_icon">image of share action</string>
     <string name="trophy">image of a golden trophy using in score activity</string>
 
-
+    <!-- altro -->
 
 </resources>

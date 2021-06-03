@@ -1,8 +1,12 @@
 package com.example.wumpusworldgame.activities;
 //serie di import
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.GridView;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.wumpusworldgame.R;
@@ -20,7 +24,8 @@ public class WumpusSide extends AppCompatActivity {
 
     //id della modalita' di gioco
     public final static int WUMPUS = 1;
-
+    //intent utilizzato per riseguire il metodo onCreate() di questa classe
+    private Intent starterIntent;
     //riproduttore audio
     private MediaPlayer mp;
     //matrice di gioco
@@ -49,18 +54,14 @@ public class WumpusSide extends AppCompatActivity {
         //si mostra la schermata di gioco
         setContentView(R.layout.wumpus_side_activity);
 
+        //si memorizza l'intent di questa activity
+        starterIntent = getIntent();
+
         //scelta della clip audio
         mp = MediaPlayer.create(WumpusSide.this,R.raw.the_good_fight);
 
         //##### schermata di caricamento #####
-
-        //si preleva il puntatore al layout del contesto corrente, dell'activity attuale
-        LayoutInflater inflater = getLayoutInflater();
-        //si definisce il layout del toast che implementa la schermata di caricamento
-        //View loading_layout = inflater.inflate(R.layout.loading_custom_toast,
-         //       (ViewGroup)findViewById(R.id.loading_toast_container));
-        //si visualizza la schermata di caricamento
-       // Utility.showLoadingScreen(getApplicationContext(),loading_layout);
+        Utility.showLoadingScreen(this, getLayoutInflater());
 
         //##### schermata di gioco #####
 
@@ -190,5 +191,72 @@ public class WumpusSide extends AppCompatActivity {
 
     //##### metodi per la gestione del menu #####
 
+    /** metodo onCreateOptionsMenu(Menu): boolean
+     * questo metodo serve per visualizzare il menu
+     * nella activity corrente
+     * @param menu: Menu, oggetto che costituisce il menu
+     * @return true: boolean
+     */
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        //si preleva l'oggetto inflater associato al menu
+        MenuInflater inflater = getMenuInflater();
+        //si definisce il layout del menu
+        inflater.inflate(R.menu.game_menu,menu);
+        //si visualizza il menu nel layout (tre puntini in alto a destra)
+        return true;
+    }//onCreateOptionsMenu(Menu)
+
+    /** metodo onOptionsItemSelected(MenuItem): boolean
+     * questo metodo si occupa di gestire le azioni che
+     * devono essere svolte quando si seleziona una delle
+     * voci del menu.
+     * @param item: MenuItem, voce del menu;
+     * @return true: boolean, per qualsiasi voce del menu che
+     *                        e' stata gestita, altrimenti
+     *                        super.onOptionsItemSelected(item).
+     */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        //variabile ausiliaria per la nuova activity
+        Intent intent;
+        //id della voce del menu che e' stata selezionata
+        int itemId = item.getItemId();
+        //switch case sulle varie voci del menu
+        switch(itemId){
+            //NUOVA PARTITA
+            case R.id.item_new_game:
+                //si chiude l'activity corrente
+                this.finish();
+                //si esegue un'altra istanza di questa activity, richiamando il metodo onCreate()
+                startActivity(starterIntent);
+                //si poteva usare recreate() ma ha l'animazione per la transizione
+                return true;
+            //RISOLVI
+            case R.id.item_solve_game:
+                //creazione dell'intent per la risoluzione automatica della partita
+                //TODO
+                break;
+            //TUTORIAL
+            case R.id.item_game_tutorial:
+                //creazione dell'intent
+                //TODO
+                break;
+            //PUNTEGGI
+            case R.id.item_score:
+                //TODO gestire il ritorno alla activity corrente
+                //creazione dell'intent
+                //intent = new Intent(this, ScoreActivity.class);
+                //avvio dell'activity corrispondente
+                //startActivity(intent);
+                //viene aperta l'activity
+                //return true;
+                break;
+            default:
+                //caso di default
+                return super.onOptionsItemSelected(item);
+        }//end switch
+        return false;
+    }//onOptionsItemSelected(MenuItem)
 
 }//end WumpusSide

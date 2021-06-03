@@ -190,13 +190,15 @@ public class GameSettingsFragment extends PreferenceFragmentCompat {
      * @param screen_inch: String, stringa che descrive la dimensione
      *                   dello schermo del dispositivo in uso, in pollici.
      */
-    private static void configEmail(Intent intent, String screen_inch){
+    private void configEmail(Intent intent, String screen_inch){
         //si specifica il tipo di applicazione che interessa questa azione (email)
         intent.setData(Uri.parse("mailto:"));
         //si specifica l'indirizzo a cui inviare la mail
         intent.putExtra(Intent.EXTRA_EMAIL, new String[] {Utility.SUPPORT_EMAIL});
+        //si preleva il contenuto dell'oggetto
+        String email_subject=getResources().getString(R.string.email_subject);
         //si specifica il contenuto dell'oggetto
-        intent.putExtra(Intent.EXTRA_SUBJECT,Utility.EMAIL_SUBJECT );
+        intent.putExtra(Intent.EXTRA_SUBJECT,email_subject);
         //variabile ausiliaria che conterra' le informazioni sul dispositivo
         String info = null;
         //si raccolgono informazioni sul dispositivo in uso

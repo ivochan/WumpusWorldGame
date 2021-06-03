@@ -23,6 +23,8 @@ public class HeroSide extends AppCompatActivity {
 
     //id della modalita' di gioco
     public final static int HERO = 0;
+    //intent utilizzato per riseguire il metodo onCreate() di questa classe
+    private Intent starterIntent;
     //riproduttore audio
     private MediaPlayer mp;
     //matrice di gioco
@@ -51,6 +53,8 @@ public class HeroSide extends AppCompatActivity {
         //si mostra la schermata di gioco
         setContentView(R.layout.hero_side_activity);
 
+        //si memorizza l'intent di questa activity
+        starterIntent = getIntent();
 
         //scelta della clip audio
         mp = MediaPlayer.create(HeroSide.this,R.raw.the_good_fight);
@@ -219,43 +223,32 @@ public class HeroSide extends AppCompatActivity {
         //switch case sulle varie voci del menu
         switch(itemId){
             //NUOVA PARTITA
-            case R.id.Menu1:
-                //creazione dell'intent
-               // intent = new Intent(this, MenuOptions.newGame());
-                //avvio dell'activity corrispondente
-               // startActivity(intent);
-                //ritorno alla schermata iniziale
+            case R.id.item_new_game:
+                //si chiude l'activity corrente
+                this.finish();
+                //si esegue un'altra istanza di questa activity, richiamando il metodo onCreate()
+                startActivity(starterIntent);
+                //si poteva usare recreate() ma ha l'animazione per la transizione
                 return true;
             //RISOLVI
-            case R.id.Menu2:
+            case R.id.item_solve_game:
                 //creazione dell'intent per la risoluzione automatica della partita
                 //TODO
                 break;
-            //INFORMAZIONI
-            case R.id.Menu3:
-                //creazione dell'intent
-               // intent = new Intent(this,MenuOptions.gameInfo(game_mode));
-                //avvio dell'activity corrispondente
-               // startActivity(intent);
-                //si apre la schermata delle informazioni sul gioco
-                break;
             //TUTORIAL
-            case R.id.Menu4:
-                //comandi
-
+            case R.id.item_game_tutorial:
+                //creazione dell'intent
+                //TODO
                 break;
             //PUNTEGGI
-            case R.id.Menu5:
-                //punteggi
-
-                break;
-            //IMPOSTAZIONI
-            case R.id.Menu6:
+            case R.id.item_score:
+                //TODO gestire il ritorno alla activity corrente
                 //creazione dell'intent
-                //intent = new Intent(this,MenuOptions.changeSettings(game_mode));
+                //intent = new Intent(this, ScoreActivity.class);
                 //avvio dell'activity corrispondente
                 //startActivity(intent);
-                //si apre la schermata delle informazioni sul gioco
+                //viene aperta l'activity
+                //return true;
                 break;
             default:
                 //caso di default

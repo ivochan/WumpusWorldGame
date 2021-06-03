@@ -55,6 +55,10 @@
     <string name="ItemTutorial">Tutorial</string>
     <string name="ItemSettings">Settings</string>
     <string name="ItemScore">Score</string>
+    <!-- game menu options (Hero/Wumpus Side) -->
+    <string name="ItemNewGame">New Game</string>
+    <string name="ItemSolveGame">Solve</string>
+    <string name="ItemGameTutorial">Game Controls</string>
     <!-- HeroSide and Wumpus Side Activities-->
     <string name="score">Your score: </string>
     <string name="score_value">s</string>
@@ -126,6 +130,7 @@
     <string name="feedback_request">Do you want to send your feedback?</string>
     <string name="cancel">cancel</string>
     <string name="confirm">confirm</string>
+    <string name="email_subject">WUMPUS WORLD GAME application feedback</string>
     <!-- Images -->
     <string name="dark_forest">dark_forest_main_activity_image</string>
     <string name="dark_night">creepy_night_game_info_activity</string>
@@ -138,12 +143,11 @@
     <string name="stone_image">image of a stone</string>
     <string name="exit_image">exit image about wumpus award</string>
     <string name="red_monster_image">little red monster with open mouth</string>
-
-    <!-- other -->
-    <string name="ItemNewGame">New Game</string>
-    <string name="ItemSolveGame">Risolvi</string>
     <string name="share_icon">image of share action</string>
     <string name="trophy">image of a golden trophy using in score activity</string>
+
+    <!-- other -->
+
 
 
 </resources>

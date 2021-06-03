@@ -29,8 +29,6 @@ public class Utility {
 
     //email dello sviluppatore
     public final static String SUPPORT_EMAIL = "ivochan17@gmail.com";
-    //oggetto della mail per il feedback
-    public final static String EMAIL_SUBJECT = "WUMPUS WORLD GAME application feedback";
 
     /** metodo showLoadingScreen(Activity, LayoutInflater)
      * questo metodo realizza una schermata di caricamento
@@ -65,7 +63,7 @@ public class Utility {
                 //viene fermato il thread timer
                 t.cancel();
             }
-        }, 2000);
+        }, 1500);
     }//showLoadingScreen(Activity, LayoutInflater)
 
     /** metodo musicPlaying(MediaPlayer, Activity): void
@@ -154,7 +152,7 @@ public class Utility {
      */
     private static String getMemoryCapacity(){
         //variabile ausiliaria
-        String memory = new String();
+        String memory;
         //si preleva il path della memoria del dispositivo
         StatFs stat = new StatFs(Environment.getExternalStorageDirectory().getPath());
         //memoria totale

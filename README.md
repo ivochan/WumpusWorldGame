@@ -80,7 +80,7 @@ In questa versione del gioco è stata prevista, per il giocatore, la possibilit�
 - strutturare il menù delle schermate di gioco:
   - definire un layout per entrambe le modalità,
   - implementare le seguenti voci:
-    - nuova partita, (la modalità è quella a cui si sta giocando);
+    - ~~nuova partita, (la modalità è quella a cui si sta giocando);~~
     - risolvi partita (giocatore automatico);
     - tutorial dei comandi di gioco;
     - punteggi;
