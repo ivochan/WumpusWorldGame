@@ -1,13 +1,18 @@
 package com.example.wumpusworldgame.activities;
 //serie di import
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.GridView;
+import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.PreferenceManager;
+
 import com.example.wumpusworldgame.R;
 import com.example.wumpusworldgame.adapters.GridViewCustomAdapter;
 import com.example.wumpusworldgame.services.Utility;
@@ -25,6 +30,10 @@ public class HeroSide extends AppCompatActivity {
     public final static int HERO = 0;
     //intent utilizzato per riseguire il metodo onCreate() di questa classe
     private Intent starterIntent;
+    //file delle preferenze
+    private SharedPreferences sharedPreferences;
+    //nome del giocatore
+    String player_name;
     //riproduttore audio
     private MediaPlayer mp;
     //matrice di gioco
@@ -55,6 +64,17 @@ public class HeroSide extends AppCompatActivity {
 
         //si memorizza l'intent di questa activity
         starterIntent = getIntent();
+
+        //si preleva il file di salvataggio delle preferenze
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        //si identifica la preference relativa al nome del giocatore corrente
+        player_name = sharedPreferences.getString("prefUsername",null);
+        //si identifica il campo di testo nel layout
+        TextView game_message = findViewById(R.id.message_box);
+        //si compone il messaggio di benvenuto
+        String intro_message = getResources().getString(R.string.game_message_intro)+" "+player_name+"!";
+        //si visualizza la frase di inizio partita
+        game_message.setText(intro_message);
 
         //scelta della clip audio
         mp = MediaPlayer.create(HeroSide.this,R.raw.the_good_fight);

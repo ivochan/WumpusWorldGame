@@ -93,7 +93,7 @@
     <string name="shot">Colpi residui: </string>
     <string name="shots_value">h</string>
     <string name="score_value">s</string>
-    <string name="game_message">messaggio</string>
+    <string name="game_message_intro">Ciao! Iniziamo il gioco,</string>
     <!-- Main Tutorial Activity -->
     <string name="tutorial_intro">Per prima cosa scegli il tuo personaggio!</string>
     <string name="hero_description">Sarai un coraggioso avventuriero, che ucciderà il terribile mostro della foresta oscura?</string>
@@ -147,6 +147,11 @@
     <string name="red_monster_image">little red monster with open mouth</string>
     <string name="share_icon">image of share action</string>
     <string name="trophy">image of a golden trophy using in score activity</string>
+    <string name="hit_button">hit button icon</string>
+    <string name="left_button">left button icon</string>
+    <string name="up_button">up button icon</string>
+    <string name="right_button">right button icon</string>
+    <string name="down_button">down button icon</string>
 
     <!-- altro -->
 
