@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@android:color/transparent"
     android:configChanges="uiMode"
-    tools:context=".activities.MainActivity">
+    tools:context=".MainActivity">
 
     <ImageView
         android:id="@+id/imageView"

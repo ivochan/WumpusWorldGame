@@ -61,10 +61,10 @@
     <string name="ItemGameTutorial">Game Controls</string>
     <!-- HeroSide and Wumpus Side Activities-->
     <string name="score">Your score: </string>
-    <string name="score_value">s</string>
+    <string name="score_value">0</string>
     <string name="shot">Remaining shots: </string>
-    <string name="shots_value">h</string>
-    <string name="game_message_intro">Let\'s go ,</string>
+    <string name="shots_value">1</string>
+    <string name="game_message_intro">Let\'s go</string>
     <!-- Main Tutorial Activity -->
     <string name="tutorial_intro">Per prima cosa scegli il tuo personaggio!</string>
     <string name="hero_description">Sarai un coraggioso avventuriero, che ucciderà il terribile mostro della foresta oscura?</string>
@@ -81,15 +81,15 @@
     <!-- ScoreActivity -->
     <string name="top_score_title">High Score</string>
     <string name="top_player_title">Player\'s name :</string>
-    <string name="top_player_name">name</string>
+    <string name="top_player_name">---</string>
     <string name="top_ten">Top Ten</string>
     <string name="top_ten_list">[ ... ]</string>
     <string name="top_ten_subtitle">Elenco dei dieci migliori punteggi...</string>
     <string name="current_score_title">Current Score</string>
-    <string name="current_score_value">none</string>
+    <string name="current_score_value">---</string>
     <string name="points">Points : </string>
     <string name="score_value_title">Score : </string>
-    <string name="top_score_value">none</string>
+    <string name="top_score_value">---</string>
     <string name="share">condividi</string>
     <string name="share_score_title">Condividi il tuo punteggio!</string>
     <!-- messaggio della dialog di condivisione del record -->

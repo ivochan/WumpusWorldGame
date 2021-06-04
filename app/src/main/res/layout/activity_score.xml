@@ -180,7 +180,7 @@
                 android:layout_height="101dp"
                 android:gravity="center"
                 android:text="@string/top_ten_list"
-                android:textColor="@color/light_blue_grey" />
+                android:textColor="@color/blue200" />
         </LinearLayout>
     </ScrollView>
 

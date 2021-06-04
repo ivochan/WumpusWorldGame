@@ -70,7 +70,7 @@ public class ScoreActivity extends AppCompatActivity {
         //Utility.musicPlaying(mp, this);
 
         //si identifica la preference relativa al nome del giocatore corrente
-        player = sharedPreferences.getString("prefUsername",null);
+        player = sharedPreferences.getString("prefUsername","---");
         //si preleva il campo di testo associato al nome del giocatore del punteggio attuale
         TextView tn = findViewById(R.id.current_player_name);
         //si aggiorna il nome del giocatore del punteggio attuale
