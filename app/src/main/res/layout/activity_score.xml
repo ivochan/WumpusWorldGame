@@ -277,6 +277,8 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.931" />
 
+    <!-- pulsanti di condivisione del punteggio -->
+
     <Button
         android:id="@+id/record_share_button"
         android:layout_width="37dp"

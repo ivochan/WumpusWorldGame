@@ -95,10 +95,13 @@
         app:layout_constraintVertical_bias="0.031" />
 
     <!-- game map -->
+
+    <!-- controller -->
+
     <GridView
         android:id="@+id/grid_view"
         android:layout_width="346dp"
-        android:layout_height="wrap_content"
+        android:layout_height="225dp"
         android:background="@drawable/grid_view_border"
         android:columnWidth="20dp"
         android:gravity="center"
@@ -113,16 +116,14 @@
         app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.351">
+        app:layout_constraintVertical_bias="0.31">
 
     </GridView>
-
-    <!-- controller -->
 
     <ImageButton
         android:id="@+id/imageButtonHIT"
         android:layout_width="72dp"
-        android:layout_height="72dp"
+        android:layout_height="90dp"
         android:background="@android:color/transparent"
         android:contentDescription="@string/hit_button"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -130,22 +131,8 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.819"
+        app:layout_constraintVertical_bias="0.847"
         app:srcCompat="@drawable/hit_button" />
-
-    <ImageButton
-        android:id="@+id/imageButtonLEFT"
-        android:layout_width="72dp"
-        android:layout_height="72dp"
-        android:background="@android:color/transparent"
-        android:contentDescription="@string/left_button"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.23"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.817"
-        app:srcCompat="@drawable/left_button" />
 
     <ImageButton
         android:id="@+id/imageButtonUP"
@@ -158,22 +145,8 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.685"
+        app:layout_constraintVertical_bias="0.711"
         app:srcCompat="@drawable/up_button" />
-
-    <ImageButton
-        android:id="@+id/imageButtonRIGHT"
-        android:layout_width="72dp"
-        android:layout_height="72dp"
-        android:background="@android:color/transparent"
-        android:contentDescription="@string/right_button"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.766"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.819"
-        app:srcCompat="@drawable/right_button" />
 
     <ImageButton
         android:id="@+id/imageButtonDOWN"
@@ -186,8 +159,36 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.952"
+        app:layout_constraintVertical_bias="0.979"
         app:srcCompat="@drawable/down_button" />
+
+    <ImageButton
+        android:id="@+id/imageButtonRIGHT"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/right_button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.766"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.845"
+        app:srcCompat="@drawable/right_button" />
+
+    <ImageButton
+        android:id="@+id/imageButtonLEFT"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/left_button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.23"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.843"
+        app:srcCompat="@drawable/left_button" />
 
     <!-- game messages -->
     <TextView

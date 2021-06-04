@@ -7,12 +7,11 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.Button;
 import android.widget.GridView;
 import android.widget.TextView;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceManager;
-
 import com.example.wumpusworldgame.R;
 import com.example.wumpusworldgame.adapters.GridViewCustomAdapter;
 import com.example.wumpusworldgame.services.Utility;
@@ -46,6 +45,12 @@ public class HeroSide extends AppCompatActivity {
     private ArrayList<String> data = new ArrayList<>();
     //dati della matrice di gioco
     private ArrayList<String> game_data = new ArrayList<String>();
+    //##### pulsanti del controller di gioco #####
+    private Button hit_button;
+    private Button up_button;
+    private Button down_button;
+    private Button left_button;
+    private Button right_button;
 
     /** metodo onCreate(Bunde): void
      * ACTIVITY CREATA
@@ -125,17 +130,54 @@ public class HeroSide extends AppCompatActivity {
         Utility.musicPlaying(mp, this);
 
         //##### gestione dei pulsanti #####
+/*
+        //verifica pressione del pulsante HIT
+        hit_button.setOnClickListener(new View.OnClickListener(){
+            //il pulsante e' stato premuto
+            @Override
+            public void onClick(View view) {
 
 
+            }//onClick(View)
+        });//setOnClickListener(View.onClickListener()
 
+        //verifica pressione del pulsante DOWN
+        down_button.setOnClickListener(new View.OnClickListener(){
+            //il pulsante e' stato premuto
+            @Override
+            public void onClick(View view) {
 
+            }//onClick(View)
+        });//setOnClickListener(View.onClickListener()
 
+        //verifica pressione del pulsante UP
+        up_button.setOnClickListener(new View.OnClickListener(){
+            //il pulsante e' stato premuto
+            @Override
+            public void onClick(View view) {
 
+            }//onClick(View)
+        });//setOnClickListener(View.onClickListener()
 
+        //verifica pressione del pulsante LEFT
+        left_button.setOnClickListener(new View.OnClickListener(){
+            //il pulsante e' stato premuto
+            @Override
+            public void onClick(View view) {
 
+            }//onClick(View)
+        });//setOnClickListener(View.onClickListener()
 
+        //verifica pressione del pulsante RIGHT
+        right_button.setOnClickListener(new View.OnClickListener(){
+            //il pulsante e' stato premuto
+            @Override
+            public void onClick(View view) {
 
+            }//onClick(View)
+        });//setOnClickListener(View.onClickListener()
 
+*/
 
 
 

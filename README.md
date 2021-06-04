@@ -44,15 +44,15 @@ In questa versione del gioco è stata prevista, per il giocatore, la possibilit�
     - record
     - classifica
     - attuale
-    - condivisione
+    - ~~condivisione~~
 - gestire il tasto di navigazione -> in modo che punti all'activity precedente
 - ~~rendere a schermo intero la schermata di caricamento della partita~~;
 - fare in modo che all'avvio venga ripristinato lo stato in cui è stata interrotta la partita precedente, alla chiusura dell'applicazione;
 - ~~togliere l'autosize al testo animato della schermata iniziale~~
 - ~~rallentare la velocità di scorrimento del testo animato ed inserire una scroll bar~~
 - ~~inserire una la scroll bar che scorra automaticamente fino all'ultimo carattere del testo animato visualizzato;~~
-- allineare il valore del punteggio con l'etichetta che indica il rispettivo campo, nella schermata di gioco
-- spostare la box dei messaggi sopra la matrice di gioco e dargli una forma rettangolare;
+- ~~allineare il valore del punteggio con l'etichetta che indica il rispettivo campo, nella schermata di gioco~~
+- ~~spostare la box dei messaggi sopra la matrice di gioco e dargli una forma rettangolare;~~
 - ~~azione di invio di un feedback;~~
 - ~~scelta del gestore mail per inviare il feedback;~~
 - ~~disabilita/abilita traccia audio per ogni activity;~~
@@ -84,6 +84,7 @@ In questa versione del gioco è stata prevista, per il giocatore, la possibilit�
     - risolvi partita (giocatore automatico);
     - tutorial dei comandi di gioco;
     - punteggi;
+- 
 
 
 
