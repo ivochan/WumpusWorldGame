@@ -3,7 +3,6 @@ package com.example.wumpusworldgame.adapters;
 import java.util.ArrayList;
 import android.app.Activity;
 import android.content.Context;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +10,6 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import com.example.wumpusworldgame.R;
 import com.example.wumpusworldgame.gameActivities.HeroSide;
-
 /** class GridViewCustomAdapter
  * questa classe serve per visualizzare i dati nella
  * GridView che ha consentito di realizzare la mappa nella schermata di gioco

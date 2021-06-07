@@ -10,40 +10,44 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.DayNight">
         <!-- activity principale, launcher dell'app -->
-        <activity android:name=".MainActivity">
+        <activity android:name=".gameActivities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <!-- altre activity -->
         <activity
             android:name=".gameActivities.HeroSide"
             android:label="@string/hero_side_title"
             android:launchMode="singleTop"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".gameActivities.MainActivity" />
         <activity
             android:name=".gameActivities.WumpusSide"
             android:label="@string/wumpus_side_title"
             android:launchMode="singleTop"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".gameActivities.MainActivity" />
+        <!-- altre activity -->
         <activity
             android:name=".mainMenuItems.GameInformationActivity"
             android:label="@string/game_info_title"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".gameActivities.MainActivity" />
         <activity
             android:name=".mainMenuItems.settings.GameSettingsActivity"
             android:label="@string/game_settings_title"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".gameActivities.MainActivity" />
         <activity
-            android:name=".mainMenuItems.MainTutorialActivity"
+            android:name=".mainMenuItems.tutorial.MainTutorialActivity"
             android:label="@string/main_tutorial_title"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".gameActivities.MainActivity" />
+        <activity
+            android:name=".mainMenuItems.tutorial.MainTutorialControlsActivity"
+            android:label="@string/main_tutorial_title"
+            android:parentActivityName=".mainMenuItems.tutorial.MainTutorialActivity" />
         <activity
             android:name=".mainMenuItems.ScoreActivity"
             android:label="@string/score_title"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".gameActivities.MainActivity" />
     </application>
 
 </manifest>

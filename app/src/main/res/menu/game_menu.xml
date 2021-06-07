@@ -9,7 +9,4 @@
     <item
         android:id="@+id/item_game_tutorial"
         android:title="@string/ItemGameTutorial"/>
-    <item
-        android:id="@+id/item_score"
-        android:title="@string/ItemScore"/>
 </menu>

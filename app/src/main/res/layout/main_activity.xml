@@ -7,7 +7,8 @@
     android:layout_height="match_parent"
     android:background="@android:color/transparent"
     android:configChanges="uiMode"
-    tools:context=".MainActivity">
+    android:id="@+id/main_layout"
+    tools:context=".gameActivities.MainActivity">
 
     <ImageView
         android:id="@+id/imageView"

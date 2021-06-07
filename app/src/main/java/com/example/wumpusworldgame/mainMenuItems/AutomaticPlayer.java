@@ -33,7 +33,7 @@ public class AutomaticPlayer extends AppCompatActivity {
         //con super si invoca il metodo omonimo della classe antenata
         super.onCreate(savedInstanceState);
         //si specifica il file che descrive il layout
-        setContentView(R.layout.automatic_game_activity);
+        setContentView(R.layout.activity_automatic_game);
         //scelta della clip audio
         //TODO scegliere la musica
         mp = MediaPlayer.create(AutomaticPlayer.this,R.raw.the_good_fight);

@@ -1,37 +1,43 @@
-package com.example.wumpusworldgame.mainMenuItems.settings;
+package com.example.wumpusworldgame.mainMenuItems.tutorial;
 //serie di import
 import android.os.Bundle;
+import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.wumpusworldgame.R;
-/** class GameSettingsActivity
- * questa classe contiene una serie di impostazioni,
- * modificabili dall'utente.
+/**
+ *
  */
-public class GameSettingsActivity extends AppCompatActivity {
+public class MainTutorialControlsActivity extends AppCompatActivity {
     //##### attributi di classe #####
-    private static final String TAG = GameSettingsActivity.class.getSimpleName();
-    /** metodo onCreate(Bunde): void
+
+    //pulsante avanti
+    private Button back_button;
+
+    //TODO riproduttore audio
+    //private MediaPlayer mp;
+
+    /** metodo onCreate(Bundle): void
+     * questo metodo si occupa della CREAZIONE dell'ACTIVITY
      * @param savedInstanceState
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        //si richiama il metodo della super classe
+        //si invoca il metodo della super classe
         super.onCreate(savedInstanceState);
+        //si assegna il layout all'activity corrente
+        setContentView(R.layout.activity_main_tutorial_controls);
 
-        //si imposta il layout
-        setContentView(R.layout.activity_game_settings);
+        //##### inizializzazioni #####
 
-        // si verifica se il frame layout e' vuoto o no
-        if (findViewById(R.id.settings) != null) {
-            //si verifica se sono stati conservati dei dati
-            if (savedInstanceState != null) {
-                //se l'istanza e' stata salvata e recuperata si interrompe qui
-                return;
-            }//fi
-            //si inserisce nel layout questo fragment
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.settings,new GameSettingsFragment()).commit();
-        }//fi
+
+        //scelta della clip audio
+        //mp = MediaPlayer.create(HeroSide.this,R.raw.the_good_fight);
+
+        //##### azioni #####
+
+        //verifica dell'esecuzione della traccia audio
+        //Utility.musicPlaying(mp, this);
+
 
     }//onCreate(Bundle)
 
@@ -67,6 +73,8 @@ public class GameSettingsActivity extends AppCompatActivity {
     protected void onPause() {
         //si invoca il metodo della super classe
         super.onPause();
+        //si ferma la clip audio quando l'app viene sospesa
+        //mp.pause();
     }//onPause()
 
     /** metodo onStop(): void
@@ -87,6 +95,8 @@ public class GameSettingsActivity extends AppCompatActivity {
     public void onDestroy(){
         //si invoca il metodo della super classe
         super.onDestroy();
+        //si rilascia la risorsa del mediaplayer
+        //mp.release();
     }//onDestroy()
 
     /** metodo onRestart(): void
@@ -107,9 +117,9 @@ public class GameSettingsActivity extends AppCompatActivity {
      * piu' in primo piano, secondo un ordine a Stack.
      */
     @Override
-    public void onBackPressed(){
-       //si richiama il metodo della super classe
+    public void onBackPressed() {
+        //si invoca il metodo della super classe
         super.onBackPressed();
     }//onBackPressed()
 
-}//end GameSettingsActivity
+}//end MainTutorialControlsActivity

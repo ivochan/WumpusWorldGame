@@ -26,7 +26,7 @@ public class GameInformationActivity extends AppCompatActivity {
         //con super si invoca il metodo omonimo della classe antenata
         super.onCreate(savedInstanceState);
         //si specifica il file che descrive il layout
-        setContentView(R.layout.game_info_activity);
+        setContentView(R.layout.activity_game_info);
 
          //##### inizializzazioni #####
 

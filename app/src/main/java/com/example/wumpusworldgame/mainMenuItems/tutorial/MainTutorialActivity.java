@@ -1,13 +1,25 @@
-package com.example.wumpusworldgame.mainMenuItems;
+package com.example.wumpusworldgame.mainMenuItems.tutorial;
 //serie di import
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
+
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.LinearLayout;
+
 import com.example.wumpusworldgame.R;
 /** class MainTutorialActivity
  * questa classe fornisce un breve tutorial introduttivo al gioco
  */
 public class MainTutorialActivity extends AppCompatActivity {
     //##### attributi di classe #####
+
+    //pulsante avanti
+    private Button next_button;
+    //intent della pagina successiva
+    private Intent next_page;
 
     //TODO riproduttore audio
     //private MediaPlayer mp;
@@ -25,6 +37,11 @@ public class MainTutorialActivity extends AppCompatActivity {
 
         //##### inizializzazioni #####
 
+        //pulsante di navigazione in avanti
+        next_button = findViewById(R.id.next_page_button);
+        //intent della activity che corrisponde alla pagina successiva del tutorial
+        next_page = new Intent(this, MainTutorialControlsActivity.class);
+
         //scelta della clip audio
         //mp = MediaPlayer.create(HeroSide.this,R.raw.the_good_fight);
 
@@ -32,6 +49,26 @@ public class MainTutorialActivity extends AppCompatActivity {
 
         //verifica dell'esecuzione della traccia audio
         //Utility.musicPlaying(mp, this);
+
+        //##### gestione del pulsante #####
+
+
+        //metodo setOnClickListener(View.OnclickListener())
+        next_button.setOnClickListener(new View.OnClickListener() {
+            /** metodo onClick(View): void
+             * questo metodo definisce le azioni che si devono eseguire
+             * alla pressione del punsante.
+             * In questo caso verra' avviata una nuova activity, il cui
+             * layout conterra' la descrizione dei comandi di gioco,
+             * percio' rappresenta la seconda pagina del tutorial.
+             * @param view: View
+             */
+            @Override
+            public void onClick(View view) {
+                //sia avvia l'activity che corrisponde alla pagina successiva del tutorial
+                startActivity(next_page);
+            }//onClick(View)
+        });//setOnClickListener(View.OnclickListener())
 
     }//onCreate(Bundle)
 
