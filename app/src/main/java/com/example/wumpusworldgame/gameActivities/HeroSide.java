@@ -64,7 +64,7 @@ public class HeroSide extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         //si mostra la schermata di gioco
-        setContentView(R.layout.hero_side_activity);
+        setContentView(R.layout.activity_hero_side);
 
         //si memorizza l'intent di questa activity
         starterIntent = getIntent();
@@ -119,8 +119,8 @@ public class HeroSide extends AppCompatActivity {
         }//for righe
 
         //si crea l'adapter per il gridlayout della matrice di esplorazione
-        GridViewCustomAdapter adapter = new GridViewCustomAdapter(this, game_data);
-        //GridViewCustomAdapter adapter = new GridViewCustomAdapter(this, data);
+        //DEBUGG GridViewCustomAdapter adapter = new GridViewCustomAdapter(this, game_data);
+        GridViewCustomAdapter adapter = new GridViewCustomAdapter(this, data);
         //si visualizza la matrice di esplorazione
         list = (GridView) findViewById(R.id.grid_view);
         //oggetto che permette di visualizzare i dati

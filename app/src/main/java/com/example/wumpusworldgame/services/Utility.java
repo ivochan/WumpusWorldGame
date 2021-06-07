@@ -62,8 +62,8 @@ public class Utility {
                 customDialog.dismiss();
                 //viene fermato il thread timer
                 t.cancel();
-            }
-        }, 700);
+            }//run()
+        }, 500);
     }//showLoadingScreen(Activity, LayoutInflater)
 
     /** metodo musicPlaying(MediaPlayer, Activity): void

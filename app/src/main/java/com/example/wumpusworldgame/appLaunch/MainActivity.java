@@ -63,13 +63,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         /* impostazione del layout
          * la struttura grafica scelta per l'Activity e' specificata nel file
-         * main_activity.xml nella directory res/layout
+         * activity_main.xml nella directory res/layout
          * Gli ID delle risorse sono conservati in una classe Java denominata R,
          * Si puo' accedere ad una risorsa:
          * - tramite R.tipo_risorsa.nome_risorsa, in Java;
          * - con @tipo_risorsa/nome_risorsa, in XML;
          */
-        setContentView(R.layout.main_activity);
+        setContentView(R.layout.activity_main);
 
         //##### inizializzazioni #####
 

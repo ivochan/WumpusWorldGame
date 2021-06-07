@@ -179,6 +179,10 @@ public class GridViewCustomAdapter extends BaseAdapter {
                 case "F":
                    icon = R.drawable.stone_forbidden;
                     break;
+                //SAFE
+                case "S" :
+                    icon = R.drawable.grass_safe;
+                    break;
                 default:
                     break;
             }//end switch
