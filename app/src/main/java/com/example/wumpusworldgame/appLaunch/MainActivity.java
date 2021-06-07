@@ -1,4 +1,4 @@
-package com.example.wumpusworldgame.gameActivities;
+package com.example.wumpusworldgame.appLaunch;
 //serie di import
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
@@ -11,6 +11,8 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.wumpusworldgame.R;
+import com.example.wumpusworldgame.gameActivities.HeroSide;
+import com.example.wumpusworldgame.gameActivities.WumpusSide;
 import com.example.wumpusworldgame.mainMenuItems.GameInformationActivity;
 import com.example.wumpusworldgame.mainMenuItems.tutorial.MainTutorialActivity;
 import com.example.wumpusworldgame.mainMenuItems.ScoreActivity;

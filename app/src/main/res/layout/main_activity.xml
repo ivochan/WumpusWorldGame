@@ -8,7 +8,7 @@
     android:background="@android:color/transparent"
     android:configChanges="uiMode"
     android:id="@+id/main_layout"
-    tools:context=".gameActivities.MainActivity">
+    tools:context=".appLaunch.MainActivity">
 
     <ImageView
         android:id="@+id/imageView"

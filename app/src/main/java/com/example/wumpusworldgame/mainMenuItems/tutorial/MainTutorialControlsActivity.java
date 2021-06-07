@@ -4,8 +4,8 @@ import android.os.Bundle;
 import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.wumpusworldgame.R;
-/**
- *
+/** class MainTutorialControlsActivity
+ * questa classe fornisce le istruzioni sui comandi di gioco
  */
 public class MainTutorialControlsActivity extends AppCompatActivity {
     //##### attributi di classe #####

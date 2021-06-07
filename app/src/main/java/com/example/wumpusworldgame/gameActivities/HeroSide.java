@@ -13,7 +13,6 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceManager;
 import com.example.wumpusworldgame.R;
-import com.example.wumpusworldgame.adapters.GridViewCustomAdapter;
 import com.example.wumpusworldgame.services.Utility;
 import java.util.ArrayList;
 import game.structure.map.GameMap;

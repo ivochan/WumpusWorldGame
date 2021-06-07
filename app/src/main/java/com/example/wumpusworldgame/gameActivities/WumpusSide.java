@@ -9,7 +9,6 @@ import android.view.MenuItem;
 import android.widget.GridView;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.wumpusworldgame.R;
-import com.example.wumpusworldgame.adapters.GridViewCustomAdapter;
 import com.example.wumpusworldgame.services.Utility;
 import java.util.ArrayList;
 import game.structure.map.GameMap;
