@@ -63,7 +63,7 @@ public class Utility {
                 //viene fermato il thread timer
                 t.cancel();
             }
-        }, 1500);
+        }, 700);
     }//showLoadingScreen(Activity, LayoutInflater)
 
     /** metodo musicPlaying(MediaPlayer, Activity): void

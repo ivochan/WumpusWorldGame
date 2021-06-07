@@ -42,11 +42,20 @@ public class MainTutorialControlsActivity extends AppCompatActivity {
 
         //##### gestione del pulsante indietro #####
         back_button.setOnClickListener(new View.OnClickListener() {
+            /** metodo onClick(View): void
+             * questo metodo definisce le azioni che si devono eseguire
+             * alla pressione del punsante.
+             * In questo caso verra' avviata una nuova activity, il cui
+             * layout conterra' la descrizione dei comandi di gioco,
+             * percio' rappresenta la seconda pagina del tutorial.
+             * @param v: View
+             */
             @Override
             public void onClick(View v) {
+                //si ritorna all'activity precedente
                 onBackPressed();
-            }
-        });
+            }//onClick(View)
+        });//setOnClickListener(View.OnClickListener())
 
     }//onCreate(Bundle)
 

@@ -65,7 +65,7 @@ public class MainTutorialActivity extends AppCompatActivity {
              */
             @Override
             public void onClick(View view) {
-                //sia avvia l'activity che corrisponde alla pagina successiva del tutorial
+                //si avvia l'activity che corrisponde alla pagina successiva del tutorial
                 startActivity(next_page);
             }//onClick(View)
         });//setOnClickListener(View.OnclickListener())

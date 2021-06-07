@@ -96,7 +96,8 @@ public class WumpusSide extends AppCompatActivity {
         }//for righe
 
         //si crea l'adapter per il gridlayout della matrice di esplorazione
-        GridViewCustomAdapter adapter = new GridViewCustomAdapter(this, data);
+        //GridViewCustomAdapter adapter = new GridViewCustomAdapter(this, data);
+        GridViewCustomAdapter adapter = new GridViewCustomAdapter(this, game_data);
         //si visualizza la matrice di esplorazione
         list = (GridView) findViewById(R.id.grid_view);
         list.setAdapter(adapter);

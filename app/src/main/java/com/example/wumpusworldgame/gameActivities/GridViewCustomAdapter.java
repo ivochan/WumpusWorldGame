@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import com.example.wumpusworldgame.R;
-import com.example.wumpusworldgame.gameActivities.HeroSide;
 /** class GridViewCustomAdapter
  * questa classe serve per visualizzare i dati nella
  * GridView che ha consentito di realizzare la mappa nella schermata di gioco
@@ -24,8 +23,8 @@ public class GridViewCustomAdapter extends BaseAdapter {
     static Activity mActivity;
     //oggetto layoutInflater per unire questo componente al layout dell'activity
     private static LayoutInflater inflater = null;
-
-    int game_mode=0;
+    //intero che indica la modalita' di gioco
+    private static int game_mode=0;
 
     /** GridViewCustomAdapter(Activity, ArrayList): costruttore
      * permette di istanziare l'oggetto gridViewCustomAdapter
@@ -35,13 +34,15 @@ public class GridViewCustomAdapter extends BaseAdapter {
     public GridViewCustomAdapter(Activity activity, ArrayList<String> tempArrayList) {
         //si preleva l'activity
         mActivity = activity;
-
+        //si verifica il valore dell'intero
         if(mActivity instanceof HeroSide){
-            game_mode =0;
-        }
+            //ci si trova nella modalita' di gioco Eroe
+            game_mode = 0;
+        }//fi
         else {
-            game_mode=1;
-        }
+            //ci si trova nella modalita' di gioco Wumpus
+            game_mode = 1;
+        }//esle
         //si prelevano gli oggetti da visualizzare
         items = tempArrayList;
         //si utilizza l'inflater
@@ -119,34 +120,69 @@ public class GridViewCustomAdapter extends BaseAdapter {
         return position;
     }//getItemId(int)
 
-    /**
-     *
-     * @param cell_type
-     * @return
+    /** metodo setButtonIcon(String, int): int
+     * questo metodo assegna ad ogni button della mappa di gioco un'icona
+     * in base alla modalita' di gioco assegnata come parametro di classe
+     * @param cell_type: String, contenuto della cella di gioco;
+     * @return icon: int, codice identificativo dell'icona del button.
      */
     private int setButtonIcon(String cell_type){
         //variabile ausiliaria che indica il codice dell'icona
         int icon = 0;
         //switch case sul contenuto della singola cella della mappa
             switch (cell_type){
+                //PG
                 case "P":
                     if(game_mode==0) {
+                        //hero side
                         icon = R.drawable.hero_pg;
-                    }
+                    }//fi
                     else {
+                        //wumpus side
                         icon = R.drawable.wumpus_pg;
-                    }
-
+                    }//else
                     break;
+                //ENEMY
                 case "E":
-                    icon = R.drawable.wumpus_pg;
+                    if(game_mode==0) {
+                        //hero side
+                        icon = R.drawable.wumpus_pg;
+                    }//fi
+                    else {
+                        //wumpus side
+                        icon = R.drawable.hero_pg;
+                    }//else
+                    break;
+                //DANGER
+                case "D":
+                    if(game_mode==0){
+                        //hero_side : fossa/pozzo
+                        icon = R.drawable.pit_hero_danger;
+                    }//fi
+                    else{
+                        //wumpus_side: trappola
+                        icon = R.drawable.trap_wumpus_danger;
+                    }//else
+                    break;
+                //AWARD
+                case "A":
+                    if(game_mode==0){
+                        //hero_side : tesoro
+                        icon = R.drawable.chest_hero_award;
+                    }//fi
+                    else {
+                        //wumpus_side: uscita
+                        icon = R.drawable.exit_wumpus_award;
+                    }//esle
+                    break;
+                //FORBIDDEN
+                case "F":
+                   icon = R.drawable.stone_forbidden;
                     break;
                 default:
                     break;
-            }
-
+            }//end switch
         return icon;
-
-    }//setButtonIcon
+    }//setButtonIcon(String, int)
 
 }//end GridViewCustomAdapter
