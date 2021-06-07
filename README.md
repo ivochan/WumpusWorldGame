@@ -38,9 +38,9 @@ In questa versione del gioco √® stata prevista, per il giocatore, la possibilit√
     - about
       - ~~feedback~~
       - ~~team~~
-  - ~~tutorial~~ (due pagine)
-    - personaggi
-    - comandi
+  - tutorial (due pagine)
+    - ~~personaggi~~
+    - ~~comandi~~
   - ~~informazioni di gioco~~
   - punteggi:
     - record

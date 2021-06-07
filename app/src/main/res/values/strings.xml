@@ -7,7 +7,8 @@
     <!-- Main Menu activity titles -->
     <string name="game_info_title">Game Information</string>
     <string name="game_settings_title">Settings</string>
-    <string name="main_tutorial_title">Tutorial</string>
+    <string name="main_tutorial_title">Tutorial : Storia</string>
+    <string name="main_tutorial_controls_title">Tutorial : Comandi</string>
     <string name="score_title">Score</string>
     <!-- MainActivity -->
     <string name="game_title">Hunt the Wumpus...or not?</string>
@@ -77,6 +78,19 @@
     <string name="wumpus_danger_intro">Scansa le trappole celate da cumuli di foglie,</string>
     <string name="wumpus_mission_intro">cerca di colpire il cacciatore con un masso, non appena pensi sia vicino</string>
     <string name="wumpus_award_intro">oppure trova una via di fuga prima che ti raggiunga!</string>
+    <string name="next">next</string>
+    <!-- MainTutorialControlsActivity -->
+    <string name="tutorial2_title">Ecco i comandi di gioco!</string>
+    <string name="tutorial2_intro">Questa è la tua plancia dei comandi:</string>
+    <string name="controls_description">Potrai muoverti sulla mappa una casella per volta.
+        \nIndica la direzione in cui vuoi andare premendo una delle frecce.</string>
+    <string name="controls_intro">Esplora il terreno di gioco, muovendoti tramite i tasti direzionali:</string>
+    <string name="up_down_control_description">Usa queste due frecce per andare SOPRA oppure SOTTO.</string>
+    <string name="left_right_control_description">Usa le frecce DESTRA e SINISTRA per muoverti in queste direzioni.</string>
+    <string name="hit_description">Utilizza questo pulsante per colpire, scegliendo poi la direzione in cui credi si trovi il nemico!</string>
+    <string name="suggest_description">Man mano che proseguirai nell\'esplorazione della mappa, ti verranno mostrati dei suggerimenti, che ti forniranno
+    delle informazioni sull\'ambiente circostante. Presta attenzione!</string>
+    <string name="back">back</string>
 
     <!-- ScoreActivity -->
     <string name="top_score_title">High Score</string>
@@ -150,7 +164,6 @@
     <string name="up_button">up button icon</string>
     <string name="right_button">right button icon</string>
     <string name="down_button">down button icon</string>
-    <string name="next">next</string>
 
     <!-- other -->
 

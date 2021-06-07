@@ -1,6 +1,7 @@
 package com.example.wumpusworldgame.mainMenuItems.tutorial;
 //serie di import
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.wumpusworldgame.R;
@@ -29,6 +30,7 @@ public class MainTutorialControlsActivity extends AppCompatActivity {
 
         //##### inizializzazioni #####
 
+        back_button = findViewById(R.id.previous_page_button);
 
         //scelta della clip audio
         //mp = MediaPlayer.create(HeroSide.this,R.raw.the_good_fight);
@@ -38,6 +40,13 @@ public class MainTutorialControlsActivity extends AppCompatActivity {
         //verifica dell'esecuzione della traccia audio
         //Utility.musicPlaying(mp, this);
 
+        //##### gestione del pulsante indietro #####
+        back_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
 
     }//onCreate(Bundle)
 

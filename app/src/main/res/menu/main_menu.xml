@@ -7,11 +7,10 @@
         android:id="@+id/item_tutorial"
         android:title="@string/ItemTutorial"/>
     <item
-        android:id="@+id/item_settings"
-        android:title="@string/ItemSettings"/>
-    <item
         android:id="@+id/item_score"
         android:title="@string/ItemScore"/>
-
+    <item
+        android:id="@+id/item_settings"
+        android:title="@string/ItemSettings"/>
 </menu>
 
