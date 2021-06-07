@@ -7,7 +7,9 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.GridView;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -45,6 +47,12 @@ public class WumpusSide extends AppCompatActivity {
     private ArrayList<String> data = new ArrayList<>();
     //dati della matrice di gioco
     private ArrayList<String> game_data = new ArrayList<String>();
+    //##### pulsanti del controller di gioco #####
+    private ImageButton hit_button;
+    private ImageButton up_button;
+    private ImageButton down_button;
+    private ImageButton left_button;
+    private ImageButton right_button;
 
     /** metodo onCreate(Bunde): void
      * ACTIVITY CREATA
@@ -81,6 +89,15 @@ public class WumpusSide extends AppCompatActivity {
 
         //##### schermata di caricamento #####
         Utility.showLoadingScreen(this, getLayoutInflater());
+
+        //##### inizializzazioni dei pulsanti #####
+
+        hit_button = findViewById(R.id.imageButtonHIT);
+        up_button = findViewById(R.id.imageButtonUP);
+        down_button = findViewById(R.id.imageButtonDOWN);
+        left_button = findViewById(R.id.imageButtonLEFT);
+        right_button = findViewById(R.id.imageButtonRIGHT);
+
 
         //##### schermata di gioco #####
 
@@ -125,6 +142,47 @@ public class WumpusSide extends AppCompatActivity {
 
         //verifica dell'esecuzione della traccia audio
         Utility.musicPlaying(mp, this);
+
+
+        //##### gestione dei pulsanti #####
+
+        //pulsante HIT
+        hit_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        //pulsante UP
+        up_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        //pulsante DOWN
+        down_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        //pulsante LEFT
+        left_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        //pulsante RIGHT
+        right_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+
 
     }//onCreate(Bundle)
 

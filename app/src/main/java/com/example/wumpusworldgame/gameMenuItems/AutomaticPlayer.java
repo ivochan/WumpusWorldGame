@@ -1,4 +1,4 @@
-package com.example.wumpusworldgame.gameMenuItems.gameTutorial;
+package com.example.wumpusworldgame.gameMenuItems;
 //serie di import
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -8,7 +8,6 @@ import com.example.wumpusworldgame.R;
 import com.example.wumpusworldgame.gameActivities.GridViewCustomAdapter;
 import java.util.ArrayList;
 import game.structure.map.GameMap;
-
 /** class AutomaticPlayer
  * activity che realizza la risoluzione della partita corrente
  * con il giocatore automatico

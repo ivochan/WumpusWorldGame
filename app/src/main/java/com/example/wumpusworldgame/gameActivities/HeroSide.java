@@ -7,8 +7,10 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.GridView;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceManager;
@@ -45,11 +47,11 @@ public class HeroSide extends AppCompatActivity {
     //dati della matrice di gioco
     private ArrayList<String> game_data = new ArrayList<String>();
     //##### pulsanti del controller di gioco #####
-    private Button hit_button;
-    private Button up_button;
-    private Button down_button;
-    private Button left_button;
-    private Button right_button;
+    private ImageButton hit_button;
+    private ImageButton up_button;
+    private ImageButton down_button;
+    private ImageButton left_button;
+    private ImageButton right_button;
 
     /** metodo onCreate(Bunde): void
      * ACTIVITY CREATA
@@ -65,6 +67,8 @@ public class HeroSide extends AppCompatActivity {
 
         //si mostra la schermata di gioco
         setContentView(R.layout.activity_hero_side);
+
+        //##### inizializzazioni #####
 
         //si memorizza l'intent di questa activity
         starterIntent = getIntent();
@@ -85,6 +89,14 @@ public class HeroSide extends AppCompatActivity {
 
         //##### schermata di caricamento #####
         Utility.showLoadingScreen(this, getLayoutInflater());
+
+        //##### inizializzazioni dei pulsanti #####
+
+        hit_button = findViewById(R.id.imageButtonHIT);
+        up_button = findViewById(R.id.imageButtonUP);
+        down_button = findViewById(R.id.imageButtonDOWN);
+        left_button = findViewById(R.id.imageButtonLEFT);
+        right_button = findViewById(R.id.imageButtonRIGHT);
 
         //##### schermata di gioco #####
 
@@ -130,55 +142,42 @@ public class HeroSide extends AppCompatActivity {
         Utility.musicPlaying(mp, this);
 
         //##### gestione dei pulsanti #####
-/*
-        //verifica pressione del pulsante HIT
-        hit_button.setOnClickListener(new View.OnClickListener(){
-            //il pulsante e' stato premuto
+
+        //pulsante HIT
+        hit_button.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View v) {
 
-
-            }//onClick(View)
-        });//setOnClickListener(View.onClickListener()
-
-        //verifica pressione del pulsante DOWN
-        down_button.setOnClickListener(new View.OnClickListener(){
-            //il pulsante e' stato premuto
+            }
+        });
+        //pulsante UP
+        up_button.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View v) {
 
-            }//onClick(View)
-        });//setOnClickListener(View.onClickListener()
-
-        //verifica pressione del pulsante UP
-        up_button.setOnClickListener(new View.OnClickListener(){
-            //il pulsante e' stato premuto
+            }
+        });
+        //pulsante DOWN
+        down_button.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View v) {
 
-            }//onClick(View)
-        });//setOnClickListener(View.onClickListener()
-
-        //verifica pressione del pulsante LEFT
-        left_button.setOnClickListener(new View.OnClickListener(){
-            //il pulsante e' stato premuto
+            }
+        });
+        //pulsante LEFT
+        left_button.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View v) {
 
-            }//onClick(View)
-        });//setOnClickListener(View.onClickListener()
-
-        //verifica pressione del pulsante RIGHT
-        right_button.setOnClickListener(new View.OnClickListener(){
-            //il pulsante e' stato premuto
+            }
+        });
+        //pulsante RIGHT
+        right_button.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View v) {
 
-            }//onClick(View)
-        });//setOnClickListener(View.onClickListener()
-
-*/
-
+            }
+        });
 
 
     }//onCreate(Bundle)

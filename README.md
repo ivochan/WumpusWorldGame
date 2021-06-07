@@ -85,8 +85,8 @@ In questa versione del gioco è stata prevista, per il giocatore, la possibilit�
     - ~~nuova partita, (la modalità è quella a cui si sta giocando);~~
     - risolvi partita (giocatore automatico);
     - tutorial della modalità (con comandi di gioco);
-- inserire le icone nella mappa di gioco;
-- visualizzare le icone nella mappa di esplorazione;
+- ~~inserire le icone nella mappa di gioco;~~
+- ~~visualizzare le icone nella mappa di esplorazione;~~
 
 
 
