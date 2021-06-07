@@ -10,6 +10,9 @@
     <string name="main_tutorial_title">Tutorial : Storia</string>
     <string name="main_tutorial_controls_title">Tutorial : Comandi</string>
     <string name="score_title">Score</string>
+    <!-- Game menu activity titles -->
+    <string name="hero_mode_tutorial_title">Modalità Avventuriero : Tutorial</string>
+    <string name="wumpus_mode_tutorial_title">Modalità Wumpus : Tutorial</string>
     <!-- MainActivity -->
     <string name="game_title">Hunt the Wumpus...or not?</string>
     <string name="game_intro">Hi...iiiiiih...Uh... Hello!
@@ -145,6 +148,25 @@
     <string name="cancel">cancel</string>
     <string name="confirm">confirm</string>
     <string name="email_subject">WUMPUS WORLD GAME application feedback</string>
+
+    <!-- HeroModeTutorial -->
+    <string name="hero_tutorial_intro">Eccoti, coraggioso avventuriero!</string>
+    <string name="hero_mode_description">Ormai ci siamo, stai per addentrarti
+        nel bosco alla ricerca dei tesori del Wumpus... Riuscirai a sconfiggere
+        questo terribile mostro?</string>
+    <string name="controls_title">Comandi di gioco</string>
+    <string name="controls_summary">Usa i tasti direzionali (le frecce) per muoverti nel terreno di
+        gioco ed il tasto centrale per colpire il mostro, indicando la direzione in cui scagliare
+        la freccia.</string>
+    <string name="hero_play_description">Mi raccomando, fai attenzione a non cadere nei fossati,
+        evita i percorsi senza uscita e non farti uccidere dal Wumpus.</string>
+    <!-- Wumpus Mode Tutorial -->
+    <string name="wumpus_tutorial_intro">Eccoti, creatura misteriosa!</string>
+    <string name="wumpus_mode_description">Fruscii, rumori, rami spezzati...
+        Qualcuno ti sta dando la caccia, povero Wumpus. \nPresto, scappa!</string>
+    <string name="wumpus_play_description">Ricorda...Cerca di non finire in trappola, se puoi
+        elimina il cacciatore che ti sta inseguendo e trova una via di fuga che ti porti in salvo.</string>
+
     <!-- Images -->
     <string name="dark_forest">dark_forest_main_activity_image</string>
     <string name="dark_night">creepy_night_game_info_activity</string>

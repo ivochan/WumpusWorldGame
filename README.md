@@ -80,13 +80,14 @@ In questa versione del gioco è stata prevista, per il giocatore, la possibilit�
   - ordinando i dieci punteggi in ordine decrescente
   - tenendo memorizzato l'ultimo nome del giocatore
 - strutturare il menù delle schermate di gioco:
-  - definire un layout per entrambe le modalità,
   - implementare le seguenti voci:
     - ~~nuova partita, (la modalità è quella a cui si sta giocando);~~
     - risolvi partita (giocatore automatico);
-    - tutorial della modalità (con comandi di gioco);
+    - ~~tutorial della modalità (con comandi di gioco)~~;
 - ~~inserire le icone nella mappa di gioco;~~
 - ~~visualizzare le icone nella mappa di esplorazione;~~
+- ~~definizione del controller di gioco per entrambe le modalità;~~
+- realizzazione di una classe controller che comunichi con il backend per effettuare le azioni di gioco;
 
 
 

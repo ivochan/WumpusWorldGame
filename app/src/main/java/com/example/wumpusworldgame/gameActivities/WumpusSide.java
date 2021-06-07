@@ -16,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceManager;
 
 import com.example.wumpusworldgame.R;
+import com.example.wumpusworldgame.gameMenuItems.gameTutorials.WumpusModeTutorial;
 import com.example.wumpusworldgame.services.Utility;
 import java.util.ArrayList;
 import game.structure.map.GameMap;
@@ -318,18 +319,11 @@ public class WumpusSide extends AppCompatActivity {
             //TUTORIAL
             case R.id.item_game_tutorial:
                 //creazione dell'intent
-                //TODO
-                break;
-            //PUNTEGGI
-            case R.id.item_score:
-                //TODO gestire il ritorno alla activity corrente
-                //creazione dell'intent
-                //intent = new Intent(this, ScoreActivity.class);
-                //avvio dell'activity corrispondente
-                //startActivity(intent);
-                //viene aperta l'activity
-                //return true;
-                break;
+                intent = new Intent(this, WumpusModeTutorial.class);
+                //si avvia l'activity corrispondente
+                startActivity(intent);
+                //si interrompe il metodo
+                return true;
             default:
                 //caso di default
                 return super.onOptionsItemSelected(item);

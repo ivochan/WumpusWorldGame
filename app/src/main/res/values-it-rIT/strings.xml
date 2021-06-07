@@ -11,10 +11,13 @@
     <string name="main_tutorial_title">Tutorial : Storia</string>
     <string name="main_tutorial_controls_title">Tutorial : Comandi</string>
     <string name="score_title">Punteggi</string>
+    <!-- Game menu activity titles -->
+    <string name="hero_mode_tutorial_title">Modalità Avventuriero : Tutorial</string>
+    <string name="wumpus_mode_tutorial_title">Modalità Wumpus : Tutorial</string>
     <!-- game menu options (Hero/Wumpus Side) -->
     <string name="ItemNewGame">Nuova partita</string>
     <string name="ItemSolveGame">Risolvi</string>
-    <string name="ItemGameTutorial">Comandi</string>
+    <string name="ItemGameTutorial">Comandi di gioco</string>
     <!-- MainActivity -->
     <string name="game_title">Insegui il Wumpus... Oppure no?!?</string>
     <string name="game_intro">
@@ -148,6 +151,24 @@
     <string name="score_send_message">Hey, sfidami al gioco del mondo del Wumpus!
         \nQuesto è il mio punteggio:\n</string>
 
+    <!-- HeroModeTutorial -->
+    <string name="hero_tutorial_intro">Eccoti, coraggioso avventuriero!</string>
+    <string name="hero_mode_description">Ormai ci siamo, stai per addentrarti
+        nel bosco alla ricerca dei tesori del Wumpus...
+        \nRiuscirai a sconfiggere questo terribile mostro?</string>
+    <string name="controls_title">Comandi di gioco</string>
+    <string name="controls_summary">Usa i tasti direzionali (le frecce) per muoverti nel terreno di
+        gioco ed il tasto centrale per colpire il mostro, indicando la direzione in cui scagliare
+        la freccia.</string>
+    <string name="hero_play_description">Mi raccomando, fai attenzione a non cadere nei fossati,
+        evita i percorsi senza uscita e non farti uccidere dal Wumpus.</string>
+    <!-- Wumpus Mode Tutorial -->
+    <string name="wumpus_tutorial_intro">Eccoti, creatura misteriosa!</string>
+    <string name="wumpus_mode_description">Fruscii, rumori, rami spezzati...
+        Qualcuno ti sta dando la caccia, povero Wumpus. \nPresto, scappa!</string>
+    <string name="wumpus_play_description">Ricorda...Cerca di non finire in trappola, se puoi
+        elimina il cacciatore che ti sta inseguendo e trova una via di fuga che ti porti in salvo.</string>
+
     <!-- Immagini -->
     <string name="dark_forest">foresta_oscura_immagine_main_activity</string>
     <string name="dark_night">notte_tetra_game_info_activity</string>
@@ -167,6 +188,7 @@
     <string name="up_button">up button icon</string>
     <string name="right_button">right button icon</string>
     <string name="down_button">down button icon</string>
+
 
     <!-- altro -->
 

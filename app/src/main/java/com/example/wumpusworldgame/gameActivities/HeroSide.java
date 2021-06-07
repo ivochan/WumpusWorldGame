@@ -8,13 +8,13 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceManager;
 import com.example.wumpusworldgame.R;
+import com.example.wumpusworldgame.gameMenuItems.gameTutorials.HeroModeTutorial;
 import com.example.wumpusworldgame.services.Utility;
 import java.util.ArrayList;
 import game.structure.map.GameMap;
@@ -314,18 +314,11 @@ public class HeroSide extends AppCompatActivity {
             //TUTORIAL
             case R.id.item_game_tutorial:
                 //creazione dell'intent
-                //TODO
-                break;
-            //PUNTEGGI
-            case R.id.item_score:
-                //TODO gestire il ritorno alla activity corrente
-                //creazione dell'intent
-                //intent = new Intent(this, ScoreActivity.class);
-                //avvio dell'activity corrispondente
-                //startActivity(intent);
-                //viene aperta l'activity
-                //return true;
-                break;
+                intent = new Intent(this, HeroModeTutorial.class);
+                //si avvia l'istanza dell'activity corrispondente
+                startActivity(intent);
+                //si interrompe il metodo corrente con successo
+                return true;
             default:
                 //caso di default
                 return super.onOptionsItemSelected(item);

@@ -48,6 +48,15 @@
             android:name=".mainMenuItems.ScoreActivity"
             android:label="@string/score_title"
             android:parentActivityName=".appLaunch.MainActivity" />
+        <activity
+            android:name=".gameMenuItems.gameTutorials.HeroModeTutorial"
+            android:label="@string/hero_mode_tutorial_title"
+            android:parentActivityName=".gameActivities.HeroSide" />
+        <activity
+            android:name=".gameMenuItems.gameTutorials.WumpusModeTutorial"
+            android:label="@string/wumpus_mode_tutorial_title"
+            android:parentActivityName=".gameActivities.WumpusSide" />
     </application>
+
 
 </manifest>
