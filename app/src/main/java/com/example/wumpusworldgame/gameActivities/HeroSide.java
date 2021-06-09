@@ -1,6 +1,5 @@
 package com.example.wumpusworldgame.gameActivities;
 //serie di import
-import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.MediaPlayer;
@@ -24,6 +23,8 @@ import game.session.controller.Controller;
 import game.session.controller.Direction;
 import game.structure.map.GameMap;
 import game.structure.map.MapConfiguration;
+import game.structure.text.GameTranslations;
+
 /** class HeroSide
  * classe che implementa la modalita' di gioco in cui il personaggio
  * giocabile e' l'Avventuriero.
@@ -149,6 +150,7 @@ public class HeroSide extends AppCompatActivity {
         //verifica dell'esecuzione della traccia audio
         Utility.musicPlaying(mp, this);
 
+        GameController.setGameActivity(this);
         //##### gestione dei pulsanti #####
 
         //pulsante HIT

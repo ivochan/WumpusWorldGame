@@ -187,12 +187,20 @@ public class GridViewCustomAdapter extends BaseAdapter {
                 case "S" :
                     icon = R.drawable.grass_safe;
                     break;
+                //OBSERVED
+                case "O":
+                    icon = R.drawable.foot_path;
+                    break;
                 default:
                     break;
             }//end switch
         return icon;
     }//setButtonIcon(String, int)
 
+    /**
+     *
+     * @return
+     */
     public static Activity getmActivity() {
         return mActivity;
     }

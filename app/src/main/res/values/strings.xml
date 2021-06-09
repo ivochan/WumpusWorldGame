@@ -187,8 +187,26 @@
     <string name="right_button">right button icon</string>
     <string name="down_button">down button icon</string>
 
-    <!-- other -->
-
+    <!-- Game Messages : HERO SIDE -->
+    <string name="hero_game_intro">\nAndiamo a caccia del Wumpus e dei suoi tesori.</string>
+    <string name="hero_enemy">Ahi ahi, sei stato ferito dal Wumpus!</string>
+    <string name="hero_award">Hai trovato il tesoro del Wumpus!</string>>
+    <string name="hero_danger">Sei caduto nella fossa piena d\'acqua...</string>
+    <string name="hero_enemy_sense">Pufff! Che puzza...Il mostro deve essere vicino!</string>
+    <string name="hero_danger_sense">Brrr, che aria fredda che arriva...</string>
+    <!-- Game Messages : WUMPUS SIDE -->
+    <string name="wumpus_game_intro">Benvenuto Wumpus!\nScappa più veloce che puoi.</string>
+    <string name="wumpus_enemy">Oh no, il cacciatore ti ha colpito!</string>
+    <string name="wumpus_award">Hai trovato una via di fuga, sbrigati!</string>
+    <string name="wumpus_danger">Sei caduto in trappola...</string>
+    <string name="wumpus_enemy_sense">Swiiiish...si muovono le foglie...c\'è qualcuno che ti osserva...</string>
+    <string name="wumpus_danger_sense">Crick, crock...Il terreno è instabile.</string>
+    <!-- Game Messages : BOTH sides -->
+    <string name="wrong_move">Comando non valido!\nRipeti la mossa...</string>
+    <string name="safe_cell">Tutto apposto all\'orizzonte...</string>
+    <string name="forbidden_cell">Il passaggio e\' bloccato da un sasso.\Ripeti la mossa!</string>
+    <string name="looser">Hai perso :(</string>
+    <string name="winner">Hai vinto !!! =)</string>
 
 
 </resources>
