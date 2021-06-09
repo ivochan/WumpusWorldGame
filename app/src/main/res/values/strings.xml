@@ -204,9 +204,10 @@
     <!-- Game Messages : BOTH sides -->
     <string name="wrong_move">Comando non valido...\nRipeti la mossa!</string>
     <string name="safe_cell">Tutto apposto all\'orizzonte...</string>
-    <string name="forbidden_cell">Il passaggio e\' bloccato da un sasso.\Ripeti la mossa!</string>
+    <string name="forbidden_cell">Il passaggio e\' bloccato da un sasso.\nRipeti la mossa!</string>
     <string name="looser">Hai perso :(</string>
     <string name="winner">Hai vinto !!! =)</string>
+    <string name="end_game">Partita terminata... Gioca ancora, dai!</string>
 
 
 </resources>

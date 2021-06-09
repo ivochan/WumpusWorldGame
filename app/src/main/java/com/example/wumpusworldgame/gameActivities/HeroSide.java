@@ -158,6 +158,7 @@ public class HeroSide extends AppCompatActivity {
         hit_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
             }
         });
         //pulsante UP
@@ -171,6 +172,9 @@ public class HeroSide extends AppCompatActivity {
                     adapter = new GridViewCustomAdapter(GridViewCustomAdapter.getmActivity(), data);
                     //oggetto che permette di visualizzare i dati
                     list.setAdapter(adapter);
+                }
+                else {
+                    game_message.setText(R.string.end_game);
                 }
             }
         });
@@ -186,6 +190,9 @@ public class HeroSide extends AppCompatActivity {
                     //oggetto che permette di visualizzare i dati
                     list.setAdapter(adapter);
                 }
+                else {
+                    game_message.setText(R.string.end_game);
+                }
             }
         });
         //pulsante LEFT
@@ -200,6 +207,9 @@ public class HeroSide extends AppCompatActivity {
                     //oggetto che permette di visualizzare i dati
                     list.setAdapter(adapter);
                 }
+                else {
+                    game_message.setText(R.string.end_game);
+                }
             }
         });
         //pulsante RIGHT
@@ -213,6 +223,9 @@ public class HeroSide extends AppCompatActivity {
                     adapter = new GridViewCustomAdapter(GridViewCustomAdapter.getmActivity(), data);
                     //oggetto che permette di visualizzare i dati
                     list.setAdapter(adapter);
+                }
+                else {
+                    game_message.setText(R.string.end_game);
                 }
             }
         });

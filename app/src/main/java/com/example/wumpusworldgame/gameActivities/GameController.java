@@ -94,13 +94,14 @@ public class GameController {
             //controllo sullo stato
             if (cs.equals(CellStatus.ENEMY)) {
                 //il pg e' stato ucciso dal nemico
-
+                //si aggiorna la posizione
+                PlayableCharacter.setPGposition(cell_pos);
                 //si aggiunge alla mappa di esplorazione
                 ge.getMapCell(cell_pos[0], cell_pos[1]).
                         copyCellSpecs(gm.getMapCell(cell_pos[0], cell_pos[1]));
                 return 1;
             }//fi
-            if (cs.equals(CellStatus.FORBIDDEN)) {
+            else if (cs.equals(CellStatus.FORBIDDEN)) {
                 //questa cella e' vietata perche' e' un sasso
                 //si aggiunge alla mappa di esplorazione
                 ge.getMapCell(cell_pos[0], cell_pos[1]).
@@ -108,23 +109,25 @@ public class GameController {
                 //il pg rimane dove si trova
                 return -1;
             }//fi
-            if (cs.equals(CellStatus.AWARD)) {
+            else if (cs.equals(CellStatus.AWARD)) {
                 //il pg vince
-
+                //si aggiorna la posizione
+                PlayableCharacter.setPGposition(cell_pos);
                 //si aggiunge alla mappa di esplorazione
                 ge.getMapCell(cell_pos[0], cell_pos[1]).
                         copyCellSpecs(gm.getMapCell(cell_pos[0], cell_pos[1]));
                 return 2;
             }//fi
-            if (cs.equals(CellStatus.DANGER)) {
+            else if (cs.equals(CellStatus.DANGER)) {
                 //il pg e' caduto nella trappola
-
+                //si aggiorna la posizione
+                PlayableCharacter.setPGposition(cell_pos);
                 //si aggiunge alla mappa di esplorazione
                 ge.getMapCell(cell_pos[0], cell_pos[1]).
                         copyCellSpecs(gm.getMapCell(cell_pos[0], cell_pos[1]));
                 return 1;
             }//fi
-            if (cs.equals(CellStatus.SAFE)) {
+            else { //CellStatus.SAFE
                     //il pg si trova in una cella libera
                     //la cella in cui si trovava prima il pg si segna come visitata
                     ge.getMapCell(pg_pos[0], pg_pos[1]).setCellStatus(CellStatus.OBSERVED);
@@ -137,10 +140,8 @@ public class GameController {
                     //il contenuto di questa cella nella mappa di esplorazione e' il pg
                     ge.getMapCell(cell_pos[0], cell_pos[1]).setCellStatus(CellStatus.PG);
                     return 0;
-
             }
         }
-
         //indici di mossa non validi
         return -2;
     }//movePG(Direction, GameMap, GameMap)
@@ -177,9 +178,9 @@ public class GameController {
                 //la cella in cui si e' mosso il pg contiene il nemico oppure un pericolo
                 Cell c = gm.getMapCell(pg_pos[0], pg_pos[1]);
                 //info sullo stato della cella
-                CellStatus s = c.getCellStatus();
+                CellStatus cs = c.getCellStatus();
                 //stampa del messaggio se nemico o pericolo
-                if(s.equals(CellStatus.ENEMY)){
+                if(cs.equals(CellStatus.ENEMY)){
                     //nemico
                     if(currentActivity instanceof HeroSide){
                         info = currentActivity.getResources().getString(R.string.hero_enemy);
@@ -197,6 +198,8 @@ public class GameController {
                         info = currentActivity.getResources().getString(R.string.wumpus_danger);
                     }
                 }
+                
+
                 info += "\n"+currentActivity.getString(R.string.looser);
                 //fine della partita
                 Starter.setGameStart(false);
