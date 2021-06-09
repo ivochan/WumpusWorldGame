@@ -1,4 +1,4 @@
-package com.example.wumpusworldgame.gameActivities;
+package com.example.wumpusworldgame.gameActivities.adapter;
 //serie di import
 import java.util.ArrayList;
 import android.app.Activity;
@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import com.example.wumpusworldgame.R;
+import com.example.wumpusworldgame.gameActivities.HeroSide;
+
 /** class GridViewCustomAdapter
  * questa classe serve per visualizzare i dati nella
  * GridView che ha consentito di realizzare la mappa nella schermata di gioco
@@ -49,6 +51,8 @@ public class GridViewCustomAdapter extends BaseAdapter {
         inflater = (LayoutInflater) activity
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }//end GridViewCustomAdapter(Activity, ArrayList)
+
+
 
     //##### metodi #####
 
@@ -188,5 +192,10 @@ public class GridViewCustomAdapter extends BaseAdapter {
             }//end switch
         return icon;
     }//setButtonIcon(String, int)
+
+    public static Activity getmActivity() {
+        return mActivity;
+    }
+
 
 }//end GridViewCustomAdapter

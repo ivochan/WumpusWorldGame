@@ -16,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceManager;
 
 import com.example.wumpusworldgame.R;
+import com.example.wumpusworldgame.gameActivities.adapter.GridViewCustomAdapter;
 import com.example.wumpusworldgame.gameMenuItems.gameTutorials.WumpusModeTutorial;
 import com.example.wumpusworldgame.services.Utility;
 import java.util.ArrayList;
