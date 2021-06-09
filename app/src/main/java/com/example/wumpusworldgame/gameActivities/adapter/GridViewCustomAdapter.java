@@ -102,7 +102,7 @@ public class GridViewCustomAdapter extends BaseAdapter {
         //fornita dall'indice ricevuto come parametro
         String cell_type = items.get(position);
         //il testo del button viene assegnato prelevando il contenuto dell'item
-        tv.setText(cell_type);
+        //tv.setText(cell_type);
         //si seleziona l'immagine di ogni pulsante
         int icon = setButtonIcon(cell_type);
         //si imposta l'immagine di ogni pulsante
@@ -183,12 +183,8 @@ public class GridViewCustomAdapter extends BaseAdapter {
                 case "F":
                    icon = R.drawable.stone_forbidden;
                     break;
-                //SAFE
-                case "S" :
-                    icon = R.drawable.grass_safe;
-                    break;
-                //OBSERVED
-                case "O":
+                //SAFE--> OBSERVED
+                case "O" :
                     icon = R.drawable.foot_path;
                     break;
                 default:

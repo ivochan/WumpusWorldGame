@@ -19,11 +19,10 @@ import com.example.wumpusworldgame.gameMenuItems.gameTutorials.HeroModeTutorial;
 import com.example.wumpusworldgame.services.Utility;
 import java.util.ArrayList;
 
-import game.session.controller.Controller;
+import game.session.configuration.Starter;
 import game.session.controller.Direction;
 import game.structure.map.GameMap;
 import game.structure.map.MapConfiguration;
-import game.structure.text.GameTranslations;
 
 /** class HeroSide
  * classe che implementa la modalita' di gioco in cui il personaggio
@@ -77,6 +76,8 @@ public class HeroSide extends AppCompatActivity {
         setContentView(R.layout.activity_hero_side);
 
         //##### inizializzazioni #####
+
+        Starter.setGameStart(true);
 
         //si memorizza l'intent di questa activity
         starterIntent = getIntent();
@@ -163,48 +164,56 @@ public class HeroSide extends AppCompatActivity {
         up_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //si realizza la mossa, aggiornando la matrice di esplorazione
-               data = GameController.makePGmove(Direction.UP,gm,em,game_message,data);
-                //si aggiorna l''adapter
-                adapter = new GridViewCustomAdapter(GridViewCustomAdapter.getmActivity(),data);
-                //oggetto che permette di visualizzare i dati
-                list.setAdapter(adapter);
+                if(Starter.getGameStart()) {
+                    //si realizza la mossa, aggiornando la matrice di esplorazione
+                    data = GameController.makePGmove(Direction.UP, gm, em, game_message, data);
+                    //si aggiorna l''adapter
+                    adapter = new GridViewCustomAdapter(GridViewCustomAdapter.getmActivity(), data);
+                    //oggetto che permette di visualizzare i dati
+                    list.setAdapter(adapter);
+                }
             }
         });
         //pulsante DOWN
         down_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //si realizza la mossa, aggiornando la matrice di esplorazione
-                data = GameController.makePGmove(Direction.DOWN,gm,em,game_message,data);
-                //si aggiorna l''adapter
-                adapter = new GridViewCustomAdapter(GridViewCustomAdapter.getmActivity(),data);
-                //oggetto che permette di visualizzare i dati
-                list.setAdapter(adapter);
+                if(Starter.getGameStart()) {
+                    //si realizza la mossa, aggiornando la matrice di esplorazione
+                    data = GameController.makePGmove(Direction.DOWN, gm, em, game_message, data);
+                    //si aggiorna l''adapter
+                    adapter = new GridViewCustomAdapter(GridViewCustomAdapter.getmActivity(), data);
+                    //oggetto che permette di visualizzare i dati
+                    list.setAdapter(adapter);
+                }
             }
         });
         //pulsante LEFT
         left_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //si realizza la mossa, aggiornando la matrice di esplorazione
-                data = GameController.makePGmove(Direction.LEFT,gm,em,game_message,data);
-                //si aggiorna l''adapter
-                adapter = new GridViewCustomAdapter(GridViewCustomAdapter.getmActivity(),data);
-                //oggetto che permette di visualizzare i dati
-                list.setAdapter(adapter);
+                if(Starter.getGameStart()) {
+                    //si realizza la mossa, aggiornando la matrice di esplorazione
+                    data = GameController.makePGmove(Direction.LEFT, gm, em, game_message, data);
+                    //si aggiorna l''adapter
+                    adapter = new GridViewCustomAdapter(GridViewCustomAdapter.getmActivity(), data);
+                    //oggetto che permette di visualizzare i dati
+                    list.setAdapter(adapter);
+                }
             }
         });
         //pulsante RIGHT
         right_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //si realizza la mossa, aggiornando la matrice di esplorazione
-                data = GameController.makePGmove(Direction.RIGHT,gm,em,game_message,data);
-                //si aggiorna l''adapter
-                adapter = new GridViewCustomAdapter(GridViewCustomAdapter.getmActivity(),data);
-                //oggetto che permette di visualizzare i dati
-                list.setAdapter(adapter);
+                if(Starter.getGameStart()) {
+                    //si realizza la mossa, aggiornando la matrice di esplorazione
+                    data = GameController.makePGmove(Direction.RIGHT, gm, em, game_message, data);
+                    //si aggiorna l''adapter
+                    adapter = new GridViewCustomAdapter(GridViewCustomAdapter.getmActivity(), data);
+                    //oggetto che permette di visualizzare i dati
+                    list.setAdapter(adapter);
+                }
             }
         });
 

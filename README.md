@@ -87,13 +87,21 @@ In questa versione del gioco è stata prevista, per il giocatore, la possibilit�
 - ~~inserire le icone nella mappa di gioco;~~
 - ~~visualizzare le icone nella mappa di esplorazione;~~
 - ~~definizione del controller di gioco per entrambe le modalità;~~
-- realizzazione di una classe controller che comunichi con il backend per effettuare le azioni di gioco;
+- ~~realizzazione di una classe controller che comunichi con il backend per effettuare le azioni di gioco;~~
+- introdurre le stringhe che contengono le informazioni sullo stato della partita;
+- la classe controller dovrà avere le seguenti funzionalità:
+  - metodo che preleva l'activity corrente per poter accedere alle risorse;
+  - metodo che preleva la mossa fatta dal giocatore;
+  - metodo che esegue la mossa scelta dal giocatore;
+  - metodo che si occupa di interrompere la partita quando si perde o si vince;
+  - 
 - dark mode:
   - modificare colore action bar;
   - creare stile della dialog;
 - ~~togliere le iniziali del contenuto delle celle nella mappa;~~
 - verificare che ogni button della mappa abbia la stessa dimensione;
 - ~~correggere bug sulla clip audio della mainActivity alla disattivazione degli effetti sonori~~;
+- 
 
 
 
