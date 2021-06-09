@@ -88,6 +88,12 @@ In questa versione del gioco è stata prevista, per il giocatore, la possibilit�
 - ~~visualizzare le icone nella mappa di esplorazione;~~
 - ~~definizione del controller di gioco per entrambe le modalità;~~
 - realizzazione di una classe controller che comunichi con il backend per effettuare le azioni di gioco;
+- dark mode:
+  - modificare colore action bar;
+  - creare stile della dialog;
+- togliere le iniziali del contenuto delle celle nella mappa;
+- verificare che ogni button della mappa abbia la stessa dimensione;
+- ~~correggere bug sulla clip audio della mainActivity alla disattivazione degli effetti sonori~~;
 
 
 

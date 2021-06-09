@@ -89,6 +89,10 @@ public class MainActivity extends AppCompatActivity {
         //dichiarazione dell'activity che realizza la modalita' di gioco del wumpus
         wumpus_game = new Intent(MainActivity.this, WumpusSide.class);
 
+
+        //verifica dell'esecuzione della traccia audio
+        Utility.musicPlaying(mp, this);
+
         //##### gestione dei pulsanti #####
 
         //verifica pressione del pulsante eroe
@@ -111,9 +115,6 @@ public class MainActivity extends AppCompatActivity {
             }//onClick
         });
 
-        //verifica dell'esecuzione della traccia audio
-        Utility.musicPlaying(mp, this);
-
     }//onCreate()
 
     //##### metodi per la gestione dell'activity #####
@@ -129,8 +130,6 @@ public class MainActivity extends AppCompatActivity {
         super.onStart();
         //si anima il testo
         animatedText(typeWriter);
-        //si avvia la clip audio
-        mp.start();
     }//onStart()
 
     /** metodo onResume():void
@@ -140,6 +139,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         //si invoca il metodo della super classe
         super.onResume();
+        //verifica dell'esecuzione della traccia audio
+        Utility.musicPlaying(mp, this);
     }//onResume()
 
     /** metodo onPause(): void
