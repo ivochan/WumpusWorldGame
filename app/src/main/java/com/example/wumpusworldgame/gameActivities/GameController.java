@@ -12,6 +12,8 @@ import game.structure.cell.Cell;
 import game.structure.cell.CellStatus;
 import game.structure.elements.PlayableCharacter;
 import game.structure.map.GameMap;
+import game.structure.text.GameMessages;
+
 /** class GameController
  * questa classe si occupa di collegare il front-end con il back-end
  * implementando le effettive funzionalita' dell'applicazione,
@@ -22,8 +24,6 @@ public class GameController {
     //##### attributi di classe #####
     //activity corrente
     private static Activity currentActivity;
-
-    private boolean end_game=false;
 
     /** metodo setGameActivity(Activity): void
      * questo metodo preleva l'activity da cui e' stato invocato
@@ -225,9 +225,11 @@ public class GameController {
      * 				 all'interno della mappa di gioco;
      * @param gm: GameMap, mappa di gioco;
      */
-    private static String checkEnvironmentSensors(int[] pg_pos, GameMap gm) {
+    public static String checkEnvironmentSensors(int[] pg_pos, GameMap gm) {
         //variabile ausiliaria per le informazioni di gioco
-        String sensor_info = "";
+        String danger_sense= "";
+        String enemy_sense ="";
+        String sensor_info="";
         //si fornisce il contenuto del vettore dei sensori
         //per la cella in cui si trova il pg
         //vettore dei sensori
@@ -239,21 +241,23 @@ public class GameController {
         //vicinanza del nemico
         if(sensors[0]){
             if(currentActivity instanceof HeroSide){
-                sensor_info = currentActivity.getResources().getString(R.string.hero_enemy_sense);
+                enemy_sense = currentActivity.getResources().getString(R.string.hero_enemy_sense);
             }
             else {
-                sensor_info = currentActivity.getResources().getString(R.string.wumpus_enemy_sense);
+                enemy_sense = currentActivity.getResources().getString(R.string.wumpus_enemy_sense);
             }
         }
         //vicinanza del pericolo
         if(sensors[1]){
             if(currentActivity instanceof HeroSide){
-                sensor_info = currentActivity.getResources().getString(R.string.hero_danger_sense);
+                danger_sense = currentActivity.getResources().getString(R.string.hero_danger_sense);
             }
             else {
-                sensor_info = currentActivity.getResources().getString(R.string.wumpus_danger_sense);
+                danger_sense = currentActivity.getResources().getString(R.string.wumpus_danger_sense);
             }
         }
+        //si aggiorna la variabile da restituire
+        sensor_info = danger_sense +"..."+enemy_sense;
         //nessun tipo di pericolo
         if(!sensors[0] && !sensors[1]) {
             sensor_info = currentActivity.getResources().getString(R.string.safe_cell);
@@ -264,4 +268,48 @@ public class GameController {
     public static void endGameSession(){
 
     }
+
+    public static void hitEnemy(Direction dir, GameMap gm, TextView tv) {
+        //si preleva la posizione attuale del pg
+        int [] pg_pos = PlayableCharacter.getPGposition();
+        //flag per indicare se il nemico e' stato colpito
+        boolean defeated;
+        //vettore degli indici di cella
+        int[] enemy_indices=new int[2];
+        //variabili ausiliarie per la validita' degli indici
+        boolean iok=false;
+        boolean jok=false;
+        //si preleva la direzione in cui si vuole colpire
+        enemy_indices = Controller.findCell(dir, pg_pos);
+        //indice riga
+        int i=enemy_indices[0];
+        //indice colonna
+        int j=enemy_indices[1];
+        //controllo sull'indice riga
+        if(i>=0 && i<gm.getRows())iok=true;
+        //controllo sull'indice colonna
+        if(j>=0 && j<gm.getColumns())jok=true;
+        //la cella esiste se entrambi gli indici sono validi
+        if(iok && jok) {
+            //si cerca se il nemico si trova in una delle celle in questa direzione
+            defeated = Controller.searchForEnemy(i, j, dir, gm);
+            //si controlla se e' stato colpito
+            if(defeated) {
+                //colpo andato a segno
+                tv.setText(GameMessages.hit);
+                //si aggiornano i sensori
+                Controller.resetEnemySensor(gm);
+                //TODO si aggiorna il punteggio
+
+            }//fi
+            else {
+                //colpo errato
+                tv.setText(GameMessages.wasted_shot);
+            }//esle
+        }//fi indici cella
+        else {
+            //gli indici di cella non sono validi
+            tv.setText(GameMessages.failed_shot);
+        }//esle
+    }//hitEnemy()
 }//end GameController
