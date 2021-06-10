@@ -93,9 +93,9 @@ In questa versione del gioco √® stata prevista, per il giocatore, la possibilit√
   - ~~metodo che preleva l'activity corrente per poter accedere alle risorse;~~
   - ~~metodo che preleva la mossa fatta dal giocatore;~~
   - ~~metodo che esegue la mossa scelta dal giocatore;~~
-  - funzione che impedisce di effettuare altre mosse al termine della partita;
-  - metodo che si occupa di tentare di colpire il nemico;
-  - metodo che verifica se si ha a disposizione un tentativo di colpire il nemico;
+  - ~~funzione che impedisce di effettuare altre mosse al termine della partita;~~
+  - ~~metodo che si occupa di tentare di colpire il nemico;~~
+  - ~~metodo che verifica se si ha a disposizione un tentativo di colpire il nemico;~~
 - dark mode:
   - modificare colore action bar;
   - creare stile della dialog;

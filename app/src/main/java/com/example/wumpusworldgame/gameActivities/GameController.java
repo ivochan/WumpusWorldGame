@@ -1,10 +1,14 @@
 package com.example.wumpusworldgame.gameActivities;
 //serie di import
 import android.app.Activity;
+import android.widget.GridView;
 import android.widget.TextView;
 import com.example.wumpusworldgame.R;
-import java.util.ArrayList;
+import com.example.wumpusworldgame.gameActivities.adapter.GridViewCustomAdapter;
 
+import org.w3c.dom.Text;
+
+import java.util.ArrayList;
 import game.session.configuration.Starter;
 import game.session.controller.Controller;
 import game.session.controller.Direction;
@@ -13,7 +17,6 @@ import game.structure.cell.CellStatus;
 import game.structure.elements.PlayableCharacter;
 import game.structure.map.GameMap;
 import game.structure.text.GameMessages;
-
 /** class GameController
  * questa classe si occupa di collegare il front-end con il back-end
  * implementando le effettive funzionalita' dell'applicazione,
@@ -22,32 +25,101 @@ import game.structure.text.GameMessages;
  */
 public class GameController {
     //##### attributi di classe #####
+
     //activity corrente
     private static Activity currentActivity;
 
-    /** metodo setGameActivity(Activity): void
-     * questo metodo preleva l'activity da cui e' stato invocato
-     * e la memorizza come activity corrente, in modo da poter
-     * accedere alla risorse di progetto, come le stringhe
-     * @param activity: Activity, da cui e' stato chiamato il metodo
-     */
-    public static void setGameActivity(Activity activity){
-        //si assegna questa activity come attributo di classe
-        currentActivity = activity;
-    }//setGameActivity(Activity)
+    //##### metodi utilizzati nella schermata di gioco #####
 
-    public static ArrayList<String> makePGmove(Direction direction, GameMap gm, GameMap em, TextView game_message, ArrayList<String> data){
+    /**
+     *
+     * @param direction
+     * @param gm
+     * @param em
+     * @param game_message
+     * @param shots
+     * @param data
+     * @param list
+     * @param adapter
+     */
+    public static void gamePadMove(Direction direction, GameMap gm, GameMap em, TextView game_message, TextView shots, ArrayList<String> data, GridView list, GridViewCustomAdapter adapter){
+
+        if(Starter.getGameStart()) {
+
+            if(Starter.getTryToHit()){
+                GameController.tryToHit(direction,gm,game_message,shots);
+            }
+            else {
+
+                GameController.movePlayer(direction,gm,em,game_message,data,list,adapter);
+            }
+        }
+        else {
+            game_message.setText(R.string.end_game);
+        }
+    }
+
+
+    /**
+     *
+     * @param game_message
+     */
+    public static void gamePadHit(TextView game_message){
+        if(Starter.getGameStart()){
+
+
+            if(Starter.getChanceToHit()){
+
+                Starter.setTryToHit(true);
+                game_message.setText(R.string.choose_direction);
+            }
+            else {
+                game_message.setText(R.string.no_hit);
+            }
+        }
+    }
+
+
+    //##### metodi di gestione della mossa del pg #####
+
+    /**
+     *
+     * @param direction
+     * @param gm
+     * @param em
+     * @param game_message
+     * @param data
+     * @param list
+     * @param adapter
+     */
+    private static void movePlayer(Direction direction, GameMap gm, GameMap em, TextView game_message, ArrayList<String> data, GridView list, GridViewCustomAdapter adapter){
+        //si realizza la mossa, aggiornando la matrice di esplorazione
+        data = GameController.makePGmove(direction, gm, em, game_message, data);
+        //si aggiorna l''adapter
+        adapter = new GridViewCustomAdapter(GridViewCustomAdapter.getmActivity(), data);
+        //oggetto che permette di visualizzare i dati
+        list.setAdapter(adapter);
+    }//movePlayer()
+
+    /**
+     *
+     * @param direction
+     * @param gm
+     * @param em
+     * @param game_message
+     * @param data
+     * @return
+     */
+    private static ArrayList<String> makePGmove(Direction direction, GameMap gm, GameMap em, TextView game_message, ArrayList<String> data){
         //si riceve la mossa che il giocatore vuole effettuare
         int status = movePG(direction,gm, em);
         //si effettua la mossa
-        String info = movePGinTheMap(status,gm, em);
+        String info = makeMoveInTheMap(status,gm, em);
         //si stampa un messaggio informativo sullo stato della mossa
         game_message.setText(info);
-       //si restituisce la matrice di eplorazione
         //dimensioni della matrice di gioco, analoghe a quelle della matrice di esplorazione
         int r = gm.getRows();
         int c = gm.getColumns();
-
         //##### matrice di esplorazione #####
         data = new ArrayList<>();
         //si iterano le celle della matrice
@@ -59,7 +131,6 @@ public class GameController {
         }//for righe
         return data;
     }//makePGmove
-/*
 
     /** metodo movePG(Direction, int[], GameMap, GameMap): int
      * questo metodo si occupa di verificare se la mossa scelta dal giocatore sia
@@ -80,7 +151,7 @@ public class GameController {
      * 				 -  0, la mossa e' valida e il pg viene spostato, aggiornando la mappa di esplorazione
      * 					   e la sua posizione corrente, segnando la cella in cui si trovata prima come visitata.
      */
-      public static int movePG(Direction move, GameMap gm, GameMap ge) {
+      private static int movePG(Direction move, GameMap gm, GameMap ge) {
         //vettore della posizione successiva
         int [] cell_pos;
         //si preleva la posizione del pg
@@ -99,6 +170,7 @@ public class GameController {
                 //si aggiunge alla mappa di esplorazione
                 ge.getMapCell(cell_pos[0], cell_pos[1]).
                         copyCellSpecs(gm.getMapCell(cell_pos[0], cell_pos[1]));
+                //si restituisce lo stato
                 return 1;
             }//fi
             else if (cs.equals(CellStatus.FORBIDDEN)) {
@@ -116,6 +188,7 @@ public class GameController {
                 //si aggiunge alla mappa di esplorazione
                 ge.getMapCell(cell_pos[0], cell_pos[1]).
                         copyCellSpecs(gm.getMapCell(cell_pos[0], cell_pos[1]));
+                //si restituisce lo stato
                 return 2;
             }//fi
             else if (cs.equals(CellStatus.DANGER)) {
@@ -125,40 +198,45 @@ public class GameController {
                 //si aggiunge alla mappa di esplorazione
                 ge.getMapCell(cell_pos[0], cell_pos[1]).
                         copyCellSpecs(gm.getMapCell(cell_pos[0], cell_pos[1]));
+                //si restituisce lo stato
                 return 1;
             }//fi
             else { //CellStatus.SAFE
-                    //il pg si trova in una cella libera
-                    //la cella in cui si trovava prima il pg si segna come visitata
-                    ge.getMapCell(pg_pos[0], pg_pos[1]).setCellStatus(CellStatus.OBSERVED);
-                    //si aggiorna la posizione del pg
-                    PlayableCharacter.setPGposition(cell_pos);
-                    //si preleva il contenuto della cella in cui si trova attualmente il pg
-                    Cell c = gm.getMapCell(cell_pos[0], cell_pos[1]);
-                    //si copia questa cella nella matrice di esplorazione
-                    ge.getMapCell(cell_pos[0], cell_pos[1]).copyCellSpecs(c);
-                    //il contenuto di questa cella nella mappa di esplorazione e' il pg
-                    ge.getMapCell(cell_pos[0], cell_pos[1]).setCellStatus(CellStatus.PG);
-                    return 0;
-            }
-        }
-        //indici di mossa non validi
-        return -2;
+                //il pg si trova in una cella libera
+                //la cella in cui si trovava prima il pg si segna come visitata
+                ge.getMapCell(pg_pos[0], pg_pos[1]).setCellStatus(CellStatus.OBSERVED);
+                //si aggiorna la posizione del pg
+                PlayableCharacter.setPGposition(cell_pos);
+                //si preleva il contenuto della cella in cui si trova attualmente il pg
+                Cell c = gm.getMapCell(cell_pos[0], cell_pos[1]);
+                //si copia questa cella nella matrice di esplorazione
+                ge.getMapCell(cell_pos[0], cell_pos[1]).copyCellSpecs(c);
+                //il contenuto di questa cella nella mappa di esplorazione e' il pg
+                ge.getMapCell(cell_pos[0], cell_pos[1]).setCellStatus(CellStatus.PG);
+                //si restituisce lo stato
+                return 0;
+            }//else
+        }//fi indici di mossa corretti
+        else {
+            //indici di mossa non validi
+            return -2;
+        }//esle
     }//movePG(Direction, GameMap, GameMap)
 
-    /**
-     *
-     * @param status
-     * @param gm
-     * @param em
-     * @return
+    /** metodo makeMoveInTheMap(int, GameMap, GameMap): String
+     * questo metodo effettua la mossa vera e propria nella mappa di gioco
+     * @param status: int, rappresenta il risultato della mossa effettuata;
+     * @param gm: GameMap, mappa di gioco;
+     * @param em: GameMap, mappa di esplorazione;
+     * @return info: String, restituisce una stringa informativa sulla mossa
+     *                      che e' stata effettuata, valutata in base al
+     *                      valore della variabile statuts.
      */
-    private static String movePGinTheMap(int status, GameMap gm, GameMap em) {
+    private static String makeMoveInTheMap(int status, GameMap gm, GameMap em) {
         //variabile ausiliaria per la stringa di info sullo stato della mossa
         String info="";
         //si preleva la posizione del pg
         int [] pg_pos = PlayableCharacter.getPGposition();
-
         //realizzazione della mossa
         switch(status) {
             case -1 :
@@ -183,39 +261,45 @@ public class GameController {
                 if(cs.equals(CellStatus.ENEMY)){
                     //nemico
                     if(currentActivity instanceof HeroSide){
+                        //modalita' eroe
                         info = currentActivity.getResources().getString(R.string.hero_enemy);
                     }
                     else {
+                        //modalita' wumpus
                         info = currentActivity.getResources().getString(R.string.wumpus_enemy);
                     }
-                }
+                }//fi Enemy
                 else {
                     //pericolo
                     if(currentActivity instanceof HeroSide){
+                        //modalita' eroe
                         info = currentActivity.getResources().getString(R.string.hero_danger);
                     }
                     else {
+                        //modalita' wumpus
                         info = currentActivity.getResources().getString(R.string.wumpus_danger);
                     }
-                }
-                
-
+                }//fi Danger
+                //messaggio di fine partita
                 info += "\n"+currentActivity.getString(R.string.looser);
                 //fine della partita
-                Starter.setGameStart(false);
+                endGame();
                 break;
             case 2:
+                //premio
                 info = "Wow! "+currentActivity.getString(R.string.hero_award);
+                //messaggoi di fine partita: vittoria
                 info += "\n"+currentActivity.getString(R.string.winner);
                 //fine della partita
-                Starter.setGameStart(false);
+                endGame();
                 break;
             default:
                 break;
         }//end switch
         return info;
-    }//checkMove(int)
+    }//makeMoveInTheMap(int, GameMap, GameMap)
 
+    //##### metodo di gestione dei sensori #####
 
     /** metodo checkEnvironment(int[], GameMap): void
      * questo metodo fornisce il contenuto del vettore dei sensori
@@ -226,7 +310,7 @@ public class GameController {
      * @param gm: GameMap, mappa di gioco;
      */
     public static String checkEnvironmentSensors(int[] pg_pos, GameMap gm) {
-        //variabile ausiliaria per le informazioni di gioco
+        //variabile ausiliarie per le informazioni di gioco
         String danger_sense= "";
         String enemy_sense ="";
         String sensor_info="";
@@ -265,11 +349,26 @@ public class GameController {
         return sensor_info;
     }//checkEnvironment(int[], GameMap)
 
-    public static void endGameSession(){
+    //##### metodi di gestioni dello sparo #####
 
-    }
-
-    public static void hitEnemy(Direction dir, GameMap gm, TextView tv) {
+    /** metodo tryToHit(Direction, GameMap, GameMap): void
+     * questo metodo controlla la direzione in cui si vuole provare
+     * a colpire il nemico, verifica se la cella indicata dall'utente
+     * esiste e verifica se in essa sia posizionato il nemico oppure no.
+     * Se il colpo va a segno, il giocatore guadagna punti, altrimenti
+     * ha perso l'unico tentativo di poterlo sconfiggere.
+     * @param direction: Direction, direzione in cui si vuole lanciare il colpo;
+     * @param gm: GameMap, mappa che rappresenta il terreno di gioco;
+     * @param game_message: TextView
+     * @return defeated: boolean, indica se il nemico e' stato colpito o meno
+     */
+    public static void tryToHit(Direction direction, GameMap gm, TextView game_message, TextView shots) {
+        //si gestiscono i flag relativo al tentativo di sparo
+        firedShot();
+        //si visualizza il numero di colpi
+        shots.setText("0");
+        //variabile ausiliaria
+        String hit_info = "";
         //si preleva la posizione attuale del pg
         int [] pg_pos = PlayableCharacter.getPGposition();
         //flag per indicare se il nemico e' stato colpito
@@ -280,7 +379,7 @@ public class GameController {
         boolean iok=false;
         boolean jok=false;
         //si preleva la direzione in cui si vuole colpire
-        enemy_indices = Controller.findCell(dir, pg_pos);
+        enemy_indices = Controller.findCell(direction, pg_pos);
         //indice riga
         int i=enemy_indices[0];
         //indice colonna
@@ -292,24 +391,95 @@ public class GameController {
         //la cella esiste se entrambi gli indici sono validi
         if(iok && jok) {
             //si cerca se il nemico si trova in una delle celle in questa direzione
-            defeated = Controller.searchForEnemy(i, j, dir, gm);
+            defeated = Controller.searchForEnemy(i, j, direction, gm);
             //si controlla se e' stato colpito
             if(defeated) {
                 //colpo andato a segno
-                tv.setText(GameMessages.hit);
+                //si preleva la stringa da restituire
+                hit_info=currentActivity.getResources().getString(R.string.hit);
+                //si visualizza il messaggio di colpo andato a segno
+                game_message.setText(hit_info);
                 //si aggiornano i sensori
                 Controller.resetEnemySensor(gm);
                 //TODO si aggiorna il punteggio
-
             }//fi
             else {
-                //colpo errato
-                tv.setText(GameMessages.wasted_shot);
+                //nemico mancato
+                //si preleva la stringa da restituire
+                hit_info=currentActivity.getResources().getString(R.string.wasted_shot);
+                //si visualizza il messaggio di colpo errato
+                game_message.setText(hit_info);
             }//esle
         }//fi indici cella
         else {
-            //gli indici di cella non sono validi
-            tv.setText(GameMessages.failed_shot);
+            //colpo errato:gli indici di cella non sono validi
+            //si preleva la stringa da restituire
+            hit_info=currentActivity.getResources().getString(R.string.failed_shot);
+            //si visualizza il messaggio di colpo errato
+            game_message.setText(GameMessages.failed_shot);
         }//esle
     }//hitEnemy()
+
+    /** metodo firedShot(): void
+     * questo metodo di supporto al metodo tryToHitEnemy(Direction, GameMap, TextView, TextView)
+     * si occupa di gestire due falg, quello che identifica la richiesta di voler tentare il
+     * colpo, che viene abilitato alla pressione del button HIT e quello che indica se il
+     * giocatore dispone o meno di munizioni per eseguire questa azione.
+     * Questi flag, dopo aver tentato il colpo, devono essere disabilitati.
+     */
+    private static void firedShot(){
+        //si disabilita il flag che garantisce la possibilita' di tentare il colpo
+        Starter.setChanceToHit(false);
+        //si disabilita il flag che indica la richiesta di tentare il colpo
+        Starter.setTryToHit(false);
+    }//firedShot()
+
+    //##### metodi di gestione della partita #####
+
+    /** metodo linkStart(Activity, GameMap)
+     * questo metodo si occupa di identificare l'activity da cui e'
+     * invocato, in modo da conoscere la modalita' di gioco che e' stata
+     * selezionata dal giocatore e poi esegue tutte le configurazioni iniziali,
+     * come abilitare il flag di inizio partita e quello della disponibilita'
+     * delle munizioni per colpire il nemico.
+     * @param activity: activity, activity che in cui e' stato invocato il
+     *                metodo, HeroSide oppure WumpusSide.
+     * @param gm: GameMap, mappa che rappresenta il terreno di gioco.
+     * @return sensor_info: String, stringa che contiene le informazioni
+     *                      sull'ambiente circostante al pg.
+     */
+    public static String linkStart(Activity activity, GameMap gm){
+        //variabile ausiliaria
+        String sensor_info = "";
+        //si assegna l'activity in cui viene eseguito questo metodo
+        //come activity corrente, per poter accedere alle risorse di
+        //progetto, come le stringhe.
+        currentActivity=activity;
+        //si abilita il flag di avvio della partita
+        Starter.setGameStart(true);
+        //si abilita il flag di disponibilita' del colpo
+        Starter.setChanceToHit(true);
+        //si abilita il flag che identifica la richiesta di tentare il colpo
+        Starter.setTryToHit(false);
+        //si preleva la posizione del pg
+        int[] pg_pos = PlayableCharacter.getPGposition();
+        //si verifica lo stato dei sensori attorno al pg
+        sensor_info = GameController.checkEnvironmentSensors(pg_pos,gm);
+        //si restituisce la stringa che lo contiene
+        return sensor_info;
+    }//linkStart(Activity)
+
+    /** metodo endGame(): void
+     * questo metodo si occupa di eseguire delle operazioni necessarie alla chiusura della
+     * partita, come disabilitare il flag di avvio del gioco e visualizzare il punteggio ottenuto.
+     */
+    public static void endGame(){
+        //fine della partita
+        Starter.setGameStart(false);
+        //TODO si aggiorna il punteggio
+        //visualizzazione del punteggio
+        //TODO visualizzare una dialog con il punteggio ottenuto
+        //TODO visualizzare la mappa di gioco con tutte le celle visibili
+    }//endGame()
+
 }//end GameController

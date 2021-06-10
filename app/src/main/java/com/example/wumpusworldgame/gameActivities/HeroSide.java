@@ -77,11 +77,6 @@ public class HeroSide extends AppCompatActivity {
 
         //##### inizializzazioni #####
 
-        Starter.setGameStart(true);
-        Starter.setChanceToHit(true);
-        Starter.setTryToHit(false);
-
-        TextView shots = findViewById(R.id.shot_value);
         //si memorizza l'intent di questa activity
         starterIntent = getIntent();
 
@@ -94,15 +89,6 @@ public class HeroSide extends AppCompatActivity {
         //si compone il messaggio di benvenuto
         String intro_message = getResources().getString(R.string.game_message_intro)+" "+player_name+"!\n";
 
-
-
-
-        //scelta della clip audio
-        mp = MediaPlayer.create(HeroSide.this,R.raw.the_good_fight);
-
-        //##### schermata di caricamento #####
-        Utility.showLoadingScreen(this, getLayoutInflater());
-
         //##### inizializzazioni dei pulsanti #####
 
         hit_button = findViewById(R.id.imageButtonHIT);
@@ -110,6 +96,17 @@ public class HeroSide extends AppCompatActivity {
         down_button = findViewById(R.id.imageButtonDOWN);
         left_button = findViewById(R.id.imageButtonLEFT);
         right_button = findViewById(R.id.imageButtonRIGHT);
+
+        //identificazione del campo di testo che visualizza il numero di colpi rimasti
+        TextView shots = findViewById(R.id.shot_value);
+        //identificazione del campo di testo che visualizza il punteggio
+        TextView score = findViewById(R.id.score_value);
+
+        //scelta della clip audio
+        mp = MediaPlayer.create(HeroSide.this,R.raw.the_good_fight);
+
+        //##### schermata di caricamento #####
+        Utility.showLoadingScreen(this, getLayoutInflater());
 
         //##### schermata di gioco #####
 
@@ -143,7 +140,6 @@ public class HeroSide extends AppCompatActivity {
             }//for colonne
         }//for righe
 
-
         //si crea l'adapter per il gridlayout della matrice di esplorazione
         //DEBUGG GridViewCustomAdapter adapter = new GridViewCustomAdapter(this, data);
         adapter = new GridViewCustomAdapter(this, game_data);
@@ -152,18 +148,15 @@ public class HeroSide extends AppCompatActivity {
         //oggetto che permette di visualizzare i dati
         list.setAdapter(adapter);
 
-        //verifica dell'esecuzione della traccia audio
-        Utility.musicPlaying(mp, this);
-
-        GameController.setGameActivity(this);
-
-        int[] pg_pos = PlayableCharacter.getPGposition();
-
-        String sensor_info = GameController.checkEnvironmentSensors(pg_pos,gm);
-
+        //configurazioni da fare all'avvio della partita
+        String sensor_info = GameController.linkStart(this, gm);
+        //si concatena questa stringa a quella di inizio partita
         intro_message += sensor_info;
         //si visualizza la frase di inizio partita
         game_message.setText(intro_message);
+
+        //verifica dell'esecuzione della traccia audio
+        Utility.musicPlaying(mp, this);
 
         //##### gestione dei pulsanti #####
 
@@ -171,18 +164,7 @@ public class HeroSide extends AppCompatActivity {
         hit_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(Starter.getGameStart()){
-
-
-                    if(Starter.getChanceToHit()){
-
-                        Starter.setTryToHit(true);
-                        game_message.setText("scegli la direzione");
-                    }
-                    else {
-                       game_message.setText("non hai colpi");
-                    }
-                }
+               GameController.gamePadHit(game_message);
 
             }
         });
@@ -190,114 +172,34 @@ public class HeroSide extends AppCompatActivity {
         up_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(Starter.getGameStart()) {
-
-                    if(Starter.getTryToHit()){
-                        game_message.setText("Hai scagliato la freccia verso sopra!");
-                        Starter.setShotDir(Direction.UP);
-                        Starter.setChanceToHit(false);
-                        Starter.setTryToHit(false);
-                        GameController.hitEnemy(Starter.getShotDir(),gm,game_message);
-                        shots.setText("0");
-                    }
-                    else{
-                    //si realizza la mossa, aggiornando la matrice di esplorazione
-                    data = GameController.makePGmove(Direction.UP, gm, em, game_message, data);
-                    //si aggiorna l''adapter
-                    adapter = new GridViewCustomAdapter(GridViewCustomAdapter.getmActivity(), data);
-                    //oggetto che permette di visualizzare i dati
-                    list.setAdapter(adapter);
-                    }
-                }
-                else {
-                    game_message.setText(R.string.end_game);
-                }
+                //si verifica se la partita e' stata avviata
+                GameController.gamePadMove(Direction.UP,gm,em,game_message,shots,data,list,adapter);
             }
         });
         //pulsante DOWN
         down_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(Starter.getGameStart()) {
 
-                    if(Starter.getTryToHit()){
-                        game_message.setText("Hai scagliato la freccia verso sotto!");
-                        Starter.setShotDir(Direction.DOWN);
-                        Starter.setChanceToHit(false);
-                        Starter.setTryToHit(false);
-                        GameController.hitEnemy(Starter.getShotDir(),gm,game_message);
-                        shots.setText("0");
-                    }
-                    else {
-                        //si realizza la mossa, aggiornando la matrice di esplorazione
-                        data = GameController.makePGmove(Direction.DOWN, gm, em, game_message, data);
-                        //si aggiorna l''adapter
-                        adapter = new GridViewCustomAdapter(GridViewCustomAdapter.getmActivity(), data);
-                        //oggetto che permette di visualizzare i dati
-                        list.setAdapter(adapter);
-                    }
-                }
-                else {
-                    game_message.setText(R.string.end_game);
-                }
+                GameController.gamePadMove(Direction.DOWN,gm,em,game_message,shots,data,list,adapter);
             }
         });
         //pulsante LEFT
         left_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(Starter.getGameStart()) {
 
-                    if(Starter.getTryToHit()){
-                        game_message.setText("Hai scagliato la freccia verso sinistra!");
-                        Starter.setShotDir(Direction.LEFT);
-                        Starter.setChanceToHit(false);
-                        Starter.setTryToHit(false);
-                        GameController.hitEnemy(Starter.getShotDir(),gm,game_message);
-                        shots.setText("0");
-                    }
-                    else {
-                        //si realizza la mossa, aggiornando la matrice di esplorazione
-                        data = GameController.makePGmove(Direction.LEFT, gm, em, game_message, data);
-                        //si aggiorna l''adapter
-                        adapter = new GridViewCustomAdapter(GridViewCustomAdapter.getmActivity(), data);
-                        //oggetto che permette di visualizzare i dati
-                        list.setAdapter(adapter);
-                    }
-                }
-                else {
-                    game_message.setText(R.string.end_game);
-                }
+                GameController.gamePadMove(Direction.LEFT,gm,em,game_message,shots,data,list,adapter);
             }
         });
         //pulsante RIGHT
         right_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(Starter.getGameStart()) {
 
-                    if(Starter.getTryToHit()){
-                        game_message.setText("Hai scagliato la freccia verso destra!");
-                        Starter.setShotDir(Direction.RIGHT);
-                        Starter.setChanceToHit(false);
-                        Starter.setTryToHit(false);
-                        GameController.hitEnemy(Starter.getShotDir(),gm,game_message);
-                        shots.setText("0");
-                    }
-                    else {
-                        //si realizza la mossa, aggiornando la matrice di esplorazione
-                        data = GameController.makePGmove(Direction.RIGHT, gm, em, game_message, data);
-                        //si aggiorna l''adapter
-                        adapter = new GridViewCustomAdapter(GridViewCustomAdapter.getmActivity(), data);
-                        //oggetto che permette di visualizzare i dati
-                        list.setAdapter(adapter);
-                    }
-                }
-                else {
-                    game_message.setText(R.string.end_game);
-                }
-            }
-        });
+                GameController.gamePadMove(Direction.RIGHT,gm,em,game_message,shots,data,list,adapter);
+            }//onClick(View)
+        });//setOnClickListener(View.OnClickListener())
 
 
     }//onCreate(Bundle)

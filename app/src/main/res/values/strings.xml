@@ -208,6 +208,12 @@
     <string name="looser">Hai perso :(</string>
     <string name="winner">Hai vinto !!! =)</string>
     <string name="end_game">Partita terminata... Gioca ancora, dai!</string>
+    <string name="choose_direction">Scegli la direzione...</string>
+    <string name="hit">Yu-hu! Hai colpito il nemico!</string>
+    <string name="no_hit">Eh eh, non hai più nulla con cui colpire il nemico...</string>
+    <string name="wasted_shot">Ooops...La tua arma ormai è andata, come la possibilità
+        di battere il nemico!</string>
+    <string name="failed_shot">Che mira pessima...Non hai colpito niente!</string>
 
 
 </resources>
