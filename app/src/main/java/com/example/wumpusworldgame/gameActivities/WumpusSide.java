@@ -11,15 +11,14 @@ import android.view.View;
 import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.TextView;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceManager;
-
 import com.example.wumpusworldgame.R;
 import com.example.wumpusworldgame.gameActivities.adapter.GridViewCustomAdapter;
 import com.example.wumpusworldgame.gameMenuItems.gameTutorials.WumpusModeTutorial;
 import com.example.wumpusworldgame.services.Utility;
 import java.util.ArrayList;
+import game.session.controller.Direction;
 import game.structure.map.GameMap;
 import game.structure.map.MapConfiguration;
 /** class WumpusSide
@@ -29,14 +28,12 @@ import game.structure.map.MapConfiguration;
 public class WumpusSide extends AppCompatActivity {
     //##### attributi di classe #####
 
-    //id della modalita' di gioco
-    public final static int WUMPUS = 1;
     //intent utilizzato per riseguire il metodo onCreate() di questa classe
     private Intent starterIntent;
     //file delle preferenze
     private SharedPreferences sharedPreferences;
     //nome del giocatore
-    String player_name;
+    private String player_name;
     //riproduttore audio
     private MediaPlayer mp;
     //matrice di gioco
@@ -45,10 +42,23 @@ public class WumpusSide extends AppCompatActivity {
     private GameMap em;
     //per la matrice di esplorazione
     private GridView list;
+    //adapter per la matrice di esplorazione
+    private GridViewCustomAdapter adapter;
     //dati da mostrare nella matrice di esplorazione
-    private ArrayList<String> data = new ArrayList<>();
+    private ArrayList<String> data;
     //dati della matrice di gioco
-    private ArrayList<String> game_data = new ArrayList<String>();
+    private ArrayList<String> game_data;
+    //##### campi di testo #####
+    //messaggi di gioco
+    private TextView game_message;
+    //numero di colpi
+    private TextView shots;
+    //punteggio ottenuto
+    private TextView score;
+    //messaggio di inizio partita
+    private String intro_message;
+    //messaggio iniziale dei sensori
+    private String sensor_info;
     //##### pulsanti del controller di gioco #####
     private ImageButton hit_button;
     private ImageButton up_button;
@@ -71,6 +81,8 @@ public class WumpusSide extends AppCompatActivity {
         //si mostra la schermata di gioco
         setContentView(R.layout.activity_wumpus_side);
 
+        //##### inizializzazioni #####
+
         //si memorizza l'intent di questa activity
         starterIntent = getIntent();
 
@@ -79,32 +91,34 @@ public class WumpusSide extends AppCompatActivity {
         //si identifica la preference relativa al nome del giocatore corrente
         player_name = sharedPreferences.getString("prefUsername","");
         //si identifica il campo di testo nel layout
-        TextView game_message = findViewById(R.id.message_box);
+        game_message = findViewById(R.id.message_box);
         //si compone il messaggio di benvenuto
-        String intro_message = getResources().getString(R.string.game_message_intro)+" "+player_name+"!";
-        //si visualizza la frase di inizio partita
-        game_message.setText(intro_message);
+        intro_message = getResources().getString(R.string.game_message_intro)+" "+player_name+"!";
 
-
-        //scelta della clip audio
-        mp = MediaPlayer.create(WumpusSide.this,R.raw.the_good_fight);
-
-        //##### schermata di caricamento #####
-        Utility.showLoadingScreen(this, getLayoutInflater());
+        //dati da mostrare nella matrice di esplorazione
+        data = new ArrayList<>();
+        //dati della matrice di gioco
+        game_data = new ArrayList<>();
 
         //##### inizializzazioni dei pulsanti #####
-
         hit_button = findViewById(R.id.imageButtonHIT);
         up_button = findViewById(R.id.imageButtonUP);
         down_button = findViewById(R.id.imageButtonDOWN);
         left_button = findViewById(R.id.imageButtonLEFT);
         right_button = findViewById(R.id.imageButtonRIGHT);
 
+        //identificazione del campo di testo che visualizza il numero di colpi rimasti
+        shots = findViewById(R.id.shot_value);
+        //identificazione del campo di testo che visualizza il punteggio
+        score = findViewById(R.id.score_value);
 
+        //scelta della clip audio
+        mp = MediaPlayer.create(WumpusSide.this,R.raw.the_good_fight);
+
+        //##### schermata di caricamento #####
+        Utility.showLoadingScreen(this, getLayoutInflater());
         //##### schermata di gioco #####
 
-        //esecuzione clip audio
-        mp.start();
         //creazione della matrice di gioco
         gm = new GameMap();
         //creazione della matrice di esplorazione
@@ -137,14 +151,21 @@ public class WumpusSide extends AppCompatActivity {
 
         //si crea l'adapter per il gridlayout della matrice di esplorazione
         //GridViewCustomAdapter adapter = new GridViewCustomAdapter(this, data);
-        GridViewCustomAdapter adapter = new GridViewCustomAdapter(this, game_data);
+        adapter = new GridViewCustomAdapter(this, game_data);
         //si visualizza la matrice di esplorazione
         list = (GridView) findViewById(R.id.grid_view);
+        //oggetto che permette di visualizzare i dati
         list.setAdapter(adapter);
+
+        //configurazioni da fare all'avvio della partita
+        sensor_info = GameController.linkStart(this, gm);
+        //si concatena questa stringa a quella di inizio partita
+        intro_message += sensor_info;
+        //si visualizza la frase di inizio partita
+        game_message.setText(intro_message);
 
         //verifica dell'esecuzione della traccia audio
         Utility.musicPlaying(mp, this);
-
 
         //##### gestione dei pulsanti #####
 
@@ -152,39 +173,46 @@ public class WumpusSide extends AppCompatActivity {
         hit_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //si tenta il colpo
+                GameController.gamePadHit(game_message);
+            }//onClick(View)
+        });//setOnClickListener(View.OnClickListener())
 
-            }
-        });
         //pulsante UP
         up_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //si muove il personaggio verso sopra
+                GameController.gamePadMove(Direction.UP,gm,em,game_message,shots,data,list,adapter);
+            }//onClick(View)
+        });//setOnClickListener(View.OnClickListener())
 
-            }
-        });
         //pulsante DOWN
         down_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //si muove il personaggio verso sotto
+                GameController.gamePadMove(Direction.DOWN,gm,em,game_message,shots,data,list,adapter);
+            }//onClick(View)
+        });//setOnClickListener(View.OnClickListener())
 
-            }
-        });
         //pulsante LEFT
         left_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //si muove il personaggio verso sinistra
+                GameController.gamePadMove(Direction.LEFT,gm,em,game_message,shots,data,list,adapter);
+            }//onClick(View)
+        });//setOnClickListener(View.OnClickListener())
 
-            }
-        });
         //pulsante RIGHT
         right_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-            }
-        });
-
-
+                //si muove il personaggio verso destra
+                GameController.gamePadMove(Direction.RIGHT,gm,em,game_message,shots,data,list,adapter);
+            }//onClick(View)
+        });//setOnClickListener(View.OnClickListener())
 
     }//onCreate(Bundle)
 

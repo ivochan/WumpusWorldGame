@@ -18,10 +18,7 @@ import com.example.wumpusworldgame.gameActivities.adapter.GridViewCustomAdapter;
 import com.example.wumpusworldgame.gameMenuItems.gameTutorials.HeroModeTutorial;
 import com.example.wumpusworldgame.services.Utility;
 import java.util.ArrayList;
-import game.session.configuration.Starter;
-import game.session.controller.Controller;
 import game.session.controller.Direction;
-import game.structure.elements.PlayableCharacter;
 import game.structure.map.GameMap;
 import game.structure.map.MapConfiguration;
 /** class HeroSide
@@ -31,28 +28,37 @@ import game.structure.map.MapConfiguration;
 public class HeroSide extends AppCompatActivity {
     //##### attributi di classe #####
 
-    //id della modalita' di gioco
-    public final static int HERO = 0;
     //intent utilizzato per riseguire il metodo onCreate() di questa classe
     private Intent starterIntent;
     //file delle preferenze
     private SharedPreferences sharedPreferences;
     //nome del giocatore
-    String player_name;
+    private String player_name;
     //riproduttore audio
     private MediaPlayer mp;
     //matrice di gioco
     private GameMap gm;
     //matrice di esplorazione
     private GameMap em;
-    //per la matrice di esplorazione
+    //oggetto gridview per la matrice di esplorazione
     private GridView list;
-    //adapter
+    //adapter per la matrice di esplorazione
     private GridViewCustomAdapter adapter;
     //dati da mostrare nella matrice di esplorazione
-    private ArrayList<String> data = new ArrayList<>();
+    private ArrayList<String> data;
     //dati della matrice di gioco
-    private ArrayList<String> game_data = new ArrayList<String>();
+    private ArrayList<String> game_data;
+    //##### campi di testo #####
+    //messaggi di gioco
+    private TextView game_message;
+    //numero di colpi
+    private TextView shots;
+    //punteggio ottenuto
+    private TextView score;
+    //messaggio di inizio partita
+    private String intro_message;
+    //messaggio iniziale dei sensori
+    private String sensor_info;
     //##### pulsanti del controller di gioco #####
     private ImageButton hit_button;
     private ImageButton up_button;
@@ -85,12 +91,16 @@ public class HeroSide extends AppCompatActivity {
         //si identifica la preference relativa al nome del giocatore corrente
         player_name = sharedPreferences.getString("prefUsername","");
         //si identifica il campo di testo nel layout
-        TextView game_message = findViewById(R.id.message_box);
+        game_message = findViewById(R.id.message_box);
         //si compone il messaggio di benvenuto
-        String intro_message = getResources().getString(R.string.game_message_intro)+" "+player_name+"!\n";
+        intro_message = getResources().getString(R.string.game_message_intro)+" "+player_name+"!\n";
+
+        //dati da mostrare nella matrice di esplorazione
+        data = new ArrayList<>();
+        //dati della matrice di gioco
+        game_data = new ArrayList<>();
 
         //##### inizializzazioni dei pulsanti #####
-
         hit_button = findViewById(R.id.imageButtonHIT);
         up_button = findViewById(R.id.imageButtonUP);
         down_button = findViewById(R.id.imageButtonDOWN);
@@ -98,9 +108,9 @@ public class HeroSide extends AppCompatActivity {
         right_button = findViewById(R.id.imageButtonRIGHT);
 
         //identificazione del campo di testo che visualizza il numero di colpi rimasti
-        TextView shots = findViewById(R.id.shot_value);
+        shots = findViewById(R.id.shot_value);
         //identificazione del campo di testo che visualizza il punteggio
-        TextView score = findViewById(R.id.score_value);
+        score = findViewById(R.id.score_value);
 
         //scelta della clip audio
         mp = MediaPlayer.create(HeroSide.this,R.raw.the_good_fight);
@@ -141,15 +151,16 @@ public class HeroSide extends AppCompatActivity {
         }//for righe
 
         //si crea l'adapter per il gridlayout della matrice di esplorazione
-        //DEBUGG GridViewCustomAdapter adapter = new GridViewCustomAdapter(this, data);
-        adapter = new GridViewCustomAdapter(this, game_data);
+        //DEBUGG
+        adapter = new GridViewCustomAdapter(this, data);
+        //adapter = new GridViewCustomAdapter(this, game_data);
         //si visualizza la matrice di esplorazione
         list = (GridView) findViewById(R.id.grid_view);
         //oggetto che permette di visualizzare i dati
         list.setAdapter(adapter);
 
         //configurazioni da fare all'avvio della partita
-        String sensor_info = GameController.linkStart(this, gm);
+        sensor_info = GameController.linkStart(this, gm);
         //si concatena questa stringa a quella di inizio partita
         intro_message += sensor_info;
         //si visualizza la frase di inizio partita
@@ -164,43 +175,46 @@ public class HeroSide extends AppCompatActivity {
         hit_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //si tenta il colpo
                GameController.gamePadHit(game_message);
+            }//onClick(View)
+        });//setOnClickListener(View.OnClickListener())
 
-            }
-        });
         //pulsante UP
         up_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //si verifica se la partita e' stata avviata
+                //si muove il personaggio verso sopra
                 GameController.gamePadMove(Direction.UP,gm,em,game_message,shots,data,list,adapter);
-            }
-        });
+            }//onClick(View)
+        });//setOnClickListener(View.OnClickListener())
+
         //pulsante DOWN
         down_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                //si muove il personaggio verso sotto
                 GameController.gamePadMove(Direction.DOWN,gm,em,game_message,shots,data,list,adapter);
-            }
-        });
+            }//onClick(View)
+        });//setOnClickListener(View.OnClickListener())
+
         //pulsante LEFT
         left_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                //si muove il personaggio verso sinistra
                 GameController.gamePadMove(Direction.LEFT,gm,em,game_message,shots,data,list,adapter);
-            }
-        });
+            }//onClick(View)
+        });//setOnClickListener(View.OnClickListener())
+
         //pulsante RIGHT
         right_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                //si muove il personaggio verso destra
                 GameController.gamePadMove(Direction.RIGHT,gm,em,game_message,shots,data,list,adapter);
             }//onClick(View)
         });//setOnClickListener(View.OnClickListener())
-
 
     }//onCreate(Bundle)
 

@@ -10,7 +10,6 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import com.example.wumpusworldgame.R;
 import com.example.wumpusworldgame.gameActivities.HeroSide;
-
 /** class GridViewCustomAdapter
  * questa classe serve per visualizzare i dati nella
  * GridView che ha consentito di realizzare la mappa nella schermata di gioco
@@ -181,25 +180,56 @@ public class GridViewCustomAdapter extends BaseAdapter {
                     break;
                 //FORBIDDEN
                 case "F":
-                   icon = R.drawable.stone_forbidden;
+                   icon = R.drawable.misc_stone_forbidden_path;
                     break;
                 //SAFE--> OBSERVED
                 case "O" :
                     icon = R.drawable.foot_path;
                     break;
                 default:
+                    icon = chooseSafeIcon();
                     break;
             }//end switch
         return icon;
     }//setButtonIcon(String, int)
 
-    /**
-     *
+    /** metodo chooseSafeIcon(): int
+     * questo metodo restituisce una icona casuale per le
+     * celle della mappa che non corrispondono ad uno degli
+     * stati di interesse, cioe' tutte quelle celle etichettate
+     * come safe.
      * @return
      */
-    public static Activity getmActivity() {
-        return mActivity;
-    }
+    private static int chooseSafeIcon(){
+        //icona di default
+        int icon = R.drawable.grass_safe;
+        //si genera un numero casuale per scegliere l'icona
+        int rand =(int)(Math.random()*3);
+        //si esegue uno switch sull'intero che e' stato generato
+        switch (rand){
+            case 0:
+                icon = R.drawable.mangrove;
+                break;
+            case 1:
+                icon = R.drawable.tree;
+                break;
+            case 2:
+                icon = R.drawable.stone;
+            default:
+                break;
+        }//end switch case
+        return icon;
+    }//chooseSafeIcon()
 
+    /** metodo getCurrentActivity
+     * quesot metodo restituisce l'activity in cui e' stato
+     * utlizzato l'adapter, cioe' quella cui verra' visualizzata
+     * la griglia.
+     * @return mActivity: Activity
+     */
+    public static Activity getCurrentActivity() {
+        //restituisce l'activity corrente
+        return mActivity;
+    }//getCurrentActivity()
 
 }//end GridViewCustomAdapter

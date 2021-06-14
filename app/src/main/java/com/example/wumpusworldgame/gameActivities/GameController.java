@@ -5,9 +5,6 @@ import android.widget.GridView;
 import android.widget.TextView;
 import com.example.wumpusworldgame.R;
 import com.example.wumpusworldgame.gameActivities.adapter.GridViewCustomAdapter;
-
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 import game.session.configuration.Starter;
 import game.session.controller.Controller;
@@ -96,7 +93,7 @@ public class GameController {
         //si realizza la mossa, aggiornando la matrice di esplorazione
         data = GameController.makePGmove(direction, gm, em, game_message, data);
         //si aggiorna l''adapter
-        adapter = new GridViewCustomAdapter(GridViewCustomAdapter.getmActivity(), data);
+        adapter = new GridViewCustomAdapter(GridViewCustomAdapter.getCurrentActivity(), data);
         //oggetto che permette di visualizzare i dati
         list.setAdapter(adapter);
     }//movePlayer()

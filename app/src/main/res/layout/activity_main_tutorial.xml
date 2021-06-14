@@ -320,7 +320,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.789"
-        app:srcCompat="@drawable/stone_forbidden" />
+        app:srcCompat="@drawable/big_stone" />
 
     <ImageView
         android:id="@+id/imageView12"
