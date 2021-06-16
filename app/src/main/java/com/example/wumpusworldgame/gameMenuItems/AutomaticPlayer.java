@@ -56,10 +56,10 @@ public class AutomaticPlayer extends AppCompatActivity {
             }//for colonne
         }//for righe
         //si crea l'adapter per il gridlayout della matrice di esplorazione
-        GridViewCustomAdapter adapter = new GridViewCustomAdapter(this, data);
+        //GridViewCustomAdapter adapter = new GridViewCustomAdapter(this, data);
         //si visualizza la matrice di esplorazione
         list = (GridView) findViewById(R.id.grid_view);
-        list.setAdapter(adapter);
+        //list.setAdapter(adapter);
     }//onCreate
 
     //TODO metodo di risoluzione del gioco

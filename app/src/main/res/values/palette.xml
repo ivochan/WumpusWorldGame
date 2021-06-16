@@ -31,4 +31,7 @@
     <color name="dark_purple_100a">#b64fc8</color>
     <color name="deep_purple_100a">#b388ff</color>
     <color name="blue200">#90caf9</color>
+    <color name="dark_grey_800">#1b1b1b</color>
+    <color name="dark_brown_700">#321911</color>
+    <color name="light_brown_700">#8b6b61</color>
 </resources>

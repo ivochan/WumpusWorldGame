@@ -99,8 +99,8 @@
 
     <GridView
         android:id="@+id/grid_view"
-        android:layout_width="346dp"
-        android:layout_height="236dp"
+        android:layout_width="342dp"
+        android:layout_height="224dp"
         android:background="@drawable/grid_view_border"
         android:columnWidth="20dp"
         android:gravity="center"
@@ -115,7 +115,7 @@
         app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.354"></GridView>
+        app:layout_constraintVertical_bias="0.379"></GridView>
 
     <ImageButton
         android:id="@+id/imageButtonHIT"
@@ -191,8 +191,8 @@
 
     <TextView
         android:id="@+id/message_box"
-        android:layout_width="374dp"
-        android:layout_height="77dp"
+        android:layout_width="375dp"
+        android:layout_height="84dp"
         android:padding="10dp"
         android:text=""
         android:textColor="@color/sugar_paper"
@@ -227,7 +227,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.214" />
+        app:layout_constraintVertical_bias="0.227" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

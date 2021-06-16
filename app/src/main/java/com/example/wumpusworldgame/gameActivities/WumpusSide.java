@@ -151,16 +151,16 @@ public class WumpusSide extends AppCompatActivity {
 
         //si crea l'adapter per il gridlayout della matrice di esplorazione
         //GridViewCustomAdapter adapter = new GridViewCustomAdapter(this, data);
-        adapter = new GridViewCustomAdapter(this, game_data);
+        adapter = new GridViewCustomAdapter(this, data,game_data);
         //si visualizza la matrice di esplorazione
-        list = (GridView) findViewById(R.id.grid_view);
+        list = findViewById(R.id.grid_view);
         //oggetto che permette di visualizzare i dati
         list.setAdapter(adapter);
 
         //configurazioni da fare all'avvio della partita
         sensor_info = GameController.linkStart(this, gm);
         //si concatena questa stringa a quella di inizio partita
-        intro_message += sensor_info;
+        intro_message += "\n"+sensor_info;
         //si visualizza la frase di inizio partita
         game_message.setText(intro_message);
 
@@ -183,7 +183,7 @@ public class WumpusSide extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //si muove il personaggio verso sopra
-                GameController.gamePadMove(Direction.UP,gm,em,game_message,shots,data,list,adapter);
+                GameController.gamePadMove(Direction.UP,gm,em,game_message,shots,data,game_data,list,adapter);
             }//onClick(View)
         });//setOnClickListener(View.OnClickListener())
 
@@ -192,7 +192,7 @@ public class WumpusSide extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //si muove il personaggio verso sotto
-                GameController.gamePadMove(Direction.DOWN,gm,em,game_message,shots,data,list,adapter);
+                GameController.gamePadMove(Direction.DOWN,gm,em,game_message,shots,data,game_data,list,adapter);
             }//onClick(View)
         });//setOnClickListener(View.OnClickListener())
 
@@ -201,7 +201,7 @@ public class WumpusSide extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //si muove il personaggio verso sinistra
-                GameController.gamePadMove(Direction.LEFT,gm,em,game_message,shots,data,list,adapter);
+                GameController.gamePadMove(Direction.LEFT,gm,em,game_message,shots,data,game_data,list,adapter);
             }//onClick(View)
         });//setOnClickListener(View.OnClickListener())
 
@@ -210,7 +210,7 @@ public class WumpusSide extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //si muove il personaggio verso destra
-                GameController.gamePadMove(Direction.RIGHT,gm,em,game_message,shots,data,list,adapter);
+                GameController.gamePadMove(Direction.RIGHT,gm,em,game_message,shots,data,game_data,list,adapter);
             }//onClick(View)
         });//setOnClickListener(View.OnClickListener())
 

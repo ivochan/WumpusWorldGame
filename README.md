@@ -100,9 +100,10 @@ In questa versione del gioco √® stata prevista, per il giocatore, la possibilit√
   - modificare colore action bar;
   - creare stile della dialog;
 - ~~togliere le iniziali del contenuto delle celle nella mappa;~~
-- verificare che ogni button della mappa abbia la stessa dimensione;
+- ~~verificare che ogni button della mappa abbia la stessa dimensione;~~
 - ~~correggere bug sulla clip audio della mainActivity alla disattivazione degli effetti sonori~~;
-- 
+- ~~scurire le icone e lo sfondo delle celle non visitate alla fine della partita;~~
+- mettere la mappa di gioco nella dialog di fine partita;
 
 
 

@@ -100,8 +100,8 @@
 
     <GridView
         android:id="@+id/grid_view"
-        android:layout_width="346dp"
-        android:layout_height="236dp"
+        android:layout_width="342dp"
+        android:layout_height="224dp"
         android:background="@drawable/grid_view_border"
         android:columnWidth="20dp"
         android:gravity="center"
@@ -116,7 +116,7 @@
         app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.394"></GridView>
+        app:layout_constraintVertical_bias="0.393"></GridView>
 
     <ImageButton
         android:id="@+id/imageButtonHIT"
@@ -192,18 +192,19 @@
 
     <TextView
         android:id="@+id/message_box"
-        android:layout_width="377dp"
-        android:layout_height="81dp"
+        android:layout_width="370dp"
+        android:layout_height="87dp"
         android:padding="10dp"
         android:text=""
         android:textColor="@color/sugar_paper"
-        android:textSize="18sp"
+        android:textSize="18dp"
         android:textStyle="italic|bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.486"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.107" />
+        app:layout_constraintVertical_bias="0.102" />
 
     <View
         android:id="@+id/box_bottom_divider"
@@ -212,10 +213,10 @@
         android:background="@color/sugar_paper"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.086" />
+        app:layout_constraintVertical_bias="0.088" />
 
     <View
         android:id="@+id/box_top_divider"
@@ -227,6 +228,6 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.227" />
+        app:layout_constraintVertical_bias="0.234" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
