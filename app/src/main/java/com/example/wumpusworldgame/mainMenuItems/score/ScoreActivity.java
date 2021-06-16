@@ -1,4 +1,4 @@
-package com.example.wumpusworldgame.mainMenuItems;
+package com.example.wumpusworldgame.mainMenuItems.score;
 //serie di import
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;

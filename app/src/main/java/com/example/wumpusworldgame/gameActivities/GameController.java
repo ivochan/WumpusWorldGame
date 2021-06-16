@@ -342,31 +342,30 @@ public class GameController {
             //si restituisce la stringa
             return sensor_info;
         }//fi nessun avviso
-        //vicinanza del nemico
-        if(sensors[0]){
-            if(currentActivity instanceof HeroSide){
-                enemy_sense = currentActivity.getResources().getString(R.string.hero_enemy_sense);
-            }//fi
-            else {
-                enemy_sense = currentActivity.getResources().getString(R.string.wumpus_enemy_sense);
-            }//else
-        }//fi nemico
-        //vicinanza del pericolo
-        if(sensors[1]){
-            if(currentActivity instanceof HeroSide){
-                danger_sense = currentActivity.getResources().getString(R.string.hero_danger_sense);
-            }//fi
-            else {
-                danger_sense = currentActivity.getResources().getString(R.string.wumpus_danger_sense);
-            }//else
-        }//fi pericolo
-        //si aggiorna la stringa da restituire
-        if(enemy_sense.equals("")){
-            return  danger_sense;
-        }
-        else{
-            return enemy_sense+"\n"+danger_sense;
-        }
+        else {
+            //vicinanza del nemico
+            if (sensors[0]) {
+                if (currentActivity instanceof HeroSide) {
+                    enemy_sense = currentActivity.getResources().getString(R.string.hero_enemy_sense);
+                }//fi
+                else {
+                    enemy_sense = currentActivity.getResources().getString(R.string.wumpus_enemy_sense);
+                }//else
+            }//fi nemico
+            //vicinanza del pericolo
+            if (sensors[1]) {
+                if (currentActivity instanceof HeroSide) {
+                    danger_sense = currentActivity.getResources().getString(R.string.hero_danger_sense);
+                }//fi
+                else {
+                    danger_sense = currentActivity.getResources().getString(R.string.wumpus_danger_sense);
+                }//else
+            }//fi pericolo
+            //si aggiorna la stringa da restituire
+            sensor_info = enemy_sense + "\n" + danger_sense;
+            //si restituisce
+            return sensor_info;
+        }//else
     }//checkEnvironment(int[], GameMap)
 
     //##### metodi di gestione dello sparo #####

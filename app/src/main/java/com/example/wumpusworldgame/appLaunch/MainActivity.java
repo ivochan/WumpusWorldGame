@@ -9,16 +9,19 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-
 import com.example.wumpusworldgame.R;
 import com.example.wumpusworldgame.gameActivities.HeroSide;
 import com.example.wumpusworldgame.gameActivities.WumpusSide;
 import com.example.wumpusworldgame.mainMenuItems.GameInformationActivity;
 import com.example.wumpusworldgame.mainMenuItems.tutorial.MainTutorialActivity;
-import com.example.wumpusworldgame.mainMenuItems.ScoreActivity;
+import com.example.wumpusworldgame.mainMenuItems.score.ScoreActivity;
 import com.example.wumpusworldgame.mainMenuItems.settings.GameSettingsActivity;
 import com.example.wumpusworldgame.services.TypeWriter;
 import com.example.wumpusworldgame.services.Utility;
+
+import game.session.score.Score;
+import game.session.score.ScoreMemo;
+
 /** class MainActivity
  * questa classe rappresenta la finestra principale dell'applicazione,
  * quella che si apre al suo avvio.

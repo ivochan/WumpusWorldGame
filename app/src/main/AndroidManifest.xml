@@ -44,7 +44,7 @@
             android:label="@string/main_tutorial_controls_title"
             android:parentActivityName=".mainMenuItems.tutorial.MainTutorialActivity" />
         <activity
-            android:name=".mainMenuItems.ScoreActivity"
+            android:name=".mainMenuItems.score.ScoreActivity"
             android:label="@string/score_title"
             android:parentActivityName=".appLaunch.MainActivity" />
         <activity
