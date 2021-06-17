@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.widget.GridView;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.wumpusworldgame.R;
-import com.example.wumpusworldgame.gameActivities.adapter.GridViewCustomAdapter;
+
 import java.util.ArrayList;
 import game.structure.map.GameMap;
 /** class AutomaticPlayer

@@ -1,8 +1,10 @@
 package com.example.wumpusworldgame.services;
 //serie di import
+import android.Manifest;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Environment;
@@ -10,6 +12,8 @@ import android.os.StatFs;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
+
+import androidx.core.app.ActivityCompat;
 import androidx.preference.PreferenceManager;
 import com.example.wumpusworldgame.R;
 import java.io.IOException;
@@ -29,6 +33,12 @@ public class Utility {
 
     //email dello sviluppatore
     public final static String SUPPORT_EMAIL = "ivochan17@gmail.com";
+    //variabile di controllo per i permessi
+    private static final int REQUEST_EXTERNAL_STORAGE = 1;
+    //tipi di permessi da richiedere
+    private static final String[] PERMISSION_STORAGE = {
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE};
 
     /** metodo showLoadingScreen(Activity, LayoutInflater)
      * questo metodo realizza una schermata di caricamento
@@ -263,5 +273,19 @@ public class Utility {
         return lastValue;
     }//getTotalRAM()
 
+    //##### metodo di rischiesta del permesso di accesso alla memoria esterna #####
+    public static boolean verifyStoragePermission(Activity activity) {
+        //tipo di permesso
+        int permission = ActivityCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        //verifica del permesso
+        if (permission != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(
+                    activity,
+                    PERMISSION_STORAGE,
+                    REQUEST_EXTERNAL_STORAGE);
+            return false;
+        }
+        return true;
+    }
 
 }// end class Utility

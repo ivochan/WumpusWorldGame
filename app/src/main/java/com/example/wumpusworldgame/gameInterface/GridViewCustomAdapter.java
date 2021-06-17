@@ -1,4 +1,4 @@
-package com.example.wumpusworldgame.gameActivities.adapter;
+package com.example.wumpusworldgame.gameInterface;
 //serie di import
 import java.util.ArrayList;
 import android.app.Activity;

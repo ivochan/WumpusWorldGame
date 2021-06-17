@@ -11,8 +11,8 @@
     <string name="main_tutorial_controls_title">Tutorial : Comandi</string>
     <string name="score_title">Score</string>
     <!-- Game menu activity titles -->
-    <string name="hero_mode_tutorial_title">Modalità Avventuriero : Tutorial</string>
-    <string name="wumpus_mode_tutorial_title">Modalità Wumpus : Tutorial</string>
+    <string name="hero_mode_tutorial_title">Avventuriero : Tutorial</string>
+    <string name="wumpus_mode_tutorial_title">Wumpus : Tutorial</string>
     <!-- MainActivity -->
     <string name="game_title">Hunt the Wumpus...or not?</string>
     <string name="game_intro">Hi...iiiiiih...Uh... Hello!
@@ -206,7 +206,7 @@
     <string name="safe_cell">Tutto apposto all\'orizzonte...</string>
     <string name="forbidden_cell">Il passaggio e\' bloccato da un albero gigantesco.\nRipeti la mossa!</string>
     <string name="looser">Hai perso :(</string>
-    <string name="winner">Hai vinto !!! =)</string>
+    <string name="winner">Hai vinto ! =)</string>
     <string name="end_game">Partita terminata... Gioca ancora, dai!</string>
     <string name="choose_direction">Scegli la direzione...</string>
     <string name="hit">Yu-hu! Hai colpito il nemico!</string>
@@ -215,5 +215,11 @@
         di battere il nemico!</string>
     <string name="failed_shot">Che mira pessima...Non hai colpito niente!</string>
 
+    <!-- messaggio della dialog condivisione del punteggio attuale -->
+    <string name="game_score_share_message">Ma...Hey, sfida i tuoi amici al gioco del mondo del Wumpus!
+        \n\nEcco il tuo punteggio:\n</string>
+    <string name="share_game_map_and_score">Hey, sfidami al gioco del mondo del Wumpus!
+        \nQuesta è il territorio che ho esplorato e \ne questo è il mio punteggio:\n</string>
+    <string name="readyandroid"><![CDATA[<a href="https://readyandroid.wordpress.com/">readyandroid</a>]]></string>
 
 </resources>

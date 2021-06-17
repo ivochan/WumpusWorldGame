@@ -89,7 +89,7 @@ public class GameSettingsFragment extends PreferenceFragmentCompat {
             @Override
             public boolean onPreferenceClick(Preference preference) {
                 //si crea una alert dialog
-                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext(),R.style.AlertDialogTheme);
                 //metodo che configuara l'aspetto della dialog
                 settingDialog(builder);
 

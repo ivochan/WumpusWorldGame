@@ -9,12 +9,23 @@
         <item name="android:backgroundDimEnabled">false</item>
         <item name="android:windowIsFloating">false</item>
     </style>
-    <!-- custon alert dialog theme -->
+    <!-- custom alert dialog theme -->
     <style name="AlertDialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
         <item name="colorAccent">@color/dark_purple_600</item>
         <item name="android:textColorPrimary">@color/dark_indigo_900</item>
         <item name="dialogCornerRadius">20dp</item>
         <item name="colorBackgroundFloating">@color/light_indigo_100</item>
     </style>
+
+    <!-- custom alert dialog theme: end game -->
+    <style name="GameAlertDialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="colorAccent">@color/dark_purple_600</item>
+        <item name="android:textColorPrimary">@color/dark_indigo_900</item>
+        <item name="dialogCornerRadius">20dp</item>
+        <item name="colorBackgroundFloating">@color/light_indigo_100</item>
+        <item name="android:windowEnterAnimation">@anim/fade_in</item>
+        <item name="android:windowExitAnimation">@anim/fade_out</item>
+    </style>
+
 
 </resources>

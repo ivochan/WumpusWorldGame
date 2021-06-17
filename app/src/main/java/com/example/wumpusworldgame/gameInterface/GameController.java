@@ -1,18 +1,31 @@
-package com.example.wumpusworldgame.gameActivities;
+package com.example.wumpusworldgame.gameInterface;
 //serie di import
 import android.app.Activity;
+import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.net.Uri;
+import android.os.Build;
+import android.os.Environment;
+import android.text.Html;
+import android.text.Spanned;
+import android.view.View;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.TextView;
+import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
+import androidx.core.content.FileProvider;
 import androidx.preference.PreferenceManager;
 import com.example.wumpusworldgame.R;
-import com.example.wumpusworldgame.gameActivities.adapter.GridViewCustomAdapter;
+import com.example.wumpusworldgame.gameActivities.HeroSide;
+import com.example.wumpusworldgame.services.Utility;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import game.session.configuration.Starter;
 import game.session.controller.Controller;
@@ -30,7 +43,6 @@ import game.structure.text.GameMessages;
  */
 public class GameController {
     //##### attributi di classe #####
-
     //activity corrente
     private static Activity currentActivity;
     //valore del punteggio attuale
@@ -246,6 +258,8 @@ public class GameController {
      *                      valore della variabile statuts.
      */
     private static String makeMoveInTheMap(int status, GameMap gm) {
+        //stringa del messaggio da passare alla dialog
+        String result="";
         //variabile ausiliaria per la stringa di info sullo stato della mossa
         String info="";
         //si preleva la posizione del pg
@@ -293,18 +307,22 @@ public class GameController {
                         info = currentActivity.getResources().getString(R.string.wumpus_danger);
                     }
                 }//fi Danger
+                //si preleva la stringa del risultato della partita
+                result= currentActivity.getString(R.string.looser);
                 //messaggio di fine partita
-                info += "\n"+currentActivity.getString(R.string.looser);
+                info += "\n"+result;
                 //fine della partita
-                endGame();
+                endGame(result);
                 break;
             case 2:
                 //premio
                 info = "Wow! "+currentActivity.getString(R.string.hero_award);
-                //messaggoi di fine partita: vittoria
-                info += "\n"+currentActivity.getString(R.string.winner);
+                //si preleva la stringa del risultato della partita
+                result= currentActivity.getString(R.string.winner);
+                //messaggio di fine partita: vittoria
+                info += "\n"+result;
                 //fine della partita
-                endGame();
+                endGame(result);
                 break;
             default:
                 break;
@@ -331,8 +349,6 @@ public class GameController {
         //per la cella in cui si trova il pg
         //vettore dei sensori
         boolean [] sensors = new boolean[2];
-        //stampa della posizione corrente del pg
-        //System.out.println("Ti trovi nella cella ("+pg_pos[0]+','+pg_pos[1]+')');
         //si acquisiscono le informazioni del vettore dei sensori
         sensors=gm.getMapCell(pg_pos[0], pg_pos[1]).getSenseVector();
         //nessun tipo di pericolo
@@ -453,7 +469,7 @@ public class GameController {
         Starter.setTryToHit(false);
     }//firedShot()
 
-    //##### metodi di gestione della partita #####
+    //##### metodi di gestione della partita: avvio #####
 
     /** metodo linkStart(Activity, GameMap)
      * questo metodo si occupa di identificare l'activity da cui e'
@@ -488,11 +504,13 @@ public class GameController {
         return sensor_info;
     }//linkStart(Activity)
 
+    //##### metodi di gestione della partita: chiusura #####
+
     /** metodo endGame(): void
      * questo metodo si occupa di eseguire delle operazioni necessarie alla chiusura della
      * partita, come disabilitare il flag di avvio del gioco e visualizzare il punteggio ottenuto.
      */
-    public static void endGame(){
+    public static void endGame(String result){
         //fine della partita
         Starter.setGameStart(false);
         //TODO si aggiorna il punteggio
@@ -504,12 +522,11 @@ public class GameController {
         //TODO sviluppare la parte del punteggio
         String score ="0";
         //si crea una alert dialog
-        AlertDialog.Builder builder = new AlertDialog.Builder(currentActivity,R.style.AlertDialogTheme);
+        AlertDialog.Builder builder = new AlertDialog.Builder(currentActivity,R.style.GameAlertDialogTheme);
         //si preleva la stringa da visualizzare come messaggio della dialog
         String score_share_message = currentActivity.getResources().getString(R.string.score_share_message);
         //si configura il layout della dialog
-        //metodo che configuara l'aspetto della dialog
-        settingDialog(builder, score_share_message, player, score);
+        settingDialog(builder, score_share_message, player, score,result);
         //pulsante di chiusura
         builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
             /** metodo onClick(DialogInterface, int)
@@ -539,32 +556,35 @@ public class GameController {
              */
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                //creazione dell'intent
-                Intent shareIntent = new Intent();
-                //si specifica l'azione da svolgere
-                shareIntent.setAction(Intent.ACTION_SEND);
-                //selezione dell'immagine da condividere
-                Uri imageUri = Uri.parse("android.resource://" + currentActivity.getPackageName()+ "/drawable/" + "red_little_monster_blue");
-                //si crea la stringa che conterra' il punteggio
-                String current_score = player+", "+score+" pt";
-                //si inserisce la stringa complessiva da condividere come testo
-                shareIntent.putExtra(Intent.EXTRA_TEXT, currentActivity.getResources().getString(R.string.score_send_message)+"\n"+current_score);
-                //si inserisce l'immagine da condividere
-                shareIntent.putExtra(Intent.EXTRA_STREAM, imageUri);
-                //si specifa il tipo file da condividere (immagine/estensione)
-                shareIntent.setType("image/png");
-                //si forniscono i permessi di lettura dell'immagine
-                shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                //si visualizzano le app con cui effettuare questa azione
-                currentActivity.startActivity(Intent.createChooser(shareIntent,null));
+                //si identifica il campo del latoyut di cui si vuole catturare la schermata
+                View end_game_map = currentActivity.findViewById(R.id.grid_view);
+                //si verificano i permessi di accesso alla memoria esterna
+                if(Utility.verifyStoragePermission(currentActivity)) {
+                    //si dispone dei permessi quindi si effettua uno screenshot
+                    takeScreenshot(end_game_map,player,score);
+                }//fi
+                else {
+                    //se non si dispone dei permessi lo screenshot non si puo' condividere
+                    Toast.makeText(currentActivity, "So sorry, but you can't share your rank", Toast.LENGTH_SHORT).show();
+                }//esle
             }//onClick(DialogInterface, int)
         });//setPositiveButton(String, DialogInterface)
 
         //si crea la dialog
         AlertDialog dialog = builder.create();
-        //si visualizza la dialog
+        //visualizzazione della dialog
         dialog.show();
-
+        /*
+        //visualizzazione della dialog con ritardo
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                //si visualizza la dialog
+                dialog.show();
+            }
+        }, 100);
+        */
     }//endGame()
 
     /** metodo settingDialog(Alert.Builder, String, String, String)
@@ -575,10 +595,9 @@ public class GameController {
      * @param share_message: String, messaggio da visualizzare nella dialog;
      * @param player: String, nome del giocatore;
      * @param score: String, valore del punteggio;
+     * @param result: String, messaggio indicativo del risultato della partita;
      */
-    private static void settingDialog(AlertDialog.Builder builder, String share_message, String player, String score){
-        //si inserisce l'immagine nel layout della dialog
-        builder.setView(R.layout.alert_share_image);
+    private static void settingDialog(AlertDialog.Builder builder, String share_message, String player, String score, String result){
         //si definisce il testo del titolo
         TextView textView = new TextView(currentActivity);
         //testo del titolo della dialog
@@ -594,11 +613,98 @@ public class GameController {
         //si imposta il titolo della dialog
         builder.setCustomTitle(textView);
         //si imposta il messaggio della dialog
-        String message = share_message+"\n"+player+" "+score+" pt";
+        String message =result+"\n\n"+share_message+"\n"+player+" "+score+" pt";
         //si visualizza il messaggio nella dialog
         builder.setMessage(message);
         //la dialog si chiude cliccando al di fuori della sua area
         builder.setCancelable(true);
     }//settingDialog(AlertDialog.Builder, String)
+
+    //##### metodi per effettuare lo screenshot della mappa di gioco finale #####
+
+    /** metood takeScreenshot(View): void
+     * questo metodo effettua uno screenshot dell'oggetto view che riceve come parametro
+     * e lo salva nella memoria esterna se i permessi di scrittura/lettura sono stati
+     * approvati dall'utente.
+     * @param view: View, oggetto del layout di cui effettuare lo screenshot.
+     */
+    private static void takeScreenshot(View view, String player, String score) {
+        //blocco try-catch per la creazione del file
+        try {
+            //si crea la cartella in cui conservare il file
+            File mainDir =
+                    new File(currentActivity.getExternalFilesDir(Environment.DIRECTORY_PICTURES), "FileShare");
+            //si controlla se questa cartella esiste
+            if (!mainDir.exists()) {
+                //se non esiste viene creata
+                mainDir.mkdir();
+            }//fi
+            //si assegna il nome al file che conterra lo screenshot
+            String path = mainDir + "/"+"WumpusWorldGameMap" + ".png";
+            //si abilita la possibilita' di tenerlo in cache
+            view.setDrawingCacheEnabled(true);
+            //si crea l'immagine bitmap di questo screenshot
+            Bitmap bitmap = Bitmap.createBitmap(view.getDrawingCache());
+            //si disabilita la possibilita' di tenerlo in cache
+            view.setDrawingCacheEnabled(false);
+            //si memorizza il file con il contenuto bitmap nel path definito prima
+            File imageFile = new File(path);
+            //si crea il file vero e proprio
+            FileOutputStream fileOutputStream = new FileOutputStream(imageFile);
+            //si comprime la qualita' del file di tipo immagine
+            bitmap.compress(Bitmap.CompressFormat.PNG, 90, fileOutputStream);
+            //si svuota il buffer di scrittura
+            fileOutputStream.flush();
+            //si chiude il flusso di scrittura
+            fileOutputStream.close();
+            //si richiama il metodo per condividere lo screenshot come file immagine
+            shareScreenshot(imageFile, player, score);
+        }catch (IOException e) {
+            //errore
+            e.printStackTrace();
+        }//end try-catch
+    }//takeScreenShot(View)
+
+    /** metodo shareScreenshot(File): void
+     * questo metodo implementa la condivione, tramite Intent, del file immagine
+     * ricevuto come parametro.
+     * @param imageFile: File, immagine da condividere al di fuori dell'applicazione.
+     */
+    private static void shareScreenshot(File imageFile, String player, String score) {
+        //intent che effettuera' l'azione di condivisione
+        Intent shareIntent = new Intent();
+        //variabile che rappresentera' il file immagine
+        Uri uri;
+        //controllo sulla versione dell'sdk
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            //per la condivisione si deve utilizzare un Content Provider
+            uri = FileProvider.getUriForFile(currentActivity, currentActivity.getApplicationContext().getPackageName() + ".provider", imageFile);
+        }//fi
+        else {
+            //per le versioni inferiori alla sdk 23
+            uri = Uri.fromFile(imageFile);
+        }//else
+        //si specifica l'azione di invio per l'intent
+        shareIntent.setAction(Intent.ACTION_SEND);
+        //si specifica che verra' inviata un'immagine
+        shareIntent.setType("image/*");
+        //si crea la stringa che conterra' il punteggio
+        String current_score = player+" "+score+" pt";
+
+        String site = "<a href=http://www.google.com >Google</a>";
+        shareIntent.putExtra(android.content.Intent.EXTRA_TEXT,site);
+        //si specifica il testo da condividere oltre l'immagine
+        //shareIntent.putExtra(android.content.Intent.EXTRA_TEXT,currentActivity.getResources().getString(R.string.share_game_map_and_score)+"\n"+current_score);
+        //si invia l'immagine
+        shareIntent.putExtra(Intent.EXTRA_STREAM, uri);
+        //blocco try-catch sulla scelta delle app esterne per il servizio di condivisione
+        try {
+            //si visualizzano le applicazioni idonee alla condivisione dell'immagine
+            currentActivity.startActivity(Intent.createChooser(shareIntent, "Share With"));
+        }catch (ActivityNotFoundException e){
+            //nessuna app e' adatta a svolgere questa azione
+            Toast.makeText(currentActivity, "No App Available", Toast.LENGTH_SHORT).show();
+        }//end try-catch
+    }//shareScreenshot(File)
 
 }//end GameController

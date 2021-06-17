@@ -18,10 +18,6 @@ import com.example.wumpusworldgame.mainMenuItems.score.ScoreActivity;
 import com.example.wumpusworldgame.mainMenuItems.settings.GameSettingsActivity;
 import com.example.wumpusworldgame.services.TypeWriter;
 import com.example.wumpusworldgame.services.Utility;
-
-import game.session.score.Score;
-import game.session.score.ScoreMemo;
-
 /** class MainActivity
  * questa classe rappresenta la finestra principale dell'applicazione,
  * quella che si apre al suo avvio.
@@ -30,7 +26,6 @@ import game.session.score.ScoreMemo;
  */
 public class MainActivity extends AppCompatActivity {
     //##### attributi di classe #####
-
     //testo animato
     private TypeWriter typeWriter;
     //velocita' di scorrimento

@@ -133,7 +133,7 @@ public class ScoreActivity extends AppCompatActivity {
                     //selezione dell'immagine da condividere
                     Uri imageUri = Uri.parse("android.resource://" + getPackageName()+ "/drawable/" + "red_little_monster_blue");
                     //si crea la stringa che conterra' il punteggio
-                    String record_score = best_player+", "+highscore+" pt";
+                    String record_score = best_player+" "+highscore+" pt";
                     //si inserisce la stringa complessiva da condividere come testo
                     shareIntent.putExtra(Intent.EXTRA_TEXT, getResources().getString(R.string.record_send_message)+"\n"+record_score);
                     //si inserisce l'immagine da condividere
@@ -200,7 +200,7 @@ public class ScoreActivity extends AppCompatActivity {
                     //selezione dell'immagine da condividere
                     Uri imageUri = Uri.parse("android.resource://" + getPackageName()+ "/drawable/" + "red_little_monster_blue");
                     //si crea la stringa che conterra' il punteggio
-                    String current_score = player+", "+score+" pt";
+                    String current_score = player+" "+score+" pt";
                     //si inserisce la stringa complessiva da condividere come testo
                     shareIntent.putExtra(Intent.EXTRA_TEXT, getResources().getString(R.string.score_send_message)+"\n"+current_score);
                     //si inserisce l'immagine da condividere
