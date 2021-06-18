@@ -135,7 +135,8 @@ public class ScoreActivity extends AppCompatActivity {
                     //si crea la stringa che conterra' il punteggio
                     String record_score = best_player+" "+highscore+" pt";
                     //si inserisce la stringa complessiva da condividere come testo
-                    shareIntent.putExtra(Intent.EXTRA_TEXT, getResources().getString(R.string.record_send_message)+"\n"+record_score);
+                    shareIntent.putExtra(Intent.EXTRA_TEXT, getResources().getString(R.string.record_send_message)+
+                            "\n"+record_score+"\n"+getResources().getString(R.string.app_link));
                     //si inserisce l'immagine da condividere
                     shareIntent.putExtra(Intent.EXTRA_STREAM, imageUri);
                     //si specifa il tipo file da condividere (immagine/estensione)
@@ -202,7 +203,8 @@ public class ScoreActivity extends AppCompatActivity {
                     //si crea la stringa che conterra' il punteggio
                     String current_score = player+" "+score+" pt";
                     //si inserisce la stringa complessiva da condividere come testo
-                    shareIntent.putExtra(Intent.EXTRA_TEXT, getResources().getString(R.string.score_send_message)+"\n"+current_score);
+                    shareIntent.putExtra(Intent.EXTRA_TEXT, getResources().getString(R.string.score_send_message)+
+                            "\n"+current_score+"\n"+getResources().getString(R.string.app_link));
                     //si inserisce l'immagine da condividere
                     shareIntent.putExtra(Intent.EXTRA_STREAM, imageUri);
                     //si specifa il tipo file da condividere (immagine/estensione)
