@@ -152,7 +152,9 @@ In questa versione del gioco √® stata prevista, per il giocatore, la possibilit√
     - ~~condividere la mappa di gioco completa~~
     - ~~condividere il punteggio~~ 
     - ~~condividere l'attuale nome del giocatore, se specificato~~
-    - condividere il link di dowload dell'app con href (hyperlink)
+    - condividere il link di download dell'app (github)
+      - ~~normale~~
+      - con href(hyperlink)
 
 - ~~cambiare titolo delle schermate dei comandi di gioco~~
 

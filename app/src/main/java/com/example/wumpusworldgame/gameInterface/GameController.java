@@ -565,7 +565,9 @@ public class GameController {
                 }//fi
                 else {
                     //se non si dispone dei permessi lo screenshot non si puo' condividere
-                    Toast.makeText(currentActivity, "So sorry, but you can't share your rank", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(currentActivity,
+                            currentActivity.getString(R.string.memory_access_denied),
+                            Toast.LENGTH_LONG).show();
                 }//esle
             }//onClick(DialogInterface, int)
         });//setPositiveButton(String, DialogInterface)
@@ -690,11 +692,10 @@ public class GameController {
         shareIntent.setType("image/*");
         //si crea la stringa che conterra' il punteggio
         String current_score = player+" "+score+" pt";
-
-        String site = "<a href=http://www.google.com >Google</a>";
-        shareIntent.putExtra(android.content.Intent.EXTRA_TEXT,site);
         //si specifica il testo da condividere oltre l'immagine
-        //shareIntent.putExtra(android.content.Intent.EXTRA_TEXT,currentActivity.getResources().getString(R.string.share_game_map_and_score)+"\n"+current_score);
+        shareIntent.putExtra(android.content.Intent.EXTRA_TEXT,
+                currentActivity.getString(R.string.share_game_map_and_score)
+                        +current_score+"\n"+currentActivity.getString(R.string.app_link));
         //si invia l'immagine
         shareIntent.putExtra(Intent.EXTRA_STREAM, uri);
         //blocco try-catch sulla scelta delle app esterne per il servizio di condivisione
@@ -703,7 +704,8 @@ public class GameController {
             currentActivity.startActivity(Intent.createChooser(shareIntent, "Share With"));
         }catch (ActivityNotFoundException e){
             //nessuna app e' adatta a svolgere questa azione
-            Toast.makeText(currentActivity, "No App Available", Toast.LENGTH_SHORT).show();
+            Toast.makeText(currentActivity,currentActivity.getString(R.string.no_app),
+                    Toast.LENGTH_SHORT).show();
         }//end try-catch
     }//shareScreenshot(File)
 

@@ -214,12 +214,12 @@
     <string name="wasted_shot">Ooops...La tua arma ormai è andata, come la possibilità
         di battere il nemico!</string>
     <string name="failed_shot">Che mira pessima...Non hai colpito niente!</string>
-
     <!-- messaggio della dialog condivisione del punteggio attuale -->
     <string name="game_score_share_message">Ma...Hey, sfida i tuoi amici al gioco del mondo del Wumpus!
         \n\nEcco il tuo punteggio:\n</string>
     <string name="share_game_map_and_score">Hey, sfidami al gioco del mondo del Wumpus!
         \nQuesta è il territorio che ho esplorato e \ne questo è il mio punteggio:\n</string>
-    <string name="readyandroid"><![CDATA[<a href="https://readyandroid.wordpress.com/">readyandroid</a>]]></string>
-
+    <string name="memory_access_denied">So sorry, but you can\'t share it if you don\'t agree memory access</string>
+    <string name="no_app">No App Available</string>
+    <string name="app_link">Scarica qui l\'app: https://github.com/ivochan/WumpusWorldGame</string>
 </resources>
