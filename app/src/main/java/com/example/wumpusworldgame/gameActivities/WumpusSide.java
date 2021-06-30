@@ -186,7 +186,7 @@ public class WumpusSide extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //si muove il personaggio verso sopra
-                GameController.gamePadMove(Direction.UP,gm,em,game_message,shots,data,game_data,list,adapter);
+                GameController.gamePadMove(Direction.UP,gm,em,game_message,shots,adapter);
             }//onClick(View)
         });//setOnClickListener(View.OnClickListener())
 
@@ -195,7 +195,7 @@ public class WumpusSide extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //si muove il personaggio verso sotto
-                GameController.gamePadMove(Direction.DOWN,gm,em,game_message,shots,data,game_data,list,adapter);
+                GameController.gamePadMove(Direction.DOWN,gm,em,game_message,shots,adapter);
             }//onClick(View)
         });//setOnClickListener(View.OnClickListener())
 
@@ -204,7 +204,7 @@ public class WumpusSide extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //si muove il personaggio verso sinistra
-                GameController.gamePadMove(Direction.LEFT,gm,em,game_message,shots,data,game_data,list,adapter);
+                GameController.gamePadMove(Direction.LEFT,gm,em,game_message,shots,adapter);
             }//onClick(View)
         });//setOnClickListener(View.OnClickListener())
 
@@ -213,7 +213,7 @@ public class WumpusSide extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //si muove il personaggio verso destra
-                GameController.gamePadMove(Direction.RIGHT,gm,em,game_message,shots,data,game_data,list,adapter);
+                GameController.gamePadMove(Direction.RIGHT,gm,em,game_message,shots,adapter);
             }//onClick(View)
         });//setOnClickListener(View.OnClickListener())
 

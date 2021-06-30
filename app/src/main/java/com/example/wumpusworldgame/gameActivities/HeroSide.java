@@ -104,8 +104,6 @@ public class HeroSide extends AppCompatActivity {
         //dati della matrice di gioco
         game_data = new LinkedList<>();
 
-
-
         //##### inizializzazioni dei pulsanti #####
         hit_button = findViewById(R.id.imageButtonHIT);
         up_button = findViewById(R.id.imageButtonUP);
@@ -188,7 +186,7 @@ public class HeroSide extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //si muove il personaggio verso sopra
-                GameController.gamePadMove(Direction.UP,gm,em,game_message,shots,data,game_data,list,adapter);
+                GameController.gamePadMove(Direction.UP,gm,em,game_message,shots,adapter);
             }//onClick(View)
         });//setOnClickListener(View.OnClickListener())
 
@@ -197,7 +195,7 @@ public class HeroSide extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //si muove il personaggio verso sotto
-                GameController.gamePadMove(Direction.DOWN,gm,em,game_message,shots,data,game_data,list,adapter);
+                GameController.gamePadMove(Direction.DOWN,gm,em,game_message,shots,adapter);
             }//onClick(View)
         });//setOnClickListener(View.OnClickListener())
 
@@ -206,7 +204,7 @@ public class HeroSide extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //si muove il personaggio verso sinistra
-                GameController.gamePadMove(Direction.LEFT,gm,em,game_message,shots,data,game_data,list,adapter);
+                GameController.gamePadMove(Direction.LEFT,gm,em,game_message,shots,adapter);
                 }//onClick(View)
         });//setOnClickListener(View.OnClickListener())
 
@@ -215,9 +213,7 @@ public class HeroSide extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //si muove il personaggio verso destra
-                GameController.gamePadMove(Direction.RIGHT,gm,em,game_message,shots,data,game_data,list,adapter);
-                adapter.notifyDataSetChanged();
-                GameController.endGame("");
+                GameController.gamePadMove(Direction.RIGHT,gm,em,game_message,shots,adapter);
             }//onClick(View)
         });//setOnClickListener(View.OnClickListener())
 

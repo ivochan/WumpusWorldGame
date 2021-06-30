@@ -44,10 +44,13 @@ public class GameController {
     //##### attributi di classe #####
     //activity corrente
     private static Activity currentActivity;
+    //linkedList contentente gli elementi della mappa di esplorazione
+    private static LinkedList<String> update_data=new LinkedList<>();
+
 
     //##### metodi utilizzati nella schermata di gioco #####
 
-    /** metodo gamePadMove(Direction,GameMap,GameMap,TextView,TextView,LinkedList<String>,GridView,GridViewCustomAdapter): void
+    /** metodo gamePadMove(Direction,GameMap,GameMap,TextView,TextView,LinkedList<String>,GridViewCustomAdapter): void
      * questo metodo viene utilizzato per gestire le azioni che dovranno essere
      * effettuate dai pulsanti che costituiscono, virtualmente, il "gamepad", cioe'
      * il controller di gioco tramite cui l'utente puo' effetttuare le sue mosse.
@@ -56,12 +59,9 @@ public class GameController {
      * @param em
      * @param game_message
      * @param shots
-     * @param data
-     * @param list
      * @param adapter
      */
-    public static void gamePadMove(Direction direction, GameMap gm, GameMap em, TextView game_message, TextView shots, LinkedList<String> data, LinkedList<String> game_data, GridView list, GridViewCustomAdapter adapter) {
-        adapter.notifyDataSetChanged();
+    public static void gamePadMove(Direction direction, GameMap gm, GameMap em, TextView game_message, TextView shots, GridViewCustomAdapter adapter) {
         //si controlla se la partita e' iniziata
         if(Starter.getGameStart()) {
             //si controlla se il giocatore ha richiesto di colpire
@@ -71,7 +71,7 @@ public class GameController {
             }//fi
             else {
                 //se non ha richiesto di colpire, allora si deve muovere il pg
-                GameController.movePlayer(direction,gm,em,game_message,data,game_data,list,adapter);
+                GameController.movePlayer(direction,gm,em,game_message,adapter);
             }//else
         }//fi
 
@@ -112,50 +112,40 @@ public class GameController {
      * @param gm
      * @param em
      * @param game_message
-     * @param data
-     * @param list
      * @param adapter
      */
-    private static void movePlayer(Direction direction, GameMap gm, GameMap em, TextView game_message, LinkedList<String> data, LinkedList<String> game_data,GridView list, GridViewCustomAdapter adapter){
-        //si realizza la mossa, aggiornando la matrice di esplorazione
-        data = GameController.makePGmove(direction, gm, em, game_message, data, adapter, list);
-        //si aggiorna l'adapter
-        adapter.swapItems(data);
-        //oggetto che permette di visualizzare i dati
-        list.setAdapter(adapter);
-    }//movePlayer()
-
-    /** metodo makePGmove(Direction,GameMap,GameMap,TextView,TextView,LinkedList<String>)
-     *
-     * @param direction
-     * @param gm
-     * @param em
-     * @param game_message
-     * @param data
-     * @return
-     */
-    private static LinkedList<String> makePGmove(Direction direction, GameMap gm, GameMap em, TextView game_message, LinkedList<String> data, GridViewCustomAdapter adapter, GridView list) {
+    private static void movePlayer(Direction direction, GameMap gm, GameMap em, TextView game_message, GridViewCustomAdapter adapter){
         //si riceve la mossa che il giocatore vuole effettuare
         int status = movePG(direction,gm, em);
         //si effettua la mossa
         String info = makeMoveInTheMap(status,gm);
-        endGame("");
         //si stampa un messaggio informativo sullo stato della mossa
         game_message.setText(info);
+        //si aggiorna la linked list che contiene la mappa di esplorazione da visualizzare
+        updateExplorationMap(gm,em);
+        //si aggiorna l'adapter
+        adapter.swapItems(update_data);
+    }//movePlayer()
+
+    /**
+     *
+     * @param gm
+     * @param em
+     */
+    private static void updateExplorationMap(GameMap gm, GameMap em){
         //dimensioni della matrice di gioco, analoghe a quelle della matrice di esplorazione
         int r = gm.getRows();
         int c = gm.getColumns();
         //##### matrice di esplorazione #####
-        data = new LinkedList<>();
+        update_data.clear();
         //si iterano le celle della matrice
         for (int i = 0; i < r; i++) {
             for(int j=0;j<c;j++) {
                 //si aggiunge la cella corrente alla LinkedList
-                data.add(em.getMapCell(i,j).statusToString());
+                update_data.add(em.getMapCell(i,j).statusToString());
             }//for colonne
         }//for righe
-        return data;
-    }//makePGmove
+    }//updateExplorationMap()
 
     /** metodo movePG(Direction, int[], GameMap, GameMap): int
      * questo metodo si occupa di verificare se la mossa scelta dal giocatore sia
@@ -166,7 +156,7 @@ public class GameController {
      * @param move: Direction, direzione in cui effettuare lo spostamento del pg;
      * @param gm: GameMap, mappa che racchiude le informazioni con cui e' stato configurata
      * 					   la partita di gioco corrente;
-     * @param ge: GameMap, mappa che racchiude le infomazioni del gioco conosciute all'utente,
+     * @param em: GameMap, mappa che racchiude le infomazioni del gioco conosciute all'utente,
      * 					   come le celle gia' visitate;
      * @return status: int, intero che indica il risultato dell'esecuzione di questo metodo,
      * 				   nello specifico, se questa variabile assume il valore:
@@ -176,76 +166,75 @@ public class GameController {
      * 				 -  0, la mossa e' valida e il pg viene spostato, aggiornando la mappa di esplorazione
      * 					   e la sua posizione corrente, segnando la cella in cui si trovata prima come visitata.
      */
-      private static int movePG(Direction move, GameMap gm, GameMap ge) {
-        //vettore della posizione successiva
-        int [] cell_pos;
-        //si preleva la posizione del pg
-        int [] pg_pos = PlayableCharacter.getPGposition();
-        //si controlla il risultato della direzione scelta
-        cell_pos = Controller.findCell(move, pg_pos);
-        //la cella indicata da next_pos esiste
-        if(Controller.checkCell(cell_pos, gm)) {
-            //si controlla il contenuto della cella in questione
-            CellStatus cs = gm.getMapCell(cell_pos[0], cell_pos[1]).getCellStatus();
-            //controllo sullo stato
-            if (cs.equals(CellStatus.ENEMY)) {
-                //il pg e' stato ucciso dal nemico
-                //si aggiorna la posizione
-                PlayableCharacter.setPGposition(cell_pos);
-                //si aggiunge alla mappa di esplorazione
-                ge.getMapCell(cell_pos[0], cell_pos[1]).
-                        copyCellSpecs(gm.getMapCell(cell_pos[0], cell_pos[1]));
-                //si restituisce lo stato
-                return 1;
-            }//fi
-            else if (cs.equals(CellStatus.FORBIDDEN)) {
-                //questa cella e' vietata perche' e' un sasso
-                //si aggiunge alla mappa di esplorazione
-                ge.getMapCell(cell_pos[0], cell_pos[1]).
-                        copyCellSpecs(gm.getMapCell(cell_pos[0], cell_pos[1]));
-                //il pg rimane dove si trova
-                return -1;
-            }//fi
-            else if (cs.equals(CellStatus.AWARD)) {
-                //il pg vince
-                //si aggiorna la posizione
-                PlayableCharacter.setPGposition(cell_pos);
-                //si aggiunge alla mappa di esplorazione
-                ge.getMapCell(cell_pos[0], cell_pos[1]).
-                        copyCellSpecs(gm.getMapCell(cell_pos[0], cell_pos[1]));
-                //si restituisce lo stato
-                return 2;
-            }//fi
-            else if (cs.equals(CellStatus.DANGER)) {
-                //il pg e' caduto nella trappola
-                //si aggiorna la posizione
-                PlayableCharacter.setPGposition(cell_pos);
-                //si aggiunge alla mappa di esplorazione
-                ge.getMapCell(cell_pos[0], cell_pos[1]).
-                        copyCellSpecs(gm.getMapCell(cell_pos[0], cell_pos[1]));
-                //si restituisce lo stato
-                return 1;
-            }//fi
-            else { //CellStatus.SAFE
-                //il pg si trova in una cella libera
-                //la cella in cui si trovava prima il pg si segna come visitata
-                ge.getMapCell(pg_pos[0], pg_pos[1]).setCellStatus(CellStatus.OBSERVED);
-                //si aggiorna la posizione del pg
-                PlayableCharacter.setPGposition(cell_pos);
-                //si preleva il contenuto della cella in cui si trova attualmente il pg
-                Cell c = gm.getMapCell(cell_pos[0], cell_pos[1]);
-                //si copia questa cella nella matrice di esplorazione
-                ge.getMapCell(cell_pos[0], cell_pos[1]).copyCellSpecs(c);
-                //il contenuto di questa cella nella mappa di esplorazione e' il pg
-                ge.getMapCell(cell_pos[0], cell_pos[1]).setCellStatus(CellStatus.PG);
-                //si restituisce lo stato
-                return 0;
-            }//else
-        }//fi indici di mossa corretti
-        else {
-            //indici di mossa non validi
-            return -2;
-        }//esle
+      private static int movePG(Direction move, GameMap gm, GameMap em) {
+          //variabile ausiliaria
+          int status;
+          //vettore della posizione successiva
+          int [] cell_pos;
+          //si preleva la posizione del pg
+          int [] pg_pos = PlayableCharacter.getPGposition();
+          //si controlla il risultato della direzione scelta
+          cell_pos = Controller.findCell(move, pg_pos);
+          //la cella indicata da next_pos esiste
+          if(Controller.checkCell(cell_pos, gm)) {
+              //si controlla il contenuto della cella in questione
+              CellStatus cs = gm.getMapCell(cell_pos[0], cell_pos[1]).getCellStatus();
+              //controllo sullo stato
+              if (cs.equals(CellStatus.ENEMY)) {
+                  //il pg e' stato ucciso dal nemico
+                  //si aggiorna la posizione
+                  PlayableCharacter.setPGposition(cell_pos);
+                  //si aggiunge alla mappa di esplorazione
+                  em.getMapCell(cell_pos[0], cell_pos[1]).copyCellSpecs(gm.getMapCell(cell_pos[0], cell_pos[1]));
+                  //si aggiorna lo status
+                  status = 1;
+              }//fi
+              else if (cs.equals(CellStatus.DANGER)) {
+                  //il pg e' caduto nella trappola
+                  //si aggiorna la posizione
+                  PlayableCharacter.setPGposition(cell_pos);
+                  //si aggiunge alla mappa di esplorazione
+                  em.getMapCell(cell_pos[0], cell_pos[1]).copyCellSpecs(gm.getMapCell(cell_pos[0], cell_pos[1]));
+                  //si aggiorna lo status
+                  status = 1;
+              }//fi
+              else if (cs.equals(CellStatus.FORBIDDEN)) {
+                  //questa cella e' vietata perche' e' un sasso
+                  //si aggiunge alla mappa di esplorazione
+                  em.getMapCell(cell_pos[0], cell_pos[1]).copyCellSpecs(gm.getMapCell(cell_pos[0], cell_pos[1]));
+                  //il pg rimane dove si trova
+                  status = -1;
+              }//fi
+              else if (cs.equals(CellStatus.AWARD)) {
+                  //il pg vince
+                  //si aggiorna la posizione
+                  PlayableCharacter.setPGposition(cell_pos);
+                  //si aggiunge alla mappa di esplorazione
+                  em.getMapCell(cell_pos[0], cell_pos[1]).copyCellSpecs(gm.getMapCell(cell_pos[0], cell_pos[1]));
+                  //
+                  status = 2;
+              }//fi
+              else { //CellStatus.SAFE
+                  //il pg si trova in una cella libera
+                  //la cella in cui si trovava prima il pg si segna come visitata
+                  em.getMapCell(pg_pos[0], pg_pos[1]).setCellStatus(CellStatus.OBSERVED);
+                  //si aggiorna la posizione del pg
+                  PlayableCharacter.setPGposition(cell_pos);
+                  //si preleva il contenuto della cella in cui si trova attualmente il pg
+                  Cell c = gm.getMapCell(cell_pos[0], cell_pos[1]);
+                  //si copia questa cella nella matrice di esplorazione
+                  em.getMapCell(cell_pos[0], cell_pos[1]).copyCellSpecs(c);
+                  //il contenuto di questa cella nella mappa di esplorazione e' il pg
+                  em.getMapCell(cell_pos[0], cell_pos[1]).setCellStatus(CellStatus.PG);
+                  //si restituisce lo stato
+                  status = 0;
+              }//else
+          }//fi indici di mossa corretti
+          else {
+              //indici di mossa non validi
+              status = -2;
+          }//esle
+          return status;
     }//movePG(Direction, GameMap, GameMap)
 
     /** metodo makeMoveInTheMap(int, GameMap, GameMap): String
@@ -603,8 +592,7 @@ public class GameController {
                 //si visualizza la dialog
                 dialog.show();
             }
-        }, 100);
-
+        },1000 );
 
     }//endGame()
 
