@@ -73,6 +73,16 @@ public class GameController {
                 //se non ha richiesto di colpire, allora si deve muovere il pg
                 GameController.movePlayer(direction,gm,em,game_message,adapter);
             }//else
+
+            if(!Starter.getGameStart()) {
+                Thread t=new Thread() {
+                    public void run(){
+                      
+                        endGame("hai fatto qualcosa");
+                    }
+                };
+                t.start();
+            }
         }//fi
 
         //allora la partita e' conclusa
@@ -499,8 +509,6 @@ public class GameController {
      * partita, come disabilitare il flag di avvio del gioco e visualizzare il punteggio ottenuto.
      */
     public static void endGame(String result){
-        //si aggiorna il flag di fine della partita
-        //Starter.setGameStart(false);
         //TODO si aggiorna il punteggio
         //si preleva il file di salvataggio delle preferenze del giocatore
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(currentActivity);
@@ -584,16 +592,6 @@ public class GameController {
         //visualizzazione della dialog
         dialog.show();
 
-        //visualizzazione della dialog con ritardo
-        Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                //si visualizza la dialog
-                dialog.show();
-            }
-        },1000 );
-
     }//endGame()
 
     /** metodo settingDialog(Alert.Builder, String, String, String)
@@ -638,7 +636,6 @@ public class GameController {
      * e lo salva nella memoria esterna se i permessi di scrittura/lettura sono stati
      * approvati dall'utente.
      * @param view : View, oggetto del layout di cui effettuare lo screenshot.
-     * @return
      */
     private static File takeScreenshot(View view) {
         //inizializzazione del file da restituire
