@@ -10,6 +10,7 @@
 
 
     <ImageView
+        android:id="@+id/alert_image"
         android:layout_width="144dp"
         android:layout_height="137dp"
         android:contentDescription="@string/red_monster_image"

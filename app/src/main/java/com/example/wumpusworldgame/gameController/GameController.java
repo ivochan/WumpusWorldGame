@@ -1,4 +1,4 @@
-package com.example.wumpusworldgame.gameInterface;
+package com.example.wumpusworldgame.gameController;
 //serie di import
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
@@ -10,11 +10,10 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
-import android.text.Html;
-import android.text.Spanned;
+import android.os.Handler;
 import android.view.View;
-import android.widget.Button;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
@@ -26,7 +25,7 @@ import com.example.wumpusworldgame.services.Utility;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.LinkedList;
 import game.session.configuration.Starter;
 import game.session.controller.Controller;
 import game.session.controller.Direction;
@@ -45,14 +44,10 @@ public class GameController {
     //##### attributi di classe #####
     //activity corrente
     private static Activity currentActivity;
-    //valore del punteggio attuale
-    private String score;
-    //pulsante di condivisione de punteggio corrente
-    private Button score_share_button;
 
     //##### metodi utilizzati nella schermata di gioco #####
 
-    /** metodo gamePadMove(Direction,GameMap,GameMap,TextView,TextView,ArrayList<String>,GridView,GridViewCustomAdapter): void
+    /** metodo gamePadMove(Direction,GameMap,GameMap,TextView,TextView,LinkedList<String>,GridView,GridViewCustomAdapter): void
      * questo metodo viene utilizzato per gestire le azioni che dovranno essere
      * effettuate dai pulsanti che costituiscono, virtualmente, il "gamepad", cioe'
      * il controller di gioco tramite cui l'utente puo' effetttuare le sue mosse.
@@ -65,7 +60,8 @@ public class GameController {
      * @param list
      * @param adapter
      */
-    public static void gamePadMove(Direction direction, GameMap gm, GameMap em, TextView game_message, TextView shots, ArrayList<String> data, ArrayList<String> game_data, GridView list, GridViewCustomAdapter adapter){
+    public static void gamePadMove(Direction direction, GameMap gm, GameMap em, TextView game_message, TextView shots, LinkedList<String> data, LinkedList<String> game_data, GridView list, GridViewCustomAdapter adapter) {
+        adapter.notifyDataSetChanged();
         //si controlla se la partita e' iniziata
         if(Starter.getGameStart()) {
             //si controlla se il giocatore ha richiesto di colpire
@@ -78,11 +74,13 @@ public class GameController {
                 GameController.movePlayer(direction,gm,em,game_message,data,game_data,list,adapter);
             }//else
         }//fi
+
+        //allora la partita e' conclusa
         else {
-            //la partita e' conclusa
+            //messaggio di fine partita
             game_message.setText(R.string.end_game);
         }//else
-    }//gamePadMove(Direction,GameMap,GameMap,TextView,TextView,ArrayList<String>,GridView,GridViewCustomAdapter)
+    }//gamePadMove(Direction,GameMap,GameMap,TextView,TextView,LinkedList<String>,GridView,GridViewCustomAdapter)
 
     /** metodo gamePadHit(TextView): void
      * questo metodo realizza l'azione vera e propria che consente al giocatore di provare a
@@ -108,7 +106,7 @@ public class GameController {
 
     //##### metodi di gestione della mossa del pg #####
 
-    /** metodo movePlayer(Direction,GameMap,GameMap,TextView,TextView,ArrayList<String>,GridView,GridViewCustomAdapter)
+    /** metodo movePlayer(Direction,GameMap,GameMap,TextView,TextView,LinkedList<String>,GridView,GridViewCustomAdapter)
      *
      * @param direction
      * @param gm
@@ -118,16 +116,16 @@ public class GameController {
      * @param list
      * @param adapter
      */
-    private static void movePlayer(Direction direction, GameMap gm, GameMap em, TextView game_message, ArrayList<String> data, ArrayList<String> game_data,GridView list, GridViewCustomAdapter adapter){
+    private static void movePlayer(Direction direction, GameMap gm, GameMap em, TextView game_message, LinkedList<String> data, LinkedList<String> game_data,GridView list, GridViewCustomAdapter adapter){
         //si realizza la mossa, aggiornando la matrice di esplorazione
         data = GameController.makePGmove(direction, gm, em, game_message, data, adapter, list);
         //si aggiorna l'adapter
-        adapter = new GridViewCustomAdapter(GridViewCustomAdapter.getCurrentActivity(), data, game_data);
+        adapter.swapItems(data);
         //oggetto che permette di visualizzare i dati
         list.setAdapter(adapter);
     }//movePlayer()
 
-    /** metodo makePGmove(Direction,GameMap,GameMap,TextView,TextView,ArrayList<String>)
+    /** metodo makePGmove(Direction,GameMap,GameMap,TextView,TextView,LinkedList<String>)
      *
      * @param direction
      * @param gm
@@ -136,22 +134,23 @@ public class GameController {
      * @param data
      * @return
      */
-    private static ArrayList<String> makePGmove(Direction direction, GameMap gm, GameMap em, TextView game_message, ArrayList<String> data, GridViewCustomAdapter adapter, GridView list){
+    private static LinkedList<String> makePGmove(Direction direction, GameMap gm, GameMap em, TextView game_message, LinkedList<String> data, GridViewCustomAdapter adapter, GridView list) {
         //si riceve la mossa che il giocatore vuole effettuare
         int status = movePG(direction,gm, em);
         //si effettua la mossa
         String info = makeMoveInTheMap(status,gm);
+        endGame("");
         //si stampa un messaggio informativo sullo stato della mossa
         game_message.setText(info);
         //dimensioni della matrice di gioco, analoghe a quelle della matrice di esplorazione
         int r = gm.getRows();
         int c = gm.getColumns();
         //##### matrice di esplorazione #####
-        data = new ArrayList<>();
+        data = new LinkedList<>();
         //si iterano le celle della matrice
         for (int i = 0; i < r; i++) {
             for(int j=0;j<c;j++) {
-                //si aggiunge la cella corrente all'arraylist
+                //si aggiunge la cella corrente alla LinkedList
                 data.add(em.getMapCell(i,j).statusToString());
             }//for colonne
         }//for righe
@@ -257,7 +256,7 @@ public class GameController {
      *                      che e' stata effettuata, valutata in base al
      *                      valore della variabile statuts.
      */
-    private static String makeMoveInTheMap(int status, GameMap gm) {
+    private static String makeMoveInTheMap(int status, GameMap gm){
         //stringa del messaggio da passare alla dialog
         String result="";
         //variabile ausiliaria per la stringa di info sullo stato della mossa
@@ -312,7 +311,7 @@ public class GameController {
                 //messaggio di fine partita
                 info += "\n"+result;
                 //fine della partita
-                endGame(result);
+                Starter.setGameStart(false);
                 break;
             case 2:
                 //premio
@@ -322,7 +321,7 @@ public class GameController {
                 //messaggio di fine partita: vittoria
                 info += "\n"+result;
                 //fine della partita
-                endGame(result);
+                Starter.setGameStart(false);
                 break;
             default:
                 break;
@@ -511,8 +510,8 @@ public class GameController {
      * partita, come disabilitare il flag di avvio del gioco e visualizzare il punteggio ottenuto.
      */
     public static void endGame(String result){
-        //fine della partita
-        Starter.setGameStart(false);
+        //si aggiorna il flag di fine della partita
+        //Starter.setGameStart(false);
         //TODO si aggiorna il punteggio
         //si preleva il file di salvataggio delle preferenze del giocatore
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(currentActivity);
@@ -556,12 +555,14 @@ public class GameController {
              */
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                //si identifica il campo del latoyut di cui si vuole catturare la schermata
+                //si identifica il campo del layout di cui si vuole catturare la schermata
                 View end_game_map = currentActivity.findViewById(R.id.grid_view);
                 //si verificano i permessi di accesso alla memoria esterna
                 if(Utility.verifyStoragePermission(currentActivity)) {
                     //si dispone dei permessi quindi si effettua uno screenshot
-                    takeScreenshot(end_game_map,player,score);
+                    File imageFile = takeScreenshot(end_game_map);
+                    //si invia lo screenshot
+                    shareScreenshot(imageFile, player,score);
                 }//fi
                 else {
                     //se non si dispone dei permessi lo screenshot non si puo' condividere
@@ -572,11 +573,28 @@ public class GameController {
             }//onClick(DialogInterface, int)
         });//setPositiveButton(String, DialogInterface)
 
+
+        View view = currentActivity.findViewById(R.id.grid_view);
+
+        view.setDrawingCacheEnabled(true);
+        //si crea l'immagine bitmap di questo screenshot
+        Bitmap bitmap = Bitmap.createBitmap(view.getDrawingCache());
+        //si disabilita la possibilita' di tenerlo in cache
+        view.setDrawingCacheEnabled(false);
+
+        ImageView imageView = new ImageView(currentActivity);
+        imageView.setImageBitmap(bitmap);
+
         //si crea la dialog
         AlertDialog dialog = builder.create();
+
+
+
+        dialog.setView(imageView);
+
         //visualizzazione della dialog
         dialog.show();
-        /*
+
         //visualizzazione della dialog con ritardo
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
@@ -586,7 +604,8 @@ public class GameController {
                 dialog.show();
             }
         }, 100);
-        */
+
+
     }//endGame()
 
     /** metodo settingDialog(Alert.Builder, String, String, String)
@@ -600,6 +619,8 @@ public class GameController {
      * @param result: String, messaggio indicativo del risultato della partita;
      */
     private static void settingDialog(AlertDialog.Builder builder, String share_message, String player, String score, String result){
+        //si assegna un layout alla dialog
+        builder.setView(R.layout.alert_dialog);
         //si definisce il testo del titolo
         TextView textView = new TextView(currentActivity);
         //testo del titolo della dialog
@@ -628,9 +649,12 @@ public class GameController {
      * questo metodo effettua uno screenshot dell'oggetto view che riceve come parametro
      * e lo salva nella memoria esterna se i permessi di scrittura/lettura sono stati
      * approvati dall'utente.
-     * @param view: View, oggetto del layout di cui effettuare lo screenshot.
+     * @param view : View, oggetto del layout di cui effettuare lo screenshot.
+     * @return
      */
-    private static void takeScreenshot(View view, String player, String score) {
+    private static File takeScreenshot(View view) {
+        //inizializzazione del file da restituire
+        File imageFile = null;
         //blocco try-catch per la creazione del file
         try {
             //si crea la cartella in cui conservare il file
@@ -650,7 +674,7 @@ public class GameController {
             //si disabilita la possibilita' di tenerlo in cache
             view.setDrawingCacheEnabled(false);
             //si memorizza il file con il contenuto bitmap nel path definito prima
-            File imageFile = new File(path);
+            imageFile = new File(path);
             //si crea il file vero e proprio
             FileOutputStream fileOutputStream = new FileOutputStream(imageFile);
             //si comprime la qualita' del file di tipo immagine
@@ -659,12 +683,13 @@ public class GameController {
             fileOutputStream.flush();
             //si chiude il flusso di scrittura
             fileOutputStream.close();
-            //si richiama il metodo per condividere lo screenshot come file immagine
-            shareScreenshot(imageFile, player, score);
+            //fine del processo
         }catch (IOException e) {
             //errore
             e.printStackTrace();
         }//end try-catch
+        // si restituisce il file immagine creato
+        return imageFile;
     }//takeScreenShot(View)
 
     /** metodo shareScreenshot(File): void
@@ -708,5 +733,7 @@ public class GameController {
                     Toast.LENGTH_SHORT).show();
         }//end try-catch
     }//shareScreenshot(File)
+
+
 
 }//end GameController

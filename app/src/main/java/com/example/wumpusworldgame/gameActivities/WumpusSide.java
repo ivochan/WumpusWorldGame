@@ -14,11 +14,11 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceManager;
 import com.example.wumpusworldgame.R;
-import com.example.wumpusworldgame.gameInterface.GameController;
-import com.example.wumpusworldgame.gameInterface.GridViewCustomAdapter;
+import com.example.wumpusworldgame.gameController.GameController;
+import com.example.wumpusworldgame.gameController.GridViewCustomAdapter;
 import com.example.wumpusworldgame.gameMenuItems.gameTutorials.WumpusModeTutorial;
 import com.example.wumpusworldgame.services.Utility;
-import java.util.ArrayList;
+import java.util.LinkedList;
 import game.session.controller.Direction;
 import game.structure.map.GameMap;
 import game.structure.map.MapConfiguration;
@@ -46,9 +46,9 @@ public class WumpusSide extends AppCompatActivity {
     //adapter per la matrice di esplorazione
     private GridViewCustomAdapter adapter;
     //dati da mostrare nella matrice di esplorazione
-    private ArrayList<String> data;
+    private LinkedList<String> data;
     //dati della matrice di gioco
-    private ArrayList<String> game_data;
+    private LinkedList<String> game_data;
     //##### campi di testo #####
     //messaggi di gioco
     private TextView game_message;
@@ -97,9 +97,9 @@ public class WumpusSide extends AppCompatActivity {
         intro_message = getResources().getString(R.string.game_message_intro)+" "+player_name+"!";
 
         //dati da mostrare nella matrice di esplorazione
-        data = new ArrayList<>();
+        data = new LinkedList<>();
         //dati della matrice di gioco
-        game_data = new ArrayList<>();
+        game_data = new LinkedList<>();
 
         //##### inizializzazioni dei pulsanti #####
         hit_button = findViewById(R.id.imageButtonHIT);
@@ -135,7 +135,7 @@ public class WumpusSide extends AppCompatActivity {
         //si iterano le celle della matrice
         for (int i = 0; i < r; i++) {
             for(int j=0;j<c;j++) {
-                //si aggiunge la cella corrente all'arraylist
+                //si aggiunge la cella corrente alla LinkedList
                 game_data.add(gm.getMapCell(i,j).statusToString());
             }//for colonne
         }//for righe
@@ -145,7 +145,7 @@ public class WumpusSide extends AppCompatActivity {
         //si iterano le celle della matrice
         for (int i = 0; i < r; i++) {
             for(int j=0;j<c;j++) {
-                //si aggiunge la cella corrente all'arraylist
+                //si aggiunge la cella corrente alla LinkedList
                 data.add(em.getMapCell(i,j).statusToString());
             }//for colonne
         }//for righe
@@ -157,6 +157,8 @@ public class WumpusSide extends AppCompatActivity {
         list = findViewById(R.id.grid_view);
         //oggetto che permette di visualizzare i dati
         list.setAdapter(adapter);
+
+        //configurazioni da fare all'avvio della partita
 
         //configurazioni da fare all'avvio della partita
         sensor_info = GameController.linkStart(this, gm);
