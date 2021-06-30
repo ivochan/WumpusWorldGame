@@ -77,11 +77,12 @@ public class GameController {
             if(!Starter.getGameStart()) {
                 Thread t=new Thread() {
                     public void run(){
-                      
+                        try{Thread.sleep(1000); }
+                        catch(Exception e){}
                         endGame("hai fatto qualcosa");
                     }
                 };
-                t.start();
+                t.run();
             }
         }//fi
 
@@ -90,6 +91,7 @@ public class GameController {
             //messaggio di fine partita
             game_message.setText(R.string.end_game);
         }//else
+
     }//gamePadMove(Direction,GameMap,GameMap,TextView,TextView,LinkedList<String>,GridView,GridViewCustomAdapter)
 
     /** metodo gamePadHit(TextView): void
