@@ -11,17 +11,15 @@ import android.view.View;
 import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.TextView;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceManager;
 import com.example.wumpusworldgame.R;
 import com.example.wumpusworldgame.gameController.GameController;
+import com.example.wumpusworldgame.gameController.GameStarter;
 import com.example.wumpusworldgame.gameController.GridViewCustomAdapter;
 import com.example.wumpusworldgame.gameMenuItems.gameTutorials.HeroModeTutorial;
 import com.example.wumpusworldgame.services.Utility;
 import java.util.LinkedList;
-
-import game.session.configuration.Starter;
 import game.session.controller.Direction;
 import game.structure.map.GameMap;
 import game.structure.map.MapConfiguration;
@@ -69,6 +67,8 @@ public class HeroSide extends AppCompatActivity {
     private ImageButton down_button;
     private ImageButton left_button;
     private ImageButton right_button;
+
+    private GameStarter starter;
 
     /** metodo onCreate(Bunde): void
      * ACTIVITY CREATA
@@ -170,6 +170,22 @@ public class HeroSide extends AppCompatActivity {
         //verifica dell'esecuzione della traccia audio
         Utility.musicPlaying(mp, this);
 
+        starter = new GameStarter(true);
+
+
+        starter.setOnGameStartChangeListener(new GameStarter.OnGameStartChangeListener(){
+            @Override
+            public void onGameStartChanged(boolean newValue) {
+                Thread t=new Thread() {
+                    public void run(){
+                        try{Thread.sleep(1000); }
+                        catch(Exception e){}
+                        GameController.endGame("hai fatto qualcosa");
+                    }
+                };
+                t.run();
+            }
+        });
         //##### gestione dei pulsanti #####
 
         //pulsante HIT
@@ -221,6 +237,9 @@ public class HeroSide extends AppCompatActivity {
 
     //##### metodi per la gestione dell'activity #####
 
+    public GameStarter getFlag(){
+        return starter;
+    }
     /** metodo onStart(): void
      * ACTIVITY VISIBILE
      * questo metodo si occupa di attivare le funzionalita'
