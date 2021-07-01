@@ -73,7 +73,6 @@ public class GameController {
             }//else
 
         }//fi
-
         //allora la partita e' conclusa
         else {
             //messaggio di fine partita

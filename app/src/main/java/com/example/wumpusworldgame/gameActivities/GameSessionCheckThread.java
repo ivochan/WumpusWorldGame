@@ -1,7 +1,7 @@
 package com.example.wumpusworldgame.gameActivities;
+import com.example.wumpusworldgame.gameController.GameController;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
-
 //serie di import
 public class GameSessionCheckThread extends  Thread{
 
@@ -22,11 +22,15 @@ public class GameSessionCheckThread extends  Thread{
 
     @Override
     public void run() {
-        while(true) {
             try {
                 l.lock();
-                while(!HeroSide.endGame())c.await();
+                while(!HeroSide.endGame()) {
+                    c.await();
+                }
+
+                GameController.endGameSession("c");
                 Thread.sleep(500);
+
             } catch(Exception e) {
                 e.printStackTrace();
                 System.exit(0);
@@ -34,7 +38,6 @@ public class GameSessionCheckThread extends  Thread{
                 l.unlock();
             }
             System.out.println("è stato premuto il pulsante. Thread "+id+" ha reagito!");
-        }
     }//run
 
 }//end

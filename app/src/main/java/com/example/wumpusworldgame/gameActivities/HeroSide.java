@@ -42,6 +42,7 @@ public class HeroSide extends AppCompatActivity {
     private static boolean endGame=false;
 
 
+
     //intent utilizzato per riseguire il metodo onCreate() di questa classe
     private Intent starterIntent;
     //file delle preferenze
@@ -54,7 +55,7 @@ public class HeroSide extends AppCompatActivity {
     private GameMap gm;
     //matrice di esplorazione
     private GameMap em;
-    //oggetto gridview per la matrice di esplorazione
+    //per la matrice di esplorazione
     private GridView list;
     //adapter per la matrice di esplorazione
     private GridViewCustomAdapter adapter;
@@ -80,7 +81,6 @@ public class HeroSide extends AppCompatActivity {
     private ImageButton left_button;
     private ImageButton right_button;
 
-
     /** metodo onCreate(Bunde): void
      * ACTIVITY CREATA
      * questo metodo viene invocato alla creazione dell'Activity,
@@ -104,11 +104,11 @@ public class HeroSide extends AppCompatActivity {
         //si preleva il file di salvataggio delle preferenze
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         //si identifica la preference relativa al nome del giocatore corrente
-        player_name = sharedPreferences.getString("prefUsername","");
+        player_name = sharedPreferences.getString("prefUsername", "");
         //si identifica il campo di testo nel layout
         game_message = findViewById(R.id.message_box);
         //si compone il messaggio di benvenuto
-        intro_message = getResources().getString(R.string.game_message_intro)+" "+player_name+"!";
+        intro_message = getResources().getString(R.string.game_message_intro) + " " + player_name + "!";
 
         //dati da mostrare nella matrice di esplorazione
         data = new LinkedList<>();
@@ -128,11 +128,10 @@ public class HeroSide extends AppCompatActivity {
         score = findViewById(R.id.score_value);
 
         //scelta della clip audio
-        mp = MediaPlayer.create(HeroSide.this,R.raw.the_good_fight);
+        mp = MediaPlayer.create(HeroSide.this, R.raw.the_good_fight);
 
         //##### schermata di caricamento #####
         Utility.showLoadingScreen(this, getLayoutInflater());
-
         //##### schermata di gioco #####
 
         //creazione della matrice di gioco
@@ -140,7 +139,7 @@ public class HeroSide extends AppCompatActivity {
         //creazione della matrice di esplorazione
         em = new GameMap();
         //riempimento delle matrici
-        MapConfiguration.init(gm,em);
+        MapConfiguration.init(gm, em);
         //dimensioni della matrice di gioco, analoghe a quelle della matrice di esplorazione
         int rows = gm.getRows();
         int columns = gm.getColumns();
@@ -149,9 +148,9 @@ public class HeroSide extends AppCompatActivity {
 
         //si iterano le celle della matrice
         for (int i = 0; i < rows; i++) {
-            for(int j=0;j<columns;j++) {
+            for (int j = 0; j < columns; j++) {
                 //si aggiunge la cella corrente alla LinkedList
-                game_data.add(gm.getMapCell(i,j).statusToString());
+                game_data.add(gm.getMapCell(i, j).statusToString());
             }//for colonne
         }//for righe
 
@@ -159,32 +158,33 @@ public class HeroSide extends AppCompatActivity {
 
         //si iterano le celle della matrice
         for (int i = 0; i < rows; i++) {
-            for(int j=0;j<columns;j++) {
+            for (int j = 0; j < columns; j++) {
                 //si aggiunge la cella corrente alla LinkedList
-                data.add(em.getMapCell(i,j).statusToString());
+                data.add(em.getMapCell(i, j).statusToString());
             }//for colonne
         }//for righe
 
         //si crea l'adapter per il gridlayout della matrice di esplorazione
+        //GridViewCustomAdapter adapter = new GridViewCustomAdapter(this, data);
         adapter = new GridViewCustomAdapter(this, data, game_data);
         //si visualizza la matrice di esplorazione
         list = findViewById(R.id.grid_view);
         //oggetto che permette di visualizzare i dati
         list.setAdapter(adapter);
 
+        //configurazioni da fare all'avvio della partita
+
+        //configurazioni da fare all'avvio della partita
         sensor_info = GameController.linkStart(this, gm);
         //si concatena questa stringa a quella di inizio partita
-        intro_message += "\n"+sensor_info;
+        intro_message += "\n" + sensor_info;
         //si visualizza la frase di inizio partita
         game_message.setText(intro_message);
 
         //verifica dell'esecuzione della traccia audio
         Utility.musicPlaying(mp, this);
 
-
         //##### gestione dei pulsanti #####
-
-        Starter.setGameStart(true);
 
         //pulsante HIT
         hit_button.setOnClickListener(new View.OnClickListener() {
@@ -195,49 +195,72 @@ public class HeroSide extends AppCompatActivity {
             }//onClick(View)
         });//setOnClickListener(View.OnClickListener())
 
-            //pulsante UP
-            up_button.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    //si muove il personaggio verso sopra
-                    GameController.gamePadMove(Direction.UP, gm, em, game_message, shots, adapter);
-                }//onClick(View)
-            });//setOnClickListener(View.OnClickListener())
+        //pulsante UP
+        up_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //si muove il personaggio verso sopra
+                GameController.gamePadMove(Direction.UP,gm,em,game_message,shots,adapter);
+            }//onClick(View)
+        });//setOnClickListener(View.OnClickListener())
 
-            //pulsante DOWN
-            down_button.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    //si muove il personaggio verso sotto
-                    GameController.gamePadMove(Direction.DOWN, gm, em, game_message, shots, adapter);
-                }//onClick(View)
-            });//setOnClickListener(View.OnClickListener())
+        //pulsante DOWN
+        down_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //si muove il personaggio verso sotto
+                GameController.gamePadMove(Direction.DOWN,gm,em,game_message,shots,adapter);
+            }//onClick(View)
+        });//setOnClickListener(View.OnClickListener())
 
-            //pulsante LEFT
-            left_button.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    //si muove il personaggio verso sinistra
-                    GameController.gamePadMove(Direction.LEFT, gm, em, game_message, shots, adapter);
-                }//onClick(View)
-            });//setOnClickListener(View.OnClickListener())
+        //pulsante LEFT
+        left_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //si muove il personaggio verso sinistra
+                GameController.gamePadMove(Direction.LEFT,gm,em,game_message,shots,adapter);
+            }//onClick(View)
+        });//setOnClickListener(View.OnClickListener())
 
-            //pulsante RIGHT
-            right_button.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    //si muove il personaggio verso destra
-                    GameController.gamePadMove(Direction.RIGHT, gm, em, game_message, shots, adapter);
-                }//onClick(View)
-            });//setOnClickListener(View.OnClickListener())
-        
+        //pulsante RIGHT
+        right_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //si muove il personaggio verso destra
+                GameController.gamePadMove(Direction.RIGHT,gm,em,game_message,shots,adapter);
+            }//onClick(View)
+        });//setOnClickListener(View.OnClickListener())
+
+
+        Thread t = new GameSessionCheckThread(l, c);
+
+        t.start();
+
+              try {
+                l.lock();
+
+                if (!Starter.getGameStart()) {
+                    endGame = true;
+                    c.signal();
+                }
+
+            }
+            catch (Exception e) {
+                System.err.println("Il software e' stato chiuso.");
+                System.exit(0);
+            }
+            finally {
+                l.unlock();
+            }
+
+
     }//onCreate(Bundle)
 
-    public static boolean endGame(){
-        return endGame;
-    }
     //##### metodi per la gestione dell'activity #####
 
+    public  static boolean endGame(){
+        return  endGame;
+    }
     /** metodo onStart(): void
      * ACTIVITY VISIBILE
      * questo metodo si occupa di attivare le funzionalita'
