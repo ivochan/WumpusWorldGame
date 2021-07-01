@@ -72,17 +72,6 @@ public class GameController {
                 GameController.movePlayer(direction,gm,em,game_message,adapter);
             }//else
 
-            if(!Starter.getGameStart()) {
-                Thread t=new Thread() {
-                    public void run(){
-                        try{Thread.sleep(1000); }
-                        catch(Exception e){}
-                        endGame("hai fatto qualcosa");
-                    }
-                };
-                t.run();
-            }
-
         }//fi
 
         //allora la partita e' conclusa
@@ -505,11 +494,11 @@ public class GameController {
 
     //##### metodi di gestione della partita: chiusura #####
 
-    /** metodo endGame(): void
+    /** metodo endGameSession(): void
      * questo metodo si occupa di eseguire delle operazioni necessarie alla chiusura della
      * partita, come disabilitare il flag di avvio del gioco e visualizzare il punteggio ottenuto.
      */
-    public static void endGame(String result){
+    public static void endGameSession(String result){
         //TODO si aggiorna il punteggio
         //si preleva il file di salvataggio delle preferenze del giocatore
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(currentActivity);
@@ -593,7 +582,7 @@ public class GameController {
         //visualizzazione della dialog
         dialog.show();
 
-    }//endGame()
+    }//endGameSession()
 
     /** metodo settingDialog(Alert.Builder, String, String, String)
      * questo emtodo si occupa di configurare il layout della dialog

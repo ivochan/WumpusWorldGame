@@ -19,6 +19,10 @@ import com.example.wumpusworldgame.gameController.GridViewCustomAdapter;
 import com.example.wumpusworldgame.gameMenuItems.gameTutorials.HeroModeTutorial;
 import com.example.wumpusworldgame.services.Utility;
 import java.util.LinkedList;
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+
 import game.session.configuration.Starter;
 import game.session.controller.Direction;
 import game.structure.map.GameMap;
@@ -29,6 +33,14 @@ import game.structure.map.MapConfiguration;
  */
 public class HeroSide extends AppCompatActivity {
     //##### attributi di classe #####
+
+
+    private static Lock l = new ReentrantLock(true);
+
+    private static Condition c = l.newCondition();
+
+    private static boolean endGame=false;
+
 
     //intent utilizzato per riseguire il metodo onCreate() di questa classe
     private Intent starterIntent;
@@ -130,14 +142,14 @@ public class HeroSide extends AppCompatActivity {
         //riempimento delle matrici
         MapConfiguration.init(gm,em);
         //dimensioni della matrice di gioco, analoghe a quelle della matrice di esplorazione
-        int r = gm.getRows();
-        int c = gm.getColumns();
+        int rows = gm.getRows();
+        int columns = gm.getColumns();
 
         //##### salvataggio della matrice di gioco #####
 
         //si iterano le celle della matrice
-        for (int i = 0; i < r; i++) {
-            for(int j=0;j<c;j++) {
+        for (int i = 0; i < rows; i++) {
+            for(int j=0;j<columns;j++) {
                 //si aggiunge la cella corrente alla LinkedList
                 game_data.add(gm.getMapCell(i,j).statusToString());
             }//for colonne
@@ -146,8 +158,8 @@ public class HeroSide extends AppCompatActivity {
         //##### visualizzazione della matrice di esplorazione #####
 
         //si iterano le celle della matrice
-        for (int i = 0; i < r; i++) {
-            for(int j=0;j<c;j++) {
+        for (int i = 0; i < rows; i++) {
+            for(int j=0;j<columns;j++) {
                 //si aggiunge la cella corrente alla LinkedList
                 data.add(em.getMapCell(i,j).statusToString());
             }//for colonne
@@ -174,14 +186,14 @@ public class HeroSide extends AppCompatActivity {
 
         Starter.setGameStart(true);
 
-            //pulsante HIT
-            hit_button.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    //si tenta il colpo
-                    GameController.gamePadHit(game_message);
-                }//onClick(View)
-            });//setOnClickListener(View.OnClickListener())
+        //pulsante HIT
+        hit_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //si tenta il colpo
+                GameController.gamePadHit(game_message);
+            }//onClick(View)
+        });//setOnClickListener(View.OnClickListener())
 
             //pulsante UP
             up_button.setOnClickListener(new View.OnClickListener() {
@@ -221,6 +233,9 @@ public class HeroSide extends AppCompatActivity {
         
     }//onCreate(Bundle)
 
+    public static boolean endGame(){
+        return endGame;
+    }
     //##### metodi per la gestione dell'activity #####
 
     /** metodo onStart(): void

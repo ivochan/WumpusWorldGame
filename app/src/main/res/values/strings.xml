@@ -53,13 +53,13 @@
         you should avoid to fall into the ditches, to be devoured by the monster
         and also to find out its immense treasure!
         \n\nInstead, if you are the mysterious <b>Wumpus</b>,
-        the creature's hiding in the depths of the gloomy forest,
+        the creature\'s hiding in the depths of the gloomy forest,
         you should run away from the hunter who is hard on your heels,
         avoiding his traps and find out the secret passage
         that will lead you to salvation.
         \n\nBy the way, whether you are the Wumpus or the Adventurer, enjoy yourself!
-        \n\nUh, I've almost forgot ...
-        \nIf you're lazy enough to gain the \"High Armchair Award\"
+        \n\nUh, I\'ve almost forgot ...
+        \nIf you\'re lazy enough to gain the \"High Armchair Award\"
         let me play for you using automatic game mode!
     </string>
     <string name="game_credits">It\'s me, Ivonne! I\'ve tried to develop this game...</string>
@@ -119,7 +119,7 @@
     <string name="share_score_title">Share your score!</string>
     <!-- messaggio della dialog di condivisione del record -->
     <string name="record_share_message">Hey, challenge your friends to Wumpus World Game!
-         \nWill they be able to beat your high score?\nHere's your best score:\n</string>
+         \nWill they be able to beat your high score?\nHere there\'s your best score:\n</string>
     <!-- messaggio da visualizzare alla condivisione del record -->
     <string name="record_send_message">Hey, are you able to beat my record at Wumpus World Game?
          \nThis is my best score:\n</string>
