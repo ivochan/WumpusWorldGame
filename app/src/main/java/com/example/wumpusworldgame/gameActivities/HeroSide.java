@@ -15,11 +15,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceManager;
 import com.example.wumpusworldgame.R;
 import com.example.wumpusworldgame.gameController.GameController;
-import com.example.wumpusworldgame.gameController.GameStarter;
 import com.example.wumpusworldgame.gameController.GridViewCustomAdapter;
 import com.example.wumpusworldgame.gameMenuItems.gameTutorials.HeroModeTutorial;
 import com.example.wumpusworldgame.services.Utility;
 import java.util.LinkedList;
+import game.session.configuration.Starter;
 import game.session.controller.Direction;
 import game.structure.map.GameMap;
 import game.structure.map.MapConfiguration;
@@ -68,7 +68,6 @@ public class HeroSide extends AppCompatActivity {
     private ImageButton left_button;
     private ImageButton right_button;
 
-    private GameStarter starter;
 
     /** metodo onCreate(Bunde): void
      * ACTIVITY CREATA
@@ -170,76 +169,60 @@ public class HeroSide extends AppCompatActivity {
         //verifica dell'esecuzione della traccia audio
         Utility.musicPlaying(mp, this);
 
-        starter = new GameStarter(true);
 
-
-        starter.setOnGameStartChangeListener(new GameStarter.OnGameStartChangeListener(){
-            @Override
-            public void onGameStartChanged(boolean newValue) {
-                Thread t=new Thread() {
-                    public void run(){
-                        try{Thread.sleep(1000); }
-                        catch(Exception e){}
-                        GameController.endGame("hai fatto qualcosa");
-                    }
-                };
-                t.run();
-            }
-        });
         //##### gestione dei pulsanti #####
 
-        //pulsante HIT
-        hit_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //si tenta il colpo
-                GameController.gamePadHit(game_message);
-            }//onClick(View)
-        });//setOnClickListener(View.OnClickListener())
+        Starter.setGameStart(true);
 
-        //pulsante UP
-        up_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //si muove il personaggio verso sopra
-                GameController.gamePadMove(Direction.UP,gm,em,game_message,shots,adapter);
-            }//onClick(View)
-        });//setOnClickListener(View.OnClickListener())
-
-        //pulsante DOWN
-        down_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //si muove il personaggio verso sotto
-                GameController.gamePadMove(Direction.DOWN,gm,em,game_message,shots,adapter);
-            }//onClick(View)
-        });//setOnClickListener(View.OnClickListener())
-
-        //pulsante LEFT
-        left_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //si muove il personaggio verso sinistra
-                GameController.gamePadMove(Direction.LEFT,gm,em,game_message,shots,adapter);
+            //pulsante HIT
+            hit_button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //si tenta il colpo
+                    GameController.gamePadHit(game_message);
                 }//onClick(View)
-        });//setOnClickListener(View.OnClickListener())
+            });//setOnClickListener(View.OnClickListener())
 
-        //pulsante RIGHT
-        right_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //si muove il personaggio verso destra
-                GameController.gamePadMove(Direction.RIGHT,gm,em,game_message,shots,adapter);
-            }//onClick(View)
-        });//setOnClickListener(View.OnClickListener())
+            //pulsante UP
+            up_button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //si muove il personaggio verso sopra
+                    GameController.gamePadMove(Direction.UP, gm, em, game_message, shots, adapter);
+                }//onClick(View)
+            });//setOnClickListener(View.OnClickListener())
 
+            //pulsante DOWN
+            down_button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //si muove il personaggio verso sotto
+                    GameController.gamePadMove(Direction.DOWN, gm, em, game_message, shots, adapter);
+                }//onClick(View)
+            });//setOnClickListener(View.OnClickListener())
+
+            //pulsante LEFT
+            left_button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //si muove il personaggio verso sinistra
+                    GameController.gamePadMove(Direction.LEFT, gm, em, game_message, shots, adapter);
+                }//onClick(View)
+            });//setOnClickListener(View.OnClickListener())
+
+            //pulsante RIGHT
+            right_button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //si muove il personaggio verso destra
+                    GameController.gamePadMove(Direction.RIGHT, gm, em, game_message, shots, adapter);
+                }//onClick(View)
+            });//setOnClickListener(View.OnClickListener())
+        
     }//onCreate(Bundle)
 
     //##### metodi per la gestione dell'activity #####
 
-    public GameStarter getFlag(){
-        return starter;
-    }
     /** metodo onStart(): void
      * ACTIVITY VISIBILE
      * questo metodo si occupa di attivare le funzionalita'

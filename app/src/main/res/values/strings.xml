@@ -1,19 +1,32 @@
 <resources>
     <!-- App Name -->
     <string name="app_name">The Wumpus World Game</string>
-    <!-- Activity Titles -->
+
+    <!-- Game Activity Titles -->
     <string name="hero_side_title">Hero Side</string>
     <string name="wumpus_side_title">Wumpus Side</string>
+
     <!-- Main Menu activity titles -->
     <string name="game_info_title">Game Information</string>
     <string name="game_settings_title">Settings</string>
-    <string name="main_tutorial_title">Tutorial : Storia</string>
-    <string name="main_tutorial_controls_title">Tutorial : Comandi</string>
-    <string name="score_title">Score</string>
-    <!-- Game menu activity titles -->
+    <string name="main_tutorial_title">Tutorial : Your Tale</string>
+    <string name="main_tutorial_controls_title">Tutorial : Controls</string>
+    <string name="score_title">Ranking</string>
+    <!-- Main menu options (MainActivity Menu) -->
+    <string name="ItemGameInfo">Information</string>
+    <string name="ItemTutorial">Tutorial</string>
+    <string name="ItemSettings">Settings</string>
+    <string name="ItemScore">Ranking</string>
+
+    <!-- Game Menu activity titles -->
     <string name="hero_mode_tutorial_title">Avventuriero : Tutorial</string>
     <string name="wumpus_mode_tutorial_title">Wumpus : Tutorial</string>
-    <!-- MainActivity -->
+    <!-- Game Menu options (Hero/Wumpus Side) -->
+    <string name="ItemNewGame">New Game</string>
+    <string name="ItemSolveGame">Solve</string>
+    <string name="ItemGameTutorial">Game Controls</string>
+
+    <!-- MainActivity Elements -->
     <string name="game_title">Hunt the Wumpus...or not?</string>
     <string name="game_intro">Hi...iiiiiih...Uh... Hello!
         \n\nYou have been carried in the Wumpus\' world, a dark and dangerous place...
@@ -30,69 +43,64 @@
     <string name="hero_text">Here you are! Let\'s go on adventure, brave hero!</string>
     <string name="wumpus">WUMPUS</string>
     <string name="wumpus_text"> Here you are! Hurry up, poor Wumpus, run away!</string>
-    <!-- GameInfoActivity -->
-    <string name="game_info">Ispirato al videogioco \"<b>Hunt the Wumpus</b>\"
-        di <b>Gregory Yob</b>, questo gioco presenta due modalità,
-        in modo che tu, mio caro giocatore, possa impersonare
-        un coraggioso avventuriero,
-        oppure una creatura misteriosa.
-        \n\nSe ti troverai nei panni dell\'<b>Avventuriero</b> evita
-        di cadere nei fossati, non farti divorare dal mostro
-        ed anzi, scopri dove nasconde il suo immenso tesoro!
-        \n\nSe invece sarai il <b>Wumpus</b>,
-        la creatura che si nasconde nei meandri della cupa foresta,
-        fuggi dal cacciatore che ti sta alle costole,
-        evitando le sue trappole e trova il passaggio
-        segreto che ti porterà in salvo.
-        \n\nIn ogni caso, che tu sia il Wumpus oppure l\'Avventuriero, divertiti!
-        \n\nAh, dimenticavo...
-        \nSe sei così pigro-a da ottenere il \"Premio del Sommo Poltrone\"
-        allora lascia che sia io a giocare per te,
-        con la modalità di gioco automatica!
+
+    <!-- GameInfoActivity Elements-->
+    <string name="game_info">Inspired by \"<b>Hunt the Wumpus</b>\" video game,
+        created by <b>Gregory Yob</b>, this game app realizes two game modes,
+        so, my dear player, you can impersonate
+        a brave adventurer, or a mysterious creature.
+        \n\nIf you\'ll be in the shoes of the <b>Adventurer</b>,
+        you should avoid to fall into the ditches, to be devoured by the monster
+        and also to find out its immense treasure!
+        \n\nInstead, if you are the mysterious <b>Wumpus</b>,
+        the creature's hiding in the depths of the gloomy forest,
+        you should run away from the hunter who is hard on your heels,
+        avoiding his traps and find out the secret passage
+        that will lead you to salvation.
+        \n\nBy the way, whether you are the Wumpus or the Adventurer, enjoy yourself!
+        \n\nUh, I've almost forgot ...
+        \nIf you're lazy enough to gain the \"High Armchair Award\"
+        let me play for you using automatic game mode!
     </string>
     <string name="game_credits">It\'s me, Ivonne! I\'ve tried to develop this game...</string>
-    <!-- Loading Window -->
+
+    <!-- Game Loading Window -->
     <string name="loading">Loading game data ...</string>
     <string name="loading_image">loading bat image</string>
-    <!-- main menu options (MainActivity Menu) -->
-    <string name="ItemGameInfo">Information</string>
-    <string name="ItemTutorial">Tutorial</string>
-    <string name="ItemSettings">Settings</string>
-    <string name="ItemScore">Score</string>
-    <!-- game menu options (Hero/Wumpus Side) -->
-    <string name="ItemNewGame">New Game</string>
-    <string name="ItemSolveGame">Solve</string>
-    <string name="ItemGameTutorial">Game Controls</string>
-    <!-- HeroSide and Wumpus Side Activities-->
+    <!-- Game Solving Windows -->
+
+    <!-- HeroSide and Wumpus Side Activity Elements-->
     <string name="score">Your score: </string>
     <string name="score_value">0</string>
     <string name="shot">Remaining shots: </string>
     <string name="shots_value">1</string>
     <string name="game_message_intro">Let\'s go</string>
+
     <!-- Main Tutorial Activity -->
-    <string name="tutorial_intro">Per prima cosa scegli il tuo personaggio!</string>
-    <string name="hero_description">Sarai un coraggioso avventuriero, che ucciderà il terribile mostro della foresta oscura?</string>
+    <string name="tutorial_intro">First of all choose your Playable Character!</string>
+    <string name="hero_description">Will you be a brave adventurer, who will kill the terrible monster living in the dark forest?</string>
     <string name="hero_mode_intro">Yeah, it\'s me, the story\'s hero.</string>
-    <string name="hero_danger_intro">Evita di cadere negli insidiosi fossati, disseminati per il bosco,</string>
-    <string name="hero_mission_intro">compi il tuo destino, uccidendo il terribile mostro, scoccando una freccia</string>
-    <string name="hero_award_intro">appena ne avverti il tanfo e rubando il suo immenso tesoro!</string>
-    <string name="wumpus_description">Oppure la creatura misteriosa che si nasconde nei boschi, per sfuggire al crudele cacciatore?</string>
+    <string name="hero_danger_intro">Avoid falling into the treacherous ditches,  scattered in the woods,</string>
+    <string name="hero_mission_intro">fulfill your destiny, killing the terrible monster, shooting an arrow</string>
+    <string name="hero_award_intro">as soon as you can feel the stench and steal its sparkling treasure!</string>
+    <string name="wumpus_description">Or the mysterious creature hiding in the woods to flee from the cruel hunter?</string>
     <string name="wumpus_mode_intro">Grrr, it\'s me, the hunted Wumpus.</string>
-    <string name="wumpus_danger_intro">Scansa le trappole celate da cumuli di foglie,</string>
-    <string name="wumpus_mission_intro">cerca di colpire il cacciatore con un masso, non appena pensi sia vicino</string>
-    <string name="wumpus_award_intro">oppure trova una via di fuga prima che ti raggiunga!</string>
+    <string name="wumpus_danger_intro">Dodge the traps hidden by piles of leaves,</string>
+    <string name="wumpus_mission_intro">try to hit the hunter with a boulder when he is close to you</string>
+    <string name="wumpus_award_intro">or run away before he reaches you!</string>
     <string name="next">next</string>
+
     <!-- MainTutorialControlsActivity -->
-    <string name="tutorial2_title">Ecco i comandi di gioco!</string>
-    <string name="tutorial2_intro">Questa è la tua plancia dei comandi:</string>
-    <string name="controls_description">Potrai muoverti sulla mappa una casella per volta.
-        \nIndica la direzione in cui vuoi andare premendo una delle frecce.</string>
-    <string name="controls_intro">Esplora il terreno di gioco, muovendoti tramite i tasti direzionali:</string>
-    <string name="up_down_control_description">Usa queste due frecce per andare SOPRA oppure SOTTO.</string>
-    <string name="left_right_control_description">Usa le frecce DESTRA e SINISTRA per muoverti in queste direzioni.</string>
-    <string name="hit_description">Utilizza questo pulsante per colpire, scegliendo poi la direzione in cui credi si trovi il nemico!</string>
-    <string name="suggest_description">Man mano che proseguirai nell\'esplorazione della mappa, ti verranno mostrati dei suggerimenti, che ti forniranno
-    delle informazioni sull\'ambiente circostante. Presta attenzione!</string>
+    <string name="tutorial2_title">Here there are the game controls!</string>
+    <string name="tutorial2_intro">This is your control pad:</string>
+    <string name="controls_description">You can move around the map one square at a time.
+         \nChoose the direction you want to go by pressing one of the arrows.</string>
+    <string name="controls_intro">Explore the playing field, moving your self by directional keys:</string>
+    <string name="up_down_control_description">Use these two arrows to move UP or DOWN.</string>
+    <string name="left_right_control_description">Use the LEFT and RIGHT arrows to move in these directions.</string>
+    <string name="hit_description">Use this button to try to hit, then choose the direction where you think there\'s the enemy!</string>
+    <string name="suggest_description">As and when you\'re exploring the map, some hints\'ll appear to give you information about the surrounding environment.
+        Pay attention!</string>
     <string name="back">back</string>
 
     <!-- ScoreActivity -->
@@ -101,26 +109,26 @@
     <string name="top_player_name">---</string>
     <string name="top_ten">Top Ten</string>
     <string name="top_ten_list">[ ... ]</string>
-    <string name="top_ten_subtitle">Elenco dei dieci migliori punteggi...</string>
+    <string name="top_ten_subtitle">Ten best scores ranking...</string>
     <string name="current_score_title">Current Score</string>
     <string name="current_score_value">---</string>
     <string name="points">Points : </string>
     <string name="score_value_title">Score : </string>
     <string name="top_score_value">---</string>
-    <string name="share">condividi</string>
-    <string name="share_score_title">Condividi il tuo punteggio!</string>
+    <string name="share">Share</string>
+    <string name="share_score_title">Share your score!</string>
     <!-- messaggio della dialog di condivisione del record -->
-    <string name="record_share_message">Hey, sfida i tuoi amici al gioco del mondo del Wumpus!
-        \nSaranno in grado di battere il tuo record?\n\nEcco il tuo miglior punteggio:\n</string>
+    <string name="record_share_message">Hey, challenge your friends to Wumpus World Game!
+         \nWill they be able to beat your high score?\nHere's your best score:\n</string>
     <!-- messaggio da visualizzare alla condivisione del record -->
-    <string name="record_send_message">Hey, riuscirai a battere il mio record al gioco del mondo del Wumpus?
-        \nEcco il mio miglior punteggio:\n</string>
+    <string name="record_send_message">Hey, are you able to beat my record at Wumpus World Game?
+         \nThis is my best score:\n</string>
     <!-- messaggio della dialog condivisione del punteggio attuale -->
-    <string name="score_share_message">Hey, sfida i tuoi amici al gioco del mondo del Wumpus!
-        \n\nEcco il tuo punteggio:\n</string>;
+    <string name="score_share_message">Hey, challenge your friends to Wumpus World Game!
+         \n\nHere\'s your score:\n</string>;
     <!-- messaggio da visualizzare alla condivisione del punteggio attuale -->
-    <string name="score_send_message">Hey, sfidami al gioco del mondo del Wumpus!
-        \nQuesto è il mio punteggio:\n</string>;
+    <string name="score_send_message">Hey, challenge me to Wumpus World Game!
+         \nThis is my score:\n</string>;
 
     <!-- Preference Titles -->
     <string name="general_settings">General</string>
@@ -160,32 +168,13 @@
         la freccia.</string>
     <string name="hero_play_description">Mi raccomando, fai attenzione a non cadere nei fossati,
         evita i percorsi senza uscita e non farti uccidere dal Wumpus.</string>
+
     <!-- Wumpus Mode Tutorial -->
     <string name="wumpus_tutorial_intro">Eccoti, creatura misteriosa!</string>
     <string name="wumpus_mode_description">Fruscii, rumori, rami spezzati...
         Qualcuno ti sta dando la caccia, povero Wumpus. \nPresto, scappa!</string>
     <string name="wumpus_play_description">Ricorda...Cerca di non finire in trappola, se puoi
         elimina il cacciatore che ti sta inseguendo e trova una via di fuga che ti porti in salvo.</string>
-
-    <!-- Images -->
-    <string name="dark_forest">dark_forest_main_activity_image</string>
-    <string name="dark_night">creepy_night_game_info_activity</string>
-    <string name="hero_icon">image of hero pg</string>
-    <string name="wumpus_icon">image of wumpus pg</string>
-    <string name="gold_image">image of gold</string>
-    <string name="arch_image">image of balestr</string>
-    <string name="pit_image">pit image about hero danger</string>
-    <string name="trap_image">trap image about wumpus danger</string>
-    <string name="stone_image">image of a stone</string>
-    <string name="exit_image">exit image about wumpus award</string>
-    <string name="red_monster_image">little red monster with open mouth</string>
-    <string name="share_icon">image of share action</string>
-    <string name="trophy">image of a golden trophy using in score activity</string>
-    <string name="hit_button">hit button icon</string>
-    <string name="left_button">left button icon</string>
-    <string name="up_button">up button icon</string>
-    <string name="right_button">right button icon</string>
-    <string name="down_button">down button icon</string>
 
     <!-- Game Messages : HERO SIDE -->
     <string name="hero_game_intro">\nAndiamo a caccia del Wumpus e dei suoi tesori.</string>
@@ -222,4 +211,25 @@
     <string name="memory_access_denied">So sorry, but you can\'t share it if you don\'t agree memory access</string>
     <string name="no_app">No App Available</string>
     <string name="app_link">Scarica qui l\'app: https://github.com/ivochan/WumpusWorldGame</string>
+
+    <!-- Images -->
+    <string name="dark_forest">dark_forest_main_activity_image</string>
+    <string name="dark_night">creepy_night_game_info_activity</string>
+    <string name="hero_icon">image of hero pg</string>
+    <string name="wumpus_icon">image of wumpus pg</string>
+    <string name="gold_image">image of gold</string>
+    <string name="arch_image">image of balestr</string>
+    <string name="pit_image">pit image about hero danger</string>
+    <string name="trap_image">trap image about wumpus danger</string>
+    <string name="stone_image">image of a stone</string>
+    <string name="exit_image">exit image about wumpus award</string>
+    <string name="red_monster_image">little red monster with open mouth</string>
+    <string name="share_icon">image of share action</string>
+    <string name="trophy">image of a golden trophy using in score activity</string>
+    <string name="hit_button">hit button icon</string>
+    <string name="left_button">left button icon</string>
+    <string name="up_button">up button icon</string>
+    <string name="right_button">right button icon</string>
+    <string name="down_button">down button icon</string>
+
 </resources>

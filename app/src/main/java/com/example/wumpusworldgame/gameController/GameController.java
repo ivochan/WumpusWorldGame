@@ -10,9 +10,7 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
-import android.os.Handler;
 import android.view.View;
-import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -63,7 +61,7 @@ public class GameController {
      */
     public static void gamePadMove(Direction direction, GameMap gm, GameMap em, TextView game_message, TextView shots, GridViewCustomAdapter adapter) {
         //si controlla se la partita e' iniziata
-        if(GameStarter.getGameStart()) {
+        if(Starter.getGameStart()) {
             //si controlla se il giocatore ha richiesto di colpire
             if(Starter.getTryToHit()){
                 //si tenta di colpire il nemico
@@ -73,7 +71,7 @@ public class GameController {
                 //se non ha richiesto di colpire, allora si deve muovere il pg
                 GameController.movePlayer(direction,gm,em,game_message,adapter);
             }//else
-            /*
+
             if(!Starter.getGameStart()) {
                 Thread t=new Thread() {
                     public void run(){
@@ -84,8 +82,7 @@ public class GameController {
                 };
                 t.run();
             }
-            */
-            if(!Starter.getGameStart())GameStarter.setGameStart(false);
+
         }//fi
 
         //allora la partita e' conclusa
@@ -103,7 +100,7 @@ public class GameController {
      */
     public static void gamePadHit(TextView game_message){
         //si controlla se il gioco e' stato avviato
-        if(GameStarter.getGameStart()){
+        if(Starter.getGameStart()){
             //si controlla se si ha a disposizione il colpo
             if(Starter.getChanceToHit()){
                 //si setta il flag del tentativo del colpo in atto

@@ -2,23 +2,32 @@
 <resources>
     <!-- App Name -->
     <string name="app_name">Il gioco del mondo del Wumpus</string>
-    <!-- Activity Titles -->
+
+    <!-- Game Activity Titles -->
     <string name="hero_side_title">Modalità Avventuriero</string>
     <string name="wumpus_side_title">Modalità Wumpus</string>
+
     <!-- Main Menu activity titles -->
     <string name="game_info_title">Informazioni del gioco</string>
     <string name="game_settings_title">Impostazioni</string>
     <string name="main_tutorial_title">Tutorial : Storia</string>
     <string name="main_tutorial_controls_title">Tutorial : Comandi</string>
     <string name="score_title">Punteggi</string>
+    <!-- Opzioni del menu principale, nella MainActivity-->
+    <string name="ItemGameInfo">Informazioni</string>
+    <string name="ItemTutorial">Tutorial</string>
+    <string name="ItemSettings">Impostazioni</string>
+    <string name="ItemScore">Punteggi</string>
+
     <!-- Game menu activity titles -->
     <string name="hero_mode_tutorial_title">Avventuriero : Tutorial</string>
     <string name="wumpus_mode_tutorial_title">Wumpus : Tutorial</string>
-    <!-- game menu options (Hero/Wumpus Side) -->
+    <!-- Game Menu options (Hero/Wumpus Side) -->
     <string name="ItemNewGame">Nuova partita</string>
     <string name="ItemSolveGame">Risolvi</string>
     <string name="ItemGameTutorial">Comandi di gioco</string>
-    <!-- MainActivity -->
+
+    <!-- MainActivity Elements -->
     <string name="game_title">Insegui il Wumpus... Oppure no?!?</string>
     <string name="game_intro">
         Cia....aaaaargh...Ehm...Ciao!
@@ -38,7 +47,8 @@
     <string name="hero_text">Inizia l\'avventura, coraggioso eroe!</string>
     <string name="wumpus">WUMPUS</string>
     <string name="wumpus_text">Presto, povero Wumpus, scappa!</string>
-    <!-- GameInfoActivity -->
+
+    <!-- GameInfoActivity Elements-->
     <string name="game_info">Ispirato al videogioco \"<b>Hunt the Wumpus</b>\"
         di <b>Gregory Yob</b>, questo gioco presenta due modalità,
         in modo che tu, mio caro giocatore, possa impersonare
@@ -59,38 +69,11 @@
         con la modalità di gioco automatica!
     </string>
     <string name="game_credits">E\' Ivonne che ha tentato di sviluppare questo gioco...</string>
+
     <!-- Schermata di caricamento -->
     <string name="loading">Preparazione del terreno di gioco ...</string>
     <string name="loading_image">immagine di caricamento</string>
-    <!-- Opzioni del menu principale, nella MainActivity-->
-    <string name="ItemGameInfo">Informazioni</string>
-    <string name="ItemTutorial">Tutorial</string>
-    <string name="ItemSettings">Impostazioni</string>
-    <string name="ItemScore">Punteggi</string>
-    <!-- Impostazioni -->
-    <string name="general_settings">Generali</string>
-    <!-- per ora si intende la musica -->
-    <string name="sound_effects">Effetti sonori</string>
-    <string name="enable_sounds">suoni attivati</string>
-    <string name="disable_sounds">suoni disattivati</string>
-    <!-- nome del giocatore -->
-    <string name="player_name">Nome del giocatore</string>
-    <string name="player_info">Scegli un nickname per la classifica!</string>
-    <!-- Dati di gioco -->
-    <string name="data_sync">Dati e Sincronizzazione</string>
-    <string name="import_data">Importa i dati di gioco</string>
-    <string name="export_data">Esporta i dati di gioco</string>
-    <!-- about -->
-    <string name="team">Team</string>
-    <string name="team_info">Mi chiamo Ivonne e questa è la mia prima app :)\nGrazie a Dady e Lula per i consigli!\nLe immagini ed i suoni sono presi da
-        https://opengameart.org</string>
-    <!-- feedback -->
-    <string name="feed">Feedback</string>
-    <string name="feedback_info">Segnala dei bug o suggerisci delle nuove features!</string>
-    <string name="feedback_request">Vuoi inviare il tuo feedback?</string>
-    <string name="cancel">annulla</string>
-    <string name="confirm">accetta</string>
-    <string name="email_subject">feedback dell\'applicazione WUMPUS WORLD GAME</string>
+   <!-- Schermata di risoluzione del gioco -->
 
     <!-- HeroSide and Wumpus Side Activities: schermata di gioco -->
     <string name="score">Punteggio: </string>
@@ -98,6 +81,7 @@
     <string name="shot">Colpi residui: </string>
     <string name="shots_value">1</string>
     <string name="game_message_intro">Ciao, iniziamo il gioco</string>
+
     <!-- Main Tutorial Activity -->
     <string name="tutorial_intro">Per prima cosa scegli il tuo personaggio!</string>
     <string name="hero_description">Sarai un coraggioso avventuriero, che ucciderà il terribile mostro della foresta oscura?</string>
@@ -107,10 +91,11 @@
     <string name="hero_danger_intro">Evita di cadere negli insidiosi fossati, disseminati per il bosco,</string>
     <string name="hero_mission_intro">compi il tuo destino, uccidendo il terribile mostro, scoccando una freccia</string>
     <string name="hero_award_intro">appena ne avverti il tanfo e rubando il suo immenso tesoro!</string>
-   <string name="wumpus_danger_intro">Scansa le trappole celate da cumuli di foglie,</string>
+    <string name="wumpus_danger_intro">Scansa le trappole celate da cumuli di foglie,</string>
     <string name="wumpus_mission_intro">cerca di colpire il cacciatore con un masso, non appena pensi sia vicino</string>
     <string name="wumpus_award_intro">oppure trova una via di fuga prima che ti raggiunga!</string>
     <string name="next">avanti</string>
+
     <!-- MainTutorialControlsActivity -->
     <string name="tutorial2_title">Ecco i comandi di gioco!</string>
     <string name="tutorial2_intro">Questa è la tua plancia dei comandi:</string>
@@ -151,6 +136,31 @@
     <string name="score_send_message">Hey, sfidami al gioco del mondo del Wumpus!
         \nQuesto è il mio punteggio:\n</string>
 
+    <!-- Impostazioni -->
+    <string name="general_settings">Generali</string>
+    <!-- per ora si intende la musica -->
+    <string name="sound_effects">Effetti sonori</string>
+    <string name="enable_sounds">suoni attivati</string>
+    <string name="disable_sounds">suoni disattivati</string>
+    <!-- nome del giocatore -->
+    <string name="player_name">Nome del giocatore</string>
+    <string name="player_info">Scegli un nickname per la classifica!</string>
+    <!-- Dati di gioco -->
+    <string name="data_sync">Dati e Sincronizzazione</string>
+    <string name="import_data">Importa i dati di gioco</string>
+    <string name="export_data">Esporta i dati di gioco</string>
+    <!-- about -->
+    <string name="team">Team</string>
+    <string name="team_info">Mi chiamo Ivonne e questa è la mia prima app :)\nGrazie a Dady e Lula per i consigli!\nLe immagini ed i suoni sono presi da
+        https://opengameart.org</string>
+    <!-- feedback -->
+    <string name="feed">Feedback</string>
+    <string name="feedback_info">Segnala dei bug o suggerisci delle nuove features!</string>
+    <string name="feedback_request">Vuoi inviare il tuo feedback?</string>
+    <string name="cancel">annulla</string>
+    <string name="confirm">accetta</string>
+    <string name="email_subject">feedback dell\'applicazione WUMPUS WORLD GAME</string>
+
     <!-- HeroModeTutorial -->
     <string name="hero_tutorial_intro">Eccoti, coraggioso avventuriero!</string>
     <string name="hero_mode_description">Ormai ci siamo, stai per addentrarti
@@ -162,32 +172,13 @@
         la freccia.</string>
     <string name="hero_play_description">Mi raccomando, fai attenzione a non cadere nei fossati,
         evita i percorsi senza uscita e non farti uccidere dal Wumpus.</string>
+
     <!-- Wumpus Mode Tutorial -->
     <string name="wumpus_tutorial_intro">Eccoti, creatura misteriosa!</string>
     <string name="wumpus_mode_description">Fruscii, rumori, rami spezzati...
         Qualcuno ti sta dando la caccia, povero Wumpus. \nPresto, scappa!</string>
     <string name="wumpus_play_description">Ricorda...Cerca di non finire in trappola, se puoi
         elimina il cacciatore che ti sta inseguendo e trova una via di fuga che ti porti in salvo.</string>
-
-    <!-- Immagini -->
-    <string name="dark_forest">foresta_oscura_immagine_main_activity</string>
-    <string name="dark_night">notte_tetra_game_info_activity</string>
-    <string name="hero_icon">image of hero pg</string>
-    <string name="wumpus_icon">image of wumpus pg</string>
-    <string name="gold_image">image of gold</string>
-    <string name="arch_image">image of balestr</string>
-    <string name="pit_image">pit image about hero danger</string>
-    <string name="trap_image">trap image about wumpus danger</string>
-    <string name="stone_image">image of a stone</string>
-    <string name="exit_image">exit image about wumpus award</string>
-    <string name="red_monster_image">little red monster with open mouth</string>
-    <string name="share_icon">image of share action</string>
-    <string name="trophy">image of a golden trophy using in score activity</string>
-    <string name="hit_button">hit button icon</string>
-    <string name="left_button">left button icon</string>
-    <string name="up_button">up button icon</string>
-    <string name="right_button">right button icon</string>
-    <string name="down_button">down button icon</string>
 
     <!-- Game Messages : HERO SIDE -->
     <string name="hero_game_intro">\nAndiamo a caccia del Wumpus e dei suoi tesori.</string>
@@ -218,11 +209,31 @@
     <string name="failed_shot">Che mira pessima...Non hai colpito niente!</string>
     <!-- messaggio della dialog condivisione del punteggio attuale -->
     <string name="game_score_share_message">Ma...Hey, sfida i tuoi amici al gioco del mondo del Wumpus!
-        \n\nEcco il tuo punteggio:\n</string>
+        \nEcco il tuo punteggio:\n</string>
     <string name="share_game_map_and_score">Hey, sfidami al gioco del mondo del Wumpus!
-        \nQuesta è il territorio che ho esplorato e \ne questo è il mio punteggio:\n</string>
+        \nQuesta è il territorio che ho esplorato e\ne questo è il mio punteggio:\n</string>
     <string name="memory_access_denied">So sorry, but you can\'t share it if you don\'t agree memory access</string>
     <string name="no_app">No App Available</string>
     <string name="app_link">Scarica qui l\'app: https://github.com/ivochan/WumpusWorldGame</string>
+
+    <!-- Immagini -->
+    <string name="dark_forest">foresta_oscura_immagine_main_activity</string>
+    <string name="dark_night">notte_tetra_game_info_activity</string>
+    <string name="hero_icon">image of hero pg</string>
+    <string name="wumpus_icon">image of wumpus pg</string>
+    <string name="gold_image">image of gold</string>
+    <string name="arch_image">image of balestr</string>
+    <string name="pit_image">pit image about hero danger</string>
+    <string name="trap_image">trap image about wumpus danger</string>
+    <string name="stone_image">image of a stone</string>
+    <string name="exit_image">exit image about wumpus award</string>
+    <string name="red_monster_image">little red monster with open mouth</string>
+    <string name="share_icon">image of share action</string>
+    <string name="trophy">image of a golden trophy using in score activity</string>
+    <string name="hit_button">hit button icon</string>
+    <string name="left_button">left button icon</string>
+    <string name="up_button">up button icon</string>
+    <string name="right_button">right button icon</string>
+    <string name="down_button">down button icon</string>
 
 </resources>
