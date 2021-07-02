@@ -1,12 +1,12 @@
-package com.example.wumpusworldgame.gameMenuItems.gameTutorials;
+package com.example.wumpusworldgame.gameMenuItems.gameModeTutorials;
 //serie di import
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.wumpusworldgame.R;
-/** class HeroModeTutorial
+/** class WumpusModeTutorial
  *
  */
-public class HeroModeTutorial extends AppCompatActivity {
+public class WumpusModeTutorial extends AppCompatActivity {
     //##### attributi di classe #####
 
 
@@ -20,7 +20,7 @@ public class HeroModeTutorial extends AppCompatActivity {
         //si invoca il metodo della super classe
         super.onCreate(savedInstanceState);
         //si assegna il layout all'activity corrente
-        setContentView(R.layout.activity_hero_mode_tutorial);
+        setContentView(R.layout.activity_wumpus_mode_tutorial);
 
         //##### inizializzazioni #####
 
@@ -122,4 +122,4 @@ public class HeroModeTutorial extends AppCompatActivity {
         super.onBackPressed();
     }//onBackPressed()
 
-}//end HeroModeTutorialActivity
+}//end WumpusModeTutorialActivity

@@ -36,7 +36,7 @@ public class MainTutorialActivity extends AppCompatActivity {
         //pulsante di navigazione in avanti
         next_button = findViewById(R.id.next_page_button);
         //intent della activity che corrisponde alla pagina successiva del tutorial
-        next_page = new Intent(this, MainTutorialControlsActivity.class);
+        next_page = new Intent(this, GamePadMainTutorialActivity.class);
 
         //scelta della clip audio
         //mp = MediaPlayer.create(HeroSide.this,R.raw.the_good_fight);

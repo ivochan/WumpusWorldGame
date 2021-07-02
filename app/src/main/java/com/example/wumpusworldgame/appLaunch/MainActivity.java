@@ -13,8 +13,8 @@ import com.example.wumpusworldgame.R;
 import com.example.wumpusworldgame.gameActivities.HeroSide;
 import com.example.wumpusworldgame.gameActivities.WumpusSide;
 import com.example.wumpusworldgame.mainMenuItems.GameInformationActivity;
+import com.example.wumpusworldgame.mainMenuItems.score.RankActivity;
 import com.example.wumpusworldgame.mainMenuItems.tutorial.MainTutorialActivity;
-import com.example.wumpusworldgame.mainMenuItems.score.ScoreActivity;
 import com.example.wumpusworldgame.mainMenuItems.settings.GameSettingsActivity;
 import com.example.wumpusworldgame.services.TypeWriter;
 import com.example.wumpusworldgame.services.Utility;
@@ -265,7 +265,7 @@ public class MainActivity extends AppCompatActivity {
             //PUNTEGGI
             case R.id.item_score:
                 //creazione dell'intent
-                intent = new Intent(this, ScoreActivity.class);
+                intent = new Intent(this, RankActivity.class);
                 //avvio dell'activity corrispondente
                 startActivity(intent);
                 //viene aperta l'activity

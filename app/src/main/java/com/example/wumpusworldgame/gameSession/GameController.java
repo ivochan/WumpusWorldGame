@@ -1,4 +1,4 @@
-package com.example.wumpusworldgame.gameController;
+package com.example.wumpusworldgame.gameSession;
 //serie di import
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
@@ -25,9 +25,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.LinkedList;
-import java.util.concurrent.locks.Condition;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
+
 import game.session.configuration.Starter;
 import game.session.controller.Controller;
 import game.session.controller.Direction;

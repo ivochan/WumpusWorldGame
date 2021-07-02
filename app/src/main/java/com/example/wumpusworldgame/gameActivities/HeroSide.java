@@ -14,9 +14,9 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceManager;
 import com.example.wumpusworldgame.R;
-import com.example.wumpusworldgame.gameController.GameController;
-import com.example.wumpusworldgame.gameController.GridViewCustomAdapter;
-import com.example.wumpusworldgame.gameMenuItems.gameTutorials.HeroModeTutorial;
+import com.example.wumpusworldgame.gameSession.GameController;
+import com.example.wumpusworldgame.gameSession.GridViewCustomAdapter;
+import com.example.wumpusworldgame.gameMenuItems.gameModeTutorials.HeroModeTutorial;
 import com.example.wumpusworldgame.services.Utility;
 import java.util.LinkedList;
 import game.session.controller.Direction;
@@ -169,7 +169,7 @@ public class HeroSide extends AppCompatActivity {
         Utility.musicPlaying(mp, this);
 
         //##### gestione dei pulsanti #####
-        
+
         //pulsante HIT
         hit_button.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -12,11 +12,11 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
 import com.example.wumpusworldgame.R;
-/** class ScoreActivity
+/** class RankActivity
  * questa classe visualizza tutti i punteggi ottenuti nel gioco
  * e permette all'utente di condividerli al di fuori dell'applicazione
  */
-public class ScoreActivity extends AppCompatActivity {
+public class RankActivity extends AppCompatActivity {
     //##### attributi di classe #####
 
     //TODO riproduttore audio
@@ -90,7 +90,7 @@ public class ScoreActivity extends AppCompatActivity {
         record_share_button.setOnClickListener(view -> {
             //si apre una dialog che mostra i dati da condividere
             //si crea una alert dialog
-            AlertDialog.Builder builder = new AlertDialog.Builder(ScoreActivity.this,
+            AlertDialog.Builder builder = new AlertDialog.Builder(RankActivity.this,
                     R.style.AlertDialogTheme);
             //si preleva la stringa da visualizzare come messaggio della dialog
             String record_share_message= getResources().getString(R.string.record_share_message);
@@ -158,7 +158,7 @@ public class ScoreActivity extends AppCompatActivity {
         //verifica pressione pulsante di condivisione del punteggio attuale
         score_share_button.setOnClickListener(view -> {
             //si crea una alert dialog
-            AlertDialog.Builder builder = new AlertDialog.Builder(ScoreActivity.this,
+            AlertDialog.Builder builder = new AlertDialog.Builder(RankActivity.this,
                     R.style.AlertDialogTheme);
             //si preleva la stringa da visualizzare come messaggio della dialog
             String score_share_message = getResources().getString(R.string.score_share_message);
@@ -341,4 +341,4 @@ public class ScoreActivity extends AppCompatActivity {
         builder.setCancelable(true);
     }//settingDialog(AlertDialog.Builder, String)
 
-}//end ScoreActivity
+}//end RankActivity

@@ -90,7 +90,7 @@
     <string name="wumpus_award_intro">or run away before he reaches you!</string>
     <string name="next">next</string>
 
-    <!-- MainTutorialControlsActivity -->
+    <!-- GamePadMainTutorialActivity -->
     <string name="tutorial2_title">Here there are the game controls!</string>
     <string name="tutorial2_intro">This is your control pad:</string>
     <string name="controls_description">You can move around the map one square at a time.
@@ -103,7 +103,7 @@
         Pay attention!</string>
     <string name="back">back</string>
 
-    <!-- ScoreActivity -->
+    <!-- RankActivity -->
     <string name="top_score_title">High Score</string>
     <string name="top_player_title">Player\'s name :</string>
     <string name="top_player_name">---</string>

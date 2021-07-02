@@ -1,4 +1,4 @@
-package com.example.wumpusworldgame.gameController;
+package com.example.wumpusworldgame.gameSession;
 //serie di import
 import java.util.LinkedList;
 import android.app.Activity;

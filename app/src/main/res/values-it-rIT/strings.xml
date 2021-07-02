@@ -96,7 +96,7 @@
     <string name="wumpus_award_intro">oppure trova una via di fuga prima che ti raggiunga!</string>
     <string name="next">avanti</string>
 
-    <!-- MainTutorialControlsActivity -->
+    <!-- GamePadMainTutorialActivity -->
     <string name="tutorial2_title">Ecco i comandi di gioco!</string>
     <string name="tutorial2_intro">Questa è la tua plancia dei comandi:</string>
     <string name="controls_description">Potrai muoverti sulla mappa una casella per volta.
@@ -109,7 +109,7 @@
     delle informazioni sull\'ambiente circostante. Presta attenzione!</string>
     <string name="back">indietro</string>
 
-    <!-- ScoreActivity -->
+    <!-- RankActivity -->
     <string name="top_score_title">Record</string>
     <string name="top_player_title">Nome del giocatore: </string>
     <string name="top_player_name">---</string>
