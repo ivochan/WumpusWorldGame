@@ -232,4 +232,8 @@
     <string name="right_button">right button icon</string>
     <string name="down_button">down button icon</string>
 
+    <string name="rank_sharing_request">Do you want to share your rank?</string>
+    <string name="nope">ehm...no</string>
+    <string name="yeah">sure</string>
+
 </resources>

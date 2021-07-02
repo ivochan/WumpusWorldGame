@@ -25,7 +25,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.LinkedList;
-
 import game.session.configuration.Starter;
 import game.session.controller.Controller;
 import game.session.controller.Direction;
@@ -46,8 +45,11 @@ public class GameController {
     private static Activity currentActivity;
     //linkedList contentente gli elementi della mappa di esplorazione
     private static LinkedList<String> update_data=new LinkedList<>();
+    //flag da usare per la stringa nella dialog di fine partita
+    private static boolean victory=false;
 
     //##### metodi utilizzati nella schermata di gioco #####
+
     /** metodo gamePadMove(Direction,GameMap,GameMap,TextView,TextView,LinkedList<String>,GridViewCustomAdapter): void
      * questo metodo viene utilizzato per gestire le azioni che dovranno essere
      * effettuate dai pulsanti che costituiscono, virtualmente, il "gamepad", cioe'
@@ -69,7 +71,12 @@ public class GameController {
             }//fi
             else {
                 //se non ha richiesto di colpire, allora si deve muovere il pg
-                GameController.movePlayer(direction,gm,em,game_message,adapter,grid);
+                GameController.movePlayer(direction,gm,em,game_message,adapter);
+                //si controlla se la partita e' conclusa
+                if(!Starter.getGameStart()){
+                   //se conclusa si esegue il metodo di fine gioco
+                   endGameSession();
+                }//fi
             }//else
         }//fi
         //allora la partita e' conclusa
@@ -96,7 +103,7 @@ public class GameController {
                 game_message.setText(R.string.choose_direction);
             }//fi
             else {
-                //non si hanno munizione percio' non si puo' tentare il colpo
+                //non si hanno munizioni percio' non si puo' tentare il colpo
                 game_message.setText(R.string.no_hit);
             }//else
         }//fi
@@ -104,15 +111,17 @@ public class GameController {
 
     //##### metodi di gestione della mossa del pg #####
 
-    /** metodo movePlayer(Direction,GameMap,GameMap,TextView,TextView,LinkedList<String>,GridView,GridViewCustomAdapter)
-     *
+    /** metodo movePlayer(Direction,GameMap,GameMap,TextView,TextView,LinkedList<String>,GridViewCustomAdapter)
+     * questo metodo controlla il risultato a cui ha portato la mossa effettuata dal giocatore,
+     * aggiorna la mappa di esplorazione e la visualizza a schermo, fornendo all'utente dei messaggi
+     * sullo stato del gioco.
      * @param direction
      * @param gm
      * @param em
      * @param game_message
      * @param adapter
      */
-    private static void movePlayer(Direction direction, GameMap gm, GameMap em, TextView game_message, GridViewCustomAdapter adapter, GridView grid){
+    private static void movePlayer(Direction direction, GameMap gm, GameMap em, TextView game_message, GridViewCustomAdapter adapter){
         //si riceve la mossa che il giocatore vuole effettuare
         int status = movePG(direction,gm, em);
         //si effettua la mossa
@@ -123,12 +132,13 @@ public class GameController {
         updateExplorationMap(gm,em);
         //si aggiorna l'adapter
         adapter.swapItems(update_data);
-        //si aggiorna il componente grafico
-        grid.invalidate();
     }//movePlayer()
 
-    /**
-     *
+    /** metodo updateExplorationMap(GameMap, GameMap): void
+     * questo metodo inserisce nella linked list che verra' fornita all'adapter
+     * per mostrare a video lo stato corrente della mappa di gioco,
+     * il contenuto della mappa di esplorazione, aggiornata ogni volta
+     * che il giocatore scopre una nuova casella del terreno di gioco.
      * @param gm
      * @param em
      */
@@ -274,33 +284,28 @@ public class GameController {
                 CellStatus cs = c.getCellStatus();
                 //stampa del messaggio se nemico o pericolo
                 if(cs.equals(CellStatus.ENEMY)){
-                    //nemico
-                    if(currentActivity instanceof HeroSide){
-                        //modalita' eroe
+                    //modalita' eroe
+                    if(currentActivity instanceof HeroSide)
                         info = currentActivity.getResources().getString(R.string.hero_enemy);
-                    }
-                    else {
-                        //modalita' wumpus
+                    //modalita' wumpus
+                    else
                         info = currentActivity.getResources().getString(R.string.wumpus_enemy);
-                    }
                 }//fi Enemy
+                //else Danger
                 else {
-                    //pericolo
-                    if(currentActivity instanceof HeroSide){
-                        //modalita' eroe
+                    //modalita' eroe
+                    if(currentActivity instanceof HeroSide)
                         info = currentActivity.getResources().getString(R.string.hero_danger);
-                    }
-                    else {
-                        //modalita' wumpus
+                    //modalita' wumpus
+                    else
                         info = currentActivity.getResources().getString(R.string.wumpus_danger);
-                    }
-                }//fi Danger
+                }//esle Danger
                 //si preleva la stringa del risultato della partita
                 result= currentActivity.getString(R.string.looser);
                 //messaggio di fine partita
                 info += "\n"+result;
                 //fine della partita
-                Starter.setGameStart(false);
+                linkStop(false);
                 break;
             case 2:
                 //premio
@@ -310,7 +315,7 @@ public class GameController {
                 //messaggio di fine partita: vittoria
                 info += "\n"+result;
                 //fine della partita
-                Starter.setGameStart(false);
+                linkStop(true);
                 break;
             default:
                 break;
@@ -494,25 +499,88 @@ public class GameController {
 
     //##### metodi di gestione della partita: chiusura #####
 
-    /** metodo endGameSession(): void
+    /** metodo linkStop(boolean): void
      * questo metodo si occupa di eseguire delle operazioni necessarie alla chiusura della
-     * partita, come disabilitare il flag di avvio del gioco e visualizzare il punteggio ottenuto.
+     * partita, come disabilitare il flag di avvio del gioco e quello che consentira' di
+     * stabilire il messaggio sulla conclusione della partita,
+     * per comunicare poi all'utente la vittoria o la sconfitta
+     * @param status: boolean, flag che indica come si e' conclusa la partita, cioe'
+     *              se true, allora il giocatore ha vinto, se false allora ha perso.
      */
-    public static void endGameSession(String result){
-        //TODO si aggiorna il punteggio
+    private static void linkStop(boolean status){
+        //si disabilita il flag che indica che la partita e' ancora in corso
+        Starter.setGameStart(false);
+        //si imposta il flag sulla conclusione della partita
+        victory=status;
+    }//linkStop(boolean)
+
+    /** metodo endGameSession(): void
+     * questo metodo si occupa di visualizzare una dialog che richiede al giocatore
+     * di condividere il punteggio ottenuto a fine partita
+     */
+    private static void endGameSession(){
+        //stringa che conterra' il messaggio da visualizzare nella dialog
+        String result="";
         //si preleva il file di salvataggio delle preferenze del giocatore
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(currentActivity);
         //si identifica la preference relativa al nome del giocatore corrente
         String player = sharedPreferences.getString("prefUsername","");
-        //si preleva il punteggio
         //TODO sviluppare la parte del punteggio
-        String score ="0";
+        //si preleva il punteggio
+        String score="0";
+        //si crea una alert dialog per chiedere al giocatore se vuole condividere il suo punteggio
+        AlertDialog.Builder builder = new AlertDialog.Builder(currentActivity,R.style.GameAlertDialogTheme);
+        //si specifica il messaggio da visualizzare nella dialog di richiesta di condivisione del punteggio
+        result=victory?(currentActivity.getString(R.string.winner)):(currentActivity.getString(R.string.looser))
+                +"\n\n"+currentActivity.getString(R.string.rank_sharing_request);
+        //si configura il layout della dialog
+        settingDialog(builder, result, player, score);
+        //pulsante di chiusura
+        builder.setNegativeButton(R.string.nope, new DialogInterface.OnClickListener() {
+            //metodo onClick(DialogInterface, int)
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                //se si clicca annulla la dialog viene chiusa
+                dialog.dismiss();
+            }//onClick(DialogInterface, int)
+        });//setNegativeButton(String, DialogInterface)
+        //pulsante di conferma
+        builder.setPositiveButton(R.string.yeah, new DialogInterface.OnClickListener() {
+            //metodo onClick(DialogInterface, int)
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                //si verificano i permessi di accesso alla memoria esterna
+                if(Utility.verifyStoragePermission(currentActivity)) {
+                    //si visualizza l'anteprima della condivisione
+                    shareGameRank(player,score);
+                }//fi
+                else {
+                    if(Utility.verifyStoragePermission(currentActivity)){
+                        shareGameRank(player,score);
+                    }
+                    else{
+
+                    }
+                }
+            }//onClick(DialogInterface, int)
+        });//setPositiveButton(String, DialogInterface)
+        //si crea la dialog
+        AlertDialog share_dialog = builder.create();
+        //visualizzazione della dialog
+        share_dialog.show();
+    }//
+
+    /** metodo shareGameRank(): void
+     * questo metodo si occupa di eseguire delle operazioni necessarie alla chiusura della
+     * partita, come disabilitare il flag di avvio del gioco e visualizzare il punteggio ottenuto.
+     */
+    public static void shareGameRank(String player, String score){
         //si crea una alert dialog
         AlertDialog.Builder builder = new AlertDialog.Builder(currentActivity,R.style.GameAlertDialogTheme);
         //si preleva la stringa da visualizzare come messaggio della dialog
         String score_share_message = currentActivity.getResources().getString(R.string.score_share_message);
         //si configura il layout della dialog
-        settingDialog(builder, score_share_message, player, score,result);
+        settingDialog(builder, score_share_message, player, score);
         //pulsante di chiusura
         builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
             /** metodo onClick(DialogInterface, int)
@@ -559,29 +627,24 @@ public class GameController {
                 }//esle
             }//onClick(DialogInterface, int)
         });//setPositiveButton(String, DialogInterface)
-
-
+        //si preleva il componente grafico di cui fare lo screenshot
         View view = currentActivity.findViewById(R.id.grid_view);
-
+        //si abilita la cattura dello schermo
         view.setDrawingCacheEnabled(true);
         //si crea l'immagine bitmap di questo screenshot
         Bitmap bitmap = Bitmap.createBitmap(view.getDrawingCache());
         //si disabilita la possibilita' di tenerlo in cache
         view.setDrawingCacheEnabled(false);
-
+        //si istanzia un oggetto di tipo immagine
         ImageView imageView = new ImageView(currentActivity);
+        //si specifica il suo contenuto con la cattura dello schermo effettuata
         imageView.setImageBitmap(bitmap);
-
         //si crea la dialog
         AlertDialog dialog = builder.create();
-
-
-
+        //si visualizza la mappa di gioco nella dialog
         dialog.setView(imageView);
-
         //visualizzazione della dialog
         dialog.show();
-
     }//endGameSession()
 
     /** metodo settingDialog(Alert.Builder, String, String, String)
@@ -589,12 +652,11 @@ public class GameController {
      * impostando il testo e l'immagine.
      * Il testo cambia in base ai parametri ricevuti.
      * @param builder: Alert.Builder, costruttore della dialog;
-     * @param share_message: String, messaggio da visualizzare nella dialog;
+     * @param text_message: String, messaggio da visualizzare nella dialog;
      * @param player: String, nome del giocatore;
      * @param score: String, valore del punteggio;
-     * @param result: String, messaggio indicativo del risultato della partita;
      */
-    private static void settingDialog(AlertDialog.Builder builder, String share_message, String player, String score, String result){
+    private static void settingDialog(AlertDialog.Builder builder, String text_message, String player, String score){
         //si assegna un layout alla dialog
         builder.setView(R.layout.alert_dialog);
         //si definisce il testo del titolo
@@ -612,7 +674,7 @@ public class GameController {
         //si imposta il titolo della dialog
         builder.setCustomTitle(textView);
         //si imposta il messaggio della dialog
-        String message =result+"\n\n"+share_message+"\n"+player+" "+score+" pt";
+        String message = text_message+"\n\n"+player+" "+score+" pt";
         //si visualizza il messaggio nella dialog
         builder.setMessage(message);
         //la dialog si chiude cliccando al di fuori della sua area

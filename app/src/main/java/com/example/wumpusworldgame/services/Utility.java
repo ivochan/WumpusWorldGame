@@ -11,7 +11,7 @@ import android.os.Environment;
 import android.os.StatFs;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.WindowManager;
+import android.widget.Toast;
 
 import androidx.core.app.ActivityCompat;
 import androidx.preference.PreferenceManager;
@@ -229,8 +229,9 @@ public class Utility {
     }//floatForm(double)
 
     /** metodo getTotalRAM(): String
-     *
-     * @return
+     * questo metodo calcola il totale della memoria ram del dispositivo
+     * su cui e' in esecuzione l'app
+     * @return lastValue: String, quantita' totale di memoria RAM
      */
     public static String getTotalRAM() {
         RandomAccessFile reader = null;
@@ -274,18 +275,27 @@ public class Utility {
     }//getTotalRAM()
 
     //##### metodo di rischiesta del permesso di accesso alla memoria esterna #####
-    public static boolean verifyStoragePermission(Activity activity) {
+
+    /** metodo verifyStoragePermission(Activity): boolean
+     * questo metodo verifica il permesso che ha l'applicazione di accedere alla memoria
+     * del dispositivo.
+     * Se non si dispone del permesso, questo viene richiesto all'utente.
+     * Se e' stato accordato, allora si potra' accedere alla memoria del dispositivo
+     * (ed effettuare lo screenshot, ad esempio)
+     * @param  currentActivity: Activity
+     * @return isDenied: boolean, stato del permesso di accedere alla memoria.
+     */
+    public static boolean verifyStoragePermission(Activity currentActivity) {
         //tipo di permesso
-        int permission = ActivityCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        int permission = ActivityCompat.checkSelfPermission(currentActivity, Manifest.permission.WRITE_EXTERNAL_STORAGE);
         //verifica del permesso
-        if (permission != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(
-                    activity,
-                    PERMISSION_STORAGE,
+        if(permission!=PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(currentActivity,PERMISSION_STORAGE,
                     REQUEST_EXTERNAL_STORAGE);
             return false;
+        } else {
+            return true;
         }
-        return true;
     }
 
 }// end class Utility
