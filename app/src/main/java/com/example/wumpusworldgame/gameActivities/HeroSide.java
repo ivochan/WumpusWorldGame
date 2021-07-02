@@ -19,11 +19,6 @@ import com.example.wumpusworldgame.gameController.GridViewCustomAdapter;
 import com.example.wumpusworldgame.gameMenuItems.gameTutorials.HeroModeTutorial;
 import com.example.wumpusworldgame.services.Utility;
 import java.util.LinkedList;
-import java.util.concurrent.locks.Condition;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
-
-import game.session.configuration.Starter;
 import game.session.controller.Direction;
 import game.structure.map.GameMap;
 import game.structure.map.MapConfiguration;
@@ -33,15 +28,6 @@ import game.structure.map.MapConfiguration;
  */
 public class HeroSide extends AppCompatActivity {
     //##### attributi di classe #####
-
-
-    private static Lock l = new ReentrantLock(true);
-
-    private static Condition c = l.newCondition();
-
-    private static boolean endGame=false;
-
-
 
     //intent utilizzato per riseguire il metodo onCreate() di questa classe
     private Intent starterIntent;
@@ -173,8 +159,6 @@ public class HeroSide extends AppCompatActivity {
         list.setAdapter(adapter);
 
         //configurazioni da fare all'avvio della partita
-
-        //configurazioni da fare all'avvio della partita
         sensor_info = GameController.linkStart(this, gm);
         //si concatena questa stringa a quella di inizio partita
         intro_message += "\n" + sensor_info;
@@ -232,35 +216,13 @@ public class HeroSide extends AppCompatActivity {
         });//setOnClickListener(View.OnClickListener())
 
 
-        Thread t = new GameSessionCheckThread(l, c);
-
-        t.start();
-
-              try {
-                l.lock();
-
-                if (!Starter.getGameStart()) {
-                    endGame = true;
-                    c.signal();
-                }
-
-            }
-            catch (Exception e) {
-                System.err.println("Il software e' stato chiuso.");
-                System.exit(0);
-            }
-            finally {
-                l.unlock();
-            }
-
+        //TODO Avviare il thread
+        GameController.initGameSessiosCheck();
 
     }//onCreate(Bundle)
 
     //##### metodi per la gestione dell'activity #####
 
-    public  static boolean endGame(){
-        return  endGame;
-    }
     /** metodo onStart(): void
      * ACTIVITY VISIBILE
      * questo metodo si occupa di attivare le funzionalita'

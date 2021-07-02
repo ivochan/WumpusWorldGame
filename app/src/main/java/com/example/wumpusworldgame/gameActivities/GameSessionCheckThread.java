@@ -1,4 +1,6 @@
 package com.example.wumpusworldgame.gameActivities;
+import android.widget.Toast;
+
 import com.example.wumpusworldgame.gameController.GameController;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
@@ -24,13 +26,11 @@ public class GameSessionCheckThread extends  Thread{
     public void run() {
             try {
                 l.lock();
-                while(!HeroSide.endGame()) {
+                while(!GameController.endGame()) {
                     c.await();
                 }
-
-                GameController.endGameSession("c");
                 Thread.sleep(500);
-
+                GameController.endGameSession("c");
             } catch(Exception e) {
                 e.printStackTrace();
                 System.exit(0);

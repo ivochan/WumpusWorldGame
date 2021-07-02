@@ -18,12 +18,16 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.FileProvider;
 import androidx.preference.PreferenceManager;
 import com.example.wumpusworldgame.R;
+import com.example.wumpusworldgame.gameActivities.GameSessionCheckThread;
 import com.example.wumpusworldgame.gameActivities.HeroSide;
 import com.example.wumpusworldgame.services.Utility;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.LinkedList;
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 import game.session.configuration.Starter;
 import game.session.controller.Controller;
 import game.session.controller.Direction;
@@ -44,10 +48,22 @@ public class GameController {
     private static Activity currentActivity;
     //linkedList contentente gli elementi della mappa di esplorazione
     private static LinkedList<String> update_data=new LinkedList<>();
-
+    //
+    private static Lock l = new ReentrantLock(true);
+    private static Condition c = l.newCondition();
+    private static boolean endGame=false;
 
     //##### metodi utilizzati nella schermata di gioco #####
 
+
+    public static void initGameSessiosCheck(){
+        Thread t = new GameSessionCheckThread(l, c);
+        t.start();
+    }
+
+    public  static boolean endGame(){
+        return  endGame;
+    }
     /** metodo gamePadMove(Direction,GameMap,GameMap,TextView,TextView,LinkedList<String>,GridViewCustomAdapter): void
      * questo metodo viene utilizzato per gestire le azioni che dovranno essere
      * effettuate dai pulsanti che costituiscono, virtualmente, il "gamepad", cioe'
@@ -71,6 +87,20 @@ public class GameController {
                 //se non ha richiesto di colpire, allora si deve muovere il pg
                 GameController.movePlayer(direction,gm,em,game_message,adapter);
             }//else
+            try {
+                l.lock();
+                if (!Starter.getGameStart()) {
+                    endGame = true;
+                    c.signal();
+                }
+            }
+            catch (Exception e) {
+                System.err.println("Il software e' stato chiuso.");
+                System.exit(0);
+            }
+            finally {
+                l.unlock();
+            }
 
         }//fi
         //allora la partita e' conclusa
