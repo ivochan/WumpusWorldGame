@@ -42,7 +42,7 @@ public class HeroSide extends AppCompatActivity {
     //matrice di esplorazione
     private GameMap em;
     //per la matrice di esplorazione
-    private GridView list;
+    private static GridView grid;
     //adapter per la matrice di esplorazione
     private GridViewCustomAdapter adapter;
     //dati da mostrare nella matrice di esplorazione
@@ -154,9 +154,9 @@ public class HeroSide extends AppCompatActivity {
         //GridViewCustomAdapter adapter = new GridViewCustomAdapter(this, data);
         adapter = new GridViewCustomAdapter(this, data, game_data);
         //si visualizza la matrice di esplorazione
-        list = findViewById(R.id.grid_view);
+        grid = findViewById(R.id.grid_view);
         //oggetto che permette di visualizzare i dati
-        list.setAdapter(adapter);
+        grid.setAdapter(adapter);
 
         //configurazioni da fare all'avvio della partita
         sensor_info = GameController.linkStart(this, gm);
@@ -169,7 +169,7 @@ public class HeroSide extends AppCompatActivity {
         Utility.musicPlaying(mp, this);
 
         //##### gestione dei pulsanti #####
-
+        
         //pulsante HIT
         hit_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -184,7 +184,7 @@ public class HeroSide extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //si muove il personaggio verso sopra
-                GameController.gamePadMove(Direction.UP,gm,em,game_message,shots,adapter);
+                GameController.gamePadMove(Direction.UP,gm,em,game_message,shots,adapter,grid);
             }//onClick(View)
         });//setOnClickListener(View.OnClickListener())
 
@@ -193,7 +193,7 @@ public class HeroSide extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //si muove il personaggio verso sotto
-                GameController.gamePadMove(Direction.DOWN,gm,em,game_message,shots,adapter);
+                GameController.gamePadMove(Direction.DOWN,gm,em,game_message,shots,adapter,grid);
             }//onClick(View)
         });//setOnClickListener(View.OnClickListener())
 
@@ -202,7 +202,7 @@ public class HeroSide extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //si muove il personaggio verso sinistra
-                GameController.gamePadMove(Direction.LEFT,gm,em,game_message,shots,adapter);
+                GameController.gamePadMove(Direction.LEFT,gm,em,game_message,shots,adapter,grid);
             }//onClick(View)
         });//setOnClickListener(View.OnClickListener())
 
@@ -211,13 +211,9 @@ public class HeroSide extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //si muove il personaggio verso destra
-                GameController.gamePadMove(Direction.RIGHT,gm,em,game_message,shots,adapter);
+                GameController.gamePadMove(Direction.RIGHT,gm,em,game_message,shots,adapter,grid);
             }//onClick(View)
         });//setOnClickListener(View.OnClickListener())
-
-
-        //TODO Avviare il thread
-        GameController.initGameSessiosCheck();
 
     }//onCreate(Bundle)
 

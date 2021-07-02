@@ -11,6 +11,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
 import android.view.View;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,7 +19,6 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.FileProvider;
 import androidx.preference.PreferenceManager;
 import com.example.wumpusworldgame.R;
-import com.example.wumpusworldgame.gameActivities.GameSessionCheckThread;
 import com.example.wumpusworldgame.gameActivities.HeroSide;
 import com.example.wumpusworldgame.services.Utility;
 import java.io.File;
@@ -48,22 +48,8 @@ public class GameController {
     private static Activity currentActivity;
     //linkedList contentente gli elementi della mappa di esplorazione
     private static LinkedList<String> update_data=new LinkedList<>();
-    //
-    private static Lock l = new ReentrantLock(true);
-    private static Condition c = l.newCondition();
-    private static boolean endGame=false;
 
     //##### metodi utilizzati nella schermata di gioco #####
-
-
-    public static void initGameSessiosCheck(){
-        Thread t = new GameSessionCheckThread(l, c);
-        t.start();
-    }
-
-    public  static boolean endGame(){
-        return  endGame;
-    }
     /** metodo gamePadMove(Direction,GameMap,GameMap,TextView,TextView,LinkedList<String>,GridViewCustomAdapter): void
      * questo metodo viene utilizzato per gestire le azioni che dovranno essere
      * effettuate dai pulsanti che costituiscono, virtualmente, il "gamepad", cioe'
@@ -75,7 +61,7 @@ public class GameController {
      * @param shots
      * @param adapter
      */
-    public static void gamePadMove(Direction direction, GameMap gm, GameMap em, TextView game_message, TextView shots, GridViewCustomAdapter adapter) {
+    public static void gamePadMove(Direction direction, GameMap gm, GameMap em, TextView game_message, TextView shots, GridViewCustomAdapter adapter, GridView grid) {
         //si controlla se la partita e' iniziata
         if(Starter.getGameStart()) {
             //si controlla se il giocatore ha richiesto di colpire
@@ -85,23 +71,8 @@ public class GameController {
             }//fi
             else {
                 //se non ha richiesto di colpire, allora si deve muovere il pg
-                GameController.movePlayer(direction,gm,em,game_message,adapter);
+                GameController.movePlayer(direction,gm,em,game_message,adapter,grid);
             }//else
-            try {
-                l.lock();
-                if (!Starter.getGameStart()) {
-                    endGame = true;
-                    c.signal();
-                }
-            }
-            catch (Exception e) {
-                System.err.println("Il software e' stato chiuso.");
-                System.exit(0);
-            }
-            finally {
-                l.unlock();
-            }
-
         }//fi
         //allora la partita e' conclusa
         else {
@@ -143,7 +114,7 @@ public class GameController {
      * @param game_message
      * @param adapter
      */
-    private static void movePlayer(Direction direction, GameMap gm, GameMap em, TextView game_message, GridViewCustomAdapter adapter){
+    private static void movePlayer(Direction direction, GameMap gm, GameMap em, TextView game_message, GridViewCustomAdapter adapter, GridView grid){
         //si riceve la mossa che il giocatore vuole effettuare
         int status = movePG(direction,gm, em);
         //si effettua la mossa
@@ -154,6 +125,8 @@ public class GameController {
         updateExplorationMap(gm,em);
         //si aggiorna l'adapter
         adapter.swapItems(update_data);
+        //si aggiorna il componente grafico
+        grid.invalidate();
     }//movePlayer()
 
     /**
@@ -737,7 +710,5 @@ public class GameController {
                     Toast.LENGTH_SHORT).show();
         }//end try-catch
     }//shareScreenshot(File)
-
-
 
 }//end GameController
