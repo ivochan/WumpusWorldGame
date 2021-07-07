@@ -19,6 +19,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <!-- Game Activity: Hero Side and Wumpus Side -->
         <activity
             android:name=".gameActivities.HeroSide"
             android:label="@string/hero_side_title"
@@ -29,15 +30,24 @@
             android:label="@string/wumpus_side_title"
             android:launchMode="singleTop"
             android:parentActivityName=".appLaunch.MainActivity" />
-        <!-- altre activity -->
+        <!-- Settings -->
+        <activity
+            android:name=".mainMenuItems.settings.GameSettingsActivity"
+            android:label="@string/game_settings_title"
+            android:parentActivityName=".appLaunch.MainActivity" />
+        <!-- Menu Activity -->
         <activity
             android:name=".mainMenuItems.GameInformationActivity"
             android:label="@string/game_info_title"
             android:parentActivityName=".appLaunch.MainActivity" />
         <activity
-            android:name=".mainMenuItems.settings.GameSettingsActivity"
-            android:label="@string/game_settings_title"
+            android:name=".mainMenuItems.score.RankActivity"
+            android:label="@string/score_title"
             android:parentActivityName=".appLaunch.MainActivity" />
+        <!-- Automatic Player -->
+        <activity android:name=".gameMenuItems.AutomaticGameSession"
+            android:label="Automatic Game"/>
+        <!-- Game Tutorial -->
         <activity
             android:name=".mainMenuItems.tutorial.MainTutorialActivity"
             android:label="@string/main_tutorial_title"
@@ -46,10 +56,7 @@
             android:name=".mainMenuItems.tutorial.GamePadMainTutorialActivity"
             android:label="@string/main_tutorial_controls_title"
             android:parentActivityName=".mainMenuItems.tutorial.MainTutorialActivity" />
-        <activity
-            android:name=".mainMenuItems.score.RankActivity"
-            android:label="@string/score_title"
-            android:parentActivityName=".appLaunch.MainActivity" />
+        <!-- Mode Tutorail -->
         <activity
             android:name=".gameMenuItems.gameModeTutorials.HeroModeTutorial"
             android:label="@string/hero_mode_tutorial_title"
@@ -58,9 +65,7 @@
             android:name=".gameMenuItems.gameModeTutorials.WumpusModeTutorial"
             android:label="@string/wumpus_mode_tutorial_title"
             android:parentActivityName=".gameActivities.WumpusSide" />
-        <activity android:name=".gameMenuItems.AutomaticGameSolving"
-            android:label="@string/automatic_solving"
-            android:parentActivityName=".appLaunch.MainActivity" />
+        <!-- File sharing provider -->
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.provider"
@@ -71,6 +76,4 @@
                 android:resource="@xml/provider_paths" />
         </provider>
     </application>
-
-
 </manifest>

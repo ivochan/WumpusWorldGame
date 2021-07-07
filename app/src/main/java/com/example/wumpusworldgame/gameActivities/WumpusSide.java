@@ -14,12 +14,11 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceManager;
 import com.example.wumpusworldgame.R;
-import com.example.wumpusworldgame.gameMenuItems.AutomaticGameSolving;
 import com.example.wumpusworldgame.gameSession.GameController;
 import com.example.wumpusworldgame.gameSession.GridViewCustomAdapter;
 import com.example.wumpusworldgame.gameMenuItems.gameModeTutorials.WumpusModeTutorial;
 import com.example.wumpusworldgame.services.Utility;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import game.session.controller.Direction;
 import game.structure.map.GameMap;
 import game.structure.map.MapConfiguration;
@@ -47,9 +46,9 @@ public class WumpusSide extends AppCompatActivity {
     //adapter per la matrice di esplorazione
     private GridViewCustomAdapter adapter;
     //dati da mostrare nella matrice di esplorazione
-    private LinkedList<String> data;
+    private ArrayList<String> data;
     //dati della matrice di gioco
-    private LinkedList<String> game_data;
+    private ArrayList<String> game_data;
     //##### campi di testo #####
     //messaggi di gioco
     private TextView game_message;
@@ -98,9 +97,9 @@ public class WumpusSide extends AppCompatActivity {
         intro_message = getResources().getString(R.string.game_message_intro)+" "+player_name+"!";
 
         //dati da mostrare nella matrice di esplorazione
-        data = new LinkedList<>();
+        data = new ArrayList<>();
         //dati della matrice di gioco
-        game_data = new LinkedList<>();
+        game_data = new ArrayList<>();
 
         //##### inizializzazioni dei pulsanti #####
         hit_button = findViewById(R.id.imageButtonHIT);
@@ -187,7 +186,7 @@ public class WumpusSide extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //si muove il personaggio verso sopra
-                GameController.gamePadMove(Direction.UP,gm,em,game_message,shots,adapter,list);
+                GameController.gamePadMove(Direction.UP,gm,em,game_message,shots,adapter);
             }//onClick(View)
         });//setOnClickListener(View.OnClickListener())
 
@@ -196,7 +195,7 @@ public class WumpusSide extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //si muove il personaggio verso sotto
-                GameController.gamePadMove(Direction.DOWN,gm,em,game_message,shots,adapter,list);
+                GameController.gamePadMove(Direction.DOWN,gm,em,game_message,shots,adapter);
             }//onClick(View)
         });//setOnClickListener(View.OnClickListener())
 
@@ -205,7 +204,7 @@ public class WumpusSide extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //si muove il personaggio verso sinistra
-                GameController.gamePadMove(Direction.LEFT,gm,em,game_message,shots,adapter,list);
+                GameController.gamePadMove(Direction.LEFT,gm,em,game_message,shots,adapter);
             }//onClick(View)
         });//setOnClickListener(View.OnClickListener())
 
@@ -214,7 +213,7 @@ public class WumpusSide extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //si muove il personaggio verso destra
-                GameController.gamePadMove(Direction.RIGHT,gm,em,game_message,shots,adapter,list);
+                GameController.gamePadMove(Direction.RIGHT,gm,em,game_message,shots,adapter);
             }//onClick(View)
         });//setOnClickListener(View.OnClickListener())
 
@@ -346,12 +345,7 @@ public class WumpusSide extends AppCompatActivity {
                 return true;
             //RISOLVI
             case R.id.item_solve_game:
-                //creazione dell'intent per la risoluzione automatica della partita
-                intent = new Intent(this, AutomaticGameSolving.class);
-                //si avvia l'istanza dell'activity corrispondente
-                startActivity(intent);
-                //si interrompe il metodo corrente con successo
-                return true;
+               return false;
             //TUTORIAL
             case R.id.item_game_tutorial:
                 //creazione dell'intent

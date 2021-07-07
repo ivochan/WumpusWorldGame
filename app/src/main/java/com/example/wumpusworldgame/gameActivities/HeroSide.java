@@ -14,15 +14,26 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceManager;
 import com.example.wumpusworldgame.R;
-import com.example.wumpusworldgame.gameMenuItems.AutomaticGameSolving;
+import com.example.wumpusworldgame.gameMenuItems.AutomaticGameSession;
 import com.example.wumpusworldgame.gameSession.GameController;
 import com.example.wumpusworldgame.gameSession.GridViewCustomAdapter;
 import com.example.wumpusworldgame.gameMenuItems.gameModeTutorials.HeroModeTutorial;
 import com.example.wumpusworldgame.services.Utility;
+
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.LinkedList;
+
+import game.player.agent.RandomAgent;
+import game.session.configuration.Starter;
+import game.session.controller.Controller;
 import game.session.controller.Direction;
+import game.structure.cell.Cell;
+import game.structure.cell.CellStatus;
+import game.structure.elements.PlayableCharacter;
 import game.structure.map.GameMap;
 import game.structure.map.MapConfiguration;
+
 /** class HeroSide
  * classe che implementa la modalita' di gioco in cui il personaggio
  * giocabile e' l'Avventuriero.
@@ -47,9 +58,9 @@ public class HeroSide extends AppCompatActivity {
     //adapter per la matrice di esplorazione
     private GridViewCustomAdapter adapter;
     //dati da mostrare nella matrice di esplorazione
-    private LinkedList<String> data;
+    private ArrayList<String> data;
     //dati della matrice di gioco
-    private LinkedList<String> game_data;
+    private ArrayList<String> game_data;
     //##### campi di testo #####
     //messaggi di gioco
     private TextView game_message;
@@ -61,12 +72,17 @@ public class HeroSide extends AppCompatActivity {
     private String intro_message;
     //messaggio iniziale dei sensori
     private String sensor_info;
+
     //##### pulsanti del controller di gioco #####
     private ImageButton hit_button;
     private ImageButton up_button;
     private ImageButton down_button;
     private ImageButton left_button;
     private ImageButton right_button;
+
+    //lista contenente la coppia di indici di ogni cella visitata
+    protected LinkedList<Cell> run = new LinkedList<Cell>();
+
 
     /** metodo onCreate(Bunde): void
      * ACTIVITY CREATA
@@ -98,9 +114,9 @@ public class HeroSide extends AppCompatActivity {
         intro_message = getResources().getString(R.string.game_message_intro) + " " + player_name + "!";
 
         //dati da mostrare nella matrice di esplorazione
-        data = new LinkedList<>();
+        data = new ArrayList();
         //dati della matrice di gioco
-        game_data = new LinkedList<>();
+        game_data = new ArrayList();
 
         //##### inizializzazioni dei pulsanti #####
         hit_button = findViewById(R.id.imageButtonHIT);
@@ -152,7 +168,7 @@ public class HeroSide extends AppCompatActivity {
         }//for righe
 
         //si crea l'adapter per il gridlayout della matrice di esplorazione
-        //GridViewCustomAdapter adapter = new GridViewCustomAdapter(this, data);
+
         adapter = new GridViewCustomAdapter(this, data, game_data);
         //si visualizza la matrice di esplorazione
         grid = findViewById(R.id.grid_view);
@@ -185,7 +201,7 @@ public class HeroSide extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //si muove il personaggio verso sopra
-                GameController.gamePadMove(Direction.UP,gm,em,game_message,shots,adapter,grid);
+                GameController.gamePadMove(Direction.UP,gm,em,game_message,shots,adapter);
             }//onClick(View)
         });//setOnClickListener(View.OnClickListener())
 
@@ -194,7 +210,7 @@ public class HeroSide extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //si muove il personaggio verso sotto
-                GameController.gamePadMove(Direction.DOWN,gm,em,game_message,shots,adapter,grid);
+                GameController.gamePadMove(Direction.DOWN,gm,em,game_message,shots,adapter);
             }//onClick(View)
         });//setOnClickListener(View.OnClickListener())
 
@@ -203,7 +219,7 @@ public class HeroSide extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //si muove il personaggio verso sinistra
-                GameController.gamePadMove(Direction.LEFT,gm,em,game_message,shots,adapter,grid);
+                GameController.gamePadMove(Direction.LEFT,gm,em,game_message,shots,adapter);
             }//onClick(View)
         });//setOnClickListener(View.OnClickListener())
 
@@ -212,7 +228,7 @@ public class HeroSide extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //si muove il personaggio verso destra
-                GameController.gamePadMove(Direction.RIGHT,gm,em,game_message,shots,adapter,grid);
+                GameController.gamePadMove(Direction.RIGHT,gm,em,game_message,shots,adapter);
             }//onClick(View)
         });//setOnClickListener(View.OnClickListener())
 
@@ -344,8 +360,12 @@ public class HeroSide extends AppCompatActivity {
                 return true;
             //RISOLVI
             case R.id.item_solve_game:
-                //creazione dell'intent per la risoluzione automatica della partita
-                intent = new Intent(this, AutomaticGameSolving.class);
+                //creazione dell'intent
+                intent = new Intent(this, AutomaticGameSession.class);
+                //soluzione della partita
+                ArrayList<String> solution = automaticPlayer(gm,em);
+                //si passa la matrice di gioco
+                intent.putStringArrayListExtra("solution",solution);
                 //si avvia l'istanza dell'activity corrispondente
                 startActivity(intent);
                 //si interrompe il metodo corrente con successo
@@ -364,5 +384,233 @@ public class HeroSide extends AppCompatActivity {
         }//end switch
     }//onOptionsItemSelected(MenuItem)
 
+    private static ArrayList<String> automaticPlayer(GameMap gm, GameMap em){
+        //avvio della partita
+        Starter.setGameStart(true);
+        //lista che conterra' i dati della soluzione
+        ArrayList<String> solution = new ArrayList<>();
+        //si istanzia il giocatore automatico
+        RandomAgent player = new RandomAgent();
+
+        //risoluzione
+        while(Starter.getGameStart()){
+            //si effettua la mossa
+            chooseMove(em, gm);
+            //TODO si memorizza il punteggio
+
+        }//end while sessione di gioco
+        //dimensioni della matrice di gioco, analoghe a quelle della matrice di esplorazione
+        int rows = gm.getRows();
+        int columns = gm.getColumns();
+        //si iterano le celle della matrice
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < columns; j++) {
+                //si aggiunge la cella corrente alla LinkedList
+                solution.add(gm.getMapCell(i, j).statusToString());
+            }//for colonne
+        }//for righe
+        return solution;
+    }
+
+    /** metodo chooseMove(GameMap, GameMap): Direction
+     * questo metodo si occupa di scegliere la mossa
+     * da effettuare, sulla base del contenuto dei sensori.
+     * @param em: GameMap, mappa di esplorazione;
+     * @param gm: GameMap, mappa di gioco;
+     */
+    public static void chooseMove(GameMap em, GameMap gm) {
+        //variabile ausiliaria per lo stato della mossa
+        int status = 0;
+        //variabile ausiliaria per la direzione
+        Direction dir;
+        //variabile ausiliaria per i sensori
+        boolean[] sensors = new boolean[2];
+        //si preleva la posizione del pg
+        int  [] pg_pos = PlayableCharacter.getPGposition();
+        //si preleva la cella in cui si trova
+        Cell cur = em.getMapCell(pg_pos[0], pg_pos[1]);
+        //si preleva il vettore dei sensori
+        sensors = cur.getSenseVector();
+        //verifica del contenuto
+        if(sensors[CellStatus.ENEMY_SENSE.ordinal()]) {
+            //il nemico e' nelle vicinanze
+            if(Starter.getChanceToHit()) {
+                //si verifica la disponibilita' del colpo
+                //almeno una delle celle non e' stata visitata se il sensore e' acceso
+                Direction shot_dir = chooseDirection(pg_pos[0], pg_pos[1], gm);
+                //si tenta il colpo
+                Controller.hitEnemy(shot_dir, gm);
+                //si resetta il flag
+                Starter.setChanceToHit(false);
+            }//fi
+            else {
+                //non si hanno munizioni
+                //si sceglie la direzione in cui fare muovere il pg
+                dir = chooseDirection(pg_pos[0], pg_pos[1], gm);
+                //si sceglie la direzione in cui muovere il pg
+                status = Controller.movePG(dir, gm, em);
+                //si controlla la mossa
+                Controller.makeMove(status, gm, em);
+                //aggiornamento del percorso
+                //if(status!=-1)super.updateRunPath(gm.getMapCell(pg_pos[0], pg_pos[1]));
+            }//else
+        }//fi
+        else if(sensors[CellStatus.DANGER_SENSE.ordinal()]) {
+            //il pericolo e' vicino
+            //si preferisce come direzione una cella non visitata
+            dir = chooseDirection(pg_pos[0], pg_pos[1], gm);
+            //si sceglie la direzione in cui muovere il pg
+            status = Controller.movePG(dir, gm, em);
+            //si controlla la mossa
+            Controller.makeMove(status, gm, em);
+            //aggiornamento del percorso
+            //if(status!=-1)super.updateRunPath(gm.getMapCell(pg_pos[0], pg_pos[1]));
+        }
+        else {
+            //si sceglie una direzione a caso, tra quelle non esplorate
+            dir = chooseDirection(pg_pos[0], pg_pos[1], gm);
+            //si sceglie la direzione in cui muovere il pg
+            status = Controller.movePG(dir, gm, em);
+            //si controlla la mossa
+            Controller.makeMove(status, gm, em);
+            //aggiornamento del percorso
+            //if(status!=-1)super.updateRunPath(gm.getMapCell(pg_pos[0], pg_pos[1]));
+        }
+        Starter.setGameStart(false);
+    }//chooseMove(GameMap, GameMap)
+
+    private static Direction chooseDirection(int i, int j, GameMap em) {
+        //vettore ausiliario per le celle accessibili e non visitata
+        boolean [] ok_cells = new boolean[4];
+        //vettore ausiliario per le celle esistenti
+        boolean [] cells = new boolean[4];
+        //indice di cella casuale
+        int random = 0;
+        //variabile ausiliaria per l'indice di cella
+        int index = 0;
+        //si prelevano le direzioni possibili
+        Direction [] directions = Direction.values();
+        //si verificano le celle dispoonibili
+        if(em.cellExists(i-1, j)) {
+            //si calcola l'indice
+            index = Direction.UP.ordinal();
+            //la cella esiste
+            cells[index] = true;
+            //si verifica la cella e si aggiorna il vettore
+            ok_cells[index] = verifyCell(i-1,j, em);
+        }//UP
+        if(em.cellExists(i+1, j)) {
+            //si calcola l'indice
+            index = Direction.DOWN.ordinal();
+            //la cella esiste
+            cells[index] = true;
+            //si verifica la cella e si aggiorna il vettore
+            ok_cells[index] = verifyCell(i+1,j, em);
+        }//DOWN
+        if(em.cellExists(i, j-1)) {
+            //si calcola l'indice
+            index = Direction.LEFT.ordinal();
+            //la cella esiste
+            cells[index] = true;
+            //si verifica la cella e si aggiorna il vettore
+            ok_cells[index] = verifyCell(i,j-1, em);
+        }// LEFT
+        if(em.cellExists(i, j+1)) {
+            //si calcola l'indice
+            index = Direction.RIGHT.ordinal();
+            //la cella esiste
+            cells[index] = true;
+            //si verifica la cella e si aggiorna il vettore
+            ok_cells[index] = verifyCell(i,j+1, em);
+        }//RIGHT
+        //controllo sul contenuto del vettore ok_cells
+        if(checkCells(ok_cells)){
+            //si sceglie casualmente una cella tra quelle idonee
+            random = pickCell(ok_cells);
+        }//fi
+        else {
+            //si prende una cella a caso tra quelle accessibili ma gia' visitate
+            random = pickCell(cells);
+        }//else
+        //si estrae la direzione scelta
+        Direction dir = directions[random];
+        //si restituisce la direzione
+        return dir;
+    }
+
+    /** metodo pickCell(boolean []): int
+     * questo metodo seleziona casualmente una cella
+     * tra quelle indicate come true, nel vettore ricevuto come
+     * parametro.
+     * @param vcells: boolean[], vettore delle celle tra cui
+     * 							 selezionare quella in cui effettuare
+     * 							 la mossa;
+     * @return random: int, indice della cella da estrarre.
+     */
+    private static int pickCell(boolean[] vcells) {
+        //range del numero casuale
+        int range = vcells.length;
+        //variabile ausiliaria
+        boolean found = false;
+        //numero casuale
+        int random = 0;
+        //si sceglie casualmente una cella tra quelle idonee
+        while(!found) {
+            //si genera un numero casuale
+            random = (int)(Math.random()*range);
+            //System.out.println("random "+random);
+            //si accede alla cella corrispondente
+            found = vcells[random];
+            //se true si esce dal ciclo
+        }//end while
+        //si restituisce l'indice della cella selezionata
+        return random;
+    }//pickCell(boolean[])
+
+    /** metodo verifyCell(int, int, GameMap): boolean
+     * questo metodo verifica se la cella in cui si vuole spostare
+     * il personaggio giocabile sia idonea o no, in base al suo contenuto.
+     * Infatti, per essere una scelta valida, la cella non deve essere ne'+
+     * un sasso ne' essere stata gia' visitata.
+     * @param i: int, indice di riga della cella in cui si trova il pg;
+     * @param j: int, indice di colonna della cella in cui si trova il pg;
+     * @param em: GameMap, mappa di esplorazione, visibile al pg;
+     * @return boolean: true, se la cella e' idonea, false altrimenti,. .
+     */
+    private static boolean verifyCell(int i, int j, GameMap em) {
+        //si preleva la cella
+        CellStatus cs = em.getMapCell(i, j).getCellStatus();
+        //si verifica che non e' un sasso
+        if(!cs.equals(CellStatus.FORBIDDEN)) {
+            //si verifica che la cella non e' stata visitata
+            if(!cs.equals(CellStatus.OBSERVED)) {
+                //la cella e' idonea
+                return true;
+            }//fi
+            return false;
+        }//fi
+        //la cella non e' idonea
+        return false;
+    }//verifyCell(int, int, GameMap)
+
+    /** metodo checkCells(boolean []): boolean
+     * questo metodo verifica se questo vettore contiene almeno una
+     * cella che sia pari a true. Se cosi' non e' sceglie una cella
+     * a caso tra quelle gia' visitate.
+     * @param ok_cells: boolean [], vettore di celle risultate idonee
+     * @return check: boolean, questo flag sara' true se almeno una cella
+     * 						   del vettore e' risultata idonea, false altrimenti.
+     */
+    private static boolean checkCells(boolean[] ok_cells) {
+        //variabile ausiliaria per il controllo
+        boolean check = false;
+        //si itera il vettore
+        for(int i=0; i<ok_cells.length;i++) {
+            //System.out.println("cella "+i+" = "+ok_cells[i]);
+            //si preleva il contenuto della cella
+            if(ok_cells[i]) check = true;
+        }//end for
+        return check;
+    }//checkCells(boolean [])
 
 }//end HeroSide

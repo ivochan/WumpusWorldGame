@@ -9,9 +9,10 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
+
     <ImageView
-        android:layout_width="330dp"
-        android:layout_height="327dp"
+        android:layout_width="338dp"
+        android:layout_height="266dp"
         android:contentDescription="@string/loading_image"
         android:src="@drawable/bat_idle"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -19,35 +20,36 @@
         app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.17" />
+        app:layout_constraintVertical_bias="0.275" />
 
     <ProgressBar
         android:id="@+id/progressBar"
         style="?android:attr/indeterminateProgressStyle"
-        android:layout_width="214dp"
-        android:layout_height="80dp"
+        android:layout_width="167dp"
+        android:layout_height="84dp"
         android:indeterminate="true"
         android:indeterminateTint="@color/dark_red_900"
         android:indeterminateTintMode="src_in"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.726" />
+        app:layout_constraintVertical_bias="0.689" />
 
     <TextView
         android:id="@+id/load_text"
-        android:layout_width="305dp"
-        android:layout_height="38dp"
+        android:layout_width="337dp"
+        android:layout_height="85dp"
         android:text="@string/solving"
+        android:textAlignment="center"
         android:textColor="@color/dark_indigo_900"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.472"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.815" />
+        app:layout_constraintVertical_bias="0.926" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

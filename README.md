@@ -28,10 +28,6 @@ In questa versione del gioco √® stata prevista, per il giocatore, la possibilit√
 
 - scegliere clip audio per la modalit√† wumpus;
 
-- memorizzazione della matrice di gioco per la risoluzione;
-
-- test del giocatore automatico;
-
 - inserire nella main activity il menu con:
   - le impostazioni di gioco, quali:
     - ~~abilitare i suoni~~
@@ -164,4 +160,12 @@ In questa versione del gioco √® stata prevista, per il giocatore, la possibilit√
 
 - ~~aggiungere il provider per la condivisione dei file nei dispositivi con sdk superiori alla 23~~
 
+- activity per la risoluzione automatica della partita:
+
+  - test del giocatore automatico;
+  - memorizzazione della matrice di gioco per la risoluzione;
+  - schermata di risoluzione;
+  - definizione del layout;
+  - 
+  
   

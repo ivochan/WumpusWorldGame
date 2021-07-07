@@ -219,6 +219,10 @@
     <string name="no_app">No App Available</string>
     <string name="app_link">Scarica qui l\'app: https://github.com/ivochan/WumpusWorldGame</string>
 
+    <!-- Automatic Game -->
+    <string name="solving">Sto cercando un percorso per uscire dalla foresta ...</string>
+    <string name="automatic_solving">Automatic Solving</string>
+
     <!-- Images -->
     <string name="dark_forest">dark_forest_main_activity_image</string>
     <string name="dark_night">creepy_night_game_info_activity</string>
@@ -238,6 +242,5 @@
     <string name="up_button">up button icon</string>
     <string name="right_button">right button icon</string>
     <string name="down_button">down button icon</string>
-    <string name="solving">Solving ...</string>
-    <string name="automatic_solving">Automatic Solving</string>
+
 </resources>

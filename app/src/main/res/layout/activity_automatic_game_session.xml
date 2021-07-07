@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/hero_background"
-    tools:context=".gameActivities.HeroSide"
-    android:id="@+id/hero_mode">
+    android:layout_height="match_parent">
     <!-- dividers -->
     <View
         android:id="@+id/divider_bottom"
@@ -94,102 +91,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.031" />
 
-    <!-- game map -->
-
-    <GridView
-        android:id="@+id/grid_view"
-        android:layout_width="342dp"
-        android:layout_height="224dp"
-        android:background="@drawable/grid_view_border"
-        android:columnWidth="20dp"
-        android:gravity="center"
-        android:horizontalSpacing="6dp"
-        android:numColumns="4"
-        android:paddingHorizontal="6dp"
-        android:paddingVertical="6dp"
-        android:stretchMode="columnWidth"
-        android:verticalSpacing="6dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.492"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.393">
-
-    </GridView>
-
-    <!-- controller -->
-
-    <ImageButton
-        android:id="@+id/imageButtonHIT"
-        android:layout_width="72dp"
-        android:layout_height="72dp"
-        android:background="@drawable/hero_controller_button_background"
-        android:contentDescription="@string/hit_button"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.853"
-        app:srcCompat="@drawable/hit_button" />
-
-    <ImageButton
-        android:id="@+id/imageButtonLEFT"
-        android:layout_width="72dp"
-        android:layout_height="72dp"
-        android:background="@drawable/hero_controller_button_background"
-        android:contentDescription="@string/left_button"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.221"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.851"
-        app:srcCompat="@drawable/left_button" />
-
-    <ImageButton
-        android:id="@+id/imageButtonUP"
-        android:layout_width="72dp"
-        android:layout_height="72dp"
-        android:background="@drawable/hero_controller_button_background"
-        android:contentDescription="@string/up_button"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.717"
-        app:srcCompat="@drawable/up_button" />
-
-    <ImageButton
-        android:id="@+id/imageButtonRIGHT"
-        android:layout_width="72dp"
-        android:layout_height="72dp"
-        android:background="@drawable/hero_controller_button_background"
-        android:contentDescription="@string/right_button"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.778"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.851"
-        app:srcCompat="@drawable/right_button" />
-
-    <ImageButton
-        android:id="@+id/imageButtonDOWN"
-        android:layout_width="72dp"
-        android:layout_height="72dp"
-        android:background="@drawable/hero_controller_button_background"
-        android:contentDescription="@string/down_button"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.986"
-        app:srcCompat="@drawable/down_button" />
-
     <!-- game messages -->
 
     <TextView
@@ -231,5 +132,30 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.234" />
+
+    <!-- game map -->
+
+    <GridView
+        android:id="@+id/grid_view"
+        android:layout_width="342dp"
+        android:layout_height="224dp"
+        android:background="@drawable/grid_view_border"
+        android:columnWidth="20dp"
+        android:gravity="center"
+        android:horizontalSpacing="6dp"
+        android:numColumns="4"
+        android:paddingHorizontal="6dp"
+        android:paddingVertical="6dp"
+        android:stretchMode="columnWidth"
+        android:verticalSpacing="6dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.393">
+
+    </GridView>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

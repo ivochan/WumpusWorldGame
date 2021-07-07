@@ -1,6 +1,5 @@
 package com.example.wumpusworldgame.gameSession;
 //serie di import
-import java.util.LinkedList;
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.ColorStateList;
@@ -13,6 +12,9 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import com.example.wumpusworldgame.R;
 import com.example.wumpusworldgame.gameActivities.HeroSide;
+
+import java.util.ArrayList;
+
 import game.session.configuration.Starter;
 /** class GridViewCustomAdapter
  * questa classe serve per visualizzare i dati nella
@@ -21,10 +23,10 @@ import game.session.configuration.Starter;
 public class GridViewCustomAdapter extends BaseAdapter {
     //##### attributi di classe #####
 
-    //linkedList di stringhe che contiene gli elementi della mappa di gioco
-    private LinkedList<String> game_items;
-    //linkedList di stringhe, in cui ogni stringa descrive il contenuto della cella della mappa di esplorazione
-    private LinkedList<String> items;
+    //arrayList di stringhe che contiene gli elementi della mappa di gioco
+    private ArrayList<String> game_items;
+    //arrayList di stringhe, in cui ogni stringa descrive il contenuto della cella della mappa di esplorazione
+    private ArrayList<String> items;
     //activivy in cui verra' utilizzato
     private static Activity mActivity;
     //oggetto layoutInflater per unire questo componente al layout dell'activity
@@ -32,12 +34,12 @@ public class GridViewCustomAdapter extends BaseAdapter {
     //intero che indica la modalita' di gioco
     private static int game_mode=0;
 
-    /** GridViewCustomAdapter(Activity, LinkedList): costruttore
+    /** GridViewCustomAdapter(Activity, ArrayList): costruttore
      * permette di istanziare l'oggetto gridViewCustomAdapter
      * @param activity: Activity, activity in cui verra' utilizzato l'adapter
-     * @param tempLinkedList: List<String>, oggetto che contiene gli items
+     * @param tempList: List<String>, oggetto che contiene gli items
      */
-    public GridViewCustomAdapter(Activity activity, LinkedList<String> tempLinkedList,LinkedList<String> tempGameLinkedList) {
+    public GridViewCustomAdapter(Activity activity, ArrayList<String> tempList,ArrayList<String> tempGameList) {
         //si preleva l'activity
         mActivity = activity;
         //si verifica il valore dell'intero
@@ -50,29 +52,29 @@ public class GridViewCustomAdapter extends BaseAdapter {
             game_mode = 1;
         }//esle
         //si prelevano gli oggetti della mappa di gioco
-        game_items = tempGameLinkedList;
+        game_items = tempGameList;
         //si prelevano gli oggetti da visualizzare
-        items = tempLinkedList;
+        items = tempList;
         //si utilizza l'inflater
         inflater = (LayoutInflater)activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-    }//end GridViewCustomAdapter(Activity, LinkedList)
+    }//end GridViewCustomAdapter(Activity, List)
 
     //##### metodi #####
 
     /** metodo getCount(): int
-     * fornisce il numero di oggetti della LinkedList
+     * fornisce il numero di oggetti della List
      * @return number_of_items: int, numero di oggetti da visualizzare nel layout
      */
     @Override
     public final int getCount() {
-        //variabile ausiliaria per la lunghezza della LinkedList
+        //variabile ausiliaria per la lunghezza della List
         int number_of_items = items.size();
-        //si restituisce il numero di oggetti contenuti nella LinkedList
+        //si restituisce il numero di oggetti contenuti nella List
         return number_of_items;
     }//getCount()
 
     /** metodo getItem(int): Object
-     * questo metodo restituisce l'oggetto contenuto nella LinkedList
+     * questo metodo restituisce l'oggetto contenuto nella List
      * nella posizione fornita come parametro
      * @param position: int, indice posizionale dell'oggetto che si vuole venga restituito.
      * @return o: Object.
@@ -237,13 +239,17 @@ public class GridViewCustomAdapter extends BaseAdapter {
         return mActivity;
     }//getCurrentActivity()
 
-    public void swapItems(LinkedList<String> itemsList){
+    /**
+     *
+     * @param itemsList
+     */
+    public void swapItems(ArrayList<String> itemsList){
         //si svuota la lista che contiene gli elementi della matrice di esplorazione
         items.clear();
         //si riempie con i nuovi elementi della lista aggiornata
         items.addAll(itemsList);
         //si notifica che i dati sono stati aggiornati
         notifyDataSetChanged();
-    }
+    }//swapItems(List<String>)
 
 }//end GridViewCustomAdapter

@@ -25,7 +25,7 @@ import com.example.wumpusworldgame.services.Utility;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import game.session.configuration.Starter;
 import game.session.controller.Controller;
 import game.session.controller.Direction;
@@ -44,14 +44,14 @@ public class GameController {
     //##### attributi di classe #####
     //activity corrente
     private static Activity currentActivity;
-    //linkedList contentente gli elementi della mappa di esplorazione
-    private static LinkedList<String> update_data=new LinkedList<>();
+    //List contentente gli elementi della mappa di esplorazione
+    private static ArrayList<String> update_data=new ArrayList<>();
     //flag da usare per la stringa nella dialog di fine partita
     private static boolean victory=false;
 
     //##### metodi utilizzati nella schermata di gioco #####
 
-    /** metodo gamePadMove(Direction,GameMap,GameMap,TextView,TextView,LinkedList<String>,GridViewCustomAdapter): void
+    /** metodo gamePadMove(Direction,GameMap,GameMap,TextView,TextView,List<String>,GridViewCustomAdapter): void
      * questo metodo viene utilizzato per gestire le azioni che dovranno essere
      * effettuate dai pulsanti che costituiscono, virtualmente, il "gamepad", cioe'
      * il controller di gioco tramite cui l'utente puo' effetttuare le sue mosse.
@@ -62,7 +62,7 @@ public class GameController {
      * @param shots
      * @param adapter
      */
-    public static void gamePadMove(Direction direction, GameMap gm, GameMap em, TextView game_message, TextView shots, GridViewCustomAdapter adapter, GridView grid) {
+    public static void gamePadMove(Direction direction, GameMap gm, GameMap em, TextView game_message, TextView shots, GridViewCustomAdapter adapter) {
         //si controlla se la partita e' iniziata
         if(Starter.getGameStart()) {
             //si controlla se il giocatore ha richiesto di colpire
@@ -86,7 +86,7 @@ public class GameController {
             game_message.setText(R.string.end_game);
         }//else
 
-    }//gamePadMove(Direction,GameMap,GameMap,TextView,TextView,LinkedList<String>,GridView,GridViewCustomAdapter)
+    }//gamePadMove(Direction,GameMap,GameMap,TextView,TextView,List<String>,GridViewCustomAdapter)
 
     /** metodo gamePadHit(TextView): void
      * questo metodo realizza l'azione vera e propria che consente al giocatore di provare a
@@ -112,7 +112,7 @@ public class GameController {
 
     //##### metodi di gestione della mossa del pg #####
 
-    /** metodo movePlayer(Direction,GameMap,GameMap,TextView,TextView,LinkedList<String>,GridViewCustomAdapter)
+    /** metodo movePlayer(Direction,GameMap,GameMap,TextView,TextView,List<String>,GridViewCustomAdapter)
      * questo metodo controlla il risultato a cui ha portato la mossa effettuata dal giocatore,
      * aggiorna la mappa di esplorazione e la visualizza a schermo, fornendo all'utente dei messaggi
      * sullo stato del gioco.
@@ -129,21 +129,21 @@ public class GameController {
         String info = makeMoveInTheMap(status,gm);
         //si stampa un messaggio informativo sullo stato della mossa
         game_message.setText(info);
-        //si aggiorna la linked list che contiene la mappa di esplorazione da visualizzare
+        //si aggiorna la list che contiene la mappa di esplorazione da visualizzare
         updateExplorationMap(gm,em);
         //si aggiorna l'adapter
         adapter.swapItems(update_data);
     }//movePlayer()
 
     /** metodo updateExplorationMap(GameMap, GameMap): void
-     * questo metodo inserisce nella linked list che verra' fornita all'adapter
+     * questo metodo inserisce nella list che verra' fornita all'adapter
      * per mostrare a video lo stato corrente della mappa di gioco,
      * il contenuto della mappa di esplorazione, aggiornata ogni volta
      * che il giocatore scopre una nuova casella del terreno di gioco.
      * @param gm
      * @param em
      */
-    private static void updateExplorationMap(GameMap gm, GameMap em){
+    public static void updateExplorationMap(GameMap gm, GameMap em){
         //dimensioni della matrice di gioco, analoghe a quelle della matrice di esplorazione
         int r = gm.getRows();
         int c = gm.getColumns();
@@ -152,7 +152,7 @@ public class GameController {
         //si iterano le celle della matrice
         for (int i = 0; i < r; i++) {
             for(int j=0;j<c;j++) {
-                //si aggiunge la cella corrente alla LinkedList
+                //si aggiunge la cella corrente alla List
                 update_data.add(em.getMapCell(i,j).statusToString());
             }//for colonne
         }//for righe
