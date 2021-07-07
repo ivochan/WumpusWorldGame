@@ -147,7 +147,7 @@ In questa versione del gioco √® stata prevista, per il giocatore, la possibilit√
   - ~~predisporre il condice per mostrare la dialog 1 s dopo aver terminato la partita~~
   - ~~messaggio sul risultato della partita( vinta o persa)~~
   - ~~alla chiusura mostrare la mappa di gioco con le celle non visitate~~
-  - mostrare la mappa di gioco completa nella suddetta dialog
+  - ~~mostrare la mappa di gioco completa nella suddetta dialog~~
   - alla scelta "condividi"
     - ~~condividere la mappa di gioco completa~~
     - ~~condividere il punteggio~~ 

@@ -14,6 +14,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceManager;
 import com.example.wumpusworldgame.R;
+import com.example.wumpusworldgame.gameMenuItems.AutomaticGameSolving;
 import com.example.wumpusworldgame.gameSession.GameController;
 import com.example.wumpusworldgame.gameSession.GridViewCustomAdapter;
 import com.example.wumpusworldgame.gameMenuItems.gameModeTutorials.WumpusModeTutorial;
@@ -346,8 +347,11 @@ public class WumpusSide extends AppCompatActivity {
             //RISOLVI
             case R.id.item_solve_game:
                 //creazione dell'intent per la risoluzione automatica della partita
-                //TODO
-                break;
+                intent = new Intent(this, AutomaticGameSolving.class);
+                //si avvia l'istanza dell'activity corrispondente
+                startActivity(intent);
+                //si interrompe il metodo corrente con successo
+                return true;
             //TUTORIAL
             case R.id.item_game_tutorial:
                 //creazione dell'intent
@@ -360,7 +364,6 @@ public class WumpusSide extends AppCompatActivity {
                 //caso di default
                 return super.onOptionsItemSelected(item);
         }//end switch
-        return false;
     }//onOptionsItemSelected(MenuItem)
 
 }//end WumpusSide

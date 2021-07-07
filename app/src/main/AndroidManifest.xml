@@ -58,6 +58,9 @@
             android:name=".gameMenuItems.gameModeTutorials.WumpusModeTutorial"
             android:label="@string/wumpus_mode_tutorial_title"
             android:parentActivityName=".gameActivities.WumpusSide" />
+        <activity android:name=".gameMenuItems.AutomaticGameSolving"
+            android:label="@string/automatic_solving"
+            android:parentActivityName=".appLaunch.MainActivity" />
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.provider"

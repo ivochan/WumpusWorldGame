@@ -242,4 +242,6 @@
     <string name="up_button">up button icon</string>
     <string name="right_button">right button icon</string>
     <string name="down_button">down button icon</string>
+    <string name="solving">Solving ...</string>
+    <string name="automatic_solving">Automatic Solving</string>
 </resources>
