@@ -209,13 +209,13 @@
         \nShow them the Wumpus\' World side that you\'ve discorvered and your current rank.
         \n\nHere\'s your score:\n</string>;
     <string name="nope">Ehm...no</string>
-    <string name="yeah">Sure</string>
+    <string name="yeah">Sure</string>ù
+    <string name="memory_access_denied">Psst! That\'s so sad but you can\'t share your rank if you don\'t agree device memory access</string>
     <!-- messaggio della dialog condivisione del punteggio attuale -->
     <string name="game_score_share_message">Ma...Hey, sfida i tuoi amici al gioco del mondo del Wumpus!
         \n\nEcco il tuo punteggio:\n</string>
     <string name="share_game_map_and_score">Hey, sfidami al gioco del mondo del Wumpus!
         \nQuesta è il territorio che ho esplorato e \ne questo è il mio punteggio:\n</string>
-    <string name="memory_access_denied">So sorry, but you can\'t share it if you don\'t agree memory access</string>
     <string name="no_app">No App Available</string>
     <string name="app_link">Scarica qui l\'app: https://github.com/ivochan/WumpusWorldGame</string>
 

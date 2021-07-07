@@ -551,11 +551,11 @@ public class GameController {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 //si verificano i permessi di accesso alla memoria esterna
+                //si chiede all'utente di poter accedere alla memoria
+                Utility.requestStoragePermission(currentActivity);
                 //l'accesso alla memoria non e' consentito
                 if(!Utility.storagePermissionGranted(currentActivity)){
-                    //si chiede all'utente di poter accedere alla memoria
-                    Utility.requestStoragePermission(currentActivity);
-                    //se non si dispone dei permessi lo screenshot non si puo' condividere
+                    //messaggio da visualizzare quando i permessi non sono stati garantiti
                     Toast.makeText(currentActivity,
                             currentActivity.getString(R.string.memory_access_denied),
                             Toast.LENGTH_LONG).show();
