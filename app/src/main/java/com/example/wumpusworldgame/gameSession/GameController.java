@@ -555,6 +555,10 @@ public class GameController {
                 if(!Utility.storagePermissionGranted(currentActivity)){
                     //si chiede all'utente di poter accedere alla memoria
                     Utility.requestStoragePermission(currentActivity);
+                    //se non si dispone dei permessi lo screenshot non si puo' condividere
+                    Toast.makeText(currentActivity,
+                            currentActivity.getString(R.string.memory_access_denied),
+                            Toast.LENGTH_LONG).show();
                 }//fi
                 //l'accesso alla memoria e' consentito
                 else{
@@ -597,19 +601,10 @@ public class GameController {
             public void onClick(DialogInterface dialog, int which) {
                 //si identifica il campo del layout di cui si vuole catturare la schermata
                 View end_game_map = currentActivity.findViewById(R.id.grid_view);
-                //si verificano i permessi di accesso alla memoria esterna
-                if(Utility.storagePermissionGranted(currentActivity)) {
-                    //si dispone dei permessi quindi si effettua uno screenshot
-                    File imageFile = takeScreenshot(end_game_map);
-                    //si invia lo screenshot
-                    shareScreenshot(imageFile, player,score);
-                }//fi
-                else {
-                    //se non si dispone dei permessi lo screenshot non si puo' condividere
-                    Toast.makeText(currentActivity,
-                            currentActivity.getString(R.string.memory_access_denied),
-                            Toast.LENGTH_LONG).show();
-                }//esle
+                //si dispone dei permessi quindi si effettua uno screenshot
+                File imageFile = takeScreenshot(end_game_map);
+                //si invia lo screenshot
+                shareScreenshot(imageFile, player,score);
             }//onClick(DialogInterface, int)
         });//setPositiveButton(String, DialogInterface)
         //si preleva il componente grafico di cui fare lo screenshot
