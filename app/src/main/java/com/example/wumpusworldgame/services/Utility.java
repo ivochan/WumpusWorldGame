@@ -257,13 +257,16 @@ public class Utility {
             double gb = totRam / 1048576.0;
             double tb = totRam / 1073741824.0;
 
-            if (tb > 1) {
+            if(tb > 1) {
                 lastValue = twoDecimalForm.format(tb).concat(" TB");
-            } else if (gb > 1) {
+            }
+            else if(gb > 1) {
                 lastValue = twoDecimalForm.format(gb).concat(" GB");
-            } else if (mb > 1) {
+            }
+            else if(mb > 1) {
                 lastValue = twoDecimalForm.format(mb).concat(" MB");
-            } else {
+            }
+            else{
                 lastValue = twoDecimalForm.format(totRam).concat(" KB");
             }
         } catch (IOException ex) {
@@ -276,26 +279,33 @@ public class Utility {
 
     //##### metodo di rischiesta del permesso di accesso alla memoria esterna #####
 
-    /** metodo verifyStoragePermission(Activity): boolean
-     * questo metodo verifica il permesso che ha l'applicazione di accedere alla memoria
+    /** metodo storagePermissionGranted(Activity): boolean
+     * questo metodo verifica se l'applicazione ha il permesso di accedere alla memoria
      * del dispositivo.
-     * Se non si dispone del permesso, questo viene richiesto all'utente.
-     * Se e' stato accordato, allora si potra' accedere alla memoria del dispositivo
-     * (ed effettuare lo screenshot, ad esempio)
-     * @param  currentActivity: Activity
-     * @return isDenied: boolean, stato del permesso di accedere alla memoria.
+     * Se il permesso e' stato accordat dall'utente, allora si potra' accedere alla memoria
+     * del dispositivo ed effettuare alcune operazioni, come lo screenshot, ad esempio.
+     * @param currentActivity
+     * @return true, se il permesso e' stato accordato, false altrimenti.
      */
-    public static boolean verifyStoragePermission(Activity currentActivity) {
-        //tipo di permesso
-        int permission = ActivityCompat.checkSelfPermission(currentActivity, Manifest.permission.WRITE_EXTERNAL_STORAGE);
-        //verifica del permesso
-        if(permission!=PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(currentActivity,PERMISSION_STORAGE,
-                    REQUEST_EXTERNAL_STORAGE);
-            return false;
-        } else {
-            return true;
-        }
-    }
+    public static boolean storagePermissionGranted(Activity currentActivity){
+        //si preleva il tipo di permesso
+        int current_permission = ActivityCompat.checkSelfPermission(currentActivity, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        //si preleva il codice di quando l'accesso alla memoria e' stato consentito
+        int memory_permission = PackageManager.PERMISSION_GRANTED;
+        //permesso accrodato
+        if(current_permission==memory_permission)return true;
+        //permesso negato
+        return false;
+    }//storagePermissionGranted(Activity)
+
+    /** metodo requestStoragePermission(Activity): void
+     * questo metodo richiede all'utente il permesso di accedere alla memoria del dispositivo
+     * @param currentActivity
+     */
+    public static void requestStoragePermission(Activity currentActivity){
+        //si richiede l'accesso alla memoria
+        ActivityCompat.requestPermissions(currentActivity,PERMISSION_STORAGE,
+                REQUEST_EXTERNAL_STORAGE);
+    }//requestStoragePermission(Activity)
 
 }// end class Utility

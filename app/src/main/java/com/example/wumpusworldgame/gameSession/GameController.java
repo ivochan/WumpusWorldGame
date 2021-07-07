@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.FileProvider;
 import androidx.preference.PreferenceManager;
 import com.example.wumpusworldgame.R;
@@ -531,8 +532,8 @@ public class GameController {
         //si crea una alert dialog per chiedere al giocatore se vuole condividere il suo punteggio
         AlertDialog.Builder builder = new AlertDialog.Builder(currentActivity,R.style.GameAlertDialogTheme);
         //si specifica il messaggio da visualizzare nella dialog di richiesta di condivisione del punteggio
-        result=victory?(currentActivity.getString(R.string.winner)):(currentActivity.getString(R.string.looser))
-                +"\n\n"+currentActivity.getString(R.string.rank_sharing_request);
+        result=(victory?currentActivity.getString(R.string.winner):currentActivity.getString(R.string.looser))
+        +"\n\n"+currentActivity.getResources().getString(R.string.current_score_share_request);
         //si configura il layout della dialog
         settingDialog(builder, result, player, score);
         //pulsante di chiusura
@@ -550,25 +551,23 @@ public class GameController {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 //si verificano i permessi di accesso alla memoria esterna
-                if(Utility.verifyStoragePermission(currentActivity)) {
+                //l'accesso alla memoria non e' consentito
+                if(!Utility.storagePermissionGranted(currentActivity)){
+                    //si chiede all'utente di poter accedere alla memoria
+                    Utility.requestStoragePermission(currentActivity);
+                }//fi
+                //l'accesso alla memoria e' consentito
+                else{
                     //si visualizza l'anteprima della condivisione
                     shareGameRank(player,score);
-                }//fi
-                else {
-                    if(Utility.verifyStoragePermission(currentActivity)){
-                        shareGameRank(player,score);
-                    }
-                    else{
-
-                    }
-                }
+                }//esle
             }//onClick(DialogInterface, int)
         });//setPositiveButton(String, DialogInterface)
         //si crea la dialog
         AlertDialog share_dialog = builder.create();
         //visualizzazione della dialog
         share_dialog.show();
-    }//
+    }//endGameSession()
 
     /** metodo shareGameRank(): void
      * questo metodo si occupa di eseguire delle operazioni necessarie alla chiusura della
@@ -578,20 +577,12 @@ public class GameController {
         //si crea una alert dialog
         AlertDialog.Builder builder = new AlertDialog.Builder(currentActivity,R.style.GameAlertDialogTheme);
         //si preleva la stringa da visualizzare come messaggio della dialog
-        String score_share_message = currentActivity.getResources().getString(R.string.score_share_message);
+        String score_share_message = currentActivity.getResources().getString(R.string.current_score_share_message);
         //si configura il layout della dialog
         settingDialog(builder, score_share_message, player, score);
         //pulsante di chiusura
         builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-            /** metodo onClick(DialogInterface, int)
-             * questo metodo gestisce il comportamento dell'app
-             * al click del pulsante, definendo le azioni che
-             * devono essere svolte.
-             * In questo caso, alla pressione del pulsante "Cancel"
-             * viene chiusa la dialog
-             * @param dialog
-             * @param which
-             */
+            //metodo onClick(DialogInterface, int)
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 //se si clicca annulla la dialog viene chiusa
@@ -601,19 +592,13 @@ public class GameController {
 
         //pulsante di conferma
         builder.setPositiveButton(R.string.share, new DialogInterface.OnClickListener() {
-            /** metodo onClick(DialogInterface, int)
-             * questo metodo gestisce il comportamento dell'app
-             * al click del pulsante, definendo le azioni che
-             * devono essere svolte.
-             * @param dialog
-             * @param which
-             */
+            //metodo onClick(DialogInterface, int)
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 //si identifica il campo del layout di cui si vuole catturare la schermata
                 View end_game_map = currentActivity.findViewById(R.id.grid_view);
                 //si verificano i permessi di accesso alla memoria esterna
-                if(Utility.verifyStoragePermission(currentActivity)) {
+                if(Utility.storagePermissionGranted(currentActivity)) {
                     //si dispone dei permessi quindi si effettua uno screenshot
                     File imageFile = takeScreenshot(end_game_map);
                     //si invia lo screenshot

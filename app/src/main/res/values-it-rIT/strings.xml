@@ -207,6 +207,13 @@
     <string name="wasted_shot">Ooops...La tua arma ormai è andata, come la possibilità
         di battere il nemico!</string>
     <string name="failed_shot">Che mira pessima...Non hai colpito niente!</string>
+    <!-- Alert Dialog per la condivisione del punteggio attuale nella schermata di gioco -->
+    <string name="current_score_share_request">Vuoi condividere il tuo punteggio?</string>
+    <string name="current_score_share_message">Hey, sfida i tuoi amici al gioco del mondo del Wumpus!
+        \nMostragli la parte del mondo del Wumpus che hai esplorato ed il punteggio che hai ottenuto.
+        \n\nEcco il tuo punteggio:</string>
+    <string name="nope">Ehm...no</string>
+    <string name="yeah">Ovvio!</string>
     <!-- messaggio della dialog condivisione del punteggio attuale -->
     <string name="game_score_share_message">Ma...Hey, sfida i tuoi amici al gioco del mondo del Wumpus!
         \nEcco il tuo punteggio:\n</string>
@@ -235,9 +242,4 @@
     <string name="up_button">up button icon</string>
     <string name="right_button">right button icon</string>
     <string name="down_button">down button icon</string>
-
-    <string name="rank_sharing_request">Vuoi condividere il tuo punteggio?</string>
-    <string name="nope">ehm...no</string>
-    <string name="yeah">Ovvio!</string>
-
 </resources>
