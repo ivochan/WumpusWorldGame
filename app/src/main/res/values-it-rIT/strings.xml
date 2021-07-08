@@ -225,7 +225,9 @@
 
     <!-- Automatic Game -->
     <string name="solving">Sto cercando un percorso per uscire dalla foresta ...</string>
-    <string name="automatic_solving">Automatic Solving</string>
+    <string name="hero_automatic_mode">Avventuriero: Soluzione</string>
+    <string name="wumpus_automatic_mode">Wumpus: Soluzione</string>
+
 
     <!-- Immagini -->
     <string name="dark_forest">foresta_oscura_immagine_main_activity</string>

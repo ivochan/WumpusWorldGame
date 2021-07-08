@@ -12,9 +12,7 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import com.example.wumpusworldgame.R;
 import com.example.wumpusworldgame.gameActivities.HeroSide;
-
 import java.util.ArrayList;
-
 import game.session.configuration.Starter;
 /** class GridViewCustomAdapter
  * questa classe serve per visualizzare i dati nella
@@ -37,9 +35,10 @@ public class GridViewCustomAdapter extends BaseAdapter {
     /** GridViewCustomAdapter(Activity, ArrayList): costruttore
      * permette di istanziare l'oggetto gridViewCustomAdapter
      * @param activity: Activity, activity in cui verra' utilizzato l'adapter
-     * @param tempList: List<String>, oggetto che contiene gli items
+     * @param expList: List<String>, oggetto che contiene gli items della matrice di esplorazione
+     * @param gameList : List<String> oggetto che contiene gli oggetti della matrice di gioco
      */
-    public GridViewCustomAdapter(Activity activity, ArrayList<String> tempList,ArrayList<String> tempGameList) {
+    public GridViewCustomAdapter(Activity activity, ArrayList<String> expList,ArrayList<String> gameList) {
         //si preleva l'activity
         mActivity = activity;
         //si verifica il valore dell'intero
@@ -52,9 +51,9 @@ public class GridViewCustomAdapter extends BaseAdapter {
             game_mode = 1;
         }//esle
         //si prelevano gli oggetti della mappa di gioco
-        game_items = tempGameList;
-        //si prelevano gli oggetti da visualizzare
-        items = tempList;
+        game_items = gameList;
+        //si prelevano gli oggetti da visualizzare, della matrice di esplorazione
+        items = expList;
         //si utilizza l'inflater
         inflater = (LayoutInflater)activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }//end GridViewCustomAdapter(Activity, List)
@@ -123,7 +122,7 @@ public class GridViewCustomAdapter extends BaseAdapter {
             //si preleva il contenuto della cella della mappa di gioco
             //che si trova nella stessa posizione di quella nella mappa di esplorazione
             String game_cell_type = game_items.get(position);
-            //prendo il contenuto della cella
+            //prendo il contenuto della cella della mappa di esplorazione
             if(cell_type.equals(" ")){
                 //se vuoto e' una cella coperta
                 //si preleva l'icona
@@ -239,15 +238,17 @@ public class GridViewCustomAdapter extends BaseAdapter {
         return mActivity;
     }//getCurrentActivity()
 
-    /**
-     *
-     * @param itemsList
+    /** metodo swapItems(ArrayLost<String): void
+     * questo metodo aggiorna il contenuto della list che contiene le
+     * celle della mappa di esplorazione, dopo averla svuotata e
+     * notifica il cambiamento alla ui, in modo da aggiornare la grafica
+     * @param expList: ArrayList<String
      */
-    public void swapItems(ArrayList<String> itemsList){
+    public void swapItems(ArrayList<String> expList){
         //si svuota la lista che contiene gli elementi della matrice di esplorazione
         items.clear();
         //si riempie con i nuovi elementi della lista aggiornata
-        items.addAll(itemsList);
+        items.addAll(expList);
         //si notifica che i dati sono stati aggiornati
         notifyDataSetChanged();
     }//swapItems(List<String>)

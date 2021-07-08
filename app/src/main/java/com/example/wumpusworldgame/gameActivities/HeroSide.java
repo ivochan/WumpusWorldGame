@@ -7,18 +7,18 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceManager;
 import com.example.wumpusworldgame.R;
-import com.example.wumpusworldgame.gameMenuItems.automaticMode.AutomaticGameSession;
+import com.example.wumpusworldgame.gameMenuItems.automaticMode.HeroAutomaticMode;
 import com.example.wumpusworldgame.gameSession.GameController;
 import com.example.wumpusworldgame.gameSession.GridViewCustomAdapter;
 import com.example.wumpusworldgame.gameMenuItems.gameModeTutorials.HeroModeTutorial;
 import com.example.wumpusworldgame.services.Utility;
+
 import java.util.ArrayList;
 import game.player.agent.RandomAgent;
 import game.session.configuration.Starter;
@@ -60,6 +60,8 @@ public class HeroSide extends AppCompatActivity {
 
     //lista contenente la coppia di indici di ogni cella visitata
     private static ArrayList<Cell> run;
+    //lista che contiene le celle visitate
+    private static ArrayList<String> solution;
 
     //##### campi di testo #####
     //messaggi di gioco
@@ -113,8 +115,10 @@ public class HeroSide extends AppCompatActivity {
         data = new ArrayList();
         //dati della matrice di gioco
         game_data = new ArrayList();
-        //list che contiene le celle visitate durante la modalita' automatica
+        //list che contiene gli indici delle celle visitate durante la modalita' automatica
         run = new ArrayList();
+        //lista che contiene le celle visitate durante la modalita' automatica
+        solution = new ArrayList();
 
         //##### inizializzazioni dei pulsanti #####
         hit_button = findViewById(R.id.imageButtonHIT);
@@ -145,28 +149,19 @@ public class HeroSide extends AppCompatActivity {
         int rows = gm.getRows();
         int columns = gm.getColumns();
 
-        //##### salvataggio della matrice di gioco #####
+        //##### riempimento delle matrici #####
 
         //si iterano le celle della matrice
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < columns; j++) {
-                //si aggiunge la cella corrente alla LinkedList
+                //si aggiunge la cella corrente alla List che rappresenta la matrice di gioco
                 game_data.add(gm.getMapCell(i, j).statusToString());
-            }//for colonne
-        }//for righe
-
-        //##### visualizzazione della matrice di esplorazione #####
-
-        //si iterano le celle della matrice
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < columns; j++) {
-                //si aggiunge la cella corrente alla LinkedList
+                //si aggiunge la cella corrente allaList che rappresenra la mappa di esplorazione
                 data.add(em.getMapCell(i, j).statusToString());
             }//for colonne
         }//for righe
 
         //si crea l'adapter per il gridlayout della matrice di esplorazione
-
         adapter = new GridViewCustomAdapter(this, data, game_data);
         //si visualizza la matrice di esplorazione
         grid = findViewById(R.id.grid_view);
@@ -186,48 +181,38 @@ public class HeroSide extends AppCompatActivity {
         //##### gestione dei pulsanti #####
 
         //pulsante HIT
-        hit_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //si tenta il colpo
-                GameController.gamePadHit(game_message);
-            }//onClick(View)
+        //onClick(View)
+        hit_button.setOnClickListener(v -> {
+            //si tenta il colpo
+            GameController.gamePadHit(game_message);
         });//setOnClickListener(View.OnClickListener())
 
         //pulsante UP
-        up_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //si muove il personaggio verso sopra
-                GameController.gamePadMove(Direction.UP,gm,em,game_message,shots,adapter);
-            }//onClick(View)
+        //onClick(View)
+        up_button.setOnClickListener(v -> {
+            //si muove il personaggio verso sopra
+            GameController.gamePadMove(Direction.UP,gm,em,game_message,shots,adapter);
         });//setOnClickListener(View.OnClickListener())
 
         //pulsante DOWN
-        down_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //si muove il personaggio verso sotto
-                GameController.gamePadMove(Direction.DOWN,gm,em,game_message,shots,adapter);
-            }//onClick(View)
+        //onClick(View)
+        down_button.setOnClickListener(v -> {
+            //si muove il personaggio verso sotto
+            GameController.gamePadMove(Direction.DOWN,gm,em,game_message,shots,adapter);
         });//setOnClickListener(View.OnClickListener())
 
         //pulsante LEFT
-        left_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //si muove il personaggio verso sinistra
-                GameController.gamePadMove(Direction.LEFT,gm,em,game_message,shots,adapter);
-            }//onClick(View)
+        //onClick(View)
+        left_button.setOnClickListener(v -> {
+            //si muove il personaggio verso sinistra
+            GameController.gamePadMove(Direction.LEFT,gm,em,game_message,shots,adapter);
         });//setOnClickListener(View.OnClickListener())
 
         //pulsante RIGHT
-        right_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //si muove il personaggio verso destra
-                GameController.gamePadMove(Direction.RIGHT,gm,em,game_message,shots,adapter);
-            }//onClick(View)
+        //onClick(View)
+        right_button.setOnClickListener(v -> {
+            //si muove il personaggio verso destra
+            GameController.gamePadMove(Direction.RIGHT,gm,em,game_message,shots,adapter);
         });//setOnClickListener(View.OnClickListener())
 
     }//onCreate(Bundle)
@@ -359,15 +344,7 @@ public class HeroSide extends AppCompatActivity {
             //RISOLVI
             case R.id.item_solve_game:
                 //creazione dell'intent
-                intent = new Intent(this, AutomaticGameSession.class);
-                //soluzione della partita
-                ArrayList<String> solution = automaticPlayer(gm,em);
-                //si passa la soluzione
-                intent.putStringArrayListExtra("solution",solution);
-                //si passa l'array list delle celle visitate
-                intent.putStringArrayListExtra("path",runPathToString());
-                //si passa la mappa di gioco
-                
+                intent = new Intent(this, HeroAutomaticMode.class);
                 //si avvia l'istanza dell'activity corrispondente
                 startActivity(intent);
                 //si interrompe il metodo corrente con successo
@@ -385,124 +362,5 @@ public class HeroSide extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }//end switch
     }//onOptionsItemSelected(MenuItem)
-
-    private static ArrayList<String> automaticPlayer(GameMap gm, GameMap em){
-        //avvio della partita
-        Starter.setGameStart(true);
-        //lista che conterra' i dati della soluzione
-        ArrayList<String> solution = new ArrayList<>();
-        //si istanzia il giocatore automatico
-        RandomAgent player = new RandomAgent();
-
-        //risoluzione
-        while(Starter.getGameStart()){
-            //si effettua la mossa
-            chooseMove(em, gm, player);
-            //TODO si memorizza il punteggio
-
-        }//end while sessione di gioco
-        //dimensioni della matrice di gioco, analoghe a quelle della matrice di esplorazione
-        int rows = gm.getRows();
-        int columns = gm.getColumns();
-        //si iterano le celle della matrice
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < columns; j++) {
-                //si aggiunge la cella corrente alla LinkedList
-                solution.add(gm.getMapCell(i, j).statusToString());
-            }//for colonne
-        }//for righe
-
-        return solution;
-    }
-
-   public static void chooseMove(GameMap em, GameMap gm, RandomAgent player) {
-        //variabile ausiliaria per lo stato della mossa
-        int status = 0;
-        //variabile ausiliaria per la direzione
-        Direction dir;
-        //variabile ausiliaria per i sensori
-        boolean[] sensors = new boolean[2];
-        //si preleva la posizione del pg
-        int  [] pg_pos = PlayableCharacter.getPGposition();
-        //si preleva la cella in cui si trova
-        Cell cur = em.getMapCell(pg_pos[0], pg_pos[1]);
-        //si preleva il vettore dei sensori
-        sensors = cur.getSenseVector();
-        //verifica del contenuto
-        if(sensors[CellStatus.ENEMY_SENSE.ordinal()]) {
-            //il nemico e' nelle vicinanze
-            if(Starter.getChanceToHit()) {
-                //si verifica la disponibilita' del colpo
-                //almeno una delle celle non e' stata visitata se il sensore e' acceso
-                Direction shot_dir = player.chooseDirection(pg_pos[0], pg_pos[1], gm);
-                //si tenta il colpo
-                Controller.hitEnemy(shot_dir, gm);
-                //si resetta il flag
-                Starter.setChanceToHit(false);
-            }//fi
-            else {
-                //non si hanno munizioni
-                System.out.println(GameMessages.no_hit);
-                //si sceglie la direzione in cui fare muovere il pg
-                dir = player.chooseDirection(pg_pos[0], pg_pos[1], gm);
-                //si sceglie la direzione in cui muovere il pg
-                status = Controller.movePG(dir, gm, em);
-                //si controlla la mossa
-                Controller.makeMove(status, gm, em);
-                //TODO aggiornamento del percorso
-                if(status!=-1) {
-                    updateRunPath(gm.getMapCell(pg_pos[0], pg_pos[1]));
-                }
-
-            }//else
-        }//fi
-        else if(sensors[CellStatus.DANGER_SENSE.ordinal()]) {
-            //il pericolo e' vicino
-            //si preferisce come direzione una cella non visitata
-            dir = player.chooseDirection(pg_pos[0], pg_pos[1], gm);
-            //si sceglie la direzione in cui muovere il pg
-            status = Controller.movePG(dir, gm, em);
-            //si controlla la mossa
-            Controller.makeMove(status, gm, em);
-            //TODO aggiornamento del percorso
-            if(status!=-1){
-                updateRunPath(gm.getMapCell(pg_pos[0], pg_pos[1]));
-            }
-        }
-        else {
-            //si sceglie una direzione a caso, tra quelle non esplorate
-            dir = player.chooseDirection(pg_pos[0], pg_pos[1], gm);
-            //si sceglie la direzione in cui muovere il pg
-            status = Controller.movePG(dir, gm, em);
-            //si controlla la mossa
-            Controller.makeMove(status, gm, em);
-            //TODO aggiornamento del percorso
-            if(status!=-1){
-                updateRunPath(gm.getMapCell(pg_pos[0], pg_pos[1]));
-            }
-        }
-        Starter.setGameStart(false);
-    }//chooseMove(GameMap, GameMap)
-
-    private static void updateRunPath(Cell c){
-        //si inserisce la cella in coda, nella lista di quelle visitate
-       run.add(c);
-    }
-
-   public static ArrayList<String> runPathToString() {
-        //variabile ausiliaria
-        int [] position = new int[2];
-        //stringa da stampare
-        ArrayList<String> run_list = new ArrayList();
-        //si iterano le celle visitate
-        for(Cell c: run) {
-            //si preleva la posizione della cella in esame
-            position = c.getPosition();
-            //si inserisce nella lista
-            run_list.add("("+position[0]+','+position[1]+")");
-        }//end for
-        return run_list;
-    }//runPathToString()
-
 
 }//end HeroSide

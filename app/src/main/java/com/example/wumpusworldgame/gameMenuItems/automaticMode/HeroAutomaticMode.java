@@ -1,46 +1,34 @@
 package com.example.wumpusworldgame.gameMenuItems.automaticMode;
 //serie di import
-
-import android.app.Activity;
-import android.app.Dialog;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
 import android.widget.GridView;
 import android.widget.TextView;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceManager;
-
 import com.example.wumpusworldgame.R;
+import com.example.wumpusworldgame.gameSession.AutomaticPlayer;
 import com.example.wumpusworldgame.gameSession.GridViewCustomAdapter;
-
 import java.util.ArrayList;
-import java.util.Timer;
-import java.util.TimerTask;
+
 /**
  *
  */
-public class AutomaticGameSession extends AppCompatActivity {
+public class HeroAutomaticMode extends AppCompatActivity {
     //##### attributi di classe #####
-
-    //intent utilizzato per riseguire il metodo onCreate() di questa classe
-    private Intent starterIntent;
     //file delle preferenze
     private SharedPreferences sharedPreferences;
     //nome del giocatore
     private String player_name;
-    //riproduttore audio
-    private MediaPlayer mp;
+
+    //##### dati di gioco #####
     //per la matrice di esplorazione
     private static GridView grid;
     //adapter per la matrice di esplorazione
     private GridViewCustomAdapter adapter;
-    //dati della matrice di gioco
-    private ArrayList<String> solved_game_data = new ArrayList<>();
+    //dati della matrice di esplorazione
+    private ArrayList<String> solved_game_data;
 
     //##### campi di testo #####
     //messaggi di gioco
@@ -65,7 +53,7 @@ public class AutomaticGameSession extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         //si mostra la schermata di gioco
-        setContentView(R.layout.activity_automatic_game_session);
+        setContentView(R.layout.activity_hero_automatic_mode);
         //##### inizializzazioni #####
 
         //si preleva il file di salvataggio delle preferenze
@@ -78,56 +66,18 @@ public class AutomaticGameSession extends AppCompatActivity {
         intro_message = "Ecco la tua soluzione" + " " + player_name + "!";
 
         //schermata di caricamento per il calcolo della soluzione
-        showLoadingScreen(this, this.getLayoutInflater());
+        AutomaticPlayer.showLoadingScreen(this, this.getLayoutInflater());
 
         game_message.setText(intro_message);
 
-        //si prelevano i dati della matrice di gioco
-        solved_game_data = getIntent().getStringArrayListExtra("solution");
+        //adapter = new GridViewCustomAdapter(this,solved_game_data,solved_game_data);
 
-        ArrayList<String> path = new ArrayList();
-
-        path = getIntent().getStringArrayListExtra("path");
-
-        //si crea l'adapter per il gridlayout della matrice di esplorazione
-        adapter = new GridViewCustomAdapter(this,solved_game_data, solved_game_data);
         //si visualizza la matrice di esplorazione
         grid = findViewById(R.id.grid_view);
         //oggetto che permette di visualizzare i dati
-        grid.setAdapter(adapter);
+        //grid.setAdapter(adapter);
 
     }//onCreate(Bundle)
-
-    /** metodo showLoadingScreen(Activity, LayoutInflater)
-     * questo metodo realizza una schermata di caricamento
-     * che viene mostrata appena si richiede la modalita'
-     * di risoluzione automatica della partita di gioco attuale
-     * @param inflater
-     * @param activity
-     */
-    public static void showLoadingScreen(Activity activity, LayoutInflater inflater) {
-        //si inizializza una dialog
-        Dialog customDialog;
-        //si assegna alla dialog il layout
-        View customView = inflater.inflate(R.layout.solving_screen_dialog, null);
-        //si costruisce la dialog specificandone lo stile personalizzato
-        customDialog = new Dialog(activity, R.style.CustomDialog);
-        //si definisce il layout alla dialog attuale
-        customDialog.setContentView(customView);
-        //si visualizza la dialog
-        customDialog.show();
-        //si istanzia l'oggetto timer per defire il tempo in cui la finestra sara' visibile
-        final Timer t = new Timer();
-        //l'oggetto timer inizia la schedulazione dei processi attivi
-        t.schedule(new TimerTask() {
-            public void run() {
-                //il task e' attivo quindi la dialog viene chiusa
-                customDialog.dismiss();
-                //viene fermato il thread timer
-                t.cancel();
-            }//run()
-        }, 1000);
-    }//showLoadingScreen(Activity, LayoutInflater)
 
     //##### metodi per la gestione dell'activity #####
 
@@ -162,7 +112,7 @@ public class AutomaticGameSession extends AppCompatActivity {
         //si invoca il metodo della super classe
         super.onPause();
         //si ferma la clip audio quando l'app viene sospesa
-        mp.pause();
+        //mp.pause();
     }//onPause()
 
     /** metodo onStop(): void
@@ -170,7 +120,7 @@ public class AutomaticGameSession extends AppCompatActivity {
      * ACTIVITY NON VISIBILE
      */
     @Override
-    public void onStop(){
+    public void onStop() {
         //si invoca il metodo della super classe
         super.onStop();
     }//onStop()
@@ -180,11 +130,11 @@ public class AutomaticGameSession extends AppCompatActivity {
      * ACTIVITY DISTRUTTA
      */
     @Override
-    public void onDestroy(){
+    public void onDestroy() {
         //si invoca il metodo della super classe
         super.onDestroy();
         //si rilascia la risorsa del mediaplayer
-        mp.release();
+        //mp.release();
     }//onDestroy()
 
     /** metodo onRestart(): void
@@ -192,7 +142,7 @@ public class AutomaticGameSession extends AppCompatActivity {
      * viene invocato prima di onCreate()
      */
     @Override
-    public void onRestart(){
+    public void onRestart() {
         //si invoca il metodo della super classe
         super.onRestart();
     }//onRestart()
@@ -210,4 +160,4 @@ public class AutomaticGameSession extends AppCompatActivity {
         super.onBackPressed();
     }//onBackPressed()
 
-}//end AutomaticGameSession
+}//end HeroAutomaticMode

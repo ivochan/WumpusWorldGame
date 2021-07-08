@@ -14,6 +14,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceManager;
 import com.example.wumpusworldgame.R;
+import com.example.wumpusworldgame.gameMenuItems.automaticMode.WumpusAutomaticMode;
 import com.example.wumpusworldgame.gameSession.GameController;
 import com.example.wumpusworldgame.gameSession.GridViewCustomAdapter;
 import com.example.wumpusworldgame.gameMenuItems.gameModeTutorials.WumpusModeTutorial;
@@ -135,23 +136,14 @@ public class WumpusSide extends AppCompatActivity {
         //si iterano le celle della matrice
         for (int i = 0; i < r; i++) {
             for(int j=0;j<c;j++) {
-                //si aggiunge la cella corrente alla LinkedList
+                //si aggiunge la cella corrente alla List della matrice di gioco
                 game_data.add(gm.getMapCell(i,j).statusToString());
-            }//for colonne
-        }//for righe
-
-        //##### visualizzazione della matrice di esplorazione #####
-
-        //si iterano le celle della matrice
-        for (int i = 0; i < r; i++) {
-            for(int j=0;j<c;j++) {
-                //si aggiunge la cella corrente alla LinkedList
+                //si aggiunge la cella corrente alla List della matrice di esplorazione
                 data.add(em.getMapCell(i,j).statusToString());
             }//for colonne
         }//for righe
 
         //si crea l'adapter per il gridlayout della matrice di esplorazione
-        //GridViewCustomAdapter adapter = new GridViewCustomAdapter(this, data);
         adapter = new GridViewCustomAdapter(this, data,game_data);
         //si visualizza la matrice di esplorazione
         list = findViewById(R.id.grid_view);
@@ -345,7 +337,12 @@ public class WumpusSide extends AppCompatActivity {
                 return true;
             //RISOLVI
             case R.id.item_solve_game:
-               return false;
+                //creazione dell'intent
+                intent = new Intent(this, WumpusAutomaticMode.class);
+                //si avvia l'activity corrispondente
+                startActivity(intent);
+                //si interrompe il metodo
+                return true;
             //TUTORIAL
             case R.id.item_game_tutorial:
                 //creazione dell'intent
