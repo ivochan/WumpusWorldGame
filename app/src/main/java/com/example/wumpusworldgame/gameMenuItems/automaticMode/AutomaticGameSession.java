@@ -1,5 +1,6 @@
 package com.example.wumpusworldgame.gameMenuItems.automaticMode;
 //serie di import
+
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
@@ -10,14 +11,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.GridView;
 import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceManager;
+
 import com.example.wumpusworldgame.R;
 import com.example.wumpusworldgame.gameSession.GridViewCustomAdapter;
+
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
-import game.structure.map.GameMap;
 /**
  *
  */

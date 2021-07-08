@@ -20,7 +20,6 @@ import com.example.wumpusworldgame.gameSession.GridViewCustomAdapter;
 import com.example.wumpusworldgame.gameMenuItems.gameModeTutorials.HeroModeTutorial;
 import com.example.wumpusworldgame.services.Utility;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import game.player.agent.RandomAgent;
 import game.session.configuration.Starter;
 import game.session.controller.Controller;
