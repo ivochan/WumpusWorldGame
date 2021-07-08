@@ -19,6 +19,7 @@ import com.example.wumpusworldgame.gameSession.GridViewCustomAdapter;
 import com.example.wumpusworldgame.gameMenuItems.gameModeTutorials.HeroModeTutorial;
 import com.example.wumpusworldgame.services.Utility;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import game.player.agent.RandomAgent;
 import game.session.configuration.Starter;
@@ -343,6 +344,10 @@ public class HeroSide extends AppCompatActivity {
                 return true;
             //RISOLVI
             case R.id.item_solve_game:
+                //istanza di bundle
+                Bundle bundle = new Bundle();
+                //salvataggio della matrice
+                bundle.putSerializable("game_matrix",gm);
                 //creazione dell'intent
                 intent = new Intent(this, HeroAutomaticMode.class);
                 //si avvia l'istanza dell'activity corrispondente

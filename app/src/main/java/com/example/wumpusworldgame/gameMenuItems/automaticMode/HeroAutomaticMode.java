@@ -3,6 +3,7 @@ package com.example.wumpusworldgame.gameMenuItems.automaticMode;
 import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.GridView;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,6 +12,9 @@ import com.example.wumpusworldgame.R;
 import com.example.wumpusworldgame.gameSession.AutomaticPlayer;
 import com.example.wumpusworldgame.gameSession.GridViewCustomAdapter;
 import java.util.ArrayList;
+
+import game.structure.cell.Cell;
+import game.structure.map.GameMap;
 
 /**
  *
@@ -69,6 +73,30 @@ public class HeroAutomaticMode extends AppCompatActivity {
         AutomaticPlayer.showLoadingScreen(this, this.getLayoutInflater());
 
         game_message.setText(intro_message);
+
+        GameMap gameMap = new GameMap();
+
+        Bundle bundle = getIntent().getExtras();
+        try {
+            gameMap = (GameMap)bundle.get("game_matrix");
+        }catch(Exception e){
+            Log.i(" Error at bundle " , e.toString());
+        }
+
+        int r = gameMap.getRows();
+
+        String riga = new String(""+r);
+
+        game_message.setText(riga);
+
+/*
+        Bundle b = new Bundle();
+
+        GameMap map = new GameMap();
+
+        map = (GameMap) b.getSerializable("map");
+        */
+
 
         //adapter = new GridViewCustomAdapter(this,solved_game_data,solved_game_data);
 
