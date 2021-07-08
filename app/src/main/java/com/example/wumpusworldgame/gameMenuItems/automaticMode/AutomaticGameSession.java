@@ -1,5 +1,5 @@
-package com.example.wumpusworldgame.gameMenuItems;
-
+package com.example.wumpusworldgame.gameMenuItems.automaticMode;
+//serie di import
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
@@ -13,19 +13,14 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceManager;
 import com.example.wumpusworldgame.R;
-import com.example.wumpusworldgame.gameSession.GameController;
 import com.example.wumpusworldgame.gameSession.GridViewCustomAdapter;
-
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
-import game.player.agent.RandomAgent;
-import game.session.configuration.Starter;
-import game.session.score.Score;
-import game.structure.cell.Cell;
-import game.structure.cell.CellStatus;
 import game.structure.map.GameMap;
-
+/**
+ *
+ */
 public class AutomaticGameSession extends AppCompatActivity {
     //##### attributi di classe #####
 
@@ -44,7 +39,6 @@ public class AutomaticGameSession extends AppCompatActivity {
     //dati della matrice di gioco
     private ArrayList<String> solved_game_data = new ArrayList<>();
 
-    private  GameMap gm;
     //##### campi di testo #####
     //messaggi di gioco
     private static TextView game_message;
@@ -52,7 +46,6 @@ public class AutomaticGameSession extends AppCompatActivity {
     private TextView shots;
     //punteggio ottenuto
     private static TextView score;
-
     //messaggio di calcolo della soluzione
     private String intro_message;
 
@@ -88,6 +81,10 @@ public class AutomaticGameSession extends AppCompatActivity {
 
         //si prelevano i dati della matrice di gioco
         solved_game_data = getIntent().getStringArrayListExtra("solution");
+
+        ArrayList<String> path = new ArrayList();
+
+        path = getIntent().getStringArrayListExtra("path");
 
         //si crea l'adapter per il gridlayout della matrice di esplorazione
         adapter = new GridViewCustomAdapter(this,solved_game_data, solved_game_data);
