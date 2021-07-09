@@ -10,6 +10,8 @@ import com.example.wumpusworldgame.R;
 import com.example.wumpusworldgame.gameSession.GridViewCustomAdapter;
 import com.example.wumpusworldgame.services.Utility;
 import java.util.ArrayList;
+
+import game.structure.elements.PlayableCharacter;
 import game.structure.map.GameMap;
 /**
  *
@@ -97,12 +99,18 @@ public class HeroAutomaticMode extends AppCompatActivity {
 
         //##### prelievo dei dati di gioco #####
 
+        int [] pg_pos = PlayableCharacter.getPGposition();
         //matrice di gioco
         gm =(GameMap )getIntent().getSerializableExtra("game_map");
-        game_message.setText(""+gm);
-
+        game_message.setText(""+gm+" PG: "+pg_pos[0]+","+pg_pos[1]);
         //matrice di esplorazione
         em = (GameMap)getIntent().getSerializableExtra("exp_map");
+
+        //##### risoluzione #####
+
+        
+
+
 
         //###### visualizzazione  ######
 

@@ -98,8 +98,8 @@
 
     <TextView
         android:id="@+id/message_box"
-        android:layout_width="366dp"
-        android:layout_height="120dp"
+        android:layout_width="351dp"
+        android:layout_height="140dp"
         android:padding="10dp"
         android:text=""
         android:textColor="@color/sugar_paper"
@@ -126,6 +126,12 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.088" />
 
+
+    <!-- dividers -->
+
+
+    <!-- run list -->
+
     <View
         android:id="@+id/box_top_divider"
         android:layout_width="match_parent"
@@ -133,11 +139,10 @@
         android:background="@color/sugar_paper"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.287" />
-
+        app:layout_constraintVertical_bias="0.322" />
 
     <GridView
         android:id="@+id/grid_view"
@@ -157,14 +162,9 @@
         app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.474">
+        app:layout_constraintVertical_bias="0.551">
 
     </GridView>
-
-    <!-- dividers -->
-
-
-    <!-- run list -->
 
     <View
         android:id="@+id/divider_below_up"
@@ -188,12 +188,12 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.681" />
+        app:layout_constraintVertical_bias="0.72" />
 
     <TextView
         android:id="@+id/run_box"
-        android:layout_width="351dp"
-        android:layout_height="176dp"
+        android:layout_width="354dp"
+        android:layout_height="150dp"
         android:padding="10dp"
         android:text=""
         android:textColor="@color/sugar_paper"
