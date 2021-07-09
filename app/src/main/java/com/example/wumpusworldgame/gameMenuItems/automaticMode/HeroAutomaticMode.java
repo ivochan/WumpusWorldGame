@@ -2,7 +2,6 @@ package com.example.wumpusworldgame.gameMenuItems.automaticMode;
 //serie di import
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.GridView;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
@@ -39,8 +38,10 @@ public class HeroAutomaticMode extends AppCompatActivity {
 
 
     //##### campi di testo #####
-    //messaggi di gioco
-    private static TextView game_message;
+    //messaggio
+    private TextView game_message;
+    //lista delle celle visitate
+    private TextView run_box;
     //numero di colpi
     private TextView shots;
     //punteggio ottenuto
@@ -79,6 +80,8 @@ public class HeroAutomaticMode extends AppCompatActivity {
         player_name = sharedPreferences.getString("prefUsername", "");
         //si identifica il campo di testo nel layout
         game_message = findViewById(R.id.message_box);
+        //si identifica il campo di testo che conterra' la run list
+        run_box = findViewById(R.id.run_box);
         //messaggio da visualizzare come introduzione
         intro_message = "Ecco la tua soluzione" + " " + player_name + "!";
 
@@ -89,14 +92,18 @@ public class HeroAutomaticMode extends AppCompatActivity {
 
         //messaggio sopra la grid
         game_message.setText(intro_message);
+        //lista delle celle visitate
+        run_box.setText("lista delle celle visitate durante la risoluzione");
 
         //##### prelievo dei dati di gioco #####
 
         //matrice di gioco
         gm =(GameMap )getIntent().getSerializableExtra("game_map");
+        game_message.setText(""+gm);
+
         //matrice di esplorazione
         em = (GameMap)getIntent().getSerializableExtra("exp_map");
-        
+
         //###### visualizzazione  ######
 
         //dimensioni della matrice di gioco, analoghe a quelle della matrice di esplorazione
