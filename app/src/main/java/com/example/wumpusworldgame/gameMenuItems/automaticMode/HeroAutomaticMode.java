@@ -118,7 +118,7 @@ public class HeroAutomaticMode extends AppCompatActivity {
         else {
             run_box.setText("Risolvo la partita che hai lasciato a metà...");
             //risoluzione
-            
+
 
         }
 
