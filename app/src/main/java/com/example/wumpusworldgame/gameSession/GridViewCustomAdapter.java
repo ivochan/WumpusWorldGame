@@ -12,6 +12,8 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import com.example.wumpusworldgame.R;
 import com.example.wumpusworldgame.gameActivities.HeroSide;
+import com.example.wumpusworldgame.gameMenuItems.automaticMode.HeroAutomaticMode;
+
 import java.util.ArrayList;
 import game.session.configuration.Starter;
 /** class GridViewCustomAdapter
@@ -42,7 +44,7 @@ public class GridViewCustomAdapter extends BaseAdapter {
         //si preleva l'activity
         mActivity = activity;
         //si verifica il valore dell'intero
-        if(mActivity instanceof HeroSide){
+        if(mActivity instanceof HeroSide || mActivity instanceof HeroAutomaticMode){
             //ci si trova nella modalita' di gioco Eroe
             game_mode = 0;
         }//fi
