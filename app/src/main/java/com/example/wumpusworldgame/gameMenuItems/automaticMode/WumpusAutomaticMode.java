@@ -8,10 +8,8 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceManager;
 import com.example.wumpusworldgame.R;
-import com.example.wumpusworldgame.gameSession.AutomaticPlayer;
 import com.example.wumpusworldgame.gameSession.GridViewCustomAdapter;
 import java.util.ArrayList;
-
 /**
  *
  */
@@ -66,18 +64,6 @@ public class WumpusAutomaticMode extends AppCompatActivity {
         game_message = findViewById(R.id.message_box);
         //messaggio da visualizzare come introduzione
         intro_message = "Ecco la tua soluzione" + " " + player_name + "!";
-
-        //schermata di caricamento per il calcolo della soluzione
-        AutomaticPlayer.showLoadingScreen(this, this.getLayoutInflater());
-
-        game_message.setText(intro_message);
-
-        //adapter = new GridViewCustomAdapter(this,solved_game_data,solved_game_data);
-
-        //si visualizza la matrice di esplorazione
-        grid = findViewById(R.id.grid_view);
-        //oggetto che permette di visualizzare i dati
-        //grid.setAdapter(adapter);
 
     }//onCreate(Bundle)
 

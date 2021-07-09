@@ -11,8 +11,6 @@ import android.os.Environment;
 import android.os.StatFs;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Toast;
-
 import androidx.core.app.ActivityCompat;
 import androidx.preference.PreferenceManager;
 import com.example.wumpusworldgame.R;
@@ -26,7 +24,6 @@ import java.util.regex.Pattern;
 /** class  Utility
  * classe di utilita' che contiene una serie di metodi statici da
  * richiamare in entrambe le modalita' di gioco perche' comuni.
- * //TODO revisionare tutti i metodi e scrivere la documentazione
  */
 public class Utility {
     //##### attributi di classe #####
@@ -74,6 +71,42 @@ public class Utility {
                 t.cancel();
             }//run()
         }, 500);
+    }//showLoadingScreen(Activity, LayoutInflater)
+
+    /** metodo showSolvingScreen(Activity, LayoutInflater)
+     * questo metodo realizza una schermata di caricamento
+     * che viene mostrata appena si richiede la risoluzione
+     * automatica della sessione di gioco
+     * @param inflater
+     * @param activity
+     */
+    public static void showSolvingScreen(Activity activity, LayoutInflater inflater){
+        //##### implementazione della dialog #####
+
+        //si inizializza una dialog
+        Dialog customDialog;
+        //si assegna alla dialog il layout
+        View customView = inflater.inflate(R.layout.solving_screen_dialog, null);
+        //si costruisce la dialog specificandone lo stile personalizzato
+        customDialog = new Dialog(activity, R.style.CustomDialog);
+
+        //##### visualizzazione della dialog #####
+
+        //si definisce il layout alla dialog attuale
+        customDialog.setContentView(customView);
+        //si visualizza la dialog
+        customDialog.show();
+        //si istanzia l'oggetto timer per defire il tempo in cui la finestra sara' visibile
+        final Timer t = new Timer();
+        //l'oggetto timer inizia la schedulazione dei processi attivi
+        t.schedule(new TimerTask() {
+            public void run() {
+                //il task e' attivo quindi la dialog viene chiusa
+                customDialog.dismiss();
+                //viene fermato il thread timer
+                t.cancel();
+            }//run()
+        }, 1000);
     }//showLoadingScreen(Activity, LayoutInflater)
 
     /** metodo musicPlaying(MediaPlayer, Activity): void

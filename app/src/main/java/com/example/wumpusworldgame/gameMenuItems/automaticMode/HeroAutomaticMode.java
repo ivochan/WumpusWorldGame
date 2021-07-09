@@ -1,7 +1,6 @@
 package com.example.wumpusworldgame.gameMenuItems.automaticMode;
 //serie di import
 import android.content.SharedPreferences;
-import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.GridView;
@@ -9,13 +8,11 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceManager;
 import com.example.wumpusworldgame.R;
-import com.example.wumpusworldgame.gameSession.AutomaticPlayer;
 import com.example.wumpusworldgame.gameSession.GridViewCustomAdapter;
+import com.example.wumpusworldgame.services.Utility;
+
 import java.util.ArrayList;
-
-import game.structure.cell.Cell;
 import game.structure.map.GameMap;
-
 /**
  *
  */
@@ -27,12 +24,20 @@ public class HeroAutomaticMode extends AppCompatActivity {
     private String player_name;
 
     //##### dati di gioco #####
-    //per la matrice di esplorazione
-    private static GridView grid;
+    //matrice di gioco
+    private GameMap gm;
+    //matrice di esplorazione
+    private GameMap em;
+
+    //grid per la matrice di esplorazione
+    private GridView grid;
     //adapter per la matrice di esplorazione
     private GridViewCustomAdapter adapter;
-    //dati della matrice di esplorazione
-    private ArrayList<String> solved_game_data;
+    //dati da mostrare nella matrice di esplorazione
+    private ArrayList<String> data;
+    //dati della matrice di gioco
+    private ArrayList<String> game_data;
+
 
     //##### campi di testo #####
     //messaggi di gioco
@@ -58,7 +63,20 @@ public class HeroAutomaticMode extends AppCompatActivity {
 
         //si mostra la schermata di gioco
         setContentView(R.layout.activity_hero_automatic_mode);
+
         //##### inizializzazioni #####
+
+        //matrice di esplorazione
+        em = new GameMap();
+        //dati della matrice di esplorazione
+        data = new ArrayList();
+        //matrice di gioco
+        gm = new GameMap();
+        //dati della matrice di gioco
+        game_data =  new ArrayList();
+
+
+        //##### dati delle preferenze #####
 
         //si preleva il file di salvataggio delle preferenze
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
@@ -69,41 +87,49 @@ public class HeroAutomaticMode extends AppCompatActivity {
         //messaggio da visualizzare come introduzione
         intro_message = "Ecco la tua soluzione" + " " + player_name + "!";
 
-        //schermata di caricamento per il calcolo della soluzione
-        AutomaticPlayer.showLoadingScreen(this, this.getLayoutInflater());
+        //##### esecuzione delle operazioni #####
 
+        //schermata di caricamento per il calcolo della soluzione
+        Utility.showSolvingScreen(this, this.getLayoutInflater());
+
+        //messaggio sopra la grid
         game_message.setText(intro_message);
 
-        GameMap gameMap = new GameMap();
+        //##### prelievo dei dati di gioco #####
 
+        //istanza di bundle
         Bundle bundle = getIntent().getExtras();
+        //blocco try-catch
         try {
-            gameMap = (GameMap)bundle.get("game_matrix");
+            //matrice di gioco
+            gm = (GameMap)bundle.get("game_map");
         }catch(Exception e){
             Log.i(" Error at bundle " , e.toString());
         }
 
-        int r = gameMap.getRows();
 
-        String riga = new String(""+r);
+        //###### visualizzazione  ######
 
-        game_message.setText(riga);
+        //dimensioni della matrice di gioco, analoghe a quelle della matrice di esplorazione
+        int rows = gm.getRows();
+        int columns = gm.getColumns();
 
-/*
-        Bundle b = new Bundle();
+        //si iterano le celle della matrice
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < columns; j++) {
+                //si aggiunge la cella corrente alla List che rappresenta la matrice di gioco
+                game_data.add(gm.getMapCell(i, j).statusToString());
+                //si aggiunge la cella corrente allaList che rappresenra la mappa di esplorazione
+                data.add(em.getMapCell(i, j).statusToString());
+            }//for colonne
+        }//for righe
 
-        GameMap map = new GameMap();
-
-        map = (GameMap) b.getSerializable("map");
-        */
-
-
-        //adapter = new GridViewCustomAdapter(this,solved_game_data,solved_game_data);
-
+        //si istanzia l'adapter
+        adapter = new GridViewCustomAdapter(this,data,game_data);
         //si visualizza la matrice di esplorazione
         grid = findViewById(R.id.grid_view);
         //oggetto che permette di visualizzare i dati
-        //grid.setAdapter(adapter);
+        grid.setAdapter(adapter);
 
     }//onCreate(Bundle)
 

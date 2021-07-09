@@ -51,7 +51,7 @@ public class HeroSide extends AppCompatActivity {
     //matrice di esplorazione
     private GameMap em;
     //per la matrice di esplorazione
-    private static GridView grid;
+    private GridView grid;
     //adapter per la matrice di esplorazione
     private GridViewCustomAdapter adapter;
     //dati da mostrare nella matrice di esplorazione
@@ -116,10 +116,6 @@ public class HeroSide extends AppCompatActivity {
         data = new ArrayList();
         //dati della matrice di gioco
         game_data = new ArrayList();
-        //list che contiene gli indici delle celle visitate durante la modalita' automatica
-        run = new ArrayList();
-        //lista che contiene le celle visitate durante la modalita' automatica
-        solution = new ArrayList();
 
         //##### inizializzazioni dei pulsanti #####
         hit_button = findViewById(R.id.imageButtonHIT);
@@ -347,7 +343,7 @@ public class HeroSide extends AppCompatActivity {
                 //istanza di bundle
                 Bundle bundle = new Bundle();
                 //salvataggio della matrice
-                bundle.putSerializable("game_matrix",gm);
+                bundle.putSerializable("game_map",gm);
                 //creazione dell'intent
                 intent = new Intent(this, HeroAutomaticMode.class);
                 //si avvia l'istanza dell'activity corrispondente
