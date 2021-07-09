@@ -18,19 +18,10 @@ import com.example.wumpusworldgame.gameSession.GameController;
 import com.example.wumpusworldgame.gameSession.GridViewCustomAdapter;
 import com.example.wumpusworldgame.gameMenuItems.gameModeTutorials.HeroModeTutorial;
 import com.example.wumpusworldgame.services.Utility;
-
-import java.io.Serializable;
 import java.util.ArrayList;
-import game.player.agent.RandomAgent;
-import game.session.configuration.Starter;
-import game.session.controller.Controller;
-import game.session.controller.Direction;
-import game.structure.cell.Cell;
-import game.structure.cell.CellStatus;
-import game.structure.elements.PlayableCharacter;
+import game.session.controller.Direction;;
 import game.structure.map.GameMap;
 import game.structure.map.MapConfiguration;
-import game.structure.text.GameMessages;
 /** class HeroSide
  * classe che implementa la modalita' di gioco in cui il personaggio
  * giocabile e' l'Avventuriero.
@@ -58,11 +49,6 @@ public class HeroSide extends AppCompatActivity {
     private ArrayList<String> data;
     //dati della matrice di gioco
     private ArrayList<String> game_data;
-
-    //lista contenente la coppia di indici di ogni cella visitata
-    private static ArrayList<Cell> run;
-    //lista che contiene le celle visitate
-    private static ArrayList<String> solution;
 
     //##### campi di testo #####
     //messaggi di gioco
@@ -142,6 +128,7 @@ public class HeroSide extends AppCompatActivity {
         em = new GameMap();
         //riempimento delle matrici
         MapConfiguration.init(gm, em);
+
         //dimensioni della matrice di gioco, analoghe a quelle della matrice di esplorazione
         int rows = gm.getRows();
         int columns = gm.getColumns();
@@ -340,12 +327,12 @@ public class HeroSide extends AppCompatActivity {
                 return true;
             //RISOLVI
             case R.id.item_solve_game:
-                //istanza di bundle
-                Bundle bundle = new Bundle();
-                //salvataggio della matrice
-                bundle.putSerializable("game_map",gm);
                 //creazione dell'intent
                 intent = new Intent(this, HeroAutomaticMode.class);
+                //invio della mappa di gioco
+                intent.putExtra("game_map",gm);
+                //invio della matrice di esplorazione
+                intent.putExtra("exp_map",em);
                 //si avvia l'istanza dell'activity corrispondente
                 startActivity(intent);
                 //si interrompe il metodo corrente con successo

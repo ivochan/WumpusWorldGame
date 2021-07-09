@@ -10,7 +10,6 @@ import androidx.preference.PreferenceManager;
 import com.example.wumpusworldgame.R;
 import com.example.wumpusworldgame.gameSession.GridViewCustomAdapter;
 import com.example.wumpusworldgame.services.Utility;
-
 import java.util.ArrayList;
 import game.structure.map.GameMap;
 /**
@@ -66,12 +65,8 @@ public class HeroAutomaticMode extends AppCompatActivity {
 
         //##### inizializzazioni #####
 
-        //matrice di esplorazione
-        em = new GameMap();
         //dati della matrice di esplorazione
         data = new ArrayList();
-        //matrice di gioco
-        gm = new GameMap();
         //dati della matrice di gioco
         game_data =  new ArrayList();
 
@@ -97,17 +92,11 @@ public class HeroAutomaticMode extends AppCompatActivity {
 
         //##### prelievo dei dati di gioco #####
 
-        //istanza di bundle
-        Bundle bundle = getIntent().getExtras();
-        //blocco try-catch
-        try {
-            //matrice di gioco
-            gm = (GameMap)bundle.get("game_map");
-        }catch(Exception e){
-            Log.i(" Error at bundle " , e.toString());
-        }
-
-
+        //matrice di gioco
+        gm =(GameMap )getIntent().getSerializableExtra("game_map");
+        //matrice di esplorazione
+        em = (GameMap)getIntent().getSerializableExtra("exp_map");
+        
         //###### visualizzazione  ######
 
         //dimensioni della matrice di gioco, analoghe a quelle della matrice di esplorazione
