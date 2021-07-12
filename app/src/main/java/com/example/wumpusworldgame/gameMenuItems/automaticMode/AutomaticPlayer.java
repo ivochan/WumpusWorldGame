@@ -48,8 +48,6 @@ public class AutomaticPlayer {
      *
      */
     public void solve() {
-        //
-        String sense=new String();
         //ciclo di risoluzione
         while (!gameOver) {
             //il giocatore sceglie la mossa da eseguire
@@ -60,7 +58,6 @@ public class AutomaticPlayer {
             makeGameMove();
             //se la sessione di gioco e' conclusa si esce dal ciclo
         }
-
     }
 
     private void makeGameMove() {

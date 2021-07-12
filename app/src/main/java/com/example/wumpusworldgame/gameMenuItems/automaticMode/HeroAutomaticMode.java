@@ -160,12 +160,10 @@ public class HeroAutomaticMode extends AppCompatActivity {
 
             //si istanzia il giocatore automatico
             AutomaticPlayer player = new AutomaticPlayer(gm,em);
-
-            run_box.setText(""+player.getPGposition());
             //si avvia la risoluzione
             player.solve();
             //per debug
-            //run_box.setText(player.getSensorInfo()+"\n"+player.getMoveInfo());
+            run_box.setText("PG pos: "+player.getPGposition()+"\n"+player.getSensorInfo()+"\n"+player.getMoveInfo());
 
         }
 
