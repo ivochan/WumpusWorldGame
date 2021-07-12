@@ -362,6 +362,7 @@ public class AutomaticPlayer {
         return dir;
     }//chooseDirection(int, int, GameMap)
 
+    //TODO da richiamare dalla libreria
      private int pickCell(boolean [] vcells) {
         //range del numero casuale
         int range = vcells.length;
@@ -382,6 +383,7 @@ public class AutomaticPlayer {
         return random;
     }//pickCell(boolean[])
 
+    //TODO da richiamare dalla libreria
      private boolean verifyCell(int i, int j, GameMap em) {
         //si preleva la cella
         CellStatus cs = em.getMapCell(i, j).getCellStatus();
@@ -398,6 +400,7 @@ public class AutomaticPlayer {
         return false;
     }//verifyCell(int, int, GameMap)
 
+    //TODO da richiamare dalla libreria
       private boolean checkCells(boolean [] ok_cells) {
         //variabile ausiliaria per il controllo
         boolean check = false;
