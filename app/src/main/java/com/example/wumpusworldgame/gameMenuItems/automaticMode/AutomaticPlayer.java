@@ -1,6 +1,7 @@
 package com.example.wumpusworldgame.gameMenuItems.automaticMode;
 //import
 import game.session.configuration.Starter;
+import game.session.controller.Controller;
 import game.session.controller.Direction;
 import game.structure.cell.Cell;
 import game.structure.cell.CellStatus;
@@ -87,6 +88,8 @@ public class AutomaticPlayer {
     }
 
     private void chooseGameMove() {
+        //variabile ausiliaria per lo stato della mossa
+        int status=0;
         //variabile ausiliaria per la direzione
         Direction dir;
         //variabile ausiliaria per i sensori
@@ -108,7 +111,7 @@ public class AutomaticPlayer {
                 //almeno una delle celle non e' stata visitata se il sensore e' acceso
                 moveInfo="Tentativo di sparo verso "+dir.toString();
                 //si tenta il colpo
-                //Controller.hitEnemy(shot_dir, gm);
+                Controller.hitEnemy(dir, gm);
                 //si resetta il flag
                 Starter.setChanceToHit(false);
             }//fi
@@ -116,8 +119,9 @@ public class AutomaticPlayer {
                 //non si hanno munizioni
                 moveInfo="non si hanno munizioni";
                 //si sceglie la direzione in cui fare muovere il pg
-                //dir = chooseDirection(pg_pos[0], pg_pos[1], gm);
+                dir = chooseDirection(pg_pos[0], pg_pos[1], gm);
                 //si sceglie la direzione in cui muovere il pg
+                moveInfo+="\nmuovo verso "+dir;
                 //status = Controller.movePG(dir, gm, em);
                 //si controlla la mossa
                 //Controller.makeMove(status, gm, em);
@@ -129,8 +133,9 @@ public class AutomaticPlayer {
             //il pericolo e' vicino
             moveInfo="Il pericolo e' vicino...";
             //si preferisce come direzione una cella non visitata
-            //dir = chooseDirection(pg_pos[0], pg_pos[1], gm);
+            dir = chooseDirection(pg_pos[0], pg_pos[1], gm);
             //si sceglie la direzione in cui muovere il pg
+            moveInfo+="\nmuovo verso "+dir;
             //status = Controller.movePG(dir, gm, em);
             //si controlla la mossa
             //Controller.makeMove(status, gm, em);
@@ -140,8 +145,9 @@ public class AutomaticPlayer {
             //entrambi i sensori sono spenti
             moveInfo="posto sicuro";
             //si sceglie una direzione a caso, tra quelle non esplorate
-            //dir = chooseDirection(pg_pos[0], pg_pos[1], gm);
+            dir = chooseDirection(pg_pos[0], pg_pos[1], gm);
             //si sceglie la direzione in cui muovere il pg
+            moveInfo+="\nmuovo verso "+dir;
             //status = Controller.movePG(dir, gm, em);
             //si controlla la mossa
             //Controller.makeMove(status, gm, em);
@@ -231,16 +237,7 @@ public class AutomaticPlayer {
         return dir;
     }//chooseDirection(int, int, GameMap)
 
-    /** metodo pickCell(boolean []): int
-     * questo metodo seleziona casualmente una cella
-     * tra quelle indicate come true, nel vettore ricevuto come
-     * parametro.
-     * @param vcells: boolean[], vettore delle celle tra cui
-     * 							 selezionare quella in cui effettuare
-     * 							 la mossa;
-     * @return random: int, indice della cella da estrarre.
-     */
-    private int pickCell(boolean [] vcells) {
+     private int pickCell(boolean [] vcells) {
         //range del numero casuale
         int range = vcells.length;
         //variabile ausiliaria
@@ -260,17 +257,7 @@ public class AutomaticPlayer {
         return random;
     }//pickCell(boolean[])
 
-    /** metodo verifyCell(int, int, GameMap): boolean
-     * questo metodo verifica se la cella in cui si vuole spostare
-     * il personaggio giocabile sia idonea o no, in base al suo contenuto.
-     * Infatti, per essere una scelta valida, la cella non deve essere ne'+
-     * un sasso ne' essere stata gia' visitata.
-     * @param i: int, indice di riga della cella in cui si trova il pg;
-     * @param j: int, indice di colonna della cella in cui si trova il pg;
-     * @param em: GameMap, mappa di esplorazione, visibile al pg;
-     * @return boolean: true, se la cella e' idonea, false altrimenti,. .
-     */
-    private boolean verifyCell(int i, int j, GameMap em) {
+     private boolean verifyCell(int i, int j, GameMap em) {
         //si preleva la cella
         CellStatus cs = em.getMapCell(i, j).getCellStatus();
         //si verifica che non e' un sasso
@@ -286,15 +273,7 @@ public class AutomaticPlayer {
         return false;
     }//verifyCell(int, int, GameMap)
 
-    /** metodo checkCells(boolean []): boolean
-     * questo metodo verifica se questo vettore contiene almeno una
-     * cella che sia pari a true. Se cosi' non e' sceglie una cella
-     * a caso tra quelle gia' visitate.
-     * @param ok_cells: boolean [], vettore di celle risultate idonee
-     * @return check: boolean, questo flag sara' true se almeno una cella
-     * 						   del vettore e' risultata idonea, false altrimenti.
-     */
-    private boolean checkCells(boolean [] ok_cells) {
+      private boolean checkCells(boolean [] ok_cells) {
         //variabile ausiliaria per il controllo
         boolean check = false;
         //si itera il vettore
