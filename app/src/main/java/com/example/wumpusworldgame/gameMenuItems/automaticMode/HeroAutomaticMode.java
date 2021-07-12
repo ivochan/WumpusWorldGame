@@ -12,6 +12,7 @@ import com.example.wumpusworldgame.services.Utility;
 import java.util.ArrayList;
 import game.session.configuration.Starter;
 import game.structure.cell.Cell;
+import game.structure.cell.CellStatus;
 import game.structure.elements.PlayableCharacter;
 import game.structure.map.GameMap;
 /**
@@ -118,7 +119,6 @@ public class HeroAutomaticMode extends AppCompatActivity {
         GameMap gm = new GameMap(rows,columns);
         GameMap em = new GameMap(rows,columns);
 
-
         //copia dei dati
 
         //si iterano le celle della matrice
@@ -133,19 +133,21 @@ public class HeroAutomaticMode extends AppCompatActivity {
                 //si copia la cella  nella mappa di gioco
                 gm.getMapCell(i,j).copyCellSpecs(ncg);
                 //si preleva la cella dalla mappa di esplorazione
-                Cell ce = expMap.getMapCell(i,j);
-                //si preleva il vettore dei sensori della cella ce
-                //boolean [] sensors_ce = ce.getSenseVector();
-                //si crea la nuova cella della mappa di gioco
-                //Cell nce = new Cell(ce.getCellStatus(),sensors_ce[0],sensors_ce[1]);
-                //si copia la cella ce nella mappa di esplorazione
-                //em.getMapCell(i,j).copyCellSpecs(nce);
+                Cell nce = expMap.getMapCell(i,j);
+                //si preleva lo status della cella
+                CellStatus nce_status = nce.getCellStatus();
+                //se non e' nullo allora la cella corrente e' gia' stata visitata o e' del pg
+                if(nce_status!=null){
+                    //si aggiornano i sensori della cella gia' inserita nella matrice di eplorazione
+                    nce.setSenseVector(sensor_cg[0],sensor_cg[1]);
+                }//fi
+                //si aggiunge nella mappa di esplorazione attuale
+                em.getMapCell(i,j).copyCellSpecs(nce);
             }//for colonne
         }//for righe
 
-        game_message.setText(""+expMap);
-
-
+        game_message.setText(""+gm);
+        
         //##### risoluzione #####
 
 /*
