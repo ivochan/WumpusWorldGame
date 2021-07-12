@@ -146,7 +146,8 @@ public class HeroAutomaticMode extends AppCompatActivity {
             }//for colonne
         }//for righe
 
-        game_message.setText(""+gm);
+        //DEBUG
+        game_message.setText("Mappa di gioco:\n"+gm);
 
         //##### risoluzione #####
 
@@ -156,22 +157,22 @@ public class HeroAutomaticMode extends AppCompatActivity {
             game_message.setText("Partita completata!\nNon c'è niente da risolvere!\nUff...");
         }
         else {
+            //la partita nella classe di gioco e' in corso
             run_box.setText("Risolvo la partita che hai lasciato a metà...\nChe pigrizia!!!");
-
             //si istanzia il giocatore automatico
             AutomaticPlayer player = new AutomaticPlayer(gm,em);
             //si avvia la risoluzione
             player.solve();
             //per debug
-            run_box.setText("PG pos: "+player.getPGposition()+"\n"+player.getSensorInfo()+"\n"+player.getMoveInfo());
+            run_box.setText(player.getMoveInfo());
 
         }
 
 
         //###### visualizzazione  ######
 
-
-
+        //da sostituire con un flag proprio della classe
+        Starter.setGameStart(false);
 
         //si iterano le celle della matrice
         for (int i = 0; i < rows; i++) {

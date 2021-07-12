@@ -13,7 +13,6 @@ import android.widget.Button;
 import com.example.wumpusworldgame.R;
 import com.example.wumpusworldgame.gameActivities.HeroSide;
 import com.example.wumpusworldgame.gameMenuItems.automaticMode.HeroAutomaticMode;
-
 import java.util.ArrayList;
 import game.session.configuration.Starter;
 /** class GridViewCustomAdapter

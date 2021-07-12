@@ -48,26 +48,25 @@ public class AutomaticPlayer {
      *
      */
     public void solve() {
+        //flag da resettare
+        Starter.setTryToHit(false);
+        Starter.setChanceToHit(true);
+
         //ciclo di risoluzione
         while (!gameOver) {
             //il giocatore sceglie la mossa da eseguire
             chooseGameMove();
-            //il giocatore sceglie la direzione della mossa
-            chooseMoveDirection();
-            //il giocatore effettua la mossa e viene aggiornata la mappa di esplorazione
-            makeGameMove();
             //se la sessione di gioco e' conclusa si esce dal ciclo
         }
+        //flag da resettare
+        Starter.setChanceToHit(true);
+        Starter.setTryToHit(false);
     }
 
-    private void makeGameMove() {
-        gameOver = true;
-    }
-
-    private void chooseMoveDirection() {
-    }
 
     private void chooseGameMove() {
+        //variabile ausiliaria
+        String s = new String();
         //variabile ausiliaria per lo stato della mossa
         int status=0;
         //variabile ausiliaria per la direzione
@@ -91,7 +90,7 @@ public class AutomaticPlayer {
                 //si sceglie la direzione in cui colpire
                 dir = chooseDirection(pg_pos[0],pg_pos[1],gm);
                 //almeno una delle celle non e' stata visitata se il sensore e' acceso
-                moveInfo="Tentativo di sparo verso "+dir+"\n"+status;
+                moveInfo="Tentativo di sparo verso "+dir;
                 //si tenta il colpo
                 Controller.hitEnemy(dir, gm);
                 //si resetta il flag
@@ -102,12 +101,12 @@ public class AutomaticPlayer {
                 moveInfo="non si hanno munizioni";
                 //si sceglie la direzione in cui fare muovere il pg
                 dir = chooseDirection(pg_pos[0], pg_pos[1], gm);
-                //si sceglie la direzione in cui muovere il pg
-
-                //status = movePG(dir, gm, em);
-                moveInfo+="\nmuovo verso "+dir+"\n"+status;
+                //si verifica il risultato della mossa
+                status = movePG(dir, gm, em);
+                moveInfo+="\nmuovo verso "+dir;
                 //si controlla la mossa
-                //Controller.makeMove(status, gm, em);
+                s = makeMove(status, gm);
+                moveInfo +="\n"+s;
                 //aggiornamento del percorso
 
             }//else
@@ -117,12 +116,12 @@ public class AutomaticPlayer {
             moveInfo="Il pericolo e' vicino...";
             //si preferisce come direzione una cella non visitata
             dir = chooseDirection(pg_pos[0], pg_pos[1], gm);
-            //si sceglie la direzione in cui muovere il pg
-
-            //status = movePG(dir, gm, em);
-            moveInfo+="\nmuovo verso "+dir+"\n"+status;
+            //si verifica il risultato della mossa
+            status = movePG(dir, gm, em);
+            moveInfo+="\nmuovo verso "+dir;
             //si controlla la mossa
-            //Controller.makeMove(status, gm, em);
+            s = makeMove(status, gm);
+            moveInfo+="\n"+s;
             //aggiornamento del percorso
         }
         else {
@@ -130,18 +129,66 @@ public class AutomaticPlayer {
             moveInfo="posto sicuro";
             //si sceglie una direzione a caso, tra quelle non esplorate
             dir = chooseDirection(pg_pos[0], pg_pos[1], gm);
-            //status = movePG(dir, gm, em);
-            moveInfo+="\nmuovo verso "+dir+"\n"+status;
+            //si verifica il risultato della della mossa
+            status = movePG(dir, gm, em);
+            moveInfo+="\nmuovo verso "+dir;
             //si controlla la mossa
-            //Controller.makeMove(status, gm, em);
+            s = makeMove(status, gm);
+            moveInfo +="\n"+s;
             //aggiornamento del percorso
             //if(status!=-1)updateRunPath(gm.getMapCell(pg_pos[0], pg_pos[1]));
         }
 
     }
 
-    //aggiornamento della posizione del pg
+    public String makeMove(int status, GameMap gm) {
+        //variabile ausilaria per la cella della mappa
+        Cell c = new Cell();
+        //variabile ausiliaria
+        String s  =new String();
+        //risultato della mossa effettuata
+        switch(status) {
+            //codici di uscita associati alla mossa
+            case -1 :
+                s = "Il passaggio e' bloccato da un sasso.\nRipeti la mossa!";
+                break;
+            case 0 :
+                //informazioni sulla posizione
+                s = "ti trovi in "+getPGposition();
+                //si preleva la cella in cui si trova il pg
+                c = gm.getMapCell(pg_pos[0],pg_pos[1]);
+                //si visualizzano le informazioni dei sensori
+                s +="\n"+c.senseVectorToString(true);
+                break;
+            case 1:
+                //informazioni della cella in cui si e' mosso il pg
+                c = gm.getMapCell(pg_pos[0], pg_pos[1]);
+                //info sullo stato
+                CellStatus cs = c.getCellStatus();
+                //stampa del messaggio se nemico
+                if(cs.equals(CellStatus.ENEMY)){
+                    s = "Hai perso, ti ha ucciso il nemico";
+                }
+                else {
+                    //stampa del messaggio se pericolo
+                    s = "Hai perso, sei caduto in trappola";
+                }
+                //fine della partita
+                gameOver=true;
+                break;
+            case 2:
+                //hai trovato il premio
+                s = "Hai vinto";
+                //fine della partita
+                gameOver=true;
+                break;
+            default:
+                break;
+        }//end switch
+        return s;
+    }//makeMove(int)
 
+    //aggiornamento della posizione del pg
     public void setPGposition(int [] position) {
         //controllo sul vettore della posizione
         if(position==null) throw new IllegalArgumentException("vettore della posizione nullo");
