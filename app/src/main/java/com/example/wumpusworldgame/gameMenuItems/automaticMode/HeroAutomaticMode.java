@@ -10,7 +10,6 @@ import com.example.wumpusworldgame.R;
 import com.example.wumpusworldgame.gameSession.GridViewCustomAdapter;
 import com.example.wumpusworldgame.services.Utility;
 import java.util.ArrayList;
-
 import game.session.configuration.Starter;
 import game.structure.elements.PlayableCharacter;
 import game.structure.map.GameMap;
@@ -113,12 +112,16 @@ public class HeroAutomaticMode extends AppCompatActivity {
         //controllo
         if(!Starter.getGameStart()){
             //la partita nella classe di gioco e' terminata
-            game_message.setText("Partita completata!\nNon c'è niente da risolvere!Uff...");
+            game_message.setText("Partita completata!\nNon c'è niente da risolvere!\nUff...");
         }
         else {
-            run_box.setText("Risolvo la partita che hai lasciato a metà...");
-            //risoluzione
-
+            run_box.setText("Risolvo la partita che hai lasciato a metà...\nChe pigrizia!!!");
+            //si istanzia il giocatore automatico
+            AutomaticPlayer player = new AutomaticPlayer(gm,em,pg_pos);
+            //si avvia la risoluzione
+            player.solve();
+            //per debug
+            run_box.setText(player.getSensorInfo()+"\n"+player.getMoveInfo());
 
         }
 
