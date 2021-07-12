@@ -147,10 +147,9 @@ public class HeroAutomaticMode extends AppCompatActivity {
         }//for righe
 
         game_message.setText(""+gm);
-        
+
         //##### risoluzione #####
 
-/*
         //controllo
         if(!Starter.getGameStart()){
             //la partita nella classe di gioco e' terminata
@@ -161,16 +160,15 @@ public class HeroAutomaticMode extends AppCompatActivity {
 
             //si istanzia il giocatore automatico
             AutomaticPlayer player = new AutomaticPlayer(gm,em);
+
+            run_box.setText(""+player.getPGposition());
             //si avvia la risoluzione
             player.solve();
             //per debug
-            run_box.setText(player.getSensorInfo()+"\n"+player.getMoveInfo());
-
-
+            //run_box.setText(player.getSensorInfo()+"\n"+player.getMoveInfo());
 
         }
 
-*/
 
         //###### visualizzazione  ######
 

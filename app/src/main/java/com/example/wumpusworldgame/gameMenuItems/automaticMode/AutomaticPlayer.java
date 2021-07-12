@@ -13,8 +13,8 @@ import game.structure.map.GameMap;
 public class AutomaticPlayer {
     //##### attributi di classe #####
 
-    private GameMap gm = new GameMap();
-    private GameMap em = new GameMap();
+    private GameMap gm;
+    private GameMap em;
 
     private  int[] pg_pos = new int[2];
 
@@ -34,27 +34,13 @@ public class AutomaticPlayer {
         if (gm == null) throw new IllegalArgumentException("mappa di gioco nulla");
         if (em == null) throw new IllegalArgumentException("mappa di esplorazione nulla");
         //si assegnano i parametri agli attributi di classe
-
-
-
-        GameMap gameMap = new GameMap();
-
-        GameMap expMap = new GameMap();
-
-        //dimensioni della matrice di gioco, analoghe a quelle della matrice di esplorazione
-        int rows = gameMap.getRows();
-        int columns = gameMap.getColumns();
-
-        for(int i=0; i<rows;i++){
-            for(int j=0; j<columns; j++){
-                //si copia la mappa di gioco
-                gameMap.getMapCell(i,j).copyCellSpecs(gm.getMapCell(i,j));
-                //si copia la mappa di esplorazione
-                expMap.getMapCell(i,j).copyCellSpecs(em.getMapCell(i,j));
-            }
-        }
-        //si preleva la posizione del pg
-        pg_pos = PlayableCharacter.getPGposition();
+        this.gm=gm;
+        this.em=em;
+        //variabile temporanea per prelevare la posizione del pg
+        int [] temp_pg_pos = PlayableCharacter.getPGposition();
+        //si assegna questa posizione all'attributo di classe
+        this.pg_pos[0] = temp_pg_pos[0];
+        this.pg_pos[1] = temp_pg_pos[1];
     }
 
 
@@ -256,6 +242,19 @@ public class AutomaticPlayer {
      */
     public String getMoveInfo(){
         return moveInfo;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public String getPGposition(){
+        //variabile ausiliaria
+        String position = new String();
+        //si riempie la stringa
+        position+="("+pg_pos[0]+','+pg_pos[1]+')';
+        //si restituisce la stringa che indica la posizione del pg
+        return position;
     }
 
     //##### metodi per la scelta della direzione #####
