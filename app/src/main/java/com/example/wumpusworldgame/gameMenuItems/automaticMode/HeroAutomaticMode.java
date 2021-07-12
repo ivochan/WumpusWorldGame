@@ -11,6 +11,7 @@ import com.example.wumpusworldgame.gameSession.GridViewCustomAdapter;
 import com.example.wumpusworldgame.services.Utility;
 import java.util.ArrayList;
 import game.session.configuration.Starter;
+import game.structure.cell.Cell;
 import game.structure.elements.PlayableCharacter;
 import game.structure.map.GameMap;
 /**
@@ -25,9 +26,9 @@ public class HeroAutomaticMode extends AppCompatActivity {
 
     //##### dati di gioco #####
     //matrice di gioco
-    private GameMap gm;
+    private GameMap gameMap;
     //matrice di esplorazione
-    private GameMap em;
+    private GameMap expMap;
 
     //grid per la matrice di esplorazione
     private GridView grid;
@@ -101,14 +102,53 @@ public class HeroAutomaticMode extends AppCompatActivity {
 
         int [] pg_pos = PlayableCharacter.getPGposition();
         //matrice di gioco
-        gm =(GameMap )getIntent().getSerializableExtra("game_map");
-        game_message.setText(""+gm+" PG: "+pg_pos[0]+","+pg_pos[1]);
+        gameMap =(GameMap )getIntent().getSerializableExtra("game_map");
+
+        game_message.setText(""+gameMap+" PG: "+pg_pos[0]+","+pg_pos[1]);
         //matrice di esplorazione
-        em = (GameMap)getIntent().getSerializableExtra("exp_map");
+        expMap = (GameMap)getIntent().getSerializableExtra("exp_map");
+
+        //##### copia dei dati di gioco da rielaborare
+
+        //dimensioni della matrice di gioco, analoghe a quelle della matrice di esplorazione
+        int rows = gameMap.getRows();
+        int columns = gameMap.getColumns();
+
+        //mappe da utilizzare
+        GameMap gm = new GameMap(rows,columns);
+        GameMap em = new GameMap(rows,columns);
+
+
+        //copia dei dati
+
+        //si iterano le celle della matrice
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < columns; j++) {
+               //si preleva la cella dalla mappa di gioco
+                Cell cg = gameMap.getMapCell(i,j);
+                //si preleva il vettore dei sensori della cella cg
+                boolean[] sensor_cg = cg.getSenseVector();
+                //si crea la nuova cella della mappa di gioco
+                Cell ncg = new Cell(cg.getCellStatus(),sensor_cg[0],sensor_cg[1]);
+                //si copia la cella  nella mappa di gioco
+                gm.getMapCell(i,j).copyCellSpecs(ncg);
+                //si preleva la cella dalla mappa di esplorazione
+                Cell ce = expMap.getMapCell(i,j);
+                //si preleva il vettore dei sensori della cella ce
+                //boolean [] sensors_ce = ce.getSenseVector();
+                //si crea la nuova cella della mappa di gioco
+                //Cell nce = new Cell(ce.getCellStatus(),sensors_ce[0],sensors_ce[1]);
+                //si copia la cella ce nella mappa di esplorazione
+                //em.getMapCell(i,j).copyCellSpecs(nce);
+            }//for colonne
+        }//for righe
+
+        game_message.setText(""+expMap);
+
 
         //##### risoluzione #####
 
-
+/*
         //controllo
         if(!Starter.getGameStart()){
             //la partita nella classe di gioco e' terminata
@@ -116,22 +156,24 @@ public class HeroAutomaticMode extends AppCompatActivity {
         }
         else {
             run_box.setText("Risolvo la partita che hai lasciato a metà...\nChe pigrizia!!!");
+
             //si istanzia il giocatore automatico
-            AutomaticPlayer player = new AutomaticPlayer(gm,em,pg_pos);
+            AutomaticPlayer player = new AutomaticPlayer(gm,em);
             //si avvia la risoluzione
             player.solve();
             //per debug
             run_box.setText(player.getSensorInfo()+"\n"+player.getMoveInfo());
 
+
+
         }
 
-
+*/
 
         //###### visualizzazione  ######
 
-        //dimensioni della matrice di gioco, analoghe a quelle della matrice di esplorazione
-        int rows = gm.getRows();
-        int columns = gm.getColumns();
+
+
 
         //si iterano le celle della matrice
         for (int i = 0; i < rows; i++) {

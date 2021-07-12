@@ -13,16 +13,17 @@ import game.structure.map.GameMap;
 public class AutomaticPlayer {
     //##### attributi di classe #####
 
-    private GameMap gm;
-    private GameMap em;
-    private int[] pg_pos;
+    private GameMap gm = new GameMap();
+    private GameMap em = new GameMap();
+
+    private  int[] pg_pos = new int[2];
 
     //non statica, deve essere resettata per ogni nuova istanza della classe
     private boolean gameOver = false;
 
     //per debug
     private String sensorInfo = new String();
-    private String moveInfo  =new String();
+    private String moveInfo = new String();
 
     /**
      * @param gm
@@ -33,31 +34,27 @@ public class AutomaticPlayer {
         if (gm == null) throw new IllegalArgumentException("mappa di gioco nulla");
         if (em == null) throw new IllegalArgumentException("mappa di esplorazione nulla");
         //si assegnano i parametri agli attributi di classe
-        this.gm = gm;
-        this.em = em;
+
+
+
+        GameMap gameMap = new GameMap();
+
+        GameMap expMap = new GameMap();
+
+        //dimensioni della matrice di gioco, analoghe a quelle della matrice di esplorazione
+        int rows = gameMap.getRows();
+        int columns = gameMap.getColumns();
+
+        for(int i=0; i<rows;i++){
+            for(int j=0; j<columns; j++){
+                //si copia la mappa di gioco
+                gameMap.getMapCell(i,j).copyCellSpecs(gm.getMapCell(i,j));
+                //si copia la mappa di esplorazione
+                expMap.getMapCell(i,j).copyCellSpecs(em.getMapCell(i,j));
+            }
+        }
         //si preleva la posizione del pg
         pg_pos = PlayableCharacter.getPGposition();
-    }
-
-    /**
-     * @param gm
-     * @param em
-     * @param pg_position
-     */
-    public AutomaticPlayer(GameMap gm, GameMap em, int[] pg_position) {
-        //controllo sui parametri
-        if (pg_position == null || pg_position.length < 2)
-            throw new IllegalArgumentException("vettore posizione del pg non valido");
-        if (gm == null) throw new IllegalArgumentException("mappa di gioco nulla");
-        if (em == null) throw new IllegalArgumentException("mappa di esplorazione nulla");
-        //si assegnano i parametri agli attributi di classe
-        this.gm = gm;
-        this.em = em;
-        //inizializzazione del vettore posizione
-        pg_pos = new int[2];
-        //si copiano i valori nelle celle del vettore di classe
-        pg_pos[0] = pg_position[0];
-        pg_pos[1] = pg_position[1];
     }
 
 
@@ -94,6 +91,8 @@ public class AutomaticPlayer {
         Direction dir;
         //variabile ausiliaria per i sensori
         boolean[] sensors = new boolean[2];
+        //prelievo della posizione del pg
+        int [] pg_pos = PlayableCharacter.getPGposition();
         //si preleva la cella in cui si trova il pg nella matrice di esplorazione
         Cell current = em.getMapCell(pg_pos[0],pg_pos[1]);
         //si preleva il contenuto del vettore dei sensori
@@ -109,7 +108,7 @@ public class AutomaticPlayer {
                 //si sceglie la direzione in cui colpire
                 dir = chooseDirection(pg_pos[0],pg_pos[1],gm);
                 //almeno una delle celle non e' stata visitata se il sensore e' acceso
-                moveInfo="Tentativo di sparo verso "+dir.toString();
+                moveInfo="Tentativo di sparo verso "+dir+"\n"+status;
                 //si tenta il colpo
                 Controller.hitEnemy(dir, gm);
                 //si resetta il flag
@@ -121,8 +120,9 @@ public class AutomaticPlayer {
                 //si sceglie la direzione in cui fare muovere il pg
                 dir = chooseDirection(pg_pos[0], pg_pos[1], gm);
                 //si sceglie la direzione in cui muovere il pg
-                moveInfo+="\nmuovo verso "+dir;
-                //status = Controller.movePG(dir, gm, em);
+
+                //status = movePG(dir, gm, em);
+                moveInfo+="\nmuovo verso "+dir+"\n"+status;
                 //si controlla la mossa
                 //Controller.makeMove(status, gm, em);
                 //aggiornamento del percorso
@@ -135,8 +135,9 @@ public class AutomaticPlayer {
             //si preferisce come direzione una cella non visitata
             dir = chooseDirection(pg_pos[0], pg_pos[1], gm);
             //si sceglie la direzione in cui muovere il pg
-            moveInfo+="\nmuovo verso "+dir;
-            //status = Controller.movePG(dir, gm, em);
+
+            //status = movePG(dir, gm, em);
+            moveInfo+="\nmuovo verso "+dir+"\n"+status;
             //si controlla la mossa
             //Controller.makeMove(status, gm, em);
             //aggiornamento del percorso
@@ -146,9 +147,8 @@ public class AutomaticPlayer {
             moveInfo="posto sicuro";
             //si sceglie una direzione a caso, tra quelle non esplorate
             dir = chooseDirection(pg_pos[0], pg_pos[1], gm);
-            //si sceglie la direzione in cui muovere il pg
-            moveInfo+="\nmuovo verso "+dir;
-            //status = Controller.movePG(dir, gm, em);
+            //status = movePG(dir, gm, em);
+            moveInfo+="\nmuovo verso "+dir+"\n"+status;
             //si controlla la mossa
             //Controller.makeMove(status, gm, em);
             //aggiornamento del percorso
@@ -157,6 +157,88 @@ public class AutomaticPlayer {
 
     }
 
+    //aggiornamento della posizione del pg
+
+    public void setPGposition(int [] position) {
+        //controllo sul vettore della posizione
+        if(position==null) throw new IllegalArgumentException("vettore della posizione nullo");
+        //controllo sulla dimensione del vettore
+        if(position.length!=2) throw new IllegalArgumentException("il vettore della posizione"
+                + " non ha una dimensione valida");
+        //si preleva l'indice di riga
+        int i = position[0];
+        //si preleva l'indice di colonna
+        int j = position[1];
+        //si assegna l'indice di riga
+        pg_pos[0]=i;
+        //si assegna l'indice della colonna
+        pg_pos[1]=j;
+    }//setPGposition(int,int, Map)
+
+    //metodo che realizza la mossa del pg
+
+    public int movePG(Direction move, GameMap gm, GameMap ge) {
+        //vettore della posizione successiva
+        int [] cell_pos= new int[2];
+        //variabile da restituire
+        int status = 0;
+        //si controlla il risultato della direzione scelta
+        cell_pos = Controller.findCell(move, pg_pos);
+        //la cella indicata da next_pos esiste
+        if(Controller.checkCell(cell_pos, gm)) {
+            //si controlla il contenuto della cella in questione
+            CellStatus cs = gm.getMapCell(cell_pos[0], cell_pos[1]).getCellStatus();
+            //controllo sullo stato
+            if(cs.equals(CellStatus.ENEMY)) {
+                //il pg e' stato ucciso dal nemico
+                status = 1;
+                //si deve aggiornare la posizione del PG
+                setPGposition(cell_pos);
+            }//fi
+            else if(cs.equals(CellStatus.FORBIDDEN)) {
+                //questa cella e' vietata perche' e' un sasso
+                status = -1;
+                //si aggiunge alla mappa di esplorazione
+                ge.getMapCell(cell_pos[0], cell_pos[1]).
+                        copyCellSpecs(gm.getMapCell(cell_pos[0], cell_pos[1]));
+                //il pg rimane dove si trova
+            }//fi
+            else if(cs.equals(CellStatus.AWARD)) {
+                //il pg vince
+                status = 2 ;
+                //si aggiorna la posizione
+                setPGposition(cell_pos);
+            }//fi
+            else if(cs.equals(CellStatus.DANGER)) {
+                //il pg e' caduto nella trappola
+                status = 1;
+                //si aggiorna la posizione
+                setPGposition(cell_pos);
+            }//fi
+            else {//CellStatus.SAFE
+                //il pg si trova in una cella libera
+                status = 0;
+                //la cella in cui si trovava prima il pg si segna come visitata
+                ge.getMapCell(pg_pos[0], pg_pos[1]).setCellStatus(CellStatus.OBSERVED);
+                //si aggiorna la posizione del pg
+                setPGposition(cell_pos);
+                //si preleva il contenuto della cella in cui si trova attualmente il pg
+                Cell c = gm.getMapCell(cell_pos[0], cell_pos[1]);
+                //si copia questa cella nella matrice di esplorazione
+                ge.getMapCell(cell_pos[0], cell_pos[1]).copyCellSpecs(c);
+                //il contenuto di questa cella nella mappa di esplorazione e' il pg
+                ge.getMapCell(cell_pos[0], cell_pos[1]).setCellStatus(CellStatus.PG);
+            }//esle
+            //aggiornamento del punteggio
+
+        }//fi indici di mossa corretti
+        else {
+            //comando non valido, oppure la cella non esiste
+            status = -2;
+        }//esle
+        //si restituisce il codice associato al tipo di mossa
+        return status;
+    }//movePG(Direction, GameMap, GameMap)
 
     //##### metodi accessori per le stampe di debug #####
 
