@@ -163,9 +163,9 @@ In questa versione del gioco √® stata prevista, per il giocatore, la possibilit√
 - activity per la risoluzione automatica della partita:
 
   - test del giocatore automatico;
-  - memorizzazione della matrice di gioco per la risoluzione;
+  - ~~memorizzazione della matrice di gioco per la risoluzione;~~
   - schermata di risoluzione;
   - definizione del layout;
-  - 
+  - ~~inserire un flag statico per gestire celle coperte e visitate nell'adapter~~
   
   

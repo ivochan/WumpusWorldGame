@@ -7,25 +7,29 @@ import game.structure.cell.Cell;
 import game.structure.cell.CellStatus;
 import game.structure.elements.PlayableCharacter;
 import game.structure.map.GameMap;
-/**
+/** class AutomaticPlayer
  *
  */
 public class AutomaticPlayer {
     //##### attributi di classe #####
 
+    //mappa di gioco
     private GameMap gm;
+    //mappa di esplorazione
     private GameMap em;
-
+    //posizione del pg
     private  int[] pg_pos = new int[2];
 
-    //non statica, deve essere resettata per ogni nuova istanza della classe
+    //flag non statica, deve essere resettata per ogni nuova istanza della classe
     private boolean gameOver = false;
+
+    private static boolean endAutomaticSession = false;
 
     //per debug
     private String sensorInfo = new String();
     private String moveInfo = new String();
 
-    /**
+    /** costruttore AutomaticPlayer(GameMap, GameMap)
      * @param gm
      * @param em
      */
@@ -41,29 +45,52 @@ public class AutomaticPlayer {
         //si assegna questa posizione all'attributo di classe
         this.pg_pos[0] = temp_pg_pos[0];
         this.pg_pos[1] = temp_pg_pos[1];
-    }
+        //si resetta il flag della sessione di gioco automatica
+        setEndAutomaticSession(false);
+    }//end AutomaticPlayer(GameMap, GameMap)
 
+    //##### metodo di risoluzione della mappa di gioco #####
 
-    /**
+    /** metodo solve() : void
      *
      */
     public void solve() {
         //flag da resettare
-        Starter.setTryToHit(false);
-        Starter.setChanceToHit(true);
-
+        start();
         //ciclo di risoluzione
         while (!gameOver) {
             //il giocatore sceglie la mossa da eseguire
             chooseGameMove();
-            //se la sessione di gioco e' conclusa si esce dal ciclo
-        }
+        }//end while
+        //la sessione di gioco e' conclusa
+        end();
+    }//solve()
+
+    /** metodo start(): void
+     * si occupa di resettare dei flag all'inizio del calcolo della
+     * soluzione della sessione di gioco
+     */
+    private void start(){
+        //flag da resettare
+        Starter.setTryToHit(false);
+        Starter.setChanceToHit(false);
+    }//start()
+
+    /** metodo end(): void
+     * si occupa di resettare dei flag alla fine del
+     * calcolo della soluzione della sessione di gioco
+     */
+    private void end(){
         //flag da resettare
         Starter.setChanceToHit(true);
         Starter.setTryToHit(false);
-    }
+    }//end()
 
+    //##### metodi per la scelta e la realizzazione della mossa #####
 
+    /** metodo chooseGameMove()
+     *
+     */
     private void chooseGameMove() {
         //variabile ausiliaria
         String s = new String();
@@ -138,9 +165,14 @@ public class AutomaticPlayer {
             //aggiornamento del percorso
             //if(status!=-1)updateRunPath(gm.getMapCell(pg_pos[0], pg_pos[1]));
         }
+    }//end chooseGameMove()
 
-    }
-
+    /** metodo makeMove(int, GameMap): String
+     *
+     * @param status
+     * @param gm
+     * @return
+     */
     public String makeMove(int status, GameMap gm) {
         //variabile ausilaria per la cella della mappa
         Cell c = new Cell();
@@ -175,12 +207,16 @@ public class AutomaticPlayer {
                 }
                 //fine della partita
                 gameOver=true;
+                //flag di termine della sessione di gioco automatica
+                setEndAutomaticSession(true);
                 break;
             case 2:
                 //hai trovato il premio
                 s = "Hai vinto";
                 //fine della partita
                 gameOver=true;
+                //flag di termine della sessione di gioco automatica
+                setEndAutomaticSession(true);
                 break;
             default:
                 break;
@@ -188,25 +224,13 @@ public class AutomaticPlayer {
         return s;
     }//makeMove(int)
 
-    //aggiornamento della posizione del pg
-    public void setPGposition(int [] position) {
-        //controllo sul vettore della posizione
-        if(position==null) throw new IllegalArgumentException("vettore della posizione nullo");
-        //controllo sulla dimensione del vettore
-        if(position.length!=2) throw new IllegalArgumentException("il vettore della posizione"
-                + " non ha una dimensione valida");
-        //si preleva l'indice di riga
-        int i = position[0];
-        //si preleva l'indice di colonna
-        int j = position[1];
-        //si assegna l'indice di riga
-        pg_pos[0]=i;
-        //si assegna l'indice della colonna
-        pg_pos[1]=j;
-    }//setPGposition(int,int, Map)
-
-    //metodo che realizza la mossa del pg
-
+    /** metodo movePG(Direction, GameMap, GameMap): int
+     * metodo che realizza la mossa del pg
+     * @param move
+     * @param gm
+     * @param ge
+     * @return
+     */
     public int movePG(Direction move, GameMap gm, GameMap ge) {
         //vettore della posizione successiva
         int [] cell_pos= new int[2];
@@ -260,7 +284,6 @@ public class AutomaticPlayer {
                 ge.getMapCell(cell_pos[0], cell_pos[1]).setCellStatus(CellStatus.PG);
             }//esle
             //aggiornamento del punteggio
-
         }//fi indici di mossa corretti
         else {
             //comando non valido, oppure la cella non esiste
@@ -269,6 +292,62 @@ public class AutomaticPlayer {
         //si restituisce il codice associato al tipo di mossa
         return status;
     }//movePG(Direction, GameMap, GameMap)
+
+    //##### metodi accessori #####
+
+    /** metodo setPGposition(int[]): void
+     * metodo che si occupa di aggiornare la posizione del
+     * pg nella mappa di esplorazione, dopo che e' stata effettuata
+     * la mossa nella mappa di gioco
+     * @param position
+     */
+    public void setPGposition(int [] position) {
+        //controllo sul vettore della posizione
+        if(position==null) throw new IllegalArgumentException("vettore della posizione nullo");
+        //controllo sulla dimensione del vettore
+        if(position.length!=2) throw new IllegalArgumentException("il vettore della posizione"
+                + " non ha una dimensione valida");
+        //si preleva l'indice di riga
+        int i = position[0];
+        //si preleva l'indice di colonna
+        int j = position[1];
+        //si assegna l'indice di riga
+        pg_pos[0]=i;
+        //si assegna l'indice della colonna
+        pg_pos[1]=j;
+    }//setPGposition(int,int, Map)
+
+    /**
+     *
+     * @return
+     */
+    public String getPGposition(){
+        //variabile ausiliaria
+        String position = new String();
+        //si riempie la stringa
+        position+="("+pg_pos[0]+','+pg_pos[1]+')';
+        //si restituisce la stringa che indica la posizione del pg
+        return position;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public static boolean getEndAutomaticSession(){
+        //si restituisce il flag
+        return endAutomaticSession;
+    }//getEndAutomaticSession()
+
+    /**
+     *
+     * @param flag
+     * @return
+     */
+    public static void setEndAutomaticSession(boolean flag){
+        //si assegna il flag all'attributo di classe
+        endAutomaticSession=flag;
+    }//setEndAutomaticSession(boolean)
 
     //##### metodi accessori per le stampe di debug #####
 
@@ -286,19 +365,6 @@ public class AutomaticPlayer {
      */
     public String getMoveInfo(){
         return moveInfo;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public String getPGposition(){
-        //variabile ausiliaria
-        String position = new String();
-        //si riempie la stringa
-        position+="("+pg_pos[0]+','+pg_pos[1]+')';
-        //si restituisce la stringa che indica la posizione del pg
-        return position;
     }
 
     //##### metodi per la scelta della direzione #####

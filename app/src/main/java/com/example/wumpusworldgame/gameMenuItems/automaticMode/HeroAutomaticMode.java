@@ -15,7 +15,7 @@ import game.structure.cell.Cell;
 import game.structure.cell.CellStatus;
 import game.structure.elements.PlayableCharacter;
 import game.structure.map.GameMap;
-/**
+/** class HeroAutomaticMode
  *
  */
 public class HeroAutomaticMode extends AppCompatActivity {

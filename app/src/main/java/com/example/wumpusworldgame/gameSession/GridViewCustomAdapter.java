@@ -12,6 +12,7 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import com.example.wumpusworldgame.R;
 import com.example.wumpusworldgame.gameActivities.HeroSide;
+import com.example.wumpusworldgame.gameMenuItems.automaticMode.AutomaticPlayer;
 import com.example.wumpusworldgame.gameMenuItems.automaticMode.HeroAutomaticMode;
 import java.util.ArrayList;
 import game.session.configuration.Starter;
@@ -119,7 +120,7 @@ public class GridViewCustomAdapter extends BaseAdapter {
         tv.setPadding(0, 8, 0, 0);
         //la partita e' terminata
         //si deve aggiornare la mappa segnalando le celle ancora coperte
-        if(!Starter.getGameStart()) {
+        if(!Starter.getGameStart() || AutomaticPlayer.getEndAutomaticSession()) {
             //si preleva il contenuto della cella della mappa di gioco
             //che si trova nella stessa posizione di quella nella mappa di esplorazione
             String game_cell_type = game_items.get(position);
