@@ -40,7 +40,7 @@ public class GridViewCustomAdapter extends BaseAdapter {
      * @param expList: List<String>, oggetto che contiene gli items della matrice di esplorazione
      * @param gameList : List<String> oggetto che contiene gli oggetti della matrice di gioco
      */
-    public GridViewCustomAdapter(Activity activity, ArrayList<String> expList,ArrayList<String> gameList) {
+    public GridViewCustomAdapter(Activity activity, ArrayList<String> expList, ArrayList<String> gameList) {
         //si preleva l'activity
         mActivity = activity;
         //si verifica il valore dell'intero

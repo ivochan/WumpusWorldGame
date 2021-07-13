@@ -13,6 +13,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceManager;
 import com.example.wumpusworldgame.R;
+import com.example.wumpusworldgame.gameMenuItems.automaticMode.AutomaticPlayer;
 import com.example.wumpusworldgame.gameMenuItems.automaticMode.HeroAutomaticMode;
 import com.example.wumpusworldgame.gameSession.GameController;
 import com.example.wumpusworldgame.gameSession.GridViewCustomAdapter;
@@ -120,6 +121,8 @@ public class HeroSide extends AppCompatActivity {
 
         //##### schermata di caricamento #####
         Utility.showLoadingScreen(this, getLayoutInflater());
+
+
         //##### schermata di gioco #####
 
         //creazione della matrice di gioco

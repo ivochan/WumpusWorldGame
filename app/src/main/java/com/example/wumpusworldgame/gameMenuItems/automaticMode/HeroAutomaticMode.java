@@ -191,6 +191,9 @@ public class HeroAutomaticMode extends AppCompatActivity {
         //oggetto che permette di visualizzare i dati
         grid.setAdapter(adapter);
 
+        //reset del flag della modalita' di risoluzione automatica
+        AutomaticPlayer.setEndAutomaticSession(false);
+
     }//onCreate(Bundle)
 
     //##### metodi per la gestione dell'activity #####
