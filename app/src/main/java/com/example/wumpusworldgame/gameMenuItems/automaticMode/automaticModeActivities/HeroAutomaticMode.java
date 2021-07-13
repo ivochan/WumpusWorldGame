@@ -1,4 +1,4 @@
-package com.example.wumpusworldgame.gameMenuItems.automaticMode;
+package com.example.wumpusworldgame.gameMenuItems.automaticMode.automaticModeActivities;
 //serie di import
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -7,7 +7,8 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceManager;
 import com.example.wumpusworldgame.R;
-import com.example.wumpusworldgame.gameSession.GridViewCustomAdapter;
+import com.example.wumpusworldgame.gameMenuItems.automaticMode.AutomaticModeGridViewAdapter;
+import com.example.wumpusworldgame.gameMenuItems.automaticMode.AutomaticPlayer;
 import com.example.wumpusworldgame.services.Utility;
 import java.util.ArrayList;
 import game.session.configuration.Starter;
@@ -34,7 +35,7 @@ public class HeroAutomaticMode extends AppCompatActivity {
     //grid per la matrice di esplorazione
     private GridView grid;
     //adapter per la matrice di esplorazione
-    private GridViewCustomAdapter adapter;
+    private AutomaticModeGridViewAdapter adapter;
     //dati da mostrare nella matrice di esplorazione
     private ArrayList<String> data;
     //dati della matrice di gioco
@@ -49,7 +50,7 @@ public class HeroAutomaticMode extends AppCompatActivity {
     //numero di colpi
     private TextView shots;
     //punteggio ottenuto
-    private static TextView score;
+    private TextView score;
     //messaggio di calcolo della soluzione
     private String intro_message;
 
@@ -69,6 +70,11 @@ public class HeroAutomaticMode extends AppCompatActivity {
         setContentView(R.layout.activity_hero_automatic_mode);
 
         //##### inizializzazioni #####
+
+        //identificazione del campo di testo che visualizza il numero di colpi rimasti
+        shots = findViewById(R.id.shot_value);
+        //identificazione del campo di testo che visualizza il punteggio
+        score = findViewById(R.id.score_value);
 
         //dati della matrice di esplorazione
         data = new ArrayList();
@@ -162,17 +168,12 @@ public class HeroAutomaticMode extends AppCompatActivity {
             //si istanzia il giocatore automatico
             AutomaticPlayer player = new AutomaticPlayer(gm,em);
             //si avvia la risoluzione
-            player.solve();
+            player.solve(shots);
             //per debug
             run_box.setText(player.getMoveInfo());
-
         }
 
-
         //###### visualizzazione  ######
-
-        //da sostituire con un flag proprio della classe
-        Starter.setGameStart(false);
 
         //si iterano le celle della matrice
         for (int i = 0; i < rows; i++) {
@@ -185,14 +186,11 @@ public class HeroAutomaticMode extends AppCompatActivity {
         }//for righe
 
         //si istanzia l'adapter
-        adapter = new GridViewCustomAdapter(this,data,game_data);
+        adapter = new AutomaticModeGridViewAdapter(this,data,game_data);
         //si visualizza la matrice di esplorazione
         grid = findViewById(R.id.grid_view);
         //oggetto che permette di visualizzare i dati
         grid.setAdapter(adapter);
-
-        //reset del flag della modalita' di risoluzione automatica
-        AutomaticPlayer.setEndAutomaticSession(false);
 
     }//onCreate(Bundle)
 

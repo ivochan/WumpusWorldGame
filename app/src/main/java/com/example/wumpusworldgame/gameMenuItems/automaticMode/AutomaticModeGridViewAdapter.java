@@ -1,5 +1,6 @@
-package com.example.wumpusworldgame.gameSession;
+package com.example.wumpusworldgame.gameMenuItems.automaticMode;
 //serie di import
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.ColorStateList;
@@ -10,16 +11,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+
 import com.example.wumpusworldgame.R;
-import com.example.wumpusworldgame.gameActivities.HeroSide;
+import com.example.wumpusworldgame.gameMenuItems.automaticMode.automaticModeActivities.HeroAutomaticMode;
 
 import java.util.ArrayList;
-import game.session.configuration.Starter;
-/** class GridViewCustomAdapter
+
+/** class AutomaticModeGridViewAdapter
  * questa classe serve per visualizzare i dati nella
- * GridView che ha consentito di realizzare la mappa nella schermata di gioco
+ * GridView che ha consentito di realizzare la mappa nella schermata
+ * di risoluzione automatica del gioco
  */
-public class GridViewCustomAdapter extends BaseAdapter {
+public class AutomaticModeGridViewAdapter extends BaseAdapter {
     //##### attributi di classe #####
 
     //arrayList di stringhe che contiene gli elementi della mappa di gioco
@@ -27,7 +30,7 @@ public class GridViewCustomAdapter extends BaseAdapter {
     //arrayList di stringhe, in cui ogni stringa descrive il contenuto della cella della mappa di esplorazione
     private ArrayList<String> items;
     //activivy in cui verra' utilizzato
-    private static Activity mActivity;
+    private static Activity currentActivity;
     //oggetto layoutInflater per unire questo componente al layout dell'activity
     private static LayoutInflater inflater = null;
     //intero che indica la modalita' di gioco
@@ -39,11 +42,11 @@ public class GridViewCustomAdapter extends BaseAdapter {
      * @param expList: List<String>, oggetto che contiene gli items della matrice di esplorazione
      * @param gameList : List<String> oggetto che contiene gli oggetti della matrice di gioco
      */
-    public GridViewCustomAdapter(Activity activity, ArrayList<String> expList, ArrayList<String> gameList) {
+    public AutomaticModeGridViewAdapter(Activity activity, ArrayList<String> expList, ArrayList<String> gameList) {
         //si preleva l'activity
-        mActivity = activity;
+        currentActivity = activity;
         //si verifica il valore dell'intero
-        if(mActivity instanceof HeroSide){
+        if(currentActivity instanceof HeroAutomaticMode){
             //ci si trova nella modalita' di gioco Eroe
             game_mode = 0;
         }//fi
@@ -119,7 +122,7 @@ public class GridViewCustomAdapter extends BaseAdapter {
         tv.setPadding(0, 8, 0, 0);
         //la partita e' terminata
         //si deve aggiornare la mappa segnalando le celle ancora coperte
-        if(!Starter.getGameStart()) {
+        if(AutomaticPlayer.getEndAutomaticSession()) {
             //si preleva il contenuto della cella della mappa di gioco
             //che si trova nella stessa posizione di quella nella mappa di esplorazione
             String game_cell_type = game_items.get(position);
@@ -169,89 +172,63 @@ public class GridViewCustomAdapter extends BaseAdapter {
         //variabile ausiliaria che indica il codice dell'icona
         int icon = 0;
         //switch case sul contenuto della singola cella della mappa
-            switch (cell_type){
-                //PG
-                case "P":
-                    if(game_mode==0) {
-                        //hero side
-                        icon = R.drawable.hero_pg;
-                    }//fi
-                    else {
-                        //wumpus side
-                        icon = R.drawable.wumpus_pg;
-                    }//else
-                    break;
-                //ENEMY
-                case "E":
-                    if(game_mode==0) {
-                        //hero side
-                        icon = R.drawable.wumpus_pg;
-                    }//fi
-                    else {
-                        //wumpus side
-                        icon = R.drawable.hero_pg;
-                    }//else
-                    break;
-                //DANGER
-                case "D":
-                    if(game_mode==0){
-                        //hero_side : fossa/pozzo
-                        icon = R.drawable.pit_hero_danger;
-                    }//fi
-                    else{
-                        //wumpus_side: trappola
-                        icon = R.drawable.trap_wumpus_danger;
-                    }//else
-                    break;
-                //AWARD
-                case "A":
-                    if(game_mode==0){
-                        //hero_side : tesoro
-                        icon = R.drawable.chest_hero_award;
-                    }//fi
-                    else {
-                        //wumpus_side: uscita
-                        icon = R.drawable.exit_wumpus_award;
-                    }//esle
-                    break;
-                //FORBIDDEN
-                case "F":
-                   icon = R.drawable.mangrove;
-                    break;
-                //SAFE--> OBSERVED
-                case "O" :
-                    icon = R.drawable.foot_path;
-                    break;
-                default:
-                    break;
-            }//end switch
+        switch (cell_type){
+            //PG
+            case "P":
+                if(game_mode==0) {
+                    //hero side
+                    icon = R.drawable.hero_pg;
+                }//fi
+                else {
+                    //wumpus side
+                    icon = R.drawable.wumpus_pg;
+                }//else
+                break;
+            //ENEMY
+            case "E":
+                if(game_mode==0) {
+                    //hero side
+                    icon = R.drawable.wumpus_pg;
+                }//fi
+                else {
+                    //wumpus side
+                    icon = R.drawable.hero_pg;
+                }//else
+                break;
+            //DANGER
+            case "D":
+                if(game_mode==0){
+                    //hero_side : fossa/pozzo
+                    icon = R.drawable.pit_hero_danger;
+                }//fi
+                else{
+                    //wumpus_side: trappola
+                    icon = R.drawable.trap_wumpus_danger;
+                }//else
+                break;
+            //AWARD
+            case "A":
+                if(game_mode==0){
+                    //hero_side : tesoro
+                    icon = R.drawable.chest_hero_award;
+                }//fi
+                else {
+                    //wumpus_side: uscita
+                    icon = R.drawable.exit_wumpus_award;
+                }//esle
+                break;
+            //FORBIDDEN
+            case "F":
+                icon = R.drawable.mangrove;
+                break;
+            //SAFE--> OBSERVED
+            case "O" :
+                icon = R.drawable.foot_path;
+                break;
+            default:
+                break;
+        }//end switch
         return icon;
     }//setButtonIcon(String, int)
 
-    /** metodo getCurrentActivity
-     * quesot metodo restituisce l'activity in cui e' stato
-     * utlizzato l'adapter, cioe' quella cui verra' visualizzata
-     * la griglia.
-     * @return mActivity: Activity
-     */
-    public static Activity getCurrentActivity() {
-        //restituisce l'activity corrente
-        return mActivity;
-    }//getCurrentActivity()
-
-    /** metodo swapItems(ArrayLost<String): void
-     * questo metodo aggiorna il contenuto della list che contiene le
-     * celle della mappa di esplorazione, dopo averla svuotata e
-     * notifica il cambiamento alla ui, in modo da aggiornare la grafica
-     * @param expList: ArrayList<String
-     */
-    public void swapItems(ArrayList<String> expList){
-        //si svuota la lista che contiene gli elementi della matrice di esplorazione
-        items.clear();
-        //si riempie con i nuovi elementi della lista aggiornata
-        items.addAll(expList);
-        //si notifica che i dati sono stati aggiornati
-        notifyDataSetChanged();
-    }//swapItems(List<String>)
-
-}//end GridViewCustomAdapter
+}//end AutomaticModeGridViewAdapter

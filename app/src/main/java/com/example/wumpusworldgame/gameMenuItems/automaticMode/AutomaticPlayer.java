@@ -1,6 +1,7 @@
 package com.example.wumpusworldgame.gameMenuItems.automaticMode;
 //import
-import game.session.configuration.Starter;
+import android.widget.TextView;
+
 import game.session.controller.Controller;
 import game.session.controller.Direction;
 import game.structure.cell.Cell;
@@ -19,13 +20,17 @@ public class AutomaticPlayer {
     private GameMap em;
     //posizione del pg
     private  int[] pg_pos = new int[2];
+    //debug
+    private static String shot = new String();
 
     //flag non statica, deve essere resettata per ogni nuova istanza della classe
-    private boolean gameOver = false;
+    private boolean gameOver;
+    //flag che indica il termine della risoluzione della partita per aggiornare la grafica
+    private static boolean endAutomaticSession;
+    //flag statica per la disponibilita' delle munizioni per lo sparo
+    private static boolean automaticChanceToHit;
 
-    private static boolean endAutomaticSession = false;
-
-    //per debug
+    //##### stringhe di debug #####
     private String sensorInfo = new String();
     private String moveInfo = new String();
 
@@ -47,6 +52,10 @@ public class AutomaticPlayer {
         this.pg_pos[1] = temp_pg_pos[1];
         //si resetta il flag della sessione di gioco automatica
         setEndAutomaticSession(false);
+        //flag di displonibilita' del colpo
+        automaticChanceToHit = true;
+        //debug
+        //shot= " shot: ";
     }//end AutomaticPlayer(GameMap, GameMap)
 
     //##### metodo di risoluzione della mappa di gioco #####
@@ -54,37 +63,22 @@ public class AutomaticPlayer {
     /** metodo solve() : void
      *
      */
-    public void solve() {
-        //flag da resettare
-        start();
+    public void solve(TextView shots) {
+        //si visualizza il numero di colpi
+        shots.setText("1");
         //ciclo di risoluzione
         while (!gameOver) {
             //il giocatore sceglie la mossa da eseguire
             chooseGameMove();
+            if(automaticChanceToHit){
+                shots.setText("1");
+            }
+            else {
+                shots.setText("0");
+            }
         }//end while
-        //la sessione di gioco e' conclusa
-        end();
+        // la sessione di gioco e' conclusa
     }//solve()
-
-    /** metodo start(): void
-     * si occupa di resettare dei flag all'inizio del calcolo della
-     * soluzione della sessione di gioco
-     */
-    private void start(){
-        //flag da resettare
-        Starter.setTryToHit(false);
-        Starter.setChanceToHit(false);
-    }//start()
-
-    /** metodo end(): void
-     * si occupa di resettare dei flag alla fine del
-     * calcolo della soluzione della sessione di gioco
-     */
-    private void end(){
-        //flag da resettare
-        Starter.setChanceToHit(true);
-        Starter.setTryToHit(false);
-    }//end()
 
     //##### metodi per la scelta e la realizzazione della mossa #####
 
@@ -113,7 +107,7 @@ public class AutomaticPlayer {
             //il nemico e' nelle vicinanze
             moveInfo="Il nemico e' in agguato!";
             //si verifica la disponibilita' del colpo
-            if(Starter.getChanceToHit()) {
+            if(automaticChanceToHit){
                 //si sceglie la direzione in cui colpire
                 dir = chooseDirection(pg_pos[0],pg_pos[1],gm);
                 //almeno una delle celle non e' stata visitata se il sensore e' acceso
@@ -121,7 +115,8 @@ public class AutomaticPlayer {
                 //si tenta il colpo
                 Controller.hitEnemy(dir, gm);
                 //si resetta il flag
-                Starter.setChanceToHit(false);
+                automaticChanceToHit = false;
+                //shot+="yep";
             }//fi
             else {
                 //non si hanno munizioni
@@ -135,7 +130,6 @@ public class AutomaticPlayer {
                 s = makeMove(status, gm);
                 moveInfo +="\n"+s;
                 //aggiornamento del percorso
-
             }//else
         }//fi
         else if(sensors[CellStatus.DANGER_SENSE.ordinal()]) {
@@ -165,6 +159,7 @@ public class AutomaticPlayer {
             //aggiornamento del percorso
             //if(status!=-1)updateRunPath(gm.getMapCell(pg_pos[0], pg_pos[1]));
         }
+        //moveInfo+=shot;
     }//end chooseGameMove()
 
     /** metodo makeMove(int, GameMap): String
@@ -479,5 +474,50 @@ public class AutomaticPlayer {
         return check;
     }//checkCells(boolean [])
 
+    /*
+    public static void hitEnemy(Direction dir, GameMap gm) {
+        //si preleva la posizione attuale del pg
+        int [] pg_pos = PlayableCharacter.getPGposition();
+        //flag per indicare se il nemico e' stato colpito
+        boolean defeated;
+        //vettore degli indici di cella
+        int[] enemy_indices=new int[2];
+        //variabili ausiliarie per la validita' degli indici
+        boolean iok=false;
+        boolean jok=false;
+        //si preleva la direzione in cui si vuole colpire
+        enemy_indices = findCell(dir, pg_pos);
+        //indice riga
+        int i=enemy_indices[0];
+        //indice colonna
+        int j=enemy_indices[1];
+        //controllo sull'indice riga
+        if(i>=0 && i<gm.getRows())iok=true;
+        //controllo sull'indice colonna
+        if(j>=0 && j<gm.getColumns())jok=true;
+        //la cella esiste se entrambi gli indici sono validi
+        if(iok && jok) {
+            //si cerca se il nemico si trova in una delle celle in questa direzione
+            defeated = searchForEnemy(i, j, dir, gm);
+            //si controlla se e' stato colpito
+            if(defeated) {
+                //colpo andato a segno
+                System.out.println(GameMessages.hit);
+                //si aggiornano i sensori
+                resetEnemySensor(gm);
+                //si aggiorna il punteggio
+                Score.hitScore();
+            }//fi
+            else {
+                //colpo errato
+                System.out.println(GameMessages.wasted_shot);
+            }//esle
+        }//fi indici cella
+        else {
+            //gli indici di cella non sono validi
+            System.out.println(GameMessages.failed_shot);
+        }//esle
+    }//hitEnemy()
+     */
 }//end AutomaticPlayer
 

@@ -1,4 +1,4 @@
-package com.example.wumpusworldgame.gameMenuItems.automaticMode;
+package com.example.wumpusworldgame.gameMenuItems.automaticMode.automaticModeActivities;
 //serie di import
 import android.content.SharedPreferences;
 import android.media.MediaPlayer;
