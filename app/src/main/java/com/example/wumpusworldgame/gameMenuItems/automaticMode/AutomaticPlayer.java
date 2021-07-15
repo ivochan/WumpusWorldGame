@@ -67,13 +67,8 @@ public class AutomaticPlayer {
         while (!gameOver) {
             //il giocatore sceglie la mossa da eseguire
             chooseGameMove();
-            /*
-            if(automaticChanceToHit){
-                shots.setText("1");
-            }
-            else {
-                shots.setText("0");
-            }*/
+            //aggiornamento del campo di testo che identifica lo sparo
+            if(!automaticChanceToHit)shots.setText("0");
         }//end while
         // la sessione di gioco e' conclusa
     }//solve()
