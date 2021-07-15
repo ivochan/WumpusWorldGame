@@ -1,7 +1,6 @@
 package com.example.wumpusworldgame.gameMenuItems.automaticMode;
 //import
 import android.widget.TextView;
-
 import game.session.controller.Controller;
 import game.session.controller.Direction;
 import game.structure.cell.Cell;
@@ -19,9 +18,7 @@ public class AutomaticPlayer {
     //mappa di esplorazione
     private GameMap em;
     //posizione del pg
-    private  int[] pg_pos = new int[2];
-    //debug
-    private static String shot = new String();
+    private  int[] pg_position = new int[2];
 
     //flag non statica, deve essere resettata per ogni nuova istanza della classe
     private boolean gameOver;
@@ -48,8 +45,8 @@ public class AutomaticPlayer {
         //variabile temporanea per prelevare la posizione del pg
         int [] temp_pg_pos = PlayableCharacter.getPGposition();
         //si assegna questa posizione all'attributo di classe
-        this.pg_pos[0] = temp_pg_pos[0];
-        this.pg_pos[1] = temp_pg_pos[1];
+        this.pg_position[0] = temp_pg_pos[0];
+        this.pg_position[1] = temp_pg_pos[1];
         //si resetta il flag della sessione di gioco automatica
         setEndAutomaticSession(false);
         //flag di displonibilita' del colpo
@@ -70,12 +67,13 @@ public class AutomaticPlayer {
         while (!gameOver) {
             //il giocatore sceglie la mossa da eseguire
             chooseGameMove();
+            /*
             if(automaticChanceToHit){
                 shots.setText("1");
             }
             else {
                 shots.setText("0");
-            }
+            }*/
         }//end while
         // la sessione di gioco e' conclusa
     }//solve()
@@ -89,15 +87,13 @@ public class AutomaticPlayer {
         //variabile ausiliaria
         String s = new String();
         //variabile ausiliaria per lo stato della mossa
-        int status=0;
+        int status = 3;
         //variabile ausiliaria per la direzione
         Direction dir;
         //variabile ausiliaria per i sensori
         boolean[] sensors = new boolean[2];
-        //prelievo della posizione del pg
-        int [] pg_pos = PlayableCharacter.getPGposition();
         //si preleva la cella in cui si trova il pg nella matrice di esplorazione
-        Cell current = em.getMapCell(pg_pos[0],pg_pos[1]);
+        Cell current = em.getMapCell(pg_position[0],pg_position[1]);
         //si preleva il contenuto del vettore dei sensori
         sensors = current.getSenseVector();
         //per dubug
@@ -109,7 +105,7 @@ public class AutomaticPlayer {
             //si verifica la disponibilita' del colpo
             if(automaticChanceToHit){
                 //si sceglie la direzione in cui colpire
-                dir = chooseDirection(pg_pos[0],pg_pos[1],gm);
+                dir = chooseDirection(pg_position[0],pg_position[1],gm);
                 //almeno una delle celle non e' stata visitata se il sensore e' acceso
                 moveInfo="Tentativo di sparo verso "+dir;
                 //si tenta il colpo
@@ -122,7 +118,7 @@ public class AutomaticPlayer {
                 //non si hanno munizioni
                 moveInfo="non si hanno munizioni";
                 //si sceglie la direzione in cui fare muovere il pg
-                dir = chooseDirection(pg_pos[0], pg_pos[1], gm);
+                dir = chooseDirection(pg_position[0], pg_position[1], gm);
                 //si verifica il risultato della mossa
                 status = movePG(dir, gm, em);
                 moveInfo+="\nmuovo verso "+dir;
@@ -136,7 +132,7 @@ public class AutomaticPlayer {
             //il pericolo e' vicino
             moveInfo="Il pericolo e' vicino...";
             //si preferisce come direzione una cella non visitata
-            dir = chooseDirection(pg_pos[0], pg_pos[1], gm);
+            dir = chooseDirection(pg_position[0], pg_position[1], gm);
             //si verifica il risultato della mossa
             status = movePG(dir, gm, em);
             moveInfo+="\nmuovo verso "+dir;
@@ -149,7 +145,7 @@ public class AutomaticPlayer {
             //entrambi i sensori sono spenti
             moveInfo="posto sicuro";
             //si sceglie una direzione a caso, tra quelle non esplorate
-            dir = chooseDirection(pg_pos[0], pg_pos[1], gm);
+            dir = chooseDirection(pg_position[0], pg_position[1], gm);
             //si verifica il risultato della della mossa
             status = movePG(dir, gm, em);
             moveInfo+="\nmuovo verso "+dir;
@@ -183,13 +179,13 @@ public class AutomaticPlayer {
                 //informazioni sulla posizione
                 s = "ti trovi in "+getPGposition();
                 //si preleva la cella in cui si trova il pg
-                c = gm.getMapCell(pg_pos[0],pg_pos[1]);
+                c = gm.getMapCell(pg_position[0],pg_position[1]);
                 //si visualizzano le informazioni dei sensori
                 s +="\n"+c.senseVectorToString(true);
                 break;
             case 1:
                 //informazioni della cella in cui si e' mosso il pg
-                c = gm.getMapCell(pg_pos[0], pg_pos[1]);
+                c = gm.getMapCell(pg_position[0], pg_position[1]);
                 //info sullo stato
                 CellStatus cs = c.getCellStatus();
                 //stampa del messaggio se nemico
@@ -213,6 +209,9 @@ public class AutomaticPlayer {
                 //flag di termine della sessione di gioco automatica
                 setEndAutomaticSession(true);
                 break;
+            case -2:
+                s = "Comando non valido...\nRipeti la mossa!";
+                break;
             default:
                 break;
         }//end switch
@@ -232,7 +231,7 @@ public class AutomaticPlayer {
         //variabile da restituire
         int status = 0;
         //si controlla il risultato della direzione scelta
-        cell_pos = Controller.findCell(move, pg_pos);
+        cell_pos = Controller.findCell(move, pg_position);
         //la cella indicata da next_pos esiste
         if(Controller.checkCell(cell_pos, gm)) {
             //si controlla il contenuto della cella in questione
@@ -268,7 +267,7 @@ public class AutomaticPlayer {
                 //il pg si trova in una cella libera
                 status = 0;
                 //la cella in cui si trovava prima il pg si segna come visitata
-                ge.getMapCell(pg_pos[0], pg_pos[1]).setCellStatus(CellStatus.OBSERVED);
+                ge.getMapCell(pg_position[0], pg_position[1]).setCellStatus(CellStatus.OBSERVED);
                 //si aggiorna la posizione del pg
                 setPGposition(cell_pos);
                 //si preleva il contenuto della cella in cui si trova attualmente il pg
@@ -307,9 +306,9 @@ public class AutomaticPlayer {
         //si preleva l'indice di colonna
         int j = position[1];
         //si assegna l'indice di riga
-        pg_pos[0]=i;
+        pg_position[0]=i;
         //si assegna l'indice della colonna
-        pg_pos[1]=j;
+        pg_position[1]=j;
     }//setPGposition(int,int, Map)
 
     /**
@@ -320,7 +319,7 @@ public class AutomaticPlayer {
         //variabile ausiliaria
         String position = new String();
         //si riempie la stringa
-        position+="("+pg_pos[0]+','+pg_pos[1]+')';
+        position+="("+pg_position[0]+','+pg_position[1]+')';
         //si restituisce la stringa che indica la posizione del pg
         return position;
     }

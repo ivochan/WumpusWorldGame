@@ -111,6 +111,7 @@ public class HeroAutomaticMode extends AppCompatActivity {
         //matrice di gioco
         gameMap =(GameMap )getIntent().getSerializableExtra("game_map");
 
+        //DEBUG
         game_message.setText(""+gameMap+" PG: "+pg_pos[0]+","+pg_pos[1]);
         //matrice di esplorazione
         expMap = (GameMap)getIntent().getSerializableExtra("exp_map");
@@ -153,7 +154,7 @@ public class HeroAutomaticMode extends AppCompatActivity {
         }//for righe
 
         //DEBUG
-        game_message.setText("Mappa di gioco:\n"+gm);
+        //game_message.setText("Mappa di gioco:\n"+gm);
 
         //##### risoluzione #####
 
