@@ -1,6 +1,5 @@
 package com.example.wumpusworldgame.gameMenuItems.automaticMode;
 //serie di import
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.ColorStateList;
@@ -11,12 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
-
 import com.example.wumpusworldgame.R;
 import com.example.wumpusworldgame.gameMenuItems.automaticMode.automaticModeActivities.HeroAutomaticMode;
-
 import java.util.ArrayList;
-
 /** class AutomaticModeGridViewAdapter
  * questa classe serve per visualizzare i dati nella
  * GridView che ha consentito di realizzare la mappa nella schermata
@@ -120,32 +116,28 @@ public class AutomaticModeGridViewAdapter extends BaseAdapter {
         tv.setCompoundDrawablesWithIntrinsicBounds(0, icon, 0, 0);
         //padding
         tv.setPadding(0, 8, 0, 0);
-        //la partita e' terminata
-        //si deve aggiornare la mappa segnalando le celle ancora coperte
-        if(AutomaticPlayer.getEndAutomaticSession()) {
-            //si preleva il contenuto della cella della mappa di gioco
-            //che si trova nella stessa posizione di quella nella mappa di esplorazione
-            String game_cell_type = game_items.get(position);
-            //prendo il contenuto della cella della mappa di esplorazione
-            if(cell_type.equals(" ")){
-                //se vuoto e' una cella coperta
-                //si preleva l'icona
-                int covered_icon = setButtonIcon(game_cell_type);
-                //si verifica la versione dell'sdk
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    //le icone delle caselle coperte vengono visualizzate come nere
-                    tv.setCompoundDrawableTintList(ColorStateList.valueOf(Color.BLACK));
-                    //sfondo delle caselle coperte
-                    tv.setBackgroundResource(R.drawable.covered_grid_item_specs);
-                    //si imposta l'immagine di ogni pulsante
-                    tv.setCompoundDrawablesWithIntrinsicBounds(0, covered_icon, 0, 0);
-                }//fi
-                else {
-                    //per le versioni inferiori dell'sdk le celle sono nere
-                    tv.setBackgroundResource(R.color.dark_brown_700);
-                }//else
-            }//fi cella coperta
-        }//fi partita terminata
+        //si preleva il contenuto della cella della mappa di gioco
+        //che si trova nella stessa posizione di quella nella mappa di esplorazione
+        String game_cell_type = game_items.get(position);
+        //prendo il contenuto della cella della mappa di esplorazione
+        if(cell_type.equals("U")){
+            //se vuoto e' una cella coperta
+            //si preleva l'icona
+            int covered_icon = setButtonIcon(game_cell_type);
+            //si verifica la versione dell'sdk
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                //le icone delle caselle coperte vengono visualizzate come nere
+                tv.setCompoundDrawableTintList(ColorStateList.valueOf(Color.BLACK));
+                //sfondo delle caselle coperte
+                tv.setBackgroundResource(R.drawable.covered_grid_item_specs);
+                //si imposta l'immagine di ogni pulsante
+                tv.setCompoundDrawablesWithIntrinsicBounds(0, covered_icon, 0, 0);
+            }//fi
+            else {
+                //per le versioni inferiori dell'sdk le celle sono nere
+                tv.setBackgroundResource(R.color.dark_brown_700);
+            }//else
+        }//fi cella coperta
         //si restituisce il singolo oggetto View
         return v;
     }//getView(int, View,ViewGroup)

@@ -1,16 +1,22 @@
 package com.example.wumpusworldgame.gameMenuItems.automaticMode.automaticModeActivities;
 //serie di import
+//serie di import
 import android.content.SharedPreferences;
-import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.widget.GridView;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceManager;
 import com.example.wumpusworldgame.R;
-import com.example.wumpusworldgame.gameSession.GridViewCustomAdapter;
+import com.example.wumpusworldgame.gameMenuItems.automaticMode.AutomaticModeGridViewAdapter;
+import com.example.wumpusworldgame.services.Utility;
 import java.util.ArrayList;
-/**
+import java.util.LinkedList;
+import game.automatic_player.AutomaticPlayer;
+import game.session.configuration.Starter;
+import game.structure.cell.Cell;
+import game.structure.map.GameMap;
+/** class HeroAutomaticMode
  *
  */
 public class WumpusAutomaticMode extends AppCompatActivity {
@@ -19,24 +25,35 @@ public class WumpusAutomaticMode extends AppCompatActivity {
     private SharedPreferences sharedPreferences;
     //nome del giocatore
     private String player_name;
-    //riproduttore audio
-    private MediaPlayer mp;
 
     //##### dati di gioco #####
-    //per la matrice di esplorazione
-    private static GridView grid;
+
+    private static boolean solution_request = false;
+
+    //matrice di gioco
+    private GameMap gameMap;
+    //matrice di esplorazione
+    private GameMap expMap;
+
+    //##### componenti per la grafica #####
+
+    //grid per la matrice di esplorazione
+    private GridView grid;
     //adapter per la matrice di esplorazione
-    private GridViewCustomAdapter adapter;
-    //dati della matrice di esplorazione
-    private ArrayList<String> solved_game_data;
+    private AutomaticModeGridViewAdapter adapter;
+    //dati da mostrare nella matrice di esplorazione
+    private ArrayList<String> data;
+    //dati della matrice di gioco
+    private ArrayList<String> game_data;
+
 
     //##### campi di testo #####
-    //messaggi di gioco
-    private static TextView game_message;
-    //numero di colpi
-    private TextView shots;
-    //punteggio ottenuto
-    private static TextView score;
+    //intro
+    private TextView text_message;
+    //messaggio
+    private TextView game_message;
+    //lista delle celle visitate
+    private TextView run_box;
     //messaggio di calcolo della soluzione
     private String intro_message;
 
@@ -54,18 +71,99 @@ public class WumpusAutomaticMode extends AppCompatActivity {
 
         //si mostra la schermata di gioco
         setContentView(R.layout.activity_wumpus_automatic_mode);
+
         //##### inizializzazioni #####
+
+        //dati della matrice di esplorazione
+        data = new ArrayList();
+        //dati della matrice di gioco
+        game_data =  new ArrayList();
+
+        //##### dati delle preferenze #####
 
         //si preleva il file di salvataggio delle preferenze
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         //si identifica la preference relativa al nome del giocatore corrente
         player_name = sharedPreferences.getString("prefUsername", "");
+        //si identifica il campo del testo del titolo
+        text_message = findViewById(R.id.textMessage);
         //si identifica il campo di testo nel layout
         game_message = findViewById(R.id.message_box);
+        //si identifica il campo di testo che conterra' la run list
+        run_box = findViewById(R.id.run_box);
         //messaggio da visualizzare come introduzione
         intro_message = "Ecco la tua soluzione" + " " + player_name + "!";
 
+        //##### esecuzione delle operazioni #####
+
+        //schermata di caricamento per il calcolo della soluzione
+        Utility.showSolvingScreen(this, this.getLayoutInflater());
+
+        //messaggio sopra la grid
+        game_message.setText(intro_message);
+        //lista delle celle visitate
+        run_box.setText("lista delle celle visitate durante la risoluzione");
+
+        //##### prelievo dei dati di gioco #####
+
+        //matrice di gioco
+        gameMap =(GameMap)getIntent().getSerializableExtra("game_map");
+
+        //matrice di esplorazione
+        expMap = (GameMap)getIntent().getSerializableExtra("exp_map");
+
+        //##### risoluzione #####
+
+        //controllo
+        if(!Starter.getGameStart()){
+            //la partita nella classe di gioco e' terminata
+            text_message.setText("Partita completata!");
+            game_message.setText("Non c'è niente da risolvere!\nUff...");
+        }
+        else {
+            solution_request = true;
+            //path
+            LinkedList<Cell> run_path = new LinkedList<>();
+            //la partita nella classe di gioco e' in corso
+            text_message.setText("Risolvo la partita che hai lasciato a metà...");
+            //game_message.setText("Mappa di gioco:\n"+gameMap);
+            //si istanzia il giocatore automatico
+            int status = AutomaticPlayer.solveGame(gameMap, expMap,run_path);
+            //percorso compiuto
+            String path = AutomaticPlayer.runPathToString(run_path);
+            //visualizzazione del percorso
+            game_message.setText("Percorso:\n"+path);
+            run_box.setText(""+AutomaticPlayer.printStatusMessage(status)+
+                    "\nMappa di esplorazione:\n"+expMap);
+            //si disabilita la possibilita' di continuare la partita una volta
+            //che l'utente ritorna alla schermata della sessione di gioco
+            Starter.setGameStart(false);
+        }
+
+        //###### visualizzazione  ######
+
+        //si iterano le celle della matrice
+        for (int i = 0; i < gameMap.getRows(); i++) {
+            for (int j = 0; j < gameMap.getColumns(); j++) {
+                //si aggiunge la cella corrente alla List che rappresenta la matrice di gioco
+                game_data.add(gameMap.getMapCell(i, j).statusToString());
+                //si aggiunge la cella corrente allaList che rappresenra la mappa di esplorazione
+                data.add(expMap.getMapCell(i, j).statusToString());
+            }//for colonne
+        }//for righe
+
+        //si istanzia l'adapter
+        adapter = new AutomaticModeGridViewAdapter(this,data,game_data);
+        //si visualizza la matrice di esplorazione
+        grid = findViewById(R.id.grid_view);
+        //oggetto che permette di visualizzare i dati
+        grid.setAdapter(adapter);
+
     }//onCreate(Bundle)
+
+    public static boolean getSolutionRequest(){
+        return solution_request;
+    }
 
     //##### metodi per la gestione dell'activity #####
 
@@ -148,5 +246,4 @@ public class WumpusAutomaticMode extends AppCompatActivity {
         super.onBackPressed();
     }//onBackPressed()
 
-
-}//end WumpusAutomaticMode
+}//end HeroAutomaticMode

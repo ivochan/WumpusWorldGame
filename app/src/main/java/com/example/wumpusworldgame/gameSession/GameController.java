@@ -19,6 +19,7 @@ import androidx.core.content.FileProvider;
 import androidx.preference.PreferenceManager;
 import com.example.wumpusworldgame.R;
 import com.example.wumpusworldgame.gameActivities.HeroSide;
+import com.example.wumpusworldgame.gameMenuItems.automaticMode.automaticModeActivities.HeroAutomaticMode;
 import com.example.wumpusworldgame.services.Utility;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -80,8 +81,15 @@ public class GameController {
         }//fi
         //allora la partita e' conclusa
         else {
-            //messaggio di fine partita
-            game_message.setText(R.string.end_game);
+            //si controlla se l'utente aveva chiesto la soluzione
+            if(HeroAutomaticMode.getSolutionRequest()){
+                //messaggio di soluzione visionata
+                game_message.setText(R.string.solution_request);
+            }
+            else {
+                //messaggio di fine partita
+                game_message.setText(R.string.end_game);
+            }
         }//else
 
     }//gamePadMove(Direction,GameMap,GameMap,TextView,TextView,List<String>,GridViewCustomAdapter)

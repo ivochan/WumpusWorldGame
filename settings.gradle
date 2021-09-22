@@ -1,3 +1,4 @@
+include ':huntthewumpusgame'
 include ':huntthewumpusornot'
 include ':huntthewumpusornot'
 include ':huntthewumpus'

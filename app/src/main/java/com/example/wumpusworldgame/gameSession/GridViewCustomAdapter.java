@@ -12,7 +12,6 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import com.example.wumpusworldgame.R;
 import com.example.wumpusworldgame.gameActivities.HeroSide;
-
 import java.util.ArrayList;
 import game.session.configuration.Starter;
 /** class GridViewCustomAdapter
@@ -124,7 +123,7 @@ public class GridViewCustomAdapter extends BaseAdapter {
             //che si trova nella stessa posizione di quella nella mappa di esplorazione
             String game_cell_type = game_items.get(position);
             //prendo il contenuto della cella della mappa di esplorazione
-            if(cell_type.equals(" ")){
+            if(cell_type.equals("U")){
                 //se vuoto e' una cella coperta
                 //si preleva l'icona
                 int covered_icon = setButtonIcon(game_cell_type);

@@ -47,7 +47,6 @@
         <activity android:name=".gameMenuItems.automaticMode.automaticModeActivities.HeroAutomaticMode"
             android:label="@string/hero_automatic_mode"
             android:parentActivityName=".gameActivities.HeroSide"/>
-        
         <activity android:name=".gameMenuItems.automaticMode.automaticModeActivities.WumpusAutomaticMode"
             android:label="@string/wumpus_automatic_mode"
             android:parentActivityName=".gameActivities.WumpusSide"/>

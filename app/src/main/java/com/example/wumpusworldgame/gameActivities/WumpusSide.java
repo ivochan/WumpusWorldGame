@@ -7,13 +7,13 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceManager;
 import com.example.wumpusworldgame.R;
+import com.example.wumpusworldgame.gameMenuItems.automaticMode.automaticModeActivities.HeroAutomaticMode;
 import com.example.wumpusworldgame.gameMenuItems.automaticMode.automaticModeActivities.WumpusAutomaticMode;
 import com.example.wumpusworldgame.gameSession.GameController;
 import com.example.wumpusworldgame.gameSession.GridViewCustomAdapter;
@@ -42,14 +42,17 @@ public class WumpusSide extends AppCompatActivity {
     private GameMap gm;
     //matrice di esplorazione
     private GameMap em;
+    //matrice di esplorazione pulita
+    private GameMap clear_em;
     //per la matrice di esplorazione
-    private GridView list;
+    private GridView grid;
     //adapter per la matrice di esplorazione
     private GridViewCustomAdapter adapter;
     //dati da mostrare nella matrice di esplorazione
     private ArrayList<String> data;
     //dati della matrice di gioco
     private ArrayList<String> game_data;
+
     //##### campi di testo #####
     //messaggi di gioco
     private TextView game_message;
@@ -61,13 +64,13 @@ public class WumpusSide extends AppCompatActivity {
     private String intro_message;
     //messaggio iniziale dei sensori
     private String sensor_info;
+
     //##### pulsanti del controller di gioco #####
     private ImageButton hit_button;
     private ImageButton up_button;
     private ImageButton down_button;
     private ImageButton left_button;
     private ImageButton right_button;
-
     /** metodo onCreate(Bunde): void
      * ACTIVITY CREATA
      * questo metodo viene invocato alla creazione dell'Activity,
@@ -91,16 +94,16 @@ public class WumpusSide extends AppCompatActivity {
         //si preleva il file di salvataggio delle preferenze
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         //si identifica la preference relativa al nome del giocatore corrente
-        player_name = sharedPreferences.getString("prefUsername","");
+        player_name = sharedPreferences.getString("prefUsername", "");
         //si identifica il campo di testo nel layout
         game_message = findViewById(R.id.message_box);
         //si compone il messaggio di benvenuto
-        intro_message = getResources().getString(R.string.game_message_intro)+" "+player_name+"!";
+        intro_message = getResources().getString(R.string.game_message_intro) + " " + player_name + "!";
 
         //dati da mostrare nella matrice di esplorazione
-        data = new ArrayList<>();
+        data = new ArrayList();
         //dati della matrice di gioco
-        game_data = new ArrayList<>();
+        game_data = new ArrayList();
 
         //##### inizializzazioni dei pulsanti #####
         hit_button = findViewById(R.id.imageButtonHIT);
@@ -115,47 +118,58 @@ public class WumpusSide extends AppCompatActivity {
         score = findViewById(R.id.score_value);
 
         //scelta della clip audio
-        mp = MediaPlayer.create(WumpusSide.this,R.raw.the_good_fight);
+        mp = MediaPlayer.create(WumpusSide.this, R.raw.the_good_fight);
 
         //##### schermata di caricamento #####
         Utility.showLoadingScreen(this, getLayoutInflater());
+
+
         //##### schermata di gioco #####
 
         //creazione della matrice di gioco
         gm = new GameMap();
         //creazione della matrice di esplorazione
         em = new GameMap();
-        //riempimento delle matrici
-        MapConfiguration.init(gm,em);
-        //dimensioni della matrice di gioco, analoghe a quelle della matrice di esplorazione
-        int r = gm.getRows();
-        int c = gm.getColumns();
+        //creazione della matrice di esplorazione pulita
+        clear_em = new GameMap();
 
-        //##### salvataggio della matrice di gioco #####
+        //riempimento delle matrici
+        MapConfiguration.init(gm, em);
+
+        //dimensioni della matrice di gioco, analoghe a quelle della matrice di esplorazione
+        int rows = gm.getRows();
+        int columns = gm.getColumns();
+
+        //copio la matrice di esplorazione nella matrice di eplorazione da tenere pulita
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < columns; j++) {
+                clear_em.getMapCell(i,j).copyCellSpecs(em.getMapCell(i,j));
+            }//for colonne
+        }//for righe
+
+        //##### riempimento delle matrici #####
 
         //si iterano le celle della matrice
-        for (int i = 0; i < r; i++) {
-            for(int j=0;j<c;j++) {
-                //si aggiunge la cella corrente alla List della matrice di gioco
-                game_data.add(gm.getMapCell(i,j).statusToString());
-                //si aggiunge la cella corrente alla List della matrice di esplorazione
-                data.add(em.getMapCell(i,j).statusToString());
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < columns; j++) {
+                //si aggiunge la cella corrente alla List che rappresenta la matrice di gioco
+                game_data.add(gm.getMapCell(i, j).statusToString());
+                //si aggiunge la cella corrente allaList che rappresenra la mappa di esplorazione
+                data.add(em.getMapCell(i, j).statusToString());
             }//for colonne
         }//for righe
 
         //si crea l'adapter per il gridlayout della matrice di esplorazione
-        adapter = new GridViewCustomAdapter(this, data,game_data);
+        adapter = new GridViewCustomAdapter(this, data, game_data);
         //si visualizza la matrice di esplorazione
-        list = findViewById(R.id.grid_view);
+        grid = findViewById(R.id.grid_view);
         //oggetto che permette di visualizzare i dati
-        list.setAdapter(adapter);
-
-        //configurazioni da fare all'avvio della partita
+        grid.setAdapter(adapter);
 
         //configurazioni da fare all'avvio della partita
         sensor_info = GameController.linkStart(this, gm);
         //si concatena questa stringa a quella di inizio partita
-        intro_message += "\n"+sensor_info;
+        intro_message += "\n" + sensor_info;
         //si visualizza la frase di inizio partita
         game_message.setText(intro_message);
 
@@ -165,52 +179,41 @@ public class WumpusSide extends AppCompatActivity {
         //##### gestione dei pulsanti #####
 
         //pulsante HIT
-        hit_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //si tenta il colpo
-                GameController.gamePadHit(game_message);
-            }//onClick(View)
+        //onClick(View)
+        hit_button.setOnClickListener(v -> {
+            //si tenta il colpo
+            GameController.gamePadHit(game_message);
         });//setOnClickListener(View.OnClickListener())
 
         //pulsante UP
-        up_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //si muove il personaggio verso sopra
-                GameController.gamePadMove(Direction.UP,gm,em,game_message,shots,adapter);
-            }//onClick(View)
+        //onClick(View)
+        up_button.setOnClickListener(v -> {
+            //si muove il personaggio verso sopra
+            GameController.gamePadMove(Direction.UP,gm,em,game_message,shots,adapter);
         });//setOnClickListener(View.OnClickListener())
 
         //pulsante DOWN
-        down_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //si muove il personaggio verso sotto
-                GameController.gamePadMove(Direction.DOWN,gm,em,game_message,shots,adapter);
-            }//onClick(View)
+        //onClick(View)
+        down_button.setOnClickListener(v -> {
+            //si muove il personaggio verso sotto
+            GameController.gamePadMove(Direction.DOWN,gm,em,game_message,shots,adapter);
         });//setOnClickListener(View.OnClickListener())
 
         //pulsante LEFT
-        left_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //si muove il personaggio verso sinistra
-                GameController.gamePadMove(Direction.LEFT,gm,em,game_message,shots,adapter);
-            }//onClick(View)
+        //onClick(View)
+        left_button.setOnClickListener(v -> {
+            //si muove il personaggio verso sinistra
+            GameController.gamePadMove(Direction.LEFT,gm,em,game_message,shots,adapter);
         });//setOnClickListener(View.OnClickListener())
 
         //pulsante RIGHT
-        right_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //si muove il personaggio verso destra
-                GameController.gamePadMove(Direction.RIGHT,gm,em,game_message,shots,adapter);
-            }//onClick(View)
+        //onClick(View)
+        right_button.setOnClickListener(v -> {
+            //si muove il personaggio verso destra
+            GameController.gamePadMove(Direction.RIGHT,gm,em,game_message,shots,adapter);
         });//setOnClickListener(View.OnClickListener())
 
     }//onCreate(Bundle)
-
     //##### metodi per la gestione dell'activity #####
 
     /** metodo onStart(): void
@@ -339,17 +342,21 @@ public class WumpusSide extends AppCompatActivity {
             case R.id.item_solve_game:
                 //creazione dell'intent
                 intent = new Intent(this, WumpusAutomaticMode.class);
-                //si avvia l'activity corrispondente
+                //invio della mappa di gioco
+                intent.putExtra("game_map",gm);
+                //invio della matrice di esplorazione pulita (senza le mosse del giocatore)
+                intent.putExtra("exp_map",clear_em);
+                //si avvia l'istanza dell'activity corrispondente
                 startActivity(intent);
-                //si interrompe il metodo
+                //si interrompe il metodo corrente con successo
                 return true;
             //TUTORIAL
             case R.id.item_game_tutorial:
                 //creazione dell'intent
                 intent = new Intent(this, WumpusModeTutorial.class);
-                //si avvia l'activity corrispondente
+                //si avvia l'istanza dell'activity corrispondente
                 startActivity(intent);
-                //si interrompe il metodo
+                //si interrompe il metodo corrente con successo
                 return true;
             default:
                 //caso di default

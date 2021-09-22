@@ -23,7 +23,7 @@
     <string name="wumpus_mode_tutorial_title">Wumpus : Tutorial</string>
     <!-- Game Menu options (Hero/Wumpus Side) -->
     <string name="ItemNewGame">New Game</string>
-    <string name="ItemSolveGame">Solve</string>
+    <string name="ItemSolveGame">Automatic player</string>
     <string name="ItemGameTutorial">Game Controls</string>
 
     <!-- MainActivity Elements -->
@@ -244,4 +244,7 @@
     <string name="up_button">up button icon</string>
     <string name="right_button">right button icon</string>
     <string name="down_button">down button icon</string>
+    <string name="textview">TextView</string>
+    <string name="solution_request">Hey, non imbrogliare! Hai già visto la soluzione...
+                                    \nInizia una nuova partita!</string>
 </resources>

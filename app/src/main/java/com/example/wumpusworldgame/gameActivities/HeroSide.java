@@ -41,6 +41,8 @@ public class HeroSide extends AppCompatActivity {
     private GameMap gm;
     //matrice di esplorazione
     private GameMap em;
+    //matrice di esplorazione pulita
+    private GameMap clear_em;
     //per la matrice di esplorazione
     private GridView grid;
     //adapter per la matrice di esplorazione
@@ -128,12 +130,22 @@ public class HeroSide extends AppCompatActivity {
         gm = new GameMap();
         //creazione della matrice di esplorazione
         em = new GameMap();
+        //creazione della matrice di esplorazione pulita
+        clear_em = new GameMap();
+
         //riempimento delle matrici
         MapConfiguration.init(gm, em);
 
         //dimensioni della matrice di gioco, analoghe a quelle della matrice di esplorazione
         int rows = gm.getRows();
         int columns = gm.getColumns();
+
+        //copio la matrice di esplorazione nella matrice di eplorazione da tenere pulita
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < columns; j++) {
+                clear_em.getMapCell(i,j).copyCellSpecs(em.getMapCell(i,j));
+            }//for colonne
+        }//for righe
 
         //##### riempimento delle matrici #####
 
@@ -333,8 +345,8 @@ public class HeroSide extends AppCompatActivity {
                 intent = new Intent(this, HeroAutomaticMode.class);
                 //invio della mappa di gioco
                 intent.putExtra("game_map",gm);
-                //invio della matrice di esplorazione
-                intent.putExtra("exp_map",em);
+                //invio della matrice di esplorazione pulita (senza le mosse del giocatore)
+                intent.putExtra("exp_map",clear_em);
                 //si avvia l'istanza dell'activity corrispondente
                 startActivity(intent);
                 //si interrompe il metodo corrente con successo
