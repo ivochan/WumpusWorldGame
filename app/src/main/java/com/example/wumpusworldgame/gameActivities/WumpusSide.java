@@ -21,6 +21,7 @@ import com.example.wumpusworldgame.gameMenuItems.gameModeTutorials.WumpusModeTut
 import com.example.wumpusworldgame.services.Utility;
 import java.util.ArrayList;
 import game.session.controller.Direction;
+import game.session.score.Score;
 import game.structure.map.GameMap;
 import game.structure.map.MapConfiguration;
 /** class WumpusSide
@@ -44,6 +45,8 @@ public class WumpusSide extends AppCompatActivity {
     private GameMap em;
     //matrice di esplorazione pulita
     private GameMap clear_em;
+    //valore del punteggio
+    private static Score score;
     //per la matrice di esplorazione
     private GridView grid;
     //adapter per la matrice di esplorazione
@@ -59,7 +62,7 @@ public class WumpusSide extends AppCompatActivity {
     //numero di colpi
     private TextView shots;
     //punteggio ottenuto
-    private TextView score;
+    private TextView score_box;
     //messaggio di inizio partita
     private String intro_message;
     //messaggio iniziale dei sensori
@@ -115,7 +118,7 @@ public class WumpusSide extends AppCompatActivity {
         //identificazione del campo di testo che visualizza il numero di colpi rimasti
         shots = findViewById(R.id.shot_value);
         //identificazione del campo di testo che visualizza il punteggio
-        score = findViewById(R.id.score_value);
+        score_box = findViewById(R.id.score_value);
 
         //scelta della clip audio
         mp = MediaPlayer.create(WumpusSide.this, R.raw.the_good_fight);
@@ -132,6 +135,10 @@ public class WumpusSide extends AppCompatActivity {
         em = new GameMap();
         //creazione della matrice di esplorazione pulita
         clear_em = new GameMap();
+        //si inizializza il punteggio
+        score = new Score();
+        //si imposta il nome del giocatore
+        score.setNickname(player_name);
 
         //riempimento delle matrici
         MapConfiguration.init(gm, em);
@@ -189,28 +196,28 @@ public class WumpusSide extends AppCompatActivity {
         //onClick(View)
         up_button.setOnClickListener(v -> {
             //si muove il personaggio verso sopra
-            GameController.gamePadMove(Direction.UP,gm,em,game_message,shots,adapter);
+            GameController.gamePadMove(Direction.UP,gm,em,game_message,shots,score_box,score,adapter);
         });//setOnClickListener(View.OnClickListener())
 
         //pulsante DOWN
         //onClick(View)
         down_button.setOnClickListener(v -> {
             //si muove il personaggio verso sotto
-            GameController.gamePadMove(Direction.DOWN,gm,em,game_message,shots,adapter);
+            GameController.gamePadMove(Direction.DOWN,gm,em,game_message,shots,score_box,score,adapter);
         });//setOnClickListener(View.OnClickListener())
 
         //pulsante LEFT
         //onClick(View)
         left_button.setOnClickListener(v -> {
             //si muove il personaggio verso sinistra
-            GameController.gamePadMove(Direction.LEFT,gm,em,game_message,shots,adapter);
+            GameController.gamePadMove(Direction.LEFT,gm,em,game_message,shots,score_box,score,adapter);
         });//setOnClickListener(View.OnClickListener())
 
         //pulsante RIGHT
         //onClick(View)
         right_button.setOnClickListener(v -> {
             //si muove il personaggio verso destra
-            GameController.gamePadMove(Direction.RIGHT,gm,em,game_message,shots,adapter);
+            GameController.gamePadMove(Direction.RIGHT,gm,em,game_message,shots,score_box,score,adapter);
         });//setOnClickListener(View.OnClickListener())
 
     }//onCreate(Bundle)

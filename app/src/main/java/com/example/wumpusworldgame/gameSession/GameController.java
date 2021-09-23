@@ -28,6 +28,7 @@ import java.util.ArrayList;
 import game.session.configuration.Starter;
 import game.session.controller.Controller;
 import game.session.controller.Direction;
+import game.session.score.Score;
 import game.structure.cell.Cell;
 import game.structure.cell.CellStatus;
 import game.structure.elements.PlayableCharacter;
@@ -61,17 +62,17 @@ public class GameController {
      * @param shots
      * @param adapter
      */
-    public static void gamePadMove(Direction direction, GameMap gm, GameMap em, TextView game_message, TextView shots, GridViewCustomAdapter adapter) {
+    public static void gamePadMove(Direction direction, GameMap gm, GameMap em, TextView game_message, TextView shots, TextView score_box, Score score, GridViewCustomAdapter adapter) {
         //si controlla se la partita e' iniziata
         if(Starter.getGameStart()) {
             //si controlla se il giocatore ha richiesto di colpire
             if(Starter.getTryToHit()){
                 //si tenta di colpire il nemico
-                GameController.tryToHit(direction,gm,game_message,shots);
+                GameController.tryToHit(direction,gm,game_message,shots,score_box,score);
             }//fi
             else {
                 //se non ha richiesto di colpire, allora si deve muovere il pg
-                GameController.movePlayer(direction,gm,em,game_message,adapter);
+                GameController.movePlayer(direction,gm,em,game_message,score_box,score,adapter);
                 //si controlla se la partita e' conclusa
                 if(!Starter.getGameStart()){
                    //se conclusa si esegue il metodo di fine gioco
@@ -128,13 +129,15 @@ public class GameController {
      * @param game_message
      * @param adapter
      */
-    private static void movePlayer(Direction direction, GameMap gm, GameMap em, TextView game_message, GridViewCustomAdapter adapter){
+    private static void movePlayer(Direction direction, GameMap gm, GameMap em, TextView game_message, TextView score_box, Score score, GridViewCustomAdapter adapter){
         //si riceve la mossa che il giocatore vuole effettuare
-        int status = movePG(direction,gm, em);
+        int status = movePG(direction,gm, em, score);
         //si effettua la mossa
         String info = makeMoveInTheMap(status,gm);
         //si stampa un messaggio informativo sullo stato della mossa
         game_message.setText(info);
+        //si aggiorna il valore del punteggio
+        score_box.setText(""+score.getScore());
         //si aggiorna la list che contiene la mappa di esplorazione da visualizzare
         updateExplorationMap(gm,em);
         //si aggiorna l'adapter
@@ -183,7 +186,7 @@ public class GameController {
      * 				 -  0, la mossa e' valida e il pg viene spostato, aggiornando la mappa di esplorazione
      * 					   e la sua posizione corrente, segnando la cella in cui si trovata prima come visitata.
      */
-      private static int movePG(Direction move, GameMap gm, GameMap em) {
+      private static int movePG(Direction move, GameMap gm, GameMap em, Score score) {
           //variabile ausiliaria
           int status;
           //vettore della posizione successiva
@@ -228,7 +231,7 @@ public class GameController {
                   PlayableCharacter.setPGposition(cell_pos);
                   //si aggiunge alla mappa di esplorazione
                   em.getMapCell(cell_pos[0], cell_pos[1]).copyCellSpecs(gm.getMapCell(cell_pos[0], cell_pos[1]));
-                  //
+                  //si restituisce lo stato
                   status = 2;
               }//fi
               else { //CellStatus.SAFE
@@ -246,6 +249,8 @@ public class GameController {
                   //si restituisce lo stato
                   status = 0;
               }//else
+              //##### gestione del punteggio #####
+              score.updateScore(cs);
           }//fi indici di mossa corretti
           else {
               //indici di mossa non validi
@@ -397,7 +402,7 @@ public class GameController {
      * @param game_message: TextView
      * @return defeated: boolean, indica se il nemico e' stato colpito o meno
      */
-    public static void tryToHit(Direction direction, GameMap gm, TextView game_message, TextView shots) {
+    public static void tryToHit(Direction direction, GameMap gm, TextView game_message, TextView shots, TextView score_box, Score score) {
         //si gestiscono i flag relativo al tentativo di sparo
         firedShot();
         //si visualizza il numero di colpi
@@ -436,7 +441,10 @@ public class GameController {
                 game_message.setText(hit_info);
                 //si aggiornano i sensori
                 Controller.resetEnemySensor(gm);
-                //TODO si aggiorna il punteggio
+                //si aggiorna il punteggio
+                score.hitScore();
+                //si visualizza il punteggio aggiornato
+                score_box.setText(""+score.getScore());
             }//fi
             else {
                 //nemico mancato
