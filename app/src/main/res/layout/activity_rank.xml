@@ -75,7 +75,7 @@
         app:layout_constraintVertical_bias="0.11" />
 
     <TextView
-        android:id="@+id/score_value_title"
+        android:id="@+id/best_score_value_title"
         android:layout_width="102dp"
         android:layout_height="32dp"
         android:text="@string/score_value_title"
@@ -88,7 +88,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.201" />
     <TextView
-        android:id="@+id/score_value"
+        android:id="@+id/best_score_value"
         android:layout_width="89dp"
         android:layout_height="32dp"
         android:text="@string/top_score_value"
@@ -153,35 +153,40 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.347" />
 
-    <ScrollView
-        android:id="@+id/scrollView"
-        android:layout_width="296dp"
-        android:layout_height="156dp"
+    <TextView
+        android:id="@+id/top_ten_subtitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/top_ten_subtitle"
+        android:textColor="@color/deep_purple_100a"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.536">
-        <LinearLayout
+        app:layout_constraintVertical_bias="0.383" />
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="321dp"
+        android:layout_height="169dp"
+        android:fillViewport="true"
+        android:scrollbarSize="6dp"
+        android:scrollbars="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.564">
+
+        <TextView
+            android:id="@+id/top_ten_list"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-            <TextView
-                android:id="@+id/top_ten_subtitle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="@string/top_ten_subtitle"
-                android:textColor="@color/deep_purple_100a" />
-            <TextView
-                android:id="@+id/top_ten_list"
-                android:layout_width="match_parent"
-                android:layout_height="101dp"
-                android:gravity="center"
-                android:text="@string/top_ten_list"
-                android:textColor="@color/blue200" />
-        </LinearLayout>
+            android:layout_height="133dp"
+            android:gravity="center"
+            android:text="@string/top_ten_list"
+            android:textColor="@color/blue200" />
     </ScrollView>
 
     <View
@@ -252,7 +257,7 @@
         app:layout_constraintVertical_bias="0.857" />
 
     <TextView
-        android:id="@+id/points"
+        android:id="@+id/current_score_box"
         android:layout_width="86dp"
         android:layout_height="35dp"
         android:text="@string/points"

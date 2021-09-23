@@ -12,6 +12,12 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
 import com.example.wumpusworldgame.R;
+import com.example.wumpusworldgame.appLaunch.MainActivity;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+
 /** class RankActivity
  * questa classe visualizza tutti i punteggi ottenuti nel gioco
  * e permette all'utente di condividerli al di fuori dell'applicazione
@@ -19,7 +25,6 @@ import com.example.wumpusworldgame.R;
 public class RankActivity extends AppCompatActivity {
     //##### attributi di classe #####
 
-    //TODO riproduttore audio
     //private MediaPlayer mp;
 
     //file delle preferenze
@@ -35,9 +40,24 @@ public class RankActivity extends AppCompatActivity {
     private Button score_share_button;
 
     //valore del punteggio attuale
-    private String score;
+    private String current_score;
     //nome del giocatore del punteggio attuale
-    private String player;
+    private String current_player;
+
+    //lista dei dieci punteggi
+    private String top_ten_list;
+
+    //##### campi di testo #####
+    //record
+    private TextView best_player_box;
+    private TextView best_score_box;
+    //top ten
+    private TextView top_ten_box;
+    //attuale
+    private TextView current_player_box;
+    private TextView current_score_box;
+
+
 
 
     /** metodo onCreate(Bundle): void
@@ -49,43 +69,79 @@ public class RankActivity extends AppCompatActivity {
         //si invoca il metodo della super classe
         super.onCreate(savedInstanceState);
         //si stabilisce il layout dell'activity
-        setContentView(R.layout.activity_score);
+        setContentView(R.layout.activity_rank);
 
         //##### inizializzazioni #####
 
         //scelta della clip audio
         //mp = MediaPlayer.create(HeroSide.this,R.raw.the_good_fight);
 
+        //##### inizializzazione campi di testo #####
+
+        //record
+        best_player_box = findViewById(R.id.top_player_name);
+        best_score_box = findViewById(R.id.best_score_value);
+        //topten
+        top_ten_box = findViewById(R.id.top_ten_list);
+        //attuale
+        current_player_box = findViewById(R.id.current_player_name);
+        current_score_box = findViewById(R.id.current_score_value);
+
+        //##### lettura del file dei punteggi #####
+
+
+        //##### inizializzazioni dati per i campi di testo #####
+
         //si preleva il file di salvataggio delle preferenze
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        //si identifica la preference relativa al nome del giocatore corrente
+        current_player = sharedPreferences.getString("prefUsername", "---");
+        //si aggiorna il nome del giocatore del punteggio attuale con quello delle impostazioni
+        current_player_box.setText(current_player);
+        //TODO prelevare il punteggio attuale dal file (ultima riga)
+        //si preleva il valore del punteggio
+        current_score = String.valueOf(0);
+        //si aggiorna il valore del punteggio
+        current_score_box.setText(current_score);
 
-        //pulsante di condivisione del punteggio record
-        record_share_button = findViewById(R.id.record_share_button);
-        //pulsante di condivisione del punteggio attuale
-        score_share_button = findViewById(R.id.current_share_button);
+        //highscore
+        //TODO prelevare i dati dal file
+        //nome del giocatore da record
+        best_player = "TopPlayer";
+        //valore del punteggio da record
+        highscore = String.valueOf(100);
+        //si aggiorna il nome del giocatore
+        best_player_box.setText(best_player);
+        //si aggiorna il punteggio da record
+        best_score_box.setText(highscore);
+
+        //lista dei dieci punteggi migliori
+        top_ten_list="";
+        //stringa che contiene la lista
+        for(int i=0;i<10;i++){
+            top_ten_list +=(i+1)+". ciao!\n";
+        }
+        //si aggiorna il campo di testo
+        top_ten_box.setText(top_ten_list);
+
+
+
+
 
         //##### azioni #####
 
         //verifica dell'esecuzione della traccia audio
         //Utility.musicPlaying(mp, this);
 
-        //si identifica la preference relativa al nome del giocatore corrente
-        player = sharedPreferences.getString("prefUsername","---");
-        //si preleva il campo di testo associato al nome del giocatore del punteggio attuale
-        TextView tn = findViewById(R.id.current_player_name);
-        //si aggiorna il nome del giocatore del punteggio attuale
-        //con il valore scelto dalle impostazioni
-        tn.setText(player);
-        //TODO si preleva il valore del punteggio
-        score = "0";
-
-        //dati del punteggio record
-        best_player = "TopPlayer";
-        highscore = "1000";
-
         //##### gestione dei pulsanti #####
 
+        //pulsante di condivisione del punteggio record
+        record_share_button = findViewById(R.id.record_share_button);
+        //pulsante di condivisione del punteggio attuale
+        score_share_button = findViewById(R.id.current_share_button);
+
         //##### condivisione del punteggio record #####
+
         //verifica pressione del pulsante di condivisione del punteggio record
         record_share_button.setOnClickListener(view -> {
             //si apre una dialog che mostra i dati da condividere
@@ -155,6 +211,7 @@ public class RankActivity extends AppCompatActivity {
         });//setOnClickListener(View)
 
         //##### condivisione punteggio attuale #####
+
         //verifica pressione pulsante di condivisione del punteggio attuale
         score_share_button.setOnClickListener(view -> {
             //si crea una alert dialog
@@ -163,7 +220,7 @@ public class RankActivity extends AppCompatActivity {
             //si preleva la stringa da visualizzare come messaggio della dialog
             String score_share_message = getResources().getString(R.string.score_share_message);
             //si configura il layout della dialog
-            settingDialog(builder, score_share_message, player, score);
+            settingDialog(builder, score_share_message, current_player, current_score);
 
             //pulsante di chiusura
             builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
@@ -201,10 +258,10 @@ public class RankActivity extends AppCompatActivity {
                     //selezione dell'immagine da condividere
                     Uri imageUri = Uri.parse("android.resource://" + getPackageName()+ "/drawable/" + "red_little_monster_blue");
                     //si crea la stringa che conterra' il punteggio
-                    String current_score = player+" "+score+" pt";
+                    String current_score_text = current_player+" "+current_score+" pt";
                     //si inserisce la stringa complessiva da condividere come testo
                     shareIntent.putExtra(Intent.EXTRA_TEXT, getResources().getString(R.string.score_send_message)+
-                            "\n"+current_score+"\n"+getResources().getString(R.string.app_link));
+                            "\n"+current_score_text+"\n"+getResources().getString(R.string.app_link));
                     //si inserisce l'immagine da condividere
                     shareIntent.putExtra(Intent.EXTRA_STREAM, imageUri);
                     //si specifa il tipo file da condividere (immagine/estensione)

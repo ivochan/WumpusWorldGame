@@ -56,6 +56,7 @@ public class HeroSide extends AppCompatActivity {
     private ArrayList<String> game_data;
 
     //##### campi di testo #####
+
     //messaggi di gioco
     private TextView game_message;
     //numero di colpi

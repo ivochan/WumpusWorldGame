@@ -18,6 +18,7 @@ import com.example.wumpusworldgame.mainMenuItems.tutorial.MainTutorialActivity;
 import com.example.wumpusworldgame.mainMenuItems.settings.GameSettingsActivity;
 import com.example.wumpusworldgame.services.TypeWriter;
 import com.example.wumpusworldgame.services.Utility;
+import game.session.score.ScoreUtility;
 /** class MainActivity
  * questa classe rappresenta la finestra principale dell'applicazione,
  * quella che si apre al suo avvio.
@@ -26,6 +27,10 @@ import com.example.wumpusworldgame.services.Utility;
  */
 public class MainActivity extends AppCompatActivity {
     //##### attributi di classe #####
+
+    //nome del file dei punteggi
+    private static String score_file_path;
+
     //testo animato
     private TypeWriter typeWriter;
     //velocita' di scorrimento
@@ -77,6 +82,9 @@ public class MainActivity extends AppCompatActivity {
         //riproduttore audio
         mp = MediaPlayer.create(MainActivity.this,R.raw.fato_shadow_main_menu);
 
+        //verifica dell'esecuzione della traccia audio
+        Utility.musicPlaying(mp, this);
+
         //pulsante modalita' eroe
         button_hero = findViewById(R.id.button_hero);
         //dichiarazione dell'activity che realizza la modalita' di gioco dell'avventuriero
@@ -86,10 +94,6 @@ public class MainActivity extends AppCompatActivity {
         button_wumpus = findViewById(R.id.button_wumpus);
         //dichiarazione dell'activity che realizza la modalita' di gioco del wumpus
         wumpus_game = new Intent(MainActivity.this, WumpusSide.class);
-
-
-        //verifica dell'esecuzione della traccia audio
-        Utility.musicPlaying(mp, this);
 
         //##### gestione dei pulsanti #####
 
@@ -112,6 +116,13 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(wumpus_game);
             }//onClick
         });
+
+        //##### gestione del file dei punteggi #####
+
+        //path in cui creare il file dei punteggi
+        score_file_path = new String();
+        //si inizializza il file
+        ScoreUtility.createScoreFile(score_file_path);
 
     }//onCreate()
 
@@ -275,5 +286,13 @@ public class MainActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }//end switch
     }//onOptionsItemSelected(MenuItem)
+
+    /**
+     *
+     * @return
+     */
+    public static String getScoreFilePath(){
+        return score_file_path;
+    }//getScoreFilePath()
 
 }//end MainActivity
