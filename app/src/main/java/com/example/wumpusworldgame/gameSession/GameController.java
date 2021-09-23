@@ -76,7 +76,7 @@ public class GameController {
                 //si controlla se la partita e' conclusa
                 if(!Starter.getGameStart()){
                    //se conclusa si esegue il metodo di fine gioco
-                   endGameSession();
+                   endGameSession(score);
                 }//fi
             }//else
         }//fi
@@ -533,23 +533,22 @@ public class GameController {
      * questo metodo si occupa di visualizzare una dialog che richiede al giocatore
      * di condividere il punteggio ottenuto a fine partita
      */
-    private static void endGameSession(){
+    private static void endGameSession(Score score){
         //stringa che conterra' il messaggio da visualizzare nella dialog
         String result="";
         //si preleva il file di salvataggio delle preferenze del giocatore
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(currentActivity);
         //si identifica la preference relativa al nome del giocatore corrente
         String player = sharedPreferences.getString("prefUsername","");
-        //TODO sviluppare la parte del punteggio
         //si preleva il punteggio
-        String score="0";
+        String points = String.valueOf(score.getScore());
         //si crea una alert dialog per chiedere al giocatore se vuole condividere il suo punteggio
         AlertDialog.Builder builder = new AlertDialog.Builder(currentActivity,R.style.GameAlertDialogTheme);
         //si specifica il messaggio da visualizzare nella dialog di richiesta di condivisione del punteggio
         result=(victory?currentActivity.getString(R.string.winner):currentActivity.getString(R.string.looser))
         +"\n\n"+currentActivity.getResources().getString(R.string.current_score_share_request);
         //si configura il layout della dialog
-        settingDialog(builder, result, player, score);
+        settingDialog(builder, result, player, points);
         //pulsante di chiusura
         builder.setNegativeButton(R.string.nope, new DialogInterface.OnClickListener() {
             //metodo onClick(DialogInterface, int)
@@ -577,7 +576,7 @@ public class GameController {
                 //l'accesso alla memoria e' consentito
                 else{
                     //si visualizza l'anteprima della condivisione
-                    shareGameRank(player,score);
+                    shareGameRank(player, points);
                 }//esle
             }//onClick(DialogInterface, int)
         });//setPositiveButton(String, DialogInterface)
@@ -591,13 +590,13 @@ public class GameController {
      * questo metodo si occupa di eseguire delle operazioni necessarie alla chiusura della
      * partita, come disabilitare il flag di avvio del gioco e visualizzare il punteggio ottenuto.
      */
-    public static void shareGameRank(String player, String score){
+    public static void shareGameRank(String player, String points){
         //si crea una alert dialog
         AlertDialog.Builder builder = new AlertDialog.Builder(currentActivity,R.style.GameAlertDialogTheme);
         //si preleva la stringa da visualizzare come messaggio della dialog
         String score_share_message = currentActivity.getResources().getString(R.string.current_score_share_message);
         //si configura il layout della dialog
-        settingDialog(builder, score_share_message, player, score);
+        settingDialog(builder, score_share_message, player, points);
         //pulsante di chiusura
         builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
             //metodo onClick(DialogInterface, int)
@@ -618,7 +617,7 @@ public class GameController {
                 //si dispone dei permessi quindi si effettua uno screenshot
                 File imageFile = takeScreenshot(end_game_map);
                 //si invia lo screenshot
-                shareScreenshot(imageFile, player,score);
+                shareScreenshot(imageFile, player, points);
             }//onClick(DialogInterface, int)
         });//setPositiveButton(String, DialogInterface)
         //si preleva il componente grafico di cui fare lo screenshot
@@ -648,9 +647,9 @@ public class GameController {
      * @param builder: Alert.Builder, costruttore della dialog;
      * @param text_message: String, messaggio da visualizzare nella dialog;
      * @param player: String, nome del giocatore;
-     * @param score: String, valore del punteggio;
+     * @param points: String, valore del punteggio;
      */
-    private static void settingDialog(AlertDialog.Builder builder, String text_message, String player, String score){
+    private static void settingDialog(AlertDialog.Builder builder, String text_message, String player, String points){
         //si assegna un layout alla dialog
         builder.setView(R.layout.alert_dialog);
         //si definisce il testo del titolo
@@ -668,7 +667,7 @@ public class GameController {
         //si imposta il titolo della dialog
         builder.setCustomTitle(textView);
         //si imposta il messaggio della dialog
-        String message = text_message+"\n\n"+player+" "+score+" pt";
+        String message = text_message+"\n\n"+player+" "+points+" pt";
         //si visualizza il messaggio nella dialog
         builder.setMessage(message);
         //la dialog si chiude cliccando al di fuori della sua area
@@ -747,7 +746,7 @@ public class GameController {
         //si specifica che verra' inviata un'immagine
         shareIntent.setType("image/*");
         //si crea la stringa che conterra' il punteggio
-        String current_score = player+" "+score+" pt";
+        String current_score = player+"   "+score+" pt";
         //si specifica il testo da condividere oltre l'immagine
         shareIntent.putExtra(android.content.Intent.EXTRA_TEXT,
                 currentActivity.getString(R.string.share_game_map_and_score)
