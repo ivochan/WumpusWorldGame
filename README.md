@@ -81,11 +81,11 @@ In questa versione del gioco è stata prevista, per il giocatore, la possibilit�
 
 - creare l'activity che si occupa di visualizzare i punteggi di gioco:
   - ~~definire il layout~~
-  - visualizzare i contenuti
+  - ~~visualizzare i contenuti~~
   - ~~visualizzare il punteggio più' alto~~
-  - ordinare in ordine decrescente i punteggi
-  - mantenere fino a dieci punteggi
-  - ogni punteggio e' preceduto dal nome scelto dal giocatore
+  - ~~ordinare in ordine decrescente i punteggi~~
+  - ~~estrarre fino a dieci punteggi~~
+  - ~~ogni punteggio e' preceduto dal nome scelto dal giocatore~~
   - ~~permettere la condivisione del punteggio piu' alto~~
   - ~~visualizzare il punteggio corrente~~;
   - ~~condividere il punteggio attuale;~~
@@ -97,7 +97,6 @@ In questa versione del gioco è stata prevista, per il giocatore, la possibilit�
 - scrivere e leggere il file dei punteggi:
   - aggiornandolo dopo ogni partita
   - ordinando i dieci punteggi in ordine decrescente
-  - tenendo memorizzato l'ultimo nome del giocatore
   
 - strutturare il menù delle schermate di gioco:
   - implementare le seguenti voci:

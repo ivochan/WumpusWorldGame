@@ -287,9 +287,10 @@ public class MainActivity extends AppCompatActivity {
         }//end switch
     }//onOptionsItemSelected(MenuItem)
 
-    /**
-     *
-     * @return
+    /** metodo getScoreFilePath(): String
+     * questo metodo restituisce il path in cui si trova il file dei punteggi
+     * sotto forma di stringa
+     * @return score_file_path: String
      */
     public static String getScoreFilePath(){
         return score_file_path;

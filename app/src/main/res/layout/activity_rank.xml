@@ -169,8 +169,8 @@
 
     <ScrollView
         android:id="@+id/scrollView"
-        android:layout_width="321dp"
-        android:layout_height="169dp"
+        android:layout_width="277dp"
+        android:layout_height="167dp"
         android:fillViewport="true"
         android:scrollbarSize="6dp"
         android:scrollbars="vertical"
@@ -184,7 +184,7 @@
             android:id="@+id/top_ten_list"
             android:layout_width="match_parent"
             android:layout_height="133dp"
-            android:gravity="center"
+            android:gravity="start"
             android:text="@string/top_ten_list"
             android:textColor="@color/blue200" />
     </ScrollView>

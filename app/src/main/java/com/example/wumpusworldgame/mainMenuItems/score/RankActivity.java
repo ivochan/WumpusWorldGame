@@ -13,10 +13,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import com.example.wumpusworldgame.R;
 import com.example.wumpusworldgame.appLaunch.MainActivity;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.util.LinkedList;
+import game.session.score.ScoreUtility;
 
 /** class RankActivity
  * questa classe visualizza tutti i punteggi ottenuti nel gioco
@@ -57,8 +55,16 @@ public class RankActivity extends AppCompatActivity {
     private TextView current_player_box;
     private TextView current_score_box;
 
+    //lista che contiene tutti punteggi estratti dal file
+    private LinkedList<String> scores;
 
+    //stringa che contiene il primo punteggio del file
+    private String first_score;
+    private String[] first_score_vector;
 
+    //stringa che contiene l'ultimo punteggio del file
+    private String last_score;
+    private String[] last_score_vector;
 
     /** metodo onCreate(Bundle): void
      * metodo di CREAZIONE dell'ACTIVITY
@@ -72,6 +78,22 @@ public class RankActivity extends AppCompatActivity {
         setContentView(R.layout.activity_rank);
 
         //##### inizializzazioni #####
+
+        //si preleva il file di salvataggio delle preferenze
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+
+        //valori di default per le variabili utilizzate
+        current_player = sharedPreferences.getString("prefUsername", "---");
+        //lista che contiene tutti punteggi estratti dal file
+        scores= new LinkedList<>();
+        //stringa che contiene il primo punteggio del file
+        first_score="";
+        first_score_vector =  new String[3];
+        //stringa che contiene l'ultimo punteggio del file
+        last_score="";
+        last_score_vector = new String[3];
+        //stringa che contiene i dieci migliori punteggi
+        top_ten_list="";
 
         //scelta della clip audio
         //mp = MediaPlayer.create(HeroSide.this,R.raw.the_good_fight);
@@ -89,42 +111,93 @@ public class RankActivity extends AppCompatActivity {
 
         //##### lettura del file dei punteggi #####
 
+        //path del file
+        String path = MainActivity.getScoreFilePath();
+        //si inseriscono i dati nella lista
+        ScoreUtility.extractScoreData(path,scores);
+
+
+        //si analizzano i punteggi se la lista non e' vuota
+        if(!scores.isEmpty()){
+            //punteggio record
+            first_score = scores.getFirst();
+            //punteggio attuale
+            last_score = scores.getLast();
+            //lista dei dieci migliori punteggi
+        }
+
+        //per test
+        //punteggio record
+        first_score = "148 ivonne 31-08-2021 21:23:46.704";
+        //punteggio attuale
+        last_score ="82 SoloPlayer 02-09-2021 13:34:14.776";
+        //lista
+        scores.add(first_score);
+        scores.add("100 SoloPlayer 02-09-2021 13:34:14.776");
+        scores.add("97 Player 01-09-2021 10:29:00.514");
+        scores.add("94 AutomaticPlayer 01-09-2021 10:29:00.514");
+        scores.add("93 Player 02-09-2021 12:16:54.063");
+        scores.add("86 Player 02-09-2021 13:34:14.776");
+        scores.add("82 AutomaticPlayer 02-09-2021 13:34:14.776");
+        scores.add("-4 AutomaticPlayer 31-08-2021 21:24:12.953");
+        scores.add("-10 AutomaticPlayer 31-08-2021 21:24:12.953");
+        scores.add("-14 AutomaticPlayer 31-08-2021 21:24:12.953");
+        scores.add("-17 AutomaticPlayer 02-09-2021 12:24:42.743");
+        scores.add(last_score);
+
+        //analisi del punteggio record
+        first_score_vector = ScoreUtility.scoreLineAnalysis(first_score);
+        //analisi del punteggio attuale
+        last_score_vector = ScoreUtility.scoreLineAnalysis(last_score);
+
+        //analisi dei dieci punteggi migliori
+        int i=0;
+        for(String s: scores){
+            //primi dieci punteggi da estrarre
+            if(i>=0 && i<10){
+                //si estrae il vettore
+                String[] sv = ScoreUtility.scoreLineAnalysis(s);
+                //si inserisce nella stringa da visualizzare
+                top_ten_list += (i+1)+". "+sv[1]+"  "+sv[0]+"\n\n";
+                i++;
+            }//fi
+        }//for
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         //##### inizializzazioni dati per i campi di testo #####
 
-        //si preleva il file di salvataggio delle preferenze
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         //si identifica la preference relativa al nome del giocatore corrente
-        current_player = sharedPreferences.getString("prefUsername", "---");
+        current_player = last_score_vector[1];
         //si aggiorna il nome del giocatore del punteggio attuale con quello delle impostazioni
         current_player_box.setText(current_player);
-        //TODO prelevare il punteggio attuale dal file (ultima riga)
-        //si preleva il valore del punteggio
-        current_score = String.valueOf(0);
-        //si aggiorna il valore del punteggio
+        //si preleva il valore del punteggio attuale
+        current_score = last_score_vector[0];
+        //si aggiorna il valore del punteggio attuale
         current_score_box.setText(current_score);
 
-        //highscore
-        //TODO prelevare i dati dal file
         //nome del giocatore da record
-        best_player = "TopPlayer";
+        best_player = first_score_vector[1];
         //valore del punteggio da record
-        highscore = String.valueOf(100);
-        //si aggiorna il nome del giocatore
+        highscore = first_score_vector[0];
+        //si aggiorna il nome del giocatore da record
         best_player_box.setText(best_player);
         //si aggiorna il punteggio da record
         best_score_box.setText(highscore);
 
-        //lista dei dieci punteggi migliori
-        top_ten_list="";
-        //stringa che contiene la lista
-        for(int i=0;i<10;i++){
-            top_ten_list +=(i+1)+". ciao!\n";
-        }
-        //si aggiorna il campo di testo
+        //si aggiorna il campo di testo dei dieci migliori punteggi
         top_ten_box.setText(top_ten_list);
-
-
 
 
 
