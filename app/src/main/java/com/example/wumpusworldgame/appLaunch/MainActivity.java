@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -18,6 +19,7 @@ import com.example.wumpusworldgame.mainMenuItems.tutorial.MainTutorialActivity;
 import com.example.wumpusworldgame.mainMenuItems.settings.GameSettingsActivity;
 import com.example.wumpusworldgame.services.TypeWriter;
 import com.example.wumpusworldgame.services.Utility;
+import java.io.File;
 import game.session.score.ScoreUtility;
 /** class MainActivity
  * questa classe rappresenta la finestra principale dell'applicazione,
@@ -28,8 +30,14 @@ import game.session.score.ScoreUtility;
 public class MainActivity extends AppCompatActivity {
     //##### attributi di classe #####
 
-    //nome del file dei punteggi
+    //path del file dei punteggi
     private static String score_file_path;
+    //nome del file dei punteggi
+    private static String score_file_name;
+    //nome del file del punteggio corrente
+    private static String current_score_file_name;
+    //path del file del punteggio corrente
+    private static String current_score_file_path;
 
     //testo animato
     private TypeWriter typeWriter;
@@ -119,10 +127,23 @@ public class MainActivity extends AppCompatActivity {
 
         //##### gestione del file dei punteggi #####
 
-        //path in cui creare il file dei punteggi
-        score_file_path = new String();
-        //si inizializza il file
+        //nome del file del punteggio corrente
+        current_score_file_name = "/"+"CurrentScore" + ".txt";
+        //nome del file dei punteggi
+        score_file_name = "/"+"ScoreTable" + ".txt";
+        //directory in cui verra' salvato il file
+        File main_docs_dir =
+                new File(this.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS), "");
+        //creazione della directory
+        main_docs_dir.mkdir();
+        //si definisce il path del file comprensivo di nome del file dei punteggi complessivi
+        score_file_path = main_docs_dir + score_file_name;
+        //si crea il file dei punteggi
         ScoreUtility.createScoreFile(score_file_path);
+        //si definisce il path comprensivo di nome del file del punteggio corrente
+        current_score_file_path = main_docs_dir+current_score_file_name;
+        //creazione del file del punteggio corrente
+        ScoreUtility.createScoreFile(current_score_file_path);
 
     }//onCreate()
 
@@ -294,6 +315,16 @@ public class MainActivity extends AppCompatActivity {
      */
     public static String getScoreFilePath(){
         return score_file_path;
+    }//getScoreFilePath()
+
+    /** metodo getCurrentScoreFilePath(): String
+     * questo metodo restituisce il path in cui si trova il file del
+     * punteggio attuale, ottenuto nell'ultima sessione di gioco,
+     * espresso sotto forma di stringa
+     * @return score_file_path: String
+     */
+    public static String getCurrentScoreFilePath(){
+        return current_score_file_path;
     }//getScoreFilePath()
 
 }//end MainActivity

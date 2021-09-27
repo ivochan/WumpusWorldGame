@@ -15,7 +15,6 @@ import com.example.wumpusworldgame.R;
 import com.example.wumpusworldgame.appLaunch.MainActivity;
 import java.util.LinkedList;
 import game.session.score.ScoreUtility;
-
 /** class RankActivity
  * questa classe visualizza tutti i punteggi ottenuti nel gioco
  * e permette all'utente di condividerli al di fuori dell'applicazione
@@ -29,19 +28,16 @@ public class RankActivity extends AppCompatActivity {
     private SharedPreferences sharedPreferences;
     //pulsante di condivisione del record
     private Button record_share_button;
-
     //nome del giocatore che ha effettuato il record
     private String best_player;
     //valore del punteggio record
     private String highscore;
     //pulsante di condivisione de punteggio corrente
     private Button score_share_button;
-
     //valore del punteggio attuale
     private String current_score;
     //nome del giocatore del punteggio attuale
     private String current_player;
-
     //lista dei dieci punteggi
     private String top_ten_list;
 
@@ -55,15 +51,17 @@ public class RankActivity extends AppCompatActivity {
     private TextView current_player_box;
     private TextView current_score_box;
 
+    //##### variabili per la memorizzazione dei dati #####
+
     //lista che contiene tutti punteggi estratti dal file
     private LinkedList<String> scores;
-
     //stringa che contiene il primo punteggio del file
     private String first_score;
+    //vettore che contiene gli elementi del punteggio piu' alto
     private String[] first_score_vector;
-
-    //stringa che contiene l'ultimo punteggio del file
+    //stringa che contiene l'ultimo punteggio ottenuto
     private String last_score;
+    //vettore che contiene gli elementi dell'ultimo punteggio ottenuto
     private String[] last_score_vector;
 
     /** metodo onCreate(Bundle): void
@@ -113,37 +111,15 @@ public class RankActivity extends AppCompatActivity {
 
         //path del file
         String path = MainActivity.getScoreFilePath();
+        //si aggiorna il file dei punteggi
+        ScoreUtility.updateScoreFile(path);
         //si inseriscono i dati nella lista
         ScoreUtility.extractScoreData(path,scores);
 
-
-        //si analizzano i punteggi se la lista non e' vuota
-        if(!scores.isEmpty()){
-            //punteggio record
-            first_score = scores.getFirst();
-            //punteggio attuale
-            last_score = scores.getLast();
-            //lista dei dieci migliori punteggi
-        }
-
-        //per test
         //punteggio record
-        first_score = "148 ivonne 31-08-2021 21:23:46.704";
+        first_score = scores.getFirst();
         //punteggio attuale
-        last_score ="82 SoloPlayer 02-09-2021 13:34:14.776";
-        //lista
-        scores.add(first_score);
-        scores.add("100 SoloPlayer 02-09-2021 13:34:14.776");
-        scores.add("97 Player 01-09-2021 10:29:00.514");
-        scores.add("94 AutomaticPlayer 01-09-2021 10:29:00.514");
-        scores.add("93 Player 02-09-2021 12:16:54.063");
-        scores.add("86 Player 02-09-2021 13:34:14.776");
-        scores.add("82 AutomaticPlayer 02-09-2021 13:34:14.776");
-        scores.add("-4 AutomaticPlayer 31-08-2021 21:24:12.953");
-        scores.add("-10 AutomaticPlayer 31-08-2021 21:24:12.953");
-        scores.add("-14 AutomaticPlayer 31-08-2021 21:24:12.953");
-        scores.add("-17 AutomaticPlayer 02-09-2021 12:24:42.743");
-        scores.add(last_score);
+        last_score = ScoreUtility.extractCurrentScoreData(MainActivity.getCurrentScoreFilePath());
 
         //analisi del punteggio record
         first_score_vector = ScoreUtility.scoreLineAnalysis(first_score);
@@ -162,19 +138,6 @@ public class RankActivity extends AppCompatActivity {
                 i++;
             }//fi
         }//for
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         //##### inizializzazioni dati per i campi di testo #####
 
@@ -195,11 +158,8 @@ public class RankActivity extends AppCompatActivity {
         best_player_box.setText(best_player);
         //si aggiorna il punteggio da record
         best_score_box.setText(highscore);
-
         //si aggiorna il campo di testo dei dieci migliori punteggi
         top_ten_box.setText(top_ten_list);
-
-
 
         //##### azioni #####
 

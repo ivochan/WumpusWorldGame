@@ -27,7 +27,6 @@ In questa versione del gioco è stata prevista, per il giocatore, la possibilit�
 ## TODO
 
 - scegliere clip audio per la modalità wumpus;
-
 - inserire nella main activity il menu con:
   - le impostazioni di gioco, quali:
     - ~~abilitare i suoni~~
@@ -42,43 +41,28 @@ In questa versione del gioco è stata prevista, per il giocatore, la possibilit�
     - ~~comandi~~
   - ~~informazioni di gioco~~
   - punteggi:
-    - record
-    - classifica
-    - attuale
+    - ~~record~~
+    - ~~classifica~~
+    - ~~attuale~~
     - ~~condivisione~~
-  
 - ~~gestire il tasto di navigazione -> in modo che punti all'activity precedente~~
-
 - ~~rendere a schermo intero la schermata di caricamento della partita~~;
-
 - fare in modo che all'avvio venga ripristinato lo stato in cui è stata interrotta la partita precedente, alla chiusura dell'applicazione;
-
 - ~~togliere l'autosize al testo animato della schermata iniziale~~
-
 - ~~rallentare la velocità di scorrimento del testo animato ed inserire una scroll bar~~
-
 - ~~inserire una la scroll bar che scorra automaticamente fino all'ultimo carattere del testo animato visualizzato;~~
-
 - ~~allineare il valore del punteggio con l'etichetta che indica il rispettivo campo, nella schermata di gioco~~
-
 - ~~spostare la box dei messaggi sopra la matrice di gioco e dargli una forma rettangolare;~~
-
 - ~~azione di invio di un feedback;~~
-
 - ~~scelta del gestore mail per inviare il feedback;~~
-
 - ~~disabilita/abilita traccia audio per ogni activity;~~
-
 - ~~sistemare layout del testo nella game info activity;~~
-
 - effettuare le traduzioni in inglese;
-
-- scegliere le clip audio per le activity secondarie;
-
+- scegliere le clip audio per:
+  - le activity secondarie;
+  - suoni di gioco (ad esempio per la vittoria);
 - ~~definire tema per il layout della alert dialog~~
-
 - ~~inserire nome del giocatore dalle impostazioni~~
-
 - creare l'activity che si occupa di visualizzare i punteggi di gioco:
   - ~~definire il layout~~
   - ~~visualizzare i contenuti~~
@@ -89,31 +73,19 @@ In questa versione del gioco è stata prevista, per il giocatore, la possibilit�
   - ~~permettere la condivisione del punteggio piu' alto~~
   - ~~visualizzare il punteggio corrente~~;
   - ~~condividere il punteggio attuale;~~
-  
-- esportare il file dei punteggi ed il nome attuale del giocatore (dati di gioco)
-
-- importare il file dei punteggi ed il nome attuale del giocatore (dati di gioco)
-
 - scrivere e leggere il file dei punteggi:
-  - aggiornandolo dopo ogni partita
-  - ordinando i dieci punteggi in ordine decrescente
-  
+  - ~~aggiornandolo dopo ogni partita~~
+  - ~~ordinando i dieci punteggi in ordine decrescente~~
 - strutturare il menù delle schermate di gioco:
   - implementare le seguenti voci:
     - ~~nuova partita, (la modalità è quella a cui si sta giocando);~~
     - risolvi partita (giocatore automatico);
     - ~~tutorial della modalità (con comandi di gioco)~~;
-  
 - ~~inserire le icone nella mappa di gioco;~~
-
 - ~~visualizzare le icone nella mappa di esplorazione;~~
-
 - ~~definizione del controller di gioco per entrambe le modalità;~~
-
 - ~~realizzazione di una classe controller che comunichi con il backend per effettuare le azioni di gioco;~~
-
 - ~~introdurre le stringhe che contengono le informazioni sullo stato della partita;~~
-
 - la classe controller dovrà avere le seguenti funzionalità:
   - ~~metodo che preleva l'activity corrente per poter accedere alle risorse;~~
   - ~~metodo che preleva la mossa fatta dal giocatore;~~
@@ -121,21 +93,14 @@ In questa versione del gioco è stata prevista, per il giocatore, la possibilit�
   - ~~funzione che impedisce di effettuare altre mosse al termine della partita;~~
   - ~~metodo che si occupa di tentare di colpire il nemico;~~
   - ~~metodo che verifica se si ha a disposizione un tentativo di colpire il nemico;~~
-  
 - dark mode:
   - modificare colore action bar;
   - creare stile della dialog;
-  
 - controllare proporzioni del layout sui dispositivi con schermo più piccolo;
-
 - ~~togliere le iniziali del contenuto delle celle nella mappa;~~
-
 - ~~verificare che ogni button della mappa abbia la stessa dimensione;~~
-
 - ~~correggere bug sulla clip audio della mainActivity alla disattivazione degli effetti sonori~~;
-
 - ~~scurire le icone e lo sfondo delle celle non visitate alla fine della partita;~~
-
 - strutturare la dialog a fine partita con:
 
   - ~~effetto dissolvenza~~
@@ -150,24 +115,27 @@ In questa versione del gioco è stata prevista, per il giocatore, la possibilit�
     - condividere il link di download dell'app (github)
       - ~~normale~~
       - con href(hyperlink)
-
 - ~~cambiare titolo delle schermate dei comandi di gioco~~
-
 - ~~applicare lo stile personalizzato alla dialog del feedback~~
-
 - ~~aggiungere i permessi di lettura e scrittura della memoria esterna~~
-
 - ~~aggiungere il provider per la condivisione dei file nei dispositivi con sdk superiori alla 23~~
-
+- Disegnare elementi grafici, quali:
+  - icona PG
+  - icone NPG
+  - sfondi
+  - icona app
 - activity per la risoluzione automatica della partita:
 
   - test del giocatore automatico;
   - ~~memorizzazione della matrice di gioco per la risoluzione;~~
-  - schermata di risoluzione;
+  - ~~schermata di risoluzione;~~
   - definizione del layout;
   - ~~inserire un flag statico per gestire celle coperte e visitate nell'adapter~~
   - ~~creare un adapter distinto da quello delle classi di gioco interattive;~~
   - ~~inserire dei flag per gestire il tentativo di sparo, in modo da disambiguare le risorse con le classi di gioco interattivo;~~
   - ~~aggiornare il campo di testo della disponibilita' del colpo;~~
-  
-  
+
+
+
+
+

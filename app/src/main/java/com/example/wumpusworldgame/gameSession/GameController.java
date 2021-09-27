@@ -18,6 +18,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.FileProvider;
 import androidx.preference.PreferenceManager;
 import com.example.wumpusworldgame.R;
+import com.example.wumpusworldgame.appLaunch.MainActivity;
 import com.example.wumpusworldgame.gameActivities.HeroSide;
 import com.example.wumpusworldgame.gameMenuItems.automaticMode.automaticModeActivities.HeroAutomaticMode;
 import com.example.wumpusworldgame.services.Utility;
@@ -29,6 +30,7 @@ import game.session.configuration.Starter;
 import game.session.controller.Controller;
 import game.session.controller.Direction;
 import game.session.score.Score;
+import game.session.score.ScoreUtility;
 import game.structure.cell.Cell;
 import game.structure.cell.CellStatus;
 import game.structure.elements.PlayableCharacter;
@@ -542,6 +544,19 @@ public class GameController {
         String player = sharedPreferences.getString("prefUsername","");
         //si preleva il punteggio
         String points = String.valueOf(score.getScore());
+        //##### salvataggio su file del punteggio #####
+        //path del file
+        String path = MainActivity.getScoreFilePath();
+        //creazione dell'oggetto punteggio
+        Score s = new Score(score.getScore(),score.getNickname(),score.getDate());
+        //conversione in stringa del punteggio
+        String current_score = s.toString();
+        //scrittura del punteggio nel file dei punteggi
+        ScoreUtility.saveScore(path,current_score);
+        //salvataggio del punteggio nel file del punteggio corrente
+        ScoreUtility.saveCurrentScore(MainActivity.getCurrentScoreFilePath(), current_score);
+
+        //##### condivisione del punteggio #####
         //si crea una alert dialog per chiedere al giocatore se vuole condividere il suo punteggio
         AlertDialog.Builder builder = new AlertDialog.Builder(currentActivity,R.style.GameAlertDialogTheme);
         //si specifica il messaggio da visualizzare nella dialog di richiesta di condivisione del punteggio
