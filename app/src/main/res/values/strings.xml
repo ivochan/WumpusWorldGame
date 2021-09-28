@@ -1,6 +1,6 @@
 <resources>
     <!-- App Name -->
-    <string name="app_name">The Wumpus World Game</string>
+    <string name="app_name">Wumpus World Game</string>
 
     <!-- Game Activity Titles -->
     <string name="hero_side_title">Hero Side</string>
@@ -19,8 +19,8 @@
     <string name="ItemScore">Ranking</string>
 
     <!-- Game Menu activity titles -->
-    <string name="hero_mode_tutorial_title">Avventuriero : Tutorial</string>
-    <string name="wumpus_mode_tutorial_title">Wumpus : Tutorial</string>
+    <string name="hero_mode_tutorial_title">Hero : How to play</string>
+    <string name="wumpus_mode_tutorial_title">Wumpus : How to play</string>
     <!-- Game Menu options (Hero/Wumpus Side) -->
     <string name="ItemNewGame">New Game</string>
     <string name="ItemSolveGame">Automatic player</string>
@@ -67,7 +67,6 @@
     <!-- Game Loading Window -->
     <string name="loading">Loading game data ...</string>
     <string name="loading_image">loading bat image</string>
-    <!-- Game Solving Windows -->
 
     <!-- HeroSide and Wumpus Side Activity Elements-->
     <string name="score">Your score: </string>
@@ -143,6 +142,12 @@
     <string name="data_sync"><![CDATA[Data & Sync]]></string>
     <string name="import_data">Import game data</string>
     <string name="export_data">Export game data</string>
+    <string name="delete_data">Delete game data</string>
+    <!-- delete data dialog -->
+    <string name="yes">yes</string>
+    <string name="no">no</string>
+    <string name="delete_data_title">Deleting game data</string>
+    <string name="delete_data_request">Do you really want to delete all game data? You\'ll lose your score ranking</string>
     <!-- about -->
     <string name="team">Team</string>
     <string name="team_info">I\'m Ivonne and this is my first app :)
@@ -158,23 +163,28 @@
     <string name="email_subject">WUMPUS WORLD GAME application feedback</string>
 
     <!-- HeroModeTutorial -->
-    <string name="hero_tutorial_intro">Eccoti, coraggioso avventuriero!</string>
-    <string name="hero_mode_description">Ormai ci siamo, stai per addentrarti
-        nel bosco alla ricerca dei tesori del Wumpus... Riuscirai a sconfiggere
-        questo terribile mostro?</string>
-    <string name="controls_title">Comandi di gioco</string>
-    <string name="controls_summary">Usa i tasti direzionali (le frecce) per muoverti nel terreno di
-        gioco ed il tasto centrale per colpire il mostro, indicando la direzione in cui scagliare
-        la freccia.</string>
-    <string name="hero_play_description">Mi raccomando, fai attenzione a non cadere nei fossati,
-        evita i percorsi senza uscita e non farti uccidere dal Wumpus.</string>
-
+    <string name="hero_tutorial_intro">There you are, brave adventurer!</string>
+    <string name="hero_mode_description">Here we are, you\'re going to the dark forest
+         looking for Wumpus treasures ... You will be able to defeat
+         this terrible monster?</string>
+    <string name="controls_title">Game controls</string>
+    <string name="controls_summary">Use the directional keys (arrows) to move around the playground
+        and the central button to hit the monster, choosing the direction
+        in which to shoot your arrow.</string>
+    <string name="hero_play_description">
+        Please, be careful! Don\'t fall into the ditches,
+        avoid dead-end paths and don\'t get killed by Wumpus.
+    </string>
     <!-- Wumpus Mode Tutorial -->
-    <string name="wumpus_tutorial_intro">Eccoti, creatura misteriosa!</string>
-    <string name="wumpus_mode_description">Fruscii, rumori, rami spezzati...
-        Qualcuno ti sta dando la caccia, povero Wumpus. \nPresto, scappa!</string>
-    <string name="wumpus_play_description">Ricorda...Cerca di non finire in trappola, se puoi
-        elimina il cacciatore che ti sta inseguendo e trova una via di fuga che ti porti in salvo.</string>
+    <string name="wumpus_tutorial_intro">There you are, mysterious creature!</string>
+    <string name="wumpus_mode_description">Some rustles, noise and broken branches ...
+         Someone is hunting you, poor Wumpus. \nHurry up, get away from here!
+    </string>
+    <string name="wumpus_play_description">
+        Remember this... Don\'t get trapped, find a way that
+        will lead you to salvation and if you can,
+        kill the hunter who is chasing you.
+    </string>
 
     <!-- Game Messages : HERO SIDE -->
     <string name="hero_game_intro">\nAndiamo a caccia del Wumpus e dei suoi tesori.</string>
@@ -247,10 +257,5 @@
     <string name="textview">TextView</string>
     <string name="solution_request">Hey, non imbrogliare! Hai già visto la soluzione...
                                     \nInizia una nuova partita!</string>
-    <string name="delete_data">Cancella dati di gioco</string>
-    <string name="yes">si</string>
-    <string name="no">no</string>
-    <string name="delete_data_title">Eliminazione dei dati di gioco</string>
-    <string name="delete_data_request">Vuoi davvero eliminare i dati di gioco perdendo tutti i punteggi acquisiti?</string>
     <string name="default_player_name">Player</string>
 </resources>

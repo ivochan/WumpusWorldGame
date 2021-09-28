@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- App Name -->
-    <string name="app_name">Il gioco del mondo del Wumpus</string>
+    <string name="app_name">Il mondo del Wumpus</string>
 
     <!-- Game Activity Titles -->
     <string name="hero_side_title">Modalità Avventuriero</string>
@@ -73,7 +73,6 @@
     <!-- Schermata di caricamento -->
     <string name="loading">Preparazione del terreno di gioco ...</string>
     <string name="loading_image">immagine di caricamento</string>
-   <!-- Schermata di risoluzione del gioco -->
 
     <!-- HeroSide and Wumpus Side Activities: schermata di gioco -->
     <string name="score">Punteggio: </string>
@@ -149,6 +148,12 @@
     <string name="data_sync">Dati e Sincronizzazione</string>
     <string name="import_data">Importa i dati di gioco</string>
     <string name="export_data">Esporta i dati di gioco</string>
+    <string name="delete_data">Elimina dati di gioco</string>
+    <!-- delete data dialog -->
+    <string name="yes">si</string>
+    <string name="no">no</string>
+    <string name="delete_data_title">Eliminazione dei dati di gioco</string>
+    <string name="delete_data_request">Vuoi davvero eliminare i dati di gioco? Perderai tutti i punteggi acquisiti</string>
     <!-- about -->
     <string name="team">Team</string>
     <string name="team_info">Mi chiamo Ivonne e questa è la mia prima app :)\nGrazie a Dady e Lula per i consigli!\nLe immagini ed i suoni sono presi da
@@ -168,11 +173,10 @@
         \nRiuscirai a sconfiggere questo terribile mostro?</string>
     <string name="controls_title">Comandi di gioco</string>
     <string name="controls_summary">Usa i tasti direzionali (le frecce) per muoverti nel terreno di
-        gioco ed il tasto centrale per colpire il mostro, indicando la direzione in cui scagliare
+        gioco ed il tasto centrale per colpire il mostro, indicando la direzione in cui scoccare
         la freccia.</string>
     <string name="hero_play_description">Mi raccomando, fai attenzione a non cadere nei fossati,
         evita i percorsi senza uscita e non farti uccidere dal Wumpus.</string>
-
     <!-- Wumpus Mode Tutorial -->
     <string name="wumpus_tutorial_intro">Eccoti, creatura misteriosa!</string>
     <string name="wumpus_mode_description">Fruscii, rumori, rami spezzati...
@@ -251,11 +255,6 @@
     <string name="textview">TextView</string>
     <string name="solution_request">Hey, non imbrogliare! Hai già visto la soluzione...
                                     \nInizia una nuova partita!</string>
-    <string name="delete_data">Cancella dati di gioco</string>
-    <string name="yes">si</string>
-    <string name="no">no</string>
-    <string name="delete_data_title">Eliminazione dei dati di gioco</string>
-    <string name="delete_data_request">Vuoi davvero eliminare i dati di gioco perdendo tutti i punteggi acquisiti?</string>
     <string name="default_player_name">Player</string>
 
 </resources>
