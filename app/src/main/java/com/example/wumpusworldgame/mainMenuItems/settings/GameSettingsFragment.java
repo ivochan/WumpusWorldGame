@@ -21,13 +21,14 @@ import androidx.preference.PreferenceManager;
 import com.example.wumpusworldgame.R;
 import com.example.wumpusworldgame.appLaunch.MainActivity;
 import com.example.wumpusworldgame.services.Utility;
-
 import game.session.score.ScoreUtility;
 
 /** class GameSettingsFragments
  * questo fragment implementa, effettivamente, la serie di impostazioni
  */
 public class GameSettingsFragment extends PreferenceFragmentCompat {
+    //##### attributi di classe #####
+    private SharedPreferences.OnSharedPreferenceChangeListener listener;
 
     /** metodo onCreatePreferences(Bundle, String)
      * @param savedInstanceState
@@ -49,6 +50,25 @@ public class GameSettingsFragment extends PreferenceFragmentCompat {
         EditTextPreference editUsername = findPreference("prefUsername");
         //si aggiorna il nome del giocatore
         updatePlayerName(sharedPrefs,editUsername);
+        //aggiornamento della ui alla modifica del campo di testo
+        editUsername.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+            public boolean onPreferenceChange(Preference preference, Object newValue) {
+                //si converte il parametro in stringa eliminando gli spazi
+                String new_value = newValue.toString().replaceAll(" ","");
+                //si aggiorna la preference
+                if(new_value.isEmpty()){
+                    //se la preference e' vuota si visualizza il sommario
+                    preference.setSummary(R.string.player_info);
+                }
+                else {
+                    //si aggiorna il valore
+                    preference.setSummary(new_value);
+                }
+                return true;
+            }
+        });
+
+
 
         //##### invio del feeedback #####
 
@@ -58,12 +78,32 @@ public class GameSettingsFragment extends PreferenceFragmentCompat {
         sendFeedbackRequest(sendFeedback);
 
         //##### gestione dei dati di gioco #####
+
         Preference deleteGameData = findPreference("prefDeleteData");
         //si gestisce la cancellazione dei dati
         deleteScoreData(deleteGameData);
 
 
     }//onCreatePreference
+
+    /** metodo updatePlayerName(SharedPreferences, EditTextPreference): void
+     * metodo che aggiorna il nome del giocatore
+     * @param sharedPrefs
+     * @param editUsername
+     */
+    private void updatePlayerName(SharedPreferences sharedPrefs, EditTextPreference editUsername){
+        //si preleva il nome inserito
+        String username = sharedPrefs.getString("prefUsername","");
+        //si verifica il contenuto
+        if(username.equals("")){
+            //la stringa e' nulla, percio' si visualizza il messaggio di info
+            editUsername.setSummary(R.string.player_info);
+        }//fi
+        else {
+            //e' stato inserito il nome percio' si visualizza nel campo summary
+            editUsername.setSummary(username);
+        }//esle
+    }//updatePlayerName(SharedPreferences, EditTextPreference)
 
     //##### metodi di gestione delle preferences #####
 
@@ -125,25 +165,6 @@ public class GameSettingsFragment extends PreferenceFragmentCompat {
             }//onPreferenceClick(Preference)
         });//send
     }
-
-    /** metodo updatePlayerName(SharedPreferences, EditTextPreference): void
-     * metodo che aggiorna il nome del giocatore
-     * @param sharedPrefs
-     * @param editUsername
-     */
-    private void updatePlayerName(SharedPreferences sharedPrefs, EditTextPreference editUsername){
-        //si preleva il nome inserito
-        String username = sharedPrefs.getString("prefUsername","");
-        //si verifica il contenuto
-        if(username.equals("")){
-            //la stringa e' nulla, percio' si visualizza il messaggio di info
-            editUsername.setSummary(R.string.player_info);
-        }//fi
-        else {
-            //e' stato inserito il nome percio' si visualizza nel campo summary
-            editUsername.setSummary(username);
-        }//esle
-    }//updatePlayerName(SharedPreferences, EditTextPreference)
 
     /** metodo sendFeedbackRequest(Preference)
      * questo metodo si occupa di gestire, se richiesto dall'utente,

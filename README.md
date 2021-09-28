@@ -31,6 +31,7 @@ In questa versione del gioco √® stata prevista, per il giocatore, la possibilit√
   - le impostazioni di gioco, quali:
     - ~~abilitare i suoni~~
     - ~~scelta del nome del giocatore~~
+      - ~~aggiornare il valore alla modifica~~
     - importa dati di gioco
     - esporta dati di gioco
     - ~~cancella dati di gioco~~

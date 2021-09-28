@@ -8,8 +8,7 @@ import com.example.wumpusworldgame.R;
  * modificabili dall'utente.
  */
 public class GameSettingsActivity extends AppCompatActivity {
-    //##### attributi di classe #####
-    private static final String TAG = GameSettingsActivity.class.getSimpleName();
+
     /** metodo onCreate(Bunde): void
      * @param savedInstanceState
      */
