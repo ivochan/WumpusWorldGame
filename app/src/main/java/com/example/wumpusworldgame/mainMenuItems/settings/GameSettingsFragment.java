@@ -19,7 +19,11 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceManager;
 import com.example.wumpusworldgame.R;
+import com.example.wumpusworldgame.appLaunch.MainActivity;
 import com.example.wumpusworldgame.services.Utility;
+
+import game.session.score.ScoreUtility;
+
 /** class GameSettingsFragments
  * questo fragment implementa, effettivamente, la serie di impostazioni
  */
@@ -53,17 +57,81 @@ public class GameSettingsFragment extends PreferenceFragmentCompat {
         //si gestisce l'invio del feeedback
         sendFeedbackRequest(sendFeedback);
 
+        //##### gestione dei dati di gioco #####
+        Preference deleteGameData = findPreference("prefDeleteData");
+        //si gestisce la cancellazione dei dati
+        deleteScoreData(deleteGameData);
+
 
     }//onCreatePreference
 
     //##### metodi di gestione delle preferences #####
+
+    private void deleteScoreData(Preference deleteGameData) {
+        //gestione del click tramite listener
+        deleteGameData.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            //metodo di gestione del click sulla preference
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+                //si crea una alert dialog
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext(),R.style.AlertDialogTheme);
+                //metodo che configura l'aspetto della dialog
+                settingDeleteDataDialog(builder);
+                //pulsante di chiusura
+                builder.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+                    /** metodo onClick(DialogInterface, int)
+                     * questo metodo gestisce il comportamento dell'app
+                     * al click del pulsante, definendo le azioni che
+                     * devono essere svolte.
+                     * In questo caso, alla pressione del pulsante "Cancel"
+                     * viene chiusa la dialog
+                     * @param dialog
+                     * @param which
+                     */
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //se si clicca annulla la dialog viene chiusa
+                        dialog.dismiss();
+                    }//onClick(DialogInterface, int)
+                });//setNegativeButton(String, DialogInterface)
+
+                //pulsante di conferma per la cancellazione dei dati
+                builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                    /** metodo onClick(DialogInterface, int)
+                     * questo metodo gestisce il comportamento dell'app
+                     * al click del pulsante, definendo le azioni che
+                     * devono essere svolte.
+                     * In questo caso verra' avviata la procedura che si occupera'
+                     * della cancellazione dei dati di gioco
+                     * @param dialog
+                     * @param which
+                     */
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //si preleva il path del file dei punteggi
+                        String score_file_path = MainActivity.getScoreFilePath();
+                        //si elimina il file che contiene i dati di gioco
+                        ScoreUtility.deleteScoreFile(score_file_path);
+                        //si ricrea un file vuoto
+                        //ScoreUtility.createScoreFile(score_file_path);
+                    }//onClick(Dialog Interface, int)
+                });//setPositiveButton(String, DialogInterface)
+                //si crea la dialog
+                AlertDialog dialog = builder.create();
+                //si visualizza la dialog
+                dialog.show();
+                //return
+                return false;
+            }//onPreferenceClick(Preference)
+        });//send
+    }
 
     /** metodo updatePlayerName(SharedPreferences, EditTextPreference): void
      * metodo che aggiorna il nome del giocatore
      * @param sharedPrefs
      * @param editUsername
      */
-    private static void updatePlayerName(SharedPreferences sharedPrefs, EditTextPreference editUsername){
+    private void updatePlayerName(SharedPreferences sharedPrefs, EditTextPreference editUsername){
         //si preleva il nome inserito
         String username = sharedPrefs.getString("prefUsername","");
         //si verifica il contenuto
@@ -154,6 +222,34 @@ public class GameSettingsFragment extends PreferenceFragmentCompat {
             }//onPreferenceClick(Preference)
         });//send
     }//sendFeedbackRequest(Preference)
+
+    /** metodo settingDeleteDialog(AlertDialog.Builder): void
+     * questo metodo definisce la struttura della dialog che richiede
+     * di confermare o meno l'eliminazione dei dati di gioco
+     * @param builder
+     */
+    private void settingDeleteDataDialog(AlertDialog.Builder builder){
+        //si definisce il testo del titolo
+        TextView textView = new TextView(getContext());
+        //testo del titolo della dialog
+        textView.setText(R.string.delete_data_title);
+        //padding del titolo
+        textView.setPadding(20, 30, 20, 30);
+        //dimensione del titolo
+        textView.setTextSize(20F);
+        //sfondo del titolo
+        textView.setBackgroundColor(Color.parseColor("#5c007a"));
+        //colore del testo del titolo
+        textView.setTextColor(Color.WHITE);
+        //si imposta il titolo della dialog
+        builder.setCustomTitle(textView);
+        //si imposta il messaggio della dialog
+        builder.setMessage(R.string.delete_data_request);
+        //la dialog si chiude cliccando al di fuori della sua area
+        builder.setCancelable(true);
+    }//settingDataDialog(AlertDialog.Builder, String, String)
+
+    //##### metodi per la gestione del feedback #####
 
     /** metodo settingDialog(AlertDialog.Builder): void
      * questo metodo definisce la struttura della dialog che richiede

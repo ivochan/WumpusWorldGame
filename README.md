@@ -33,6 +33,7 @@ In questa versione del gioco √® stata prevista, per il giocatore, la possibilit√
     - ~~scelta del nome del giocatore~~
     - importa dati di gioco
     - esporta dati di gioco
+    - ~~cancella dati di gioco~~
     - about
       - ~~feedback~~
       - ~~team~~

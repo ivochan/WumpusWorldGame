@@ -13,6 +13,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import com.example.wumpusworldgame.R;
 import com.example.wumpusworldgame.appLaunch.MainActivity;
+
+import java.io.File;
 import java.util.LinkedList;
 import game.session.score.ScoreUtility;
 /** class RankActivity
@@ -81,7 +83,8 @@ public class RankActivity extends AppCompatActivity {
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
         //valori di default per le variabili utilizzate
-        current_player = sharedPreferences.getString("prefUsername", "---");
+        //current_player = sharedPreferences.getString("prefUsername", "---");
+        current_player="";
         //lista che contiene tutti punteggi estratti dal file
         scores= new LinkedList<>();
         //stringa che contiene il primo punteggio del file
@@ -111,49 +114,60 @@ public class RankActivity extends AppCompatActivity {
 
         //path del file
         String path = MainActivity.getScoreFilePath();
-        //si aggiorna il file dei punteggi
-        ScoreUtility.updateScoreFile(path);
-        //si inseriscono i dati nella lista
-        ScoreUtility.extractScoreData(path,scores);
+        //si preleva il file dei punteggi
+        File f = new File(path);
+        //si controlla che il file esista
+        if(f.exists()) {
+            //si controlla che il file non sia vuoto
+            if (f.length() != 0) {
+                //si aggiorna il file dei punteggi
+                ScoreUtility.updateScoreFile(path);
+                //si inseriscono i dati nella lista
+                ScoreUtility.extractScoreData(path, scores);
+                //punteggio record
+                first_score = scores.getFirst();
+                //punteggio attuale
+                last_score = ScoreUtility.extractCurrentScoreData(MainActivity.getCurrentScoreFilePath());
+                //analisi del punteggio record
+                first_score_vector = ScoreUtility.scoreLineAnalysis(first_score);
+                //analisi del punteggio attuale
+                last_score_vector = ScoreUtility.scoreLineAnalysis(last_score);
+                //analisi dei dieci punteggi migliori
+                int i = 0;
+                for (String s : scores) {
+                    //primi dieci punteggi da estrarre
+                    if (i >= 0 && i < 10) {
+                        //si estrae il vettore
+                        String[] sv = ScoreUtility.scoreLineAnalysis(s);
+                        //si inserisce nella stringa da visualizzare
+                        top_ten_list += (i + 1) + ". " + sv[1] + "  " + sv[0] + "\n\n";
+                        i++;
+                    }//fi
+                }//for
 
-        //punteggio record
-        first_score = scores.getFirst();
-        //punteggio attuale
-        last_score = ScoreUtility.extractCurrentScoreData(MainActivity.getCurrentScoreFilePath());
+                //##### inizializzazioni dati per i campi di testo #####
 
-        //analisi del punteggio record
-        first_score_vector = ScoreUtility.scoreLineAnalysis(first_score);
-        //analisi del punteggio attuale
-        last_score_vector = ScoreUtility.scoreLineAnalysis(last_score);
+                //si identifica la preference relativa al nome del giocatore corrente
+                current_player = last_score_vector[1];
+                //si preleva il valore del punteggio attuale
+                current_score = last_score_vector[0];
+                //nome del giocatore da record
+                best_player = first_score_vector[1];
+                //valore del punteggio da record
+                highscore = first_score_vector[0];
+            }//fi file non vuoto
+        }//fi il file esiste ma e' vuoto, percio' per le variabili rimangono i valori di default
+        else {
+            //il file dei punteggi non esiste percio' viene creato
+            ScoreUtility.createScoreFile(path);
+        }//else
 
-        //analisi dei dieci punteggi migliori
-        int i=0;
-        for(String s: scores){
-            //primi dieci punteggi da estrarre
-            if(i>=0 && i<10){
-                //si estrae il vettore
-                String[] sv = ScoreUtility.scoreLineAnalysis(s);
-                //si inserisce nella stringa da visualizzare
-                top_ten_list += (i+1)+". "+sv[1]+"  "+sv[0]+"\n\n";
-                i++;
-            }//fi
-        }//for
+        //##### aggiornamento dei campi di testo #####
 
-        //##### inizializzazioni dati per i campi di testo #####
-
-        //si identifica la preference relativa al nome del giocatore corrente
-        current_player = last_score_vector[1];
         //si aggiorna il nome del giocatore del punteggio attuale con quello delle impostazioni
         current_player_box.setText(current_player);
-        //si preleva il valore del punteggio attuale
-        current_score = last_score_vector[0];
         //si aggiorna il valore del punteggio attuale
         current_score_box.setText(current_score);
-
-        //nome del giocatore da record
-        best_player = first_score_vector[1];
-        //valore del punteggio da record
-        highscore = first_score_vector[0];
         //si aggiorna il nome del giocatore da record
         best_player_box.setText(best_player);
         //si aggiorna il punteggio da record
@@ -162,7 +176,6 @@ public class RankActivity extends AppCompatActivity {
         top_ten_box.setText(top_ten_list);
 
         //##### azioni #####
-
         //verifica dell'esecuzione della traccia audio
         //Utility.musicPlaying(mp, this);
 
@@ -236,7 +249,6 @@ public class RankActivity extends AppCompatActivity {
                     startActivity(Intent.createChooser(shareIntent,null));
                 }//onClick(DialogInterface, int)
             });//setPositiveButton(String, DialogInterface)
-
             //si crea la dialog
             AlertDialog dialog = builder.create();
             //si visualizza la dialog
@@ -305,7 +317,6 @@ public class RankActivity extends AppCompatActivity {
                     startActivity(Intent.createChooser(shareIntent,null));
                 }//onClick(DialogInterface, int)
             });//setPositiveButton(String, DialogInterface)
-
             //si crea la dialog
             AlertDialog dialog = builder.create();
             //si visualizza la dialog

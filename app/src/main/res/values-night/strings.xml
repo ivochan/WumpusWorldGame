@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="delete_data_request">Vuoi davvero eliminare i dati di gioco perdendo tutti i punteggi acquisiti?</string>
+</resources>
