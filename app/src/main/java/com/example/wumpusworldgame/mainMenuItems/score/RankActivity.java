@@ -13,7 +13,6 @@ import android.widget.Button;
 import android.widget.TextView;
 import com.example.wumpusworldgame.R;
 import com.example.wumpusworldgame.appLaunch.MainActivity;
-
 import java.io.File;
 import java.util.LinkedList;
 import game.session.score.ScoreUtility;
@@ -26,8 +25,6 @@ public class RankActivity extends AppCompatActivity {
 
     //private MediaPlayer mp;
 
-    //file delle preferenze
-    private SharedPreferences sharedPreferences;
     //pulsante di condivisione del record
     private Button record_share_button;
     //nome del giocatore che ha effettuato il record
@@ -78,9 +75,6 @@ public class RankActivity extends AppCompatActivity {
         setContentView(R.layout.activity_rank);
 
         //##### inizializzazioni #####
-
-        //si preleva il file di salvataggio delle preferenze
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
         //valori di default per le variabili utilizzate
         //current_player = sharedPreferences.getString("prefUsername", "---");

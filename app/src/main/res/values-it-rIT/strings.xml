@@ -256,5 +256,6 @@
     <string name="no">no</string>
     <string name="delete_data_title">Eliminazione dei dati di gioco</string>
     <string name="delete_data_request">Vuoi davvero eliminare i dati di gioco perdendo tutti i punteggi acquisiti?</string>
+    <string name="default_player_name">Player</string>
 
 </resources>

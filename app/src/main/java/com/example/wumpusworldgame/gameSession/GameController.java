@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.net.Uri;
@@ -16,11 +15,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.FileProvider;
-import androidx.preference.PreferenceManager;
 import com.example.wumpusworldgame.R;
 import com.example.wumpusworldgame.appLaunch.MainActivity;
 import com.example.wumpusworldgame.gameActivities.HeroSide;
 import com.example.wumpusworldgame.gameMenuItems.automaticMode.automaticModeActivities.HeroAutomaticMode;
+import com.example.wumpusworldgame.gameMenuItems.automaticMode.automaticModeActivities.WumpusAutomaticMode;
 import com.example.wumpusworldgame.services.Utility;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -85,7 +84,7 @@ public class GameController {
         //allora la partita e' conclusa
         else {
             //si controlla se l'utente aveva chiesto la soluzione
-            if(HeroAutomaticMode.getSolutionRequest()){
+            if(HeroAutomaticMode.getSolutionRequest() || WumpusAutomaticMode.getSolutionRequest()){
                 //messaggio di soluzione visionata
                 game_message.setText(R.string.solution_request);
             }
@@ -117,6 +116,18 @@ public class GameController {
                 game_message.setText(R.string.no_hit);
             }//else
         }//fi
+        //allora la partita e' conclusa
+        else {
+            //si controlla se l'utente aveva chiesto la soluzione
+            if(HeroAutomaticMode.getSolutionRequest() || WumpusAutomaticMode.getSolutionRequest()){
+                //messaggio di soluzione visionata
+                game_message.setText(R.string.solution_request);
+            }
+            else {
+                //messaggio di fine partita
+                game_message.setText(R.string.end_game);
+            }
+        }//else
     }//gamePadHit(TextView)
 
     //##### metodi di gestione della mossa del pg #####
@@ -536,12 +547,8 @@ public class GameController {
      * di condividere il punteggio ottenuto a fine partita
      */
     private static void endGameSession(Score score){
-        //stringa che conterra' il messaggio da visualizzare nella dialog
-        String result="";
-        //si preleva il file di salvataggio delle preferenze del giocatore
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(currentActivity);
-        //si identifica la preference relativa al nome del giocatore corrente
-        String player = sharedPreferences.getString("prefUsername","");
+        //si preleva il nome del giocatore
+        String player = score.getNickname();
         //si preleva il punteggio
         String points = String.valueOf(score.getScore());
         //##### salvataggio su file del punteggio #####
@@ -560,8 +567,8 @@ public class GameController {
         //si crea una alert dialog per chiedere al giocatore se vuole condividere il suo punteggio
         AlertDialog.Builder builder = new AlertDialog.Builder(currentActivity,R.style.GameAlertDialogTheme);
         //si specifica il messaggio da visualizzare nella dialog di richiesta di condivisione del punteggio
-        result=(victory?currentActivity.getString(R.string.winner):currentActivity.getString(R.string.looser))
-        +"\n\n"+currentActivity.getResources().getString(R.string.current_score_share_request);
+        String result=(victory?currentActivity.getString(R.string.winner):currentActivity.getString(R.string.looser))+"\n\n"
+                +currentActivity.getResources().getString(R.string.current_score_share_request);
         //si configura il layout della dialog
         settingDialog(builder, result, player, points);
         //pulsante di chiusura

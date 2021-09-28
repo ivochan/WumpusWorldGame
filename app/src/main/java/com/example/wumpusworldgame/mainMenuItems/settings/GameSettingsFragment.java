@@ -22,7 +22,6 @@ import com.example.wumpusworldgame.R;
 import com.example.wumpusworldgame.appLaunch.MainActivity;
 import com.example.wumpusworldgame.services.Utility;
 import game.session.score.ScoreUtility;
-
 /** class GameSettingsFragments
  * questo fragment implementa, effettivamente, la serie di impostazioni
  */
@@ -49,26 +48,7 @@ public class GameSettingsFragment extends PreferenceFragmentCompat {
         //si identifica la preference relativa al nome del giocatore
         EditTextPreference editUsername = findPreference("prefUsername");
         //si aggiorna il nome del giocatore
-        updatePlayerName(sharedPrefs,editUsername);
-        //aggiornamento della ui alla modifica del campo di testo
-        editUsername.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
-            public boolean onPreferenceChange(Preference preference, Object newValue) {
-                //si converte il parametro in stringa eliminando gli spazi
-                String new_value = newValue.toString().replaceAll(" ","");
-                //si aggiorna la preference
-                if(new_value.isEmpty()){
-                    //se la preference e' vuota si visualizza il sommario
-                    preference.setSummary(R.string.player_info);
-                }
-                else {
-                    //si aggiorna il valore
-                    preference.setSummary(new_value);
-                }
-                return true;
-            }
-        });
-
-
+        setPlayerName(sharedPrefs,editUsername);
 
         //##### invio del feeedback #####
 
@@ -86,24 +66,52 @@ public class GameSettingsFragment extends PreferenceFragmentCompat {
 
     }//onCreatePreference
 
-    /** metodo updatePlayerName(SharedPreferences, EditTextPreference): void
-     * metodo che aggiorna il nome del giocatore
-     * @param sharedPrefs
-     * @param editUsername
+    /** metodo setPlayerName(SharedPreferences, EditTextPreference): void
+     * questo metodo si occupa di aggiornare il campo di testo editabile in
+     * cui l'utente inserisce il nome che vuole utilizzare da giocatore
+     * @param sharedPreferences
+     * @param editTextPreference
      */
-    private void updatePlayerName(SharedPreferences sharedPrefs, EditTextPreference editUsername){
-        //si preleva il nome inserito
-        String username = sharedPrefs.getString("prefUsername","");
+    private void setPlayerName(SharedPreferences sharedPreferences, EditTextPreference editTextPreference){
+        //si preleva il nome che e' stato scelto dall'utente
+        String username = sharedPreferences.getString("prefUsername", "");
+        //si eleminano gli spazi
+        username = username.trim().replaceAll(" ","");
         //si verifica il contenuto
-        if(username.equals("")){
+        if (username.isEmpty()) {
             //la stringa e' nulla, percio' si visualizza il messaggio di info
-            editUsername.setSummary(R.string.player_info);
+            editTextPreference.setSummary(R.string.player_info);
         }//fi
         else {
             //e' stato inserito il nome percio' si visualizza nel campo summary
-            editUsername.setSummary(username);
-        }//esle
-    }//updatePlayerName(SharedPreferences, EditTextPreference)
+            editTextPreference.setSummary(username);
+        }//else
+        //si aggiorna il nome del giocatore
+        editTextPreference.setText(username);
+        //l'ascoltatore reagisce ad una modifica successiva della variabile
+        editTextPreference.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+            //e' stato modificato il campo di testo per il nome del giocatore
+            public boolean onPreferenceChange(Preference preference, Object newValue) {
+                //si preleva il nome che e' stato scelto dall'utente
+                String username = (String)newValue;
+                //si eliminano gli spazi
+                username = username.trim().replaceAll(" ","");
+                //si verifica il contenuto
+                if (username.isEmpty()) {
+                    //la stringa e' nulla, percio' si visualizza il messaggio di info
+                    editTextPreference.setSummary(R.string.player_info);
+                }//fi
+                else {
+                    //e' stato inserito il nome percio' si visualizza nel campo summary
+                    editTextPreference.setSummary(username);
+                }//else
+                //si aggiorna il nome del giocatore
+                editTextPreference.setText(username);
+                //modifica valida
+                return true;
+            }//onPreferenceChangeListener()
+        });//setOnPreferenceChangeListener()
+    }//setPlayerName()
 
     //##### metodi di gestione delle preferences #####
 

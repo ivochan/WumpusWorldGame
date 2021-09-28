@@ -132,6 +132,7 @@ public class HeroAutomaticMode extends AppCompatActivity {
             String path = AutomaticPlayer.runPathToString(run_path);
             //visualizzazione del percorso
             game_message.setText("Percorso:\n"+path);
+            //visualizzazione della mappa
             run_box.setText(""+AutomaticPlayer.printStatusMessage(status)+
                                     "\nMappa di esplorazione:\n"+expMap);
             //si disabilita la possibilita' di continuare la partita una volta

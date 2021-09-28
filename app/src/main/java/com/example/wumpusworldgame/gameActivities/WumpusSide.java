@@ -45,7 +45,7 @@ public class WumpusSide extends AppCompatActivity {
     //matrice di esplorazione pulita
     private GameMap clear_em;
     //valore del punteggio
-    private static Score score;
+    private Score score;
     //per la matrice di esplorazione
     private GridView grid;
     //adapter per la matrice di esplorazione
@@ -96,9 +96,12 @@ public class WumpusSide extends AppCompatActivity {
         //si preleva il file di salvataggio delle preferenze
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         //si identifica la preference relativa al nome del giocatore corrente
-        player_name = sharedPreferences.getString("prefUsername", "");
+        player_name = sharedPreferences.getString("prefUsername", "Player");
         //si identifica il campo di testo nel layout
         game_message = findViewById(R.id.message_box);
+
+        //controllo sul parametro inserito come nome del giocatore
+        player_name=player_name.trim().replaceAll(" ","");
         //si compone il messaggio di benvenuto
         intro_message = getResources().getString(R.string.game_message_intro) + " " + player_name + "!";
 
