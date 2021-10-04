@@ -123,7 +123,7 @@ public class WumpusSide extends AppCompatActivity {
         score_box = findViewById(R.id.score_value);
 
         //scelta della clip audio
-        mp = MediaPlayer.create(WumpusSide.this, R.raw.the_good_fight);
+        mp = MediaPlayer.create(WumpusSide.this, R.raw.figth_in_the_dungeon);
 
         //##### schermata di caricamento #####
         Utility.showLoadingScreen(this, getLayoutInflater());

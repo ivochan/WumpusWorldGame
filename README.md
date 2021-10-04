@@ -26,7 +26,7 @@ In questa versione del gioco è stata prevista, per il giocatore, la possibilit�
 
 ## TODO
 
-- scegliere clip audio per la modalità wumpus;
+- ~~scegliere clip audio per la modalità wumpus;~~
 - inserire nella main activity il menu con:
   - le impostazioni di gioco, quali:
     - ~~abilitare i suoni~~
@@ -63,7 +63,7 @@ In questa versione del gioco è stata prevista, per il giocatore, la possibilit�
 - ~~effettuare le traduzioni in inglese;~~
 - scegliere le clip audio per:
   - le activity secondarie;
-  - suoni di gioco (ad esempio per la vittoria);
+  - suoni di gioco(ad esempio per la vittoria);
 - ~~definire tema per il layout della alert dialog~~
 - ~~inserire nome del giocatore dalle impostazioni~~
 - creare l'activity che si occupa di visualizzare i punteggi di gioco:
@@ -82,7 +82,7 @@ In questa versione del gioco è stata prevista, per il giocatore, la possibilit�
 - strutturare il menù delle schermate di gioco:
   - implementare le seguenti voci:
     - ~~nuova partita, (la modalità è quella a cui si sta giocando);~~
-    - risolvi partita (giocatore automatico);
+    - ~~risolvi partita (giocatore automatico);~~
     - ~~tutorial della modalità (con comandi di gioco)~~;
 - ~~inserire le icone nella mappa di gioco;~~
 - ~~visualizzare le icone nella mappa di esplorazione;~~
