@@ -3,8 +3,6 @@ package com.example.wumpusworldgame.services;
 import android.content.Context;
 import android.os.Handler;
 import android.util.AttributeSet;
-import android.widget.TextView;
-
 /** class tupeWriter
  * questa classe e' utilizzata per realizzare un testo animato, che
  * viene visualizzato carattere per carattere, emulando il comportamento

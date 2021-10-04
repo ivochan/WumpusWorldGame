@@ -4,14 +4,5 @@
     <color name="lightColorPrimary">@color/dark_purple_600</color>
     <color name="lightColorPrimaryVariant">@color/purple_900</color>
     <color name="lightColorOnPrimary">@color/white</color>
-    <!-- dark mode DA RIVEDERE I COLORI -->
-    <color name="darkColorPrimary">@color/dark_indigo_600</color>
-    <color name="darkColorPrimaryVariant">@color/indigo_900</color>
-    <color name="darkColorOnPrimary">@color/sugar_paper</color>
-    <color name="light_blue_600">#FF039BE5</color>
-    <color name="light_blue_900">#FF01579B</color>
-    <color name="light_blue_A200">#FF40C4FF</color>
-    <color name="light_blue_A400">#FF00B0FF</color>
-    <color name="black_overlay">#66000000</color>
-    <!-- altri colori -->
+    <!-- dark mode -->
 </resources>

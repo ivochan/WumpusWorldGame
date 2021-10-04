@@ -96,9 +96,11 @@ In questa versione del gioco è stata prevista, per il giocatore, la possibilit�
   - ~~funzione che impedisce di effettuare altre mosse al termine della partita;~~
   - ~~metodo che si occupa di tentare di colpire il nemico;~~
   - ~~metodo che verifica se si ha a disposizione un tentativo di colpire il nemico;~~
+- sostituire i metodi deprecati;
 - dark mode:
-  - modificare colore action bar;
-  - creare stile della dialog;
+  - definire i colori principali
+  - creare le dialog adeguate
+  - creare uno sfondo per main, hero_side e wumpus_side activity;
 - controllare proporzioni del layout sui dispositivi con schermo più piccolo;
 - ~~togliere le iniziali del contenuto delle celle nella mappa;~~
 - ~~verificare che ogni button della mappa abbia la stessa dimensione;~~
