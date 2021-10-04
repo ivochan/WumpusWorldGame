@@ -189,7 +189,7 @@
     <string name="hero_enemy">Ahi ahi, sei stato ferito dal Wumpus!</string>
     <string name="hero_award">Hai trovato il tesoro del Wumpus!</string>>
     <string name="hero_danger">Sei caduto nella fossa piena d\'acqua...</string>
-    <string name="hero_enemy_sense">Pufff! Che puzza...Il mostro deve essere vicino!</string>
+    <string name="hero_enemy_sense">Pufff! Che puzza...Il mostro dev\'essere vicino!</string>
     <string name="hero_danger_sense">Brrr, che aria fredda che arriva...</string>
     <!-- Game Messages : WUMPUS SIDE -->
     <string name="wumpus_game_intro">Benvenuto Wumpus!\nScappa più veloce che puoi.</string>
@@ -223,7 +223,7 @@
     <string name="game_score_share_message">Ma...Hey, sfida i tuoi amici al gioco del mondo del Wumpus!
         \nEcco il tuo punteggio:\n</string>
     <string name="share_game_map_and_score">Hey, sfidami al gioco del mondo del Wumpus!
-        \nQuesta è il territorio che ho esplorato e\ne questo è il mio punteggio:\n</string>
+        \nQuesta è il territorio che ho esplorato \ne questo è il mio punteggio:\n</string>
     <string name="no_app">No App Available</string>
     <string name="app_link">Scarica qui l\'app: https://github.com/ivochan/WumpusWorldGame</string>
 
@@ -231,7 +231,9 @@
     <string name="solving">Sto cercando un percorso per uscire dalla foresta ...</string>
     <string name="hero_automatic_mode">Avventuriero: Soluzione</string>
     <string name="wumpus_automatic_mode">Wumpus: Soluzione</string>
-
+    <string name="solution_request">Hey, non imbrogliare! Hai già visto la soluzione...
+                                    \nInizia una nuova partita!</string>
+    <string name="default_player_name">Giocatore</string>
 
     <!-- Immagini -->
     <string name="dark_forest">foresta_oscura_immagine_main_activity</string>
@@ -252,9 +254,5 @@
     <string name="up_button">up button icon</string>
     <string name="right_button">right button icon</string>
     <string name="down_button">down button icon</string>
-    <string name="textview">TextView</string>
-    <string name="solution_request">Hey, non imbrogliare! Hai già visto la soluzione...
-                                    \nInizia una nuova partita!</string>
-    <string name="default_player_name">Player</string>
 
 </resources>

@@ -187,53 +187,54 @@
     </string>
 
     <!-- Game Messages : HERO SIDE -->
-    <string name="hero_game_intro">\nAndiamo a caccia del Wumpus e dei suoi tesori.</string>
-    <string name="hero_enemy">Ahi ahi, sei stato ferito dal Wumpus!</string>
-    <string name="hero_award">Hai trovato il tesoro del Wumpus!</string>>
-    <string name="hero_danger">Sei caduto nella fossa piena d\'acqua...</string>
-    <string name="hero_enemy_sense">Pufff! Che puzza...Il mostro deve essere vicino!</string>
-    <string name="hero_danger_sense">Brrr, che aria fredda che arriva...</string>
+    <string name="hero_game_intro">\nHunt the Wumpus and take its treasure</string>
+    <string name="hero_enemy">Ouch ouch, the Wumpus hurts you!</string>
+    <string name="hero_award">You \'ve found Wumpus\' treasure!</string>>
+    <string name="hero_danger">You fell into the pit full of water ...</string>
+    <string name="hero_enemy_sense">Puff! What a stink ... The monster should be nearby!</string>
+    <string name="hero_danger_sense">Brrr, what a cold air\'s coming ...</string>
     <!-- Game Messages : WUMPUS SIDE -->
-    <string name="wumpus_game_intro">Benvenuto Wumpus!\nScappa più veloce che puoi.</string>
-    <string name="wumpus_enemy">Oh no, il cacciatore ti ha colpito!</string>
-    <string name="wumpus_award">Hai trovato una via di fuga, sbrigati!</string>
-    <string name="wumpus_danger">Sei caduto in trappola...</string>
-    <string name="wumpus_enemy_sense">Swiiiish...si muovono le foglie...c\'è qualcuno che ti osserva...</string>
-    <string name="wumpus_danger_sense">Crick, crock...Il terreno è instabile.</string>
+    <string name="wumpus_game_intro">Welcome Wumpus!\nEscape as fast as you can.</string>
+    <string name="wumpus_enemy">Oh no,the hunter\'s hit you!</string>
+    <string name="wumpus_award">You\'ve found a way out, hurry up!</string>
+    <string name="wumpus_danger">You were trapped...</string>
+    <string name="wumpus_enemy_sense">Sweesh..Leaves\'re moving...Someone is watching you...</string>
+    <string name="wumpus_danger_sense">Crik,crok...The ground is unstable.</string>
     <!-- Game Messages : BOTH sides -->
-    <string name="wrong_move">Comando non valido...\nRipeti la mossa!</string>
-    <string name="safe_cell">Tutto apposto all\'orizzonte...</string>
-    <string name="forbidden_cell">Il passaggio e\' bloccato da un albero gigantesco.\nRipeti la mossa!</string>
-    <string name="looser">Hai perso :(</string>
-    <string name="winner">Hai vinto ! =)</string>
-    <string name="end_game">Partita terminata... Gioca ancora, dai!</string>
-    <string name="choose_direction">Scegli la direzione...</string>
-    <string name="hit">Yu-hu! Hai colpito il nemico!</string>
-    <string name="no_hit">Eh eh, non hai più nulla con cui colpire il nemico...</string>
-    <string name="wasted_shot">Ooops...La tua arma ormai è andata, come la possibilità
-        di battere il nemico!</string>
-    <string name="failed_shot">Che mira pessima...Non hai colpito niente!</string>
+    <string name="wrong_move">Wrong command...\nRepeat your move!</string>
+    <string name="safe_cell">It\'s all right around here!</string>
+    <string name="forbidden_cell">The passage is blocked by a giant tree.\nRepeat the move!</string>
+    <string name="looser">You lose :(</string>
+    <string name="winner">You win ! =)</string>
+    <string name="end_game">Game over...Play again!</string>
+    <string name="choose_direction">Choose the direction...</string>
+    <string name="hit">Yu-hu!You hit the enemy!</string>
+    <string name="no_hit">Eh eh, you haven\'t arrows to hit the enemy ...</string>
+    <string name="wasted_shot">Oops ... Your weapon\'s been wasted, so you haven\'t the chance to beat the enemy anymore!</string>
+    <string name="failed_shot">What a terrible aim...You haven\'t hit anything!</string>
     <!-- Alert Dialog per la richiesta condivisione del punteggio attuale nella schermata di gioco -->
     <string name="current_score_share_request">Do you want to share your rank?</string>
     <string name="current_score_share_message">Hey, challenge your friends to Wumpus World Game!
-        \nShow them the Wumpus\' World side that you\'ve discorvered and your current rank.
+        \nShow them the Wumpus\' World side that you\'ve discovered and your current rank.
         \n\nHere\'s your score:\n</string>;
     <string name="nope">Ehm...no</string>
-    <string name="yeah">Sure</string>ù
-    <string name="memory_access_denied">Psst! That\'s so sad but you can\'t share your rank if you don\'t agree device memory access</string>
+    <string name="yeah">Sure</string>
+    <string name="memory_access_denied">Psst!That\'s so sad but you can\'t share your rank if you don\'t agree device memory access</string>
     <!-- messaggio della dialog condivisione del punteggio attuale -->
-    <string name="game_score_share_message">Ma...Hey, sfida i tuoi amici al gioco del mondo del Wumpus!
-        \n\nEcco il tuo punteggio:\n</string>
-    <string name="share_game_map_and_score">Hey, sfidami al gioco del mondo del Wumpus!
-        \nQuesta è il territorio che ho esplorato e \ne questo è il mio punteggio:\n</string>
+    <string name="game_score_share_message">Well...Hey, challenge your friends to the Wumpus world game!
+          \n\nHere\'s your score: \ n</string>
+    <string name="share_game_map_and_score">Hey, challenge me to the world of Wumpus game!
+         \nThis is the territory I\'ve explored \nand this is my score:\n</string>
     <string name="no_app">No App Available</string>
-    <string name="app_link">Scarica qui l\'app: https://github.com/ivochan/WumpusWorldGame</string>
+    <string name="app_link">Download the app here: https://github.com/ivochan/WumpusWorldGame</string>
 
     <!-- Automatic Game -->
-    <string name="solving">Sto cercando un percorso per uscire dalla foresta ...</string>
+    <string name="solving">I\'m looking for a way out from this forest...</string>
     <string name="hero_automatic_mode">Hero: Game Solving</string>
     <string name="wumpus_automatic_mode">Wumpus: Game Solving</string>
-
+    <string name="solution_request">Hey, don\'t cheat! You\'ve already seen solution...
+        \nStart a new game!</string>
+    <string name="default_player_name">Player</string>
 
     <!-- Images -->
     <string name="dark_forest">dark_forest_main_activity_image</string>
@@ -254,8 +255,5 @@
     <string name="up_button">up button icon</string>
     <string name="right_button">right button icon</string>
     <string name="down_button">down button icon</string>
-    <string name="textview">TextView</string>
-    <string name="solution_request">Hey, non imbrogliare! Hai già visto la soluzione...
-                                    \nInizia una nuova partita!</string>
-    <string name="default_player_name">Player</string>
+
 </resources>

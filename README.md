@@ -60,7 +60,7 @@ In questa versione del gioco √® stata prevista, per il giocatore, la possibilit√
 - ~~scelta del gestore mail per inviare il feedback;~~
 - ~~disabilita/abilita traccia audio per ogni activity;~~
 - ~~sistemare layout del testo nella game info activity;~~
-- effettuare le traduzioni in inglese;
+- ~~effettuare le traduzioni in inglese;~~
 - scegliere le clip audio per:
   - le activity secondarie;
   - suoni di gioco (ad esempio per la vittoria);
