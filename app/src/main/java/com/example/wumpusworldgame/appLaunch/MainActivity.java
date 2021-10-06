@@ -132,8 +132,13 @@ public class MainActivity extends AppCompatActivity {
         //nome del file dei punteggi
         score_file_name = "/"+"ScoreTable" + ".txt";
         //directory in cui verra' salvato il file
+
         File main_docs_dir =
                 new File(this.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS), "");
+
+
+
+
         //creazione della directory
         main_docs_dir.mkdir();
         //si definisce il path del file comprensivo di nome del file dei punteggi complessivi

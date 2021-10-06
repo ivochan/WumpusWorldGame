@@ -148,6 +148,13 @@
     <string name="no">no</string>
     <string name="delete_data_title">Deleting game data</string>
     <string name="delete_data_request">Do you really want to delete all game data? You\'ll lose your score ranking</string>
+    <!-- export data dialog -->
+    <string name="export_data_title">Exporting game data</string>
+    <string name="export_data_request">Do you really want to export your game data and store it somewhere in the Universe?</string>
+    <!--import data dialog -->
+    <string name="import_data_title">Importing game data</string>
+    <string name="import_data_request">Do you want to upload a previous version of your game data and restore your score ranking?</string>
+
     <!-- about -->
     <string name="team">Team</string>
     <string name="team_info">I\'m Ivonne and this is my first app :)
@@ -255,5 +262,4 @@
     <string name="up_button">up button icon</string>
     <string name="right_button">right button icon</string>
     <string name="down_button">down button icon</string>
-
 </resources>

@@ -154,6 +154,12 @@
     <string name="no">no</string>
     <string name="delete_data_title">Eliminazione dei dati di gioco</string>
     <string name="delete_data_request">Vuoi davvero eliminare i dati di gioco? Perderai tutti i punteggi acquisiti</string>
+    <!-- export data dialog -->
+    <string name="export_data_title">Esportazione dei dati di gioco</string>
+    <string name="export_data_request">Vuoi esportare i tuoi dati di gioco e salvarli da qualche parte nell\'Universo?</string>
+    <!--import data dialog -->
+    <string name="import_data_title">Caricamento dei dati di gioco</string>
+    <string name="import_data_request">Vuoi caricare i tuoi vecchi dati di gioco e recuperare la tua classifica dei punteggi?</string>
     <!-- about -->
     <string name="team">Team</string>
     <string name="team_info">Mi chiamo Ivonne e questa è la mia prima app :)\nGrazie a Dady e Lula per i consigli!\nLe immagini ed i suoni sono presi da
@@ -165,6 +171,7 @@
     <string name="cancel">annulla</string>
     <string name="confirm">accetta</string>
     <string name="email_subject">feedback dell\'applicazione WUMPUS WORLD GAME</string>
+
 
     <!-- HeroModeTutorial -->
     <string name="hero_tutorial_intro">Eccoti, coraggioso avventuriero!</string>
