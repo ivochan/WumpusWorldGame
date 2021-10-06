@@ -159,7 +159,7 @@
     <string name="export_data_request">Vuoi esportare i tuoi dati di gioco e salvarli da qualche parte nell\'Universo?</string>
     <!--import data dialog -->
     <string name="import_data_title">Caricamento dei dati di gioco</string>
-    <string name="import_data_request">Vuoi caricare i tuoi vecchi dati di gioco e recuperare la tua classifica dei punteggi?</string>
+    <string name="import_data_request">Vuoi caricare i tuoi vecchi dati di gioco e recuperare la tua classifica dei punteggi?\nAttenzione, perderai quella attuale!</string>
     <!-- about -->
     <string name="team">Team</string>
     <string name="team_info">Mi chiamo Ivonne e questa è la mia prima app :)\nGrazie a Dady e Lula per i consigli!\nLe immagini ed i suoni sono presi da

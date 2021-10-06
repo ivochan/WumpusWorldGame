@@ -34,7 +34,7 @@ In questa versione del gioco √® stata prevista, per il giocatore, la possibilit√
       - ~~aggiornare il valore alla modifica~~
       - ~~controllare l'inserimento di caratteri non validi~~
     - importa dati di gioco
-    - esporta dati di gioco
+    - ~~esporta dati di gioco~~
     - ~~cancella dati di gioco~~
     - about
       - ~~feedback~~

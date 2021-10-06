@@ -1,10 +1,12 @@
 package com.example.wumpusworldgame.mainMenuItems.settings;
 //serie di import
+import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.net.Uri;
@@ -16,25 +18,92 @@ import android.util.Log;
 import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.ActivityResultRegistry;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.FileProvider;
 import androidx.preference.EditTextPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceManager;
+
+import com.example.wumpusworldgame.BuildConfig;
 import com.example.wumpusworldgame.R;
 import com.example.wumpusworldgame.appLaunch.MainActivity;
 import com.example.wumpusworldgame.services.Utility;
-
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.net.URI;
 
 import game.session.score.ScoreUtility;
 /** class GameSettingsFragments
  * questo fragment implementa, effettivamente, la serie di impostazioni
  */
 public class GameSettingsFragment extends PreferenceFragmentCompat {
+
     //##### attributi di classe #####
-    private SharedPreferences.OnSharedPreferenceChangeListener listener;
+
+    private ActivityResultLauncher<Intent> mStartForResult = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
+        new ActivityResultCallback<ActivityResult>() {
+            @Override
+            public void onActivityResult(ActivityResult result) {
+                if (result.getResultCode() == Activity.RESULT_OK) {
+                    Intent intent = result.getData();
+                    // Handle the Intent
+
+                    //si prelevano i dati
+
+                    //Uri uri = intent.getData();
+                    //String path = uri.getPath();
+
+                    //si cancella il file attuale
+                    ScoreUtility.deleteScoreFile(MainActivity.getScoreFilePath());
+                    //si ricrea il file dei punteggi
+                    ScoreUtility.createScoreFile(MainActivity.getScoreFilePath());
+
+
+
+                    File f = new File(MainActivity.getScoreFilePath());
+
+                    if(!f.exists()) {
+                        ScoreUtility.writeScoreFile(MainActivity.getScoreFilePath(),"File inesistente!");
+                        return;
+                    }
+                    try {
+                        //si istanzia la classe per la lettura
+                        FileReader fr = new FileReader(f);
+                        //buffer
+                        BufferedReader b = new BufferedReader(fr);
+                        //variabile ausiliaria
+                        String s=new String();
+                        //si cicla fino a quando non si trova una linea vuota
+                        do{
+                            //si legge la riga
+                            s=b.readLine();
+                            //se non e' nulla si stampa
+                            //System.out.println(s==null?"":s);
+                            ScoreUtility.writeScoreFile(MainActivity.getScoreFilePath(),s);
+                        }while(s!=null);
+                        //si chiude il processo di lettura
+                        fr.close();
+                    }
+                    catch(IOException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+
+            }
+        });
+
+
+    //##### attributi di classe #####
 
     /** metodo onCreatePreferences(Bundle, String)
      * @param savedInstanceState
@@ -77,14 +146,83 @@ public class GameSettingsFragment extends PreferenceFragmentCompat {
         //importazione dei dati
         Preference importGameData = findPreference("prefImportData");
         //si gestisce l'importazione dei dati di gioco
-        //importScoreData(importGameData);
+        importScoreData(importGameData);
+
 
     }//onCreatePreference
 
-
     /**
      *
-     * @param exportGameData
+     * @param importGameData
+     */
+    private void importScoreData(Preference importGameData) {
+        //gestione del click tramite listener
+        importGameData.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            //metodo di gestione del click sulla preference
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+                //si crea una alert dialog
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext(),R.style.AlertDialogTheme);
+                //metodo che configura l'aspetto della dialog
+                settingDialog(builder,getText(R.string.import_data_title), getText(R.string.import_data_request));
+                //pulsante di chiusura
+                builder.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+                    /** metodo onClick(DialogInterface, int)
+                     * questo metodo gestisce il comportamento dell'app
+                     * al click del pulsante, definendo le azioni che
+                     * devono essere svolte.
+                     * In questo caso, alla pressione del pulsante "Cancel"
+                     * viene chiusa la dialog
+                     * @param dialog
+                     * @param which
+                     */
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //se si clicca annulla la dialog viene chiusa
+                        dialog.dismiss();
+                    }//onClick(DialogInterface, int)
+                });//setNegativeButton(String, DialogInterface)
+
+                //pulsante di conferma per la cancellazione dei dati
+                builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                    /** metodo onClick(DialogInterface, int)
+                     * questo metodo gestisce il comportamento dell'app
+                     * al click del pulsante, definendo le azioni che
+                     * devono essere svolte.
+                     * In questo caso verra' avviata la procedura che si occupera'
+                     * della cancellazione dei dati di gioco
+                     * @param dialog
+                     * @param which
+                     */
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //si crea l'intent per prelevare il file
+                        Intent chooseFile = new Intent(Intent.ACTION_GET_CONTENT);
+                        //si specifica che il file verra' selezionato
+                        chooseFile.addCategory(Intent.CATEGORY_OPENABLE);
+                        //si specifica che si tratta di un file di testo
+                        //chooseFile.setType("text/plain");
+                        chooseFile.setType("text/*");
+                        //permessi
+                        chooseFile.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                        //si avvia l'intent di selezione del file da importare
+                        mStartForResult.launch(chooseFile);
+                    }//onClick(Dialog Interface, int)
+                });//setPositiveButton(String, DialogInterface)
+                //si crea la dialog
+                AlertDialog dialog = builder.create();
+                //si visualizza la dialog
+                dialog.show();
+                //return
+                return false;
+            }//onPreferenceClick(Preference)
+        });//send
+    }
+
+    /** metodo exportScoreData(Preference)
+     * questo metodo si occupa di gestire l'esportazione ed evenutale condivisione
+     * del file dei punteggi
+     * @param exportGameData: Preference
      */
     private void exportScoreData(Preference exportGameData) {
         //gestione del click tramite listener
@@ -168,7 +306,7 @@ public class GameSettingsFragment extends PreferenceFragmentCompat {
                 return false;
             }//onPreferenceClick(Preference)
         });//send
-    }
+    }//exportGameData(Preference)
 
     /** metodo setPlayerName(SharedPreferences, EditTextPreference): void
      * questo metodo si occupa di aggiornare il campo di testo editabile in

@@ -153,7 +153,8 @@
     <string name="export_data_request">Do you really want to export your game data and store it somewhere in the Universe?</string>
     <!--import data dialog -->
     <string name="import_data_title">Importing game data</string>
-    <string name="import_data_request">Do you want to upload a previous version of your game data and restore your score ranking?</string>
+    <string name="import_data_request">Do you want to upload a previous version of your game data and restore your score ranking?
+        \nBe careful, you\'ll lose the current one!</string>
 
     <!-- about -->
     <string name="team">Team</string>
