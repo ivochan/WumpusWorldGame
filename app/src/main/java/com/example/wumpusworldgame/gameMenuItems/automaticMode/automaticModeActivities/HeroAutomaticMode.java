@@ -14,6 +14,7 @@ import java.util.LinkedList;
 import game.automatic_player.AutomaticPlayer;
 import game.session.configuration.Starter;
 import game.structure.cell.Cell;
+import game.structure.elements.PlayableCharacter;
 import game.structure.map.GameMap;
 /** class HeroAutomaticMode
  *
@@ -44,7 +45,6 @@ public class HeroAutomaticMode extends AppCompatActivity {
     private ArrayList<String> data;
     //dati della matrice di gioco
     private ArrayList<String> game_data;
-
 
     //##### campi di testo #####
     //intro
@@ -101,7 +101,7 @@ public class HeroAutomaticMode extends AppCompatActivity {
         //messaggio sopra la grid
         game_message.setText(intro_message);
         //lista delle celle visitate
-        run_box.setText("lista delle celle visitate durante la risoluzione");
+        run_box.setText("");
 
         //##### prelievo dei dati di gioco #####
 
@@ -110,6 +110,15 @@ public class HeroAutomaticMode extends AppCompatActivity {
 
         //matrice di esplorazione
         expMap = (GameMap)getIntent().getSerializableExtra("exp_map");
+
+        //indice riga del pg
+        int i_pg_pos = getIntent().getIntExtra("i_pg_pos",-1);
+        //indice colonna del pg
+        int j_pg_pos = getIntent().getIntExtra("j_pg_pos",-1);
+        //si inseriscono gli indici in un vettore posizione
+        int [] pg_pos = { i_pg_pos,j_pg_pos};
+        //si modifica la posizione del pg ripristinandola al suo valore iniziale
+        PlayableCharacter.setPGposition(pg_pos);
 
         //##### risoluzione #####
 

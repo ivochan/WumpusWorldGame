@@ -6,23 +6,19 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.ActivityResultRegistry;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.FileProvider;
@@ -30,17 +26,17 @@ import androidx.preference.EditTextPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceManager;
-
-import com.example.wumpusworldgame.BuildConfig;
 import com.example.wumpusworldgame.R;
 import com.example.wumpusworldgame.appLaunch.MainActivity;
 import com.example.wumpusworldgame.services.Utility;
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
+import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.net.URI;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 
+import game.session.score.Score;
 import game.session.score.ScoreUtility;
 /** class GameSettingsFragments
  * questo fragment implementa, effettivamente, la serie di impostazioni
@@ -53,57 +49,43 @@ public class GameSettingsFragment extends PreferenceFragmentCompat {
         new ActivityResultCallback<ActivityResult>() {
             @Override
             public void onActivityResult(ActivityResult result) {
-                if (result.getResultCode() == Activity.RESULT_OK) {
+                //si verifica il codice di uscita dell'intent
+                if(result.getResultCode() == Activity.RESULT_OK) {
+                    //Handle the Intent
                     Intent intent = result.getData();
-                    // Handle the Intent
-
-                    //si prelevano i dati
-
-                    //Uri uri = intent.getData();
-                    //String path = uri.getPath();
-
-                    //si cancella il file attuale
-                    ScoreUtility.deleteScoreFile(MainActivity.getScoreFilePath());
-                    //si ricrea il file dei punteggi
-                    ScoreUtility.createScoreFile(MainActivity.getScoreFilePath());
-
-
-
-                    File f = new File(MainActivity.getScoreFilePath());
-
-                    if(!f.exists()) {
-                        ScoreUtility.writeScoreFile(MainActivity.getScoreFilePath(),"File inesistente!");
-                        return;
-                    }
+                    //si preleva l'uri indicativo del file
+                    Uri uri = intent.getData();
+                    //si preleva il path del file dei punteggi
+                    String score_path = MainActivity.getScoreFilePath();
+                    //si cancella il file dei punteggi
+                    ScoreUtility.deleteScoreFile(score_path);
+                    //si crea il file dei punteggi
+                    ScoreUtility.createScoreFile(score_path);
+                    //si istanzia uno string builder
+                    StringBuilder total = new StringBuilder();
+                    //blocco try-catch
                     try {
-                        //si istanzia la classe per la lettura
-                        FileReader fr = new FileReader(f);
-                        //buffer
-                        BufferedReader b = new BufferedReader(fr);
-                        //variabile ausiliaria
-                        String s=new String();
-                        //si cicla fino a quando non si trova una linea vuota
-                        do{
-                            //si legge la riga
-                            s=b.readLine();
-                            //se non e' nulla si stampa
-                            //System.out.println(s==null?"":s);
-                            ScoreUtility.writeScoreFile(MainActivity.getScoreFilePath(),s);
-                        }while(s!=null);
-                        //si chiude il processo di lettura
-                        fr.close();
-                    }
-                    catch(IOException e) {
+                        //si apre il file puntato dall'uri (quello selezionato dall'utente)
+                        InputStream in = getContext().getContentResolver().openInputStream(uri);
+                        //si legge il file
+                        BufferedReader r = new BufferedReader(new InputStreamReader(in));
+                        //si iterano le righe del file
+                        for(String line=""; (line = r.readLine())!=null;){
+                            //si inseriscono nello string builder
+                            total.append(line).append('\n');
+                        }//for
+                        //si converte tutto in stringa
+                        String content = total.toString();
+                        //si scrive nel file dei punteggi utilizzato dall'app
+                        ScoreUtility.writeScoreFile(MainActivity.getScoreFilePath(),content);
+                        //si preleva il oath del file del punteggio attuale
+                        String current_score = MainActivity.getCurrentScoreFilePath();
+                    } catch (IOException e) {
                         e.printStackTrace();
-                    }
-
-                }
-
-            }
-        });
-
-
-    //##### attributi di classe #####
+                    }//end try-catch
+                }//fi
+            }//onActivityResult(ActivityResult)
+        });//callback
 
     /** metodo onCreatePreferences(Bundle, String)
      * @param savedInstanceState
@@ -151,9 +133,119 @@ public class GameSettingsFragment extends PreferenceFragmentCompat {
 
     }//onCreatePreference
 
-    /**
-     *
-     * @param importGameData
+    //##### metodi di gestione delle preferences: scelta del nome del giocatore #####
+
+    /** metodo setPlayerName(SharedPreferences, EditTextPreference): void
+     * questo metodo si occupa di aggiornare il campo di testo editabile in
+     * cui l'utente inserisce il nome che vuole utilizzare da giocatore
+     * @param sharedPreferences
+     * @param editTextPreference
+     */
+    private void setPlayerName(SharedPreferences sharedPreferences, EditTextPreference editTextPreference){
+        //si preleva il nome che e' stato scelto dall'utente
+        String username = sharedPreferences.getString("prefUsername", "");
+        //si eleminano gli spazi
+        username = username.trim().replaceAll(" ","");
+        //si verifica il contenuto
+        if (username.isEmpty()) {
+            //la stringa e' nulla, percio' si visualizza il messaggio di info
+            editTextPreference.setSummary(R.string.player_info);
+        }//fi
+        else {
+            //e' stato inserito il nome percio' si visualizza nel campo summary
+            editTextPreference.setSummary(username);
+        }//else
+        //si aggiorna il nome del giocatore
+        editTextPreference.setText(username);
+        //l'ascoltatore reagisce ad una modifica successiva della variabile
+        editTextPreference.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+            //e' stato modificato il campo di testo per il nome del giocatore
+            public boolean onPreferenceChange(Preference preference, Object newValue) {
+                //si preleva il nome che e' stato scelto dall'utente
+                String username = (String)newValue;
+                //si eliminano gli spazi
+                username = username.trim().replaceAll(" ","");
+                //si verifica il contenuto
+                if (username.isEmpty()) {
+                    //la stringa e' nulla, percio' si visualizza il messaggio di info
+                    editTextPreference.setSummary(R.string.player_info);
+                }//fi
+                else {
+                    //e' stato inserito il nome percio' si visualizza nel campo summary
+                    editTextPreference.setSummary(username);
+                }//else
+                //si aggiorna il nome del giocatore
+                editTextPreference.setText(username);
+                //modifica valida
+                return true;
+            }//onPreferenceChangeListener()
+        });//setOnPreferenceChangeListener()
+    }//setPlayerName()
+
+    //##### metodi di gestione delle preferences: dati di gioco #####
+
+    private void deleteScoreData(Preference deleteGameData) {
+        //gestione del click tramite listener
+        deleteGameData.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            //metodo di gestione del click sulla preference
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+                //si crea una alert dialog
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext(),R.style.AlertDialogTheme);
+                //metodo che configura l'aspetto della dialog
+                settingDialog(builder,getText(R.string.delete_data_title), getText(R.string.delete_data_request));
+                //pulsante di chiusura
+                builder.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+                    /** metodo onClick(DialogInterface, int)
+                     * questo metodo gestisce il comportamento dell'app
+                     * al click del pulsante, definendo le azioni che
+                     * devono essere svolte.
+                     * In questo caso, alla pressione del pulsante "Cancel"
+                     * viene chiusa la dialog
+                     * @param dialog
+                     * @param which
+                     */
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //se si clicca annulla la dialog viene chiusa
+                        dialog.dismiss();
+                    }//onClick(DialogInterface, int)
+                });//setNegativeButton(String, DialogInterface)
+
+                //pulsante di conferma per la cancellazione dei dati
+                builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                    /** metodo onClick(DialogInterface, int)
+                     * questo metodo gestisce il comportamento dell'app
+                     * al click del pulsante, definendo le azioni che
+                     * devono essere svolte.
+                     * In questo caso verra' avviata la procedura che si occupera'
+                     * della cancellazione dei dati di gioco
+                     * @param dialog
+                     * @param which
+                     */
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //si preleva il path del file dei punteggi
+                        String score_file_path = MainActivity.getScoreFilePath();
+                        //si elimina il file che contiene i dati di gioco
+                        ScoreUtility.deleteScoreFile(score_file_path);
+                    }//onClick(Dialog Interface, int)
+                });//setPositiveButton(String, DialogInterface)
+                //si crea la dialog
+                AlertDialog dialog = builder.create();
+                //si visualizza la dialog
+                dialog.show();
+                //return
+                return false;
+            }//onPreferenceClick(Preference)
+        });//send
+    }//deleteScoreData(Preference)
+
+    /** metodo importScoreData(Preference)
+     * questo metodo importa come file dei punteggi un file di
+     * testo scelto dall'utente, tramite navigazione nel gestore
+     * dei file del dispositivo.
+     * @param importGameData: Preference
      */
     private void importScoreData(Preference importGameData) {
         //gestione del click tramite listener
@@ -217,7 +309,7 @@ public class GameSettingsFragment extends PreferenceFragmentCompat {
                 return false;
             }//onPreferenceClick(Preference)
         });//send
-    }
+    }//importScoreData(Preference)
 
     /** metodo exportScoreData(Preference)
      * questo metodo si occupa di gestire l'esportazione ed evenutale condivisione
@@ -308,111 +400,7 @@ public class GameSettingsFragment extends PreferenceFragmentCompat {
         });//send
     }//exportGameData(Preference)
 
-    /** metodo setPlayerName(SharedPreferences, EditTextPreference): void
-     * questo metodo si occupa di aggiornare il campo di testo editabile in
-     * cui l'utente inserisce il nome che vuole utilizzare da giocatore
-     * @param sharedPreferences
-     * @param editTextPreference
-     */
-    private void setPlayerName(SharedPreferences sharedPreferences, EditTextPreference editTextPreference){
-        //si preleva il nome che e' stato scelto dall'utente
-        String username = sharedPreferences.getString("prefUsername", "");
-        //si eleminano gli spazi
-        username = username.trim().replaceAll(" ","");
-        //si verifica il contenuto
-        if (username.isEmpty()) {
-            //la stringa e' nulla, percio' si visualizza il messaggio di info
-            editTextPreference.setSummary(R.string.player_info);
-        }//fi
-        else {
-            //e' stato inserito il nome percio' si visualizza nel campo summary
-            editTextPreference.setSummary(username);
-        }//else
-        //si aggiorna il nome del giocatore
-        editTextPreference.setText(username);
-        //l'ascoltatore reagisce ad una modifica successiva della variabile
-        editTextPreference.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
-            //e' stato modificato il campo di testo per il nome del giocatore
-            public boolean onPreferenceChange(Preference preference, Object newValue) {
-                //si preleva il nome che e' stato scelto dall'utente
-                String username = (String)newValue;
-                //si eliminano gli spazi
-                username = username.trim().replaceAll(" ","");
-                //si verifica il contenuto
-                if (username.isEmpty()) {
-                    //la stringa e' nulla, percio' si visualizza il messaggio di info
-                    editTextPreference.setSummary(R.string.player_info);
-                }//fi
-                else {
-                    //e' stato inserito il nome percio' si visualizza nel campo summary
-                    editTextPreference.setSummary(username);
-                }//else
-                //si aggiorna il nome del giocatore
-                editTextPreference.setText(username);
-                //modifica valida
-                return true;
-            }//onPreferenceChangeListener()
-        });//setOnPreferenceChangeListener()
-    }//setPlayerName()
-
-    //##### metodi di gestione delle preferences #####
-
-    private void deleteScoreData(Preference deleteGameData) {
-        //gestione del click tramite listener
-        deleteGameData.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-            //metodo di gestione del click sulla preference
-            @Override
-            public boolean onPreferenceClick(Preference preference) {
-                //si crea una alert dialog
-                AlertDialog.Builder builder = new AlertDialog.Builder(getContext(),R.style.AlertDialogTheme);
-                //metodo che configura l'aspetto della dialog
-                settingDialog(builder,getText(R.string.delete_data_title), getText(R.string.delete_data_request));
-                //pulsante di chiusura
-                builder.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
-                    /** metodo onClick(DialogInterface, int)
-                     * questo metodo gestisce il comportamento dell'app
-                     * al click del pulsante, definendo le azioni che
-                     * devono essere svolte.
-                     * In questo caso, alla pressione del pulsante "Cancel"
-                     * viene chiusa la dialog
-                     * @param dialog
-                     * @param which
-                     */
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        //se si clicca annulla la dialog viene chiusa
-                        dialog.dismiss();
-                    }//onClick(DialogInterface, int)
-                });//setNegativeButton(String, DialogInterface)
-
-                //pulsante di conferma per la cancellazione dei dati
-                builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
-                    /** metodo onClick(DialogInterface, int)
-                     * questo metodo gestisce il comportamento dell'app
-                     * al click del pulsante, definendo le azioni che
-                     * devono essere svolte.
-                     * In questo caso verra' avviata la procedura che si occupera'
-                     * della cancellazione dei dati di gioco
-                     * @param dialog
-                     * @param which
-                     */
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        //si preleva il path del file dei punteggi
-                        String score_file_path = MainActivity.getScoreFilePath();
-                        //si elimina il file che contiene i dati di gioco
-                        ScoreUtility.deleteScoreFile(score_file_path);
-                    }//onClick(Dialog Interface, int)
-                });//setPositiveButton(String, DialogInterface)
-                //si crea la dialog
-                AlertDialog dialog = builder.create();
-                //si visualizza la dialog
-                dialog.show();
-                //return
-                return false;
-            }//onPreferenceClick(Preference)
-        });//send
-    }//deleteScoreData(Preference)
+    //##### metodi di gestione delle preferences: invio del feedback #####
 
     /** metodo sendFeedbackRequest(Preference)
      * questo metodo si occupa di gestire, se richiesto dall'utente,

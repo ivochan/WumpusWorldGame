@@ -33,7 +33,9 @@ In questa versione del gioco è stata prevista, per il giocatore, la possibilit�
     - ~~scelta del nome del giocatore~~
       - ~~aggiornare il valore alla modifica~~
       - ~~controllare l'inserimento di caratteri non validi~~
-    - importa dati di gioco
+    - importa dati di gioco:
+      - ~~modifica del file dei punteggi~~
+      - controllo della validità del file importato
     - ~~esporta dati di gioco~~
     - ~~cancella dati di gioco~~
     - about
@@ -80,10 +82,9 @@ In questa versione del gioco è stata prevista, per il giocatore, la possibilit�
   - ~~aggiornandolo dopo ogni partita~~
   - ~~ordinando i dieci punteggi in ordine decrescente~~
 - strutturare il menù delle schermate di gioco:
-  - implementare le seguenti voci:
-    - ~~nuova partita, (la modalità è quella a cui si sta giocando);~~
-    - ~~risolvi partita (giocatore automatico);~~
-    - ~~tutorial della modalità (con comandi di gioco)~~;
+  - ~~nuova partita, (la modalità è quella a cui si sta giocando);~~
+  - ~~risolvi partita (giocatore automatico);~~
+  - ~~tutorial della modalità (con comandi di gioco)~~;
 - ~~inserire le icone nella mappa di gioco;~~
 - ~~visualizzare le icone nella mappa di esplorazione;~~
 - ~~definizione del controller di gioco per entrambe le modalità;~~

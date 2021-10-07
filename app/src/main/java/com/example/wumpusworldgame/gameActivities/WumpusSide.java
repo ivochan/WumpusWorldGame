@@ -21,6 +21,7 @@ import com.example.wumpusworldgame.services.Utility;
 import java.util.ArrayList;
 import game.session.controller.Direction;
 import game.session.score.Score;
+import game.structure.elements.PlayableCharacter;
 import game.structure.map.GameMap;
 import game.structure.map.MapConfiguration;
 /** class WumpusSide
@@ -44,6 +45,11 @@ public class WumpusSide extends AppCompatActivity {
     private GameMap em;
     //matrice di esplorazione pulita
     private GameMap clear_em;
+    //posizione del pg
+    private int[] pg_pos;
+    //indici della posizione iniziale del pg
+    private int i_pg_pos;
+    private int j_pg_pos;
     //valore del punteggio
     private Score score;
     //per la matrice di esplorazione
@@ -137,6 +143,8 @@ public class WumpusSide extends AppCompatActivity {
         em = new GameMap();
         //creazione della matrice di esplorazione pulita
         clear_em = new GameMap();
+        //inizializzazione della posizione del pg
+        pg_pos = new int[2];
         //si inizializza il punteggio
         score = new Score();
         //si imposta il nome del giocatore
@@ -144,6 +152,13 @@ public class WumpusSide extends AppCompatActivity {
 
         //riempimento delle matrici
         MapConfiguration.init(gm, em);
+
+        //si memorizza la posizione del pg
+        pg_pos = PlayableCharacter.getPGposition();
+        //si salva l'indice di riga
+        i_pg_pos=pg_pos[0];
+        //si salva l'indice di colonna
+        j_pg_pos=pg_pos[1];
 
         //dimensioni della matrice di gioco, analoghe a quelle della matrice di esplorazione
         int rows = gm.getRows();
@@ -243,6 +258,8 @@ public class WumpusSide extends AppCompatActivity {
     protected void onResume() {
         //si invoca il metodo della super classe
         super.onResume();
+        //verifica dell'esecuzione della traccia audio
+        Utility.musicPlaying(mp, this);
     }//onResume()
 
     /** metodo onPause(): void
@@ -355,6 +372,9 @@ public class WumpusSide extends AppCompatActivity {
                 intent.putExtra("game_map",gm);
                 //invio della matrice di esplorazione pulita (senza le mosse del giocatore)
                 intent.putExtra("exp_map",clear_em);
+                //invio della posizione del pg
+                intent.putExtra("i_pg_pos",i_pg_pos);
+                intent.putExtra("j_pg_pos",j_pg_pos);
                 //si avvia l'istanza dell'activity corrispondente
                 startActivity(intent);
                 //si interrompe il metodo corrente con successo

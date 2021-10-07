@@ -5,12 +5,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
 import com.example.wumpusworldgame.R;
 import com.example.wumpusworldgame.appLaunch.MainActivity;
+import com.example.wumpusworldgame.services.Utility;
+
 import java.io.File;
 import java.util.LinkedList;
 import game.session.score.ScoreUtility;
@@ -21,7 +24,7 @@ import game.session.score.ScoreUtility;
 public class RankActivity extends AppCompatActivity {
     //##### attributi di classe #####
 
-    //private MediaPlayer mp;
+    private MediaPlayer mp;
 
     //pulsante di condivisione del record
     private Button record_share_button;
@@ -77,6 +80,7 @@ public class RankActivity extends AppCompatActivity {
         //valori di default per le variabili utilizzate
         //current_player = sharedPreferences.getString("prefUsername", "---");
         current_player="";
+        current_score="";
         //lista che contiene tutti punteggi estratti dal file
         scores= new LinkedList<>();
         //stringa che contiene il primo punteggio del file
@@ -89,7 +93,7 @@ public class RankActivity extends AppCompatActivity {
         top_ten_list="";
 
         //scelta della clip audio
-        //mp = MediaPlayer.create(HeroSide.this,R.raw.the_good_fight);
+        mp = MediaPlayer.create(RankActivity.this,R.raw.victory);
 
         //##### inizializzazione campi di testo #####
 
@@ -104,26 +108,45 @@ public class RankActivity extends AppCompatActivity {
 
         //##### lettura del file dei punteggi #####
 
-        //path del file
-        String path = MainActivity.getScoreFilePath();
+        //path del file dei punteggi
+        String score_path = MainActivity.getScoreFilePath();
+        //path del file del punteggio attuale
+        String current_score_path = MainActivity.getCurrentScoreFilePath();
         //si preleva il file dei punteggi
-        File f = new File(path);
-        //si controlla che il file esista
-        if(f.exists()) {
+        File sf = new File(score_path);
+        //si preleva il file del punteggio attuale
+        File csf = new File(current_score_path);
+        //si controlla che il file dei punteggi esista
+        if(sf.exists()) {
             //si controlla che il file non sia vuoto
-            if (f.length() != 0) {
+            if (sf.length() != 0) {
                 //si aggiorna il file dei punteggi
-                ScoreUtility.updateScoreFile(path);
+                ScoreUtility.updateScoreFile(score_path);
                 //si inseriscono i dati nella lista
-                ScoreUtility.extractScoreData(path, scores);
+                ScoreUtility.extractScoreData(score_path, scores);
                 //punteggio record
                 first_score = scores.getFirst();
-                //punteggio attuale
-                last_score = ScoreUtility.extractCurrentScoreData(MainActivity.getCurrentScoreFilePath());
                 //analisi del punteggio record
                 first_score_vector = ScoreUtility.scoreLineAnalysis(first_score);
-                //analisi del punteggio attuale
-                last_score_vector = ScoreUtility.scoreLineAnalysis(last_score);
+                //nome del giocatore da record
+                best_player = first_score_vector[1];
+                //valore del punteggio da record
+                highscore = first_score_vector[0];
+                //si controlla che il file del punteggio attuale esista
+                if(csf.exists()){
+                    //si controlla che il file non sia vuoto
+                    if(csf.length()!=0){
+                        //si preleva il punteggio attuale
+                        last_score =
+                                ScoreUtility.extractCurrentScoreData(MainActivity.getCurrentScoreFilePath());
+                        //analisi del punteggio attuale
+                        last_score_vector = ScoreUtility.scoreLineAnalysis(last_score);
+                        //si preleva il nome del giocatore corrente
+                        current_player = last_score_vector[1];
+                        //si preleva il valore del punteggio attuale
+                        current_score = last_score_vector[0];
+                    }//fi
+                }//fi
                 //analisi dei dieci punteggi migliori
                 int i = 0;
                 for (String s : scores) {
@@ -136,22 +159,13 @@ public class RankActivity extends AppCompatActivity {
                         i++;
                     }//fi
                 }//for
-
-                //##### inizializzazioni dati per i campi di testo #####
-
-                //si identifica la preference relativa al nome del giocatore corrente
-                current_player = last_score_vector[1];
-                //si preleva il valore del punteggio attuale
-                current_score = last_score_vector[0];
-                //nome del giocatore da record
-                best_player = first_score_vector[1];
-                //valore del punteggio da record
-                highscore = first_score_vector[0];
             }//fi file non vuoto
         }//fi il file esiste ma e' vuoto, percio' per le variabili rimangono i valori di default
         else {
             //il file dei punteggi non esiste percio' viene creato
-            ScoreUtility.createScoreFile(path);
+            ScoreUtility.createScoreFile(score_path);
+            //lo stesso vale per il file del punteggio corrente
+            ScoreUtility.createScoreFile(current_score_path);
         }//else
 
         //##### aggiornamento dei campi di testo #####
@@ -168,8 +182,10 @@ public class RankActivity extends AppCompatActivity {
         top_ten_box.setText(top_ten_list);
 
         //##### azioni #####
+
         //verifica dell'esecuzione della traccia audio
-        //Utility.musicPlaying(mp, this);
+
+        Utility.musicPlaying(mp, this);
 
         //##### gestione dei pulsanti #####
 
@@ -337,6 +353,8 @@ public class RankActivity extends AppCompatActivity {
     protected void onResume() {
         //si invoca il metodo della super classe
         super.onResume();
+        //verifica dell'esecuzione della traccia audio
+        Utility.musicPlaying(mp, this);
     }//onResume()
 
     /** metodo onPause(): void
@@ -350,7 +368,7 @@ public class RankActivity extends AppCompatActivity {
         //si invoca il metodo della super classe
         super.onPause();
         //si ferma la clip audio quando l'app viene sospesa
-        //mp.pause();
+        mp.pause();
     }//onPause()
 
     /** metodo onStop(): void
@@ -372,7 +390,7 @@ public class RankActivity extends AppCompatActivity {
         //si invoca il metodo della super classe
         super.onDestroy();
         //si rilascia la risorsa del mediaplayer
-        //mp.release();
+        mp.release();
     }//onDestroy()
 
     /** metodo onRestart(): void

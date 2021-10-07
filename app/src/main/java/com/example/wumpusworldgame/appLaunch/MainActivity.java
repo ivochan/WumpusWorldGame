@@ -314,6 +314,7 @@ public class MainActivity extends AppCompatActivity {
      * @return score_file_path: String
      */
     public static String getScoreFilePath(){
+        //si restituisce il path
         return score_file_path;
     }//getScoreFilePath()
 
@@ -324,6 +325,7 @@ public class MainActivity extends AppCompatActivity {
      * @return score_file_path: String
      */
     public static String getCurrentScoreFilePath(){
+        //si restituisce il path
         return current_score_file_path;
     }//getScoreFilePath()
 
