@@ -135,7 +135,7 @@ In questa versione del gioco √® stata prevista, per il giocatore, la possibilit√
   - test del giocatore automatico;
   - ~~memorizzazione della matrice di gioco per la risoluzione;~~
   - ~~schermata di risoluzione;~~
-  - definizione del layout;
+  - ~~definizione del layout;~~
   - ~~inserire un flag statico per gestire celle coperte e visitate nell'adapter~~
   - ~~creare un adapter distinto da quello delle classi di gioco interattive;~~
   - ~~inserire dei flag per gestire il tentativo di sparo, in modo da disambiguare le risorse con le classi di gioco interattivo;~~
