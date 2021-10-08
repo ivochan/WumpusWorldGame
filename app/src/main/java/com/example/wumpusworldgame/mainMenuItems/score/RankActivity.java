@@ -13,7 +13,6 @@ import android.widget.TextView;
 import com.example.wumpusworldgame.R;
 import com.example.wumpusworldgame.appLaunch.MainActivity;
 import com.example.wumpusworldgame.services.Utility;
-
 import java.io.File;
 import java.util.LinkedList;
 import game.session.score.ScoreUtility;
@@ -78,7 +77,6 @@ public class RankActivity extends AppCompatActivity {
         //##### inizializzazioni #####
 
         //valori di default per le variabili utilizzate
-        //current_player = sharedPreferences.getString("prefUsername", "---");
         current_player="";
         current_score="";
         //lista che contiene tutti punteggi estratti dal file
@@ -180,8 +178,6 @@ public class RankActivity extends AppCompatActivity {
         best_score_box.setText(highscore);
         //si aggiorna il campo di testo dei dieci migliori punteggi
         top_ten_box.setText(top_ten_list);
-
-        //##### azioni #####
 
         //verifica dell'esecuzione della traccia audio
 

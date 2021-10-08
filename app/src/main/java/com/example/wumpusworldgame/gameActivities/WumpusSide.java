@@ -147,6 +147,8 @@ public class WumpusSide extends AppCompatActivity {
         pg_pos = new int[2];
         //si inizializza il punteggio
         score = new Score();
+        //se il nome scelto dal giocatore e' vuoto, si imposta il valore di default
+        if(player_name.isEmpty())player_name=getString(R.string.default_player_name);
         //si imposta il nome del giocatore
         score.setNickname(player_name);
 
