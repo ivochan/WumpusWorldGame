@@ -159,9 +159,10 @@
     <!-- about -->
     <string name="team">Team</string>
     <string name="team_info">I\'m Ivonne and this is my first app :)
-                            Thanks to Lula and Dady for precious advices!
-                            Sounds and images are taken from
-                            https://opengameart.org</string>
+        \nThanks to Ciociò, my special beta tester!:3
+        \nThanks to Lula and Dady for precious advices!
+        \nSounds and images are taken from
+        https://opengameart.org</string>
     <!-- Feedback -->
     <string name="feed">Feedback</string>
     <string name="feedback_info">Report technical issues or suggest new features!</string>

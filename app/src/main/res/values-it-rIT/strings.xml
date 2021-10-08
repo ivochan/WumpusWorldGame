@@ -162,7 +162,10 @@
     <string name="import_data_request">Vuoi caricare i tuoi vecchi dati di gioco e recuperare la tua classifica dei punteggi?\nAttenzione, perderai quella attuale!</string>
     <!-- about -->
     <string name="team">Team</string>
-    <string name="team_info">Mi chiamo Ivonne e questa è la mia prima app :)\nGrazie a Dady e Lula per i consigli!\nLe immagini ed i suoni sono presi da
+    <string name="team_info">Mi chiamo Ivonne e questa è la mia prima app :)
+        \nGrazie a Ciociò, la mia speciale beta tester!:3
+        \nGrazie a Dady e Lula per i consigli!
+        \nLe immagini ed i suoni sono presi da
         https://opengameart.org</string>
     <!-- feedback -->
     <string name="feed">Feedback</string>
