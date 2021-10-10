@@ -160,6 +160,9 @@
     <!--import data dialog -->
     <string name="import_data_title">Caricamento dei dati di gioco</string>
     <string name="import_data_request">Vuoi caricare i tuoi vecchi dati di gioco e recuperare la tua classifica dei punteggi?\nAttenzione, perderai quella attuale!</string>
+    <string name="invalid_score_file">Il file dei punteggi che hai inserito non è valido.
+        \nNon è stata apportata nessuna modifica.</string>
+    <string name="valid_score_file">La classifica dei punteggi è stata aggiornata!</string>
     <!-- about -->
     <string name="team">Team</string>
     <string name="team_info">Mi chiamo Ivonne e questa è la mia prima app :)

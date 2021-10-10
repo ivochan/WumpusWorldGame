@@ -54,12 +54,12 @@ public class GameSettingsFragment extends PreferenceFragmentCompat {
                     Uri uri = intent.getData();
                     //si preleva il path del file dei punteggi
                     String score_path = MainActivity.getScoreFilePath();
-                    //si cancella il file dei punteggi
-                    ScoreUtility.deleteScoreFile(score_path);
-                    //si crea il file dei punteggi
-                    ScoreUtility.createScoreFile(score_path);
                     //si istanzia uno string builder
                     StringBuilder total = new StringBuilder();
+                    //variabile ausiliaria per il controllo della riga
+                    boolean check = false;
+                    //variabile ausiliaria per il controllo sul file
+                    boolean valid_file = true;
                     //blocco try-catch
                     try {
                         //si apre il file puntato dall'uri (quello selezionato dall'utente)
@@ -68,15 +68,38 @@ public class GameSettingsFragment extends PreferenceFragmentCompat {
                         BufferedReader r = new BufferedReader(new InputStreamReader(in));
                         //si iterano le righe del file
                         for(String line=""; (line = r.readLine())!=null;){
-                            //si inseriscono nello string builder
-                            total.append(line).append('\n');
+                            //si controlla la riga del file
+                            check = ScoreUtility.scoreLineCheck(line);
+                            //se la riga e valida
+                            if(check) {
+                                //si inseriscono nello string builder
+                                total.append(line).append('\n');
+                            }//fi
+                            else {
+                                //la riga non e' valida
+                                valid_file = false;
+                            }//else
                         }//for
                         //si converte tutto in stringa
                         String content = total.toString();
-                        //si scrive nel file dei punteggi utilizzato dall'app
-                        ScoreUtility.writeScoreFile(MainActivity.getScoreFilePath(),content);
-                        //si preleva il oath del file del punteggio attuale
-                        String current_score = MainActivity.getCurrentScoreFilePath();
+                        //si controlla la validita' del file
+                        if(valid_file){
+                            //si cancella il file dei punteggi attuale
+                            ScoreUtility.deleteScoreFile(score_path);
+                            //si crea il file dei punteggi
+                            ScoreUtility.createScoreFile(score_path);
+                            //si scrive nel file dei punteggi utilizzato dall'app
+                            ScoreUtility.writeScoreFile(MainActivity.getScoreFilePath(),content);
+                            //si visualizza un toast informativo per l'utente
+                            Toast.makeText(getContext(),getContext().getString(R.string.valid_score_file),
+                                    Toast.LENGTH_LONG).show();
+                        }//fi
+                        else {
+                            //se non e' valido si mantiene il file dei punteggi corrente
+                            //si visualizza un toast informativo per l'utente
+                            Toast.makeText(getActivity(),getActivity().getString(R.string.invalid_score_file),
+                                    Toast.LENGTH_LONG).show();
+                        }//esle
                     } catch (IOException e) {
                         e.printStackTrace();
                     }//end try-catch
@@ -126,7 +149,6 @@ public class GameSettingsFragment extends PreferenceFragmentCompat {
         Preference importGameData = findPreference("prefImportData");
         //si gestisce l'importazione dei dati di gioco
         importScoreData(importGameData);
-
 
     }//onCreatePreference
 
@@ -290,7 +312,6 @@ public class GameSettingsFragment extends PreferenceFragmentCompat {
                         //si specifica che il file verra' selezionato
                         chooseFile.addCategory(Intent.CATEGORY_OPENABLE);
                         //si specifica che si tratta di un file di testo
-                        //chooseFile.setType("text/plain");
                         chooseFile.setType("text/*");
                         //permessi
                         chooseFile.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);

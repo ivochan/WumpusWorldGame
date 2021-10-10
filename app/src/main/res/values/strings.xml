@@ -155,7 +155,9 @@
     <string name="import_data_title">Importing game data</string>
     <string name="import_data_request">Do you want to upload a previous version of your game data and restore your score ranking?
         \nBe careful, you\'ll lose the current one!</string>
-
+    <string name="invalid_score_file">Score file you\'ve entered is invalid.
+        \nNo changes\'ve been made</string>
+    <string name="valid_score_file">Score rank\'s been updated!</string>
     <!-- about -->
     <string name="team">Team</string>
     <string name="team_info">I\'m Ivonne and this is my first app :)
@@ -264,4 +266,5 @@
     <string name="up_button">up button icon</string>
     <string name="right_button">right button icon</string>
     <string name="down_button">down button icon</string>
+
 </resources>

@@ -35,7 +35,7 @@ In questa versione del gioco è stata prevista, per il giocatore, la possibilit�
       - ~~controllare l'inserimento di caratteri non validi~~
     - importa dati di gioco:
       - ~~modifica del file dei punteggi~~
-      - controllo della validità del file importato
+      - i~~controllo della validità del file importatoi~~
     - ~~esporta dati di gioco~~
     - ~~cancella dati di gioco~~
     - about
