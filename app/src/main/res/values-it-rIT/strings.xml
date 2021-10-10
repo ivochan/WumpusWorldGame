@@ -247,6 +247,11 @@
     <string name="solution_request">Hey, non imbrogliare! Hai già visto la soluzione...
                                     \nInizia una nuova partita!</string>
     <string name="default_player_name">Giocatore</string>
+    <string name="run_path_title">Percorso effettuato</string>
+    <string name="game_over">Partita terminata!</string>
+    <string name="nothing_to_do">Non c\'è niente da risolvere!\nUff...</string>
+    <string name="game_in_progress">Risolvo la partita che hai lasciato a metà...</string>
+    <string name="solution">Ecco la tua soluzione</string>
 
     <!-- Immagini -->
     <string name="dark_forest">foresta_oscura_immagine_main_activity</string>

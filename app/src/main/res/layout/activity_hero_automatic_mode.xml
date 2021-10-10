@@ -121,7 +121,7 @@
 
     <TextView
         android:id="@+id/run_box"
-        android:layout_width="347dp"
+        android:layout_width="351dp"
         android:layout_height="168dp"
         android:padding="10dp"
         android:text=""

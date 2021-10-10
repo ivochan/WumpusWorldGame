@@ -246,6 +246,11 @@
     <string name="solution_request">Hey, don\'t cheat! You\'ve already seen solution...
         \nStart a new game!</string>
     <string name="default_player_name">Player</string>
+    <string name="run_path_title">Followed path</string>
+    <string name="game_over">Game over!</string>
+    <string name="nothing_to_do">There\'s nothing to solve\nUgh...</string>
+    <string name="game_in_progress">Solving the game you\'ve left pending...</string>
+    <string name="solution">Here is your solution</string>
 
     <!-- Images -->
     <string name="dark_forest">dark_forest_main_activity_image</string>

@@ -17,7 +17,7 @@ import game.structure.cell.Cell;
 import game.structure.elements.PlayableCharacter;
 import game.structure.map.GameMap;
 /** class HeroAutomaticMode
- *
+ * giocatore automatico
  */
 public class HeroAutomaticMode extends AppCompatActivity {
     //##### attributi di classe #####
@@ -91,7 +91,7 @@ public class HeroAutomaticMode extends AppCompatActivity {
         //si identifica il campo di testo che conterra' la run list
         run_box = findViewById(R.id.run_box);
         //messaggio da visualizzare come introduzione
-        intro_message = "Ecco la tua soluzione" + " " + player_name + "!";
+        intro_message = this.getText(R.string.solution) + " " + player_name + "!";
 
         //##### esecuzione delle operazioni #####
 
@@ -125,25 +125,24 @@ public class HeroAutomaticMode extends AppCompatActivity {
         //controllo
         if(!Starter.getGameStart()){
             //la partita nella classe di gioco e' terminata
-            text_message.setText("Partita completata!");
-            game_message.setText("Non c'è niente da risolvere!\nUff...");
+            text_message.setText(this.getText(R.string.game_over));
+            game_message.setText(this.getText(R.string.nothing_to_do));
         }
         else {
             solution_request = true;
             //path
             LinkedList<Cell> run_path = new LinkedList<>();
             //la partita nella classe di gioco e' in corso
-            text_message.setText("Risolvo la partita che hai lasciato a metà...");
+            text_message.setText(this.getText(R.string.game_in_progress));
             //game_message.setText("Mappa di gioco:\n"+gameMap);
             //si istanzia il giocatore automatico
             int status = AutomaticPlayer.solveGame(gameMap, expMap,run_path);
             //percorso compiuto
             String path = AutomaticPlayer.runPathToString(run_path);
             //visualizzazione del percorso
-            game_message.setText("Percorso:\n"+path);
-            //visualizzazione della mappa
-            run_box.setText(""+AutomaticPlayer.printStatusMessage(status)+
-                                    "\nMappa di esplorazione:\n"+expMap);
+            run_box.setText(this.getText(R.string.run_path_title)+":\n\n"+path);
+            //visualizzazione della mappa per debug
+            //game_message.setText(""+AutomaticPlayer.printStatusMessage(status)+"\nMappa di esplorazione:\n"+expMap);
             //si disabilita la possibilita' di continuare la partita una volta
             //che l'utente ritorna alla schermata della sessione di gioco
             Starter.setGameStart(false);
