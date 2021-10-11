@@ -159,7 +159,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.23"
-        app:srcCompat="@drawable/open_chest" />
+        app:srcCompat="@drawable/opened_chest" />
 
     <TextView
         android:id="@+id/automatic_game_status"
