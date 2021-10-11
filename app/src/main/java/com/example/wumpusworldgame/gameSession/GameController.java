@@ -5,6 +5,7 @@ import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
@@ -719,12 +720,22 @@ public class GameController {
             }//fi
             //si assegna il nome al file che conterra lo screenshot
             String path = mainDir + "/"+"WumpusWorldGameMap" + ".png";
+            //si crea l'immagine bitmap dello screenshot
+            Bitmap bitmap = Bitmap.createBitmap(view.getWidth(), view.getHeight(), Bitmap.Config.ARGB_8888);
+            //si cattura l'immagine dallo schermo
+            Canvas canvas = new Canvas(bitmap);
+            //si imposta un colore di default
+            canvas.drawColor(Color.WHITE);
+            //si crea l'immagine vera e propria
+            view.draw(canvas);
+            /* view.getDrawingCache() is deprecated in Android API 28
             //si abilita la possibilita' di tenerlo in cache
-            view.setDrawingCacheEnabled(true);
+            //view.setDrawingCacheEnabled(true);
             //si crea l'immagine bitmap di questo screenshot
-            Bitmap bitmap = Bitmap.createBitmap(view.getDrawingCache());
+            //Bitmap bitmap = Bitmap.createBitmap(view.getDrawingCache());
             //si disabilita la possibilita' di tenerlo in cache
-            view.setDrawingCacheEnabled(false);
+            //view.setDrawingCacheEnabled(false);
+            */
             //si memorizza il file con il contenuto bitmap nel path definito prima
             imageFile = new File(path);
             //si crea il file vero e proprio
