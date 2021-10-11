@@ -14,7 +14,6 @@ public class GamePadMainTutorialActivity extends AppCompatActivity {
     //pulsante avanti
     private Button back_button;
 
-    //TODO riproduttore audio
     //private MediaPlayer mp;
 
     /** metodo onCreate(Bundle): void

@@ -645,12 +645,22 @@ public class GameController {
         });//setPositiveButton(String, DialogInterface)
         //si preleva il componente grafico di cui fare lo screenshot
         View view = currentActivity.findViewById(R.id.grid_view);
+        //si crea l'immagine bitmap dello screenshot
+        Bitmap bitmap = Bitmap.createBitmap(view.getWidth(), view.getHeight(), Bitmap.Config.ARGB_8888);
+        //si cattura l'immagine dallo schermo
+        Canvas canvas = new Canvas(bitmap);
+        //si imposta un colore di default
+        canvas.drawColor(Color.WHITE);
+        //si crea l'immagine vera e propria
+        view.draw(canvas);
+        /* metodo deprecato
         //si abilita la cattura dello schermo
         view.setDrawingCacheEnabled(true);
         //si crea l'immagine bitmap di questo screenshot
         Bitmap bitmap = Bitmap.createBitmap(view.getDrawingCache());
         //si disabilita la possibilita' di tenerlo in cache
         view.setDrawingCacheEnabled(false);
+        */
         //si istanzia un oggetto di tipo immagine
         ImageView imageView = new ImageView(currentActivity);
         //si specifica il suo contenuto con la cattura dello schermo effettuata

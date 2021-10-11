@@ -17,7 +17,6 @@ public class MainTutorialActivity extends AppCompatActivity {
     //intent della pagina successiva
     private Intent next_page;
 
-    //TODO riproduttore audio
     //private MediaPlayer mp;
 
     /** metodo onCreate(Bundle): void

@@ -97,7 +97,7 @@ In questa versione del gioco √® stata prevista, per il giocatore, la possibilit√
   - ~~funzione che impedisce di effettuare altre mosse al termine della partita;~~
   - ~~metodo che si occupa di tentare di colpire il nemico;~~
   - ~~metodo che verifica se si ha a disposizione un tentativo di colpire il nemico;~~
-- sostituire i metodi deprecati;
+- ~~sostituire i metodi deprecati;~~
 - dark mode:
   - definire i colori principali
   - creare le dialog adeguate
