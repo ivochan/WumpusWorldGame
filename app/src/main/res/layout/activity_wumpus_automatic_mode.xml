@@ -147,5 +147,48 @@
         app:layout_constraintTop_toTopOf="@+id/divider_top"
         app:layout_constraintVertical_bias="0.001" />
 
+    <ImageView
+        android:id="@+id/opened_chest_image"
+        android:layout_width="63dp"
+        android:layout_height="53dp"
+        android:contentDescription="@string/opened_chest"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.126"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.23"
+        app:srcCompat="@drawable/open_chest" />
+
+    <TextView
+        android:id="@+id/automatic_game_status"
+        android:layout_width="270dp"
+        android:layout_height="53dp"
+        android:gravity="center"
+        android:text=""
+        android:textColor="@color/sugar_paper"
+        android:textSize="18sp"
+        android:textStyle="italic|bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.801"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.23" />
+
+    <ImageView
+        android:id="@+id/closed_chest_image"
+        android:layout_width="67dp"
+        android:layout_height="62dp"
+        android:contentDescription="@string/closed_chest"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.116"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.219"
+        app:srcCompat="@drawable/closed_chest" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

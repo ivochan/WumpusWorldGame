@@ -252,6 +252,8 @@
     <string name="nothing_to_do">Non c\'è niente da risolvere!\nUff...</string>
     <string name="game_in_progress">Risolvo la partita che hai lasciato a metà...</string>
     <string name="solution">Ecco la tua soluzione</string>
+    <string name="automatic_mode_win">Yuhu, ho vinto!</string>
+    <string name="automatic_mode_lose">Oh no, ho perso :(</string>
 
     <!-- Immagini -->
     <string name="dark_forest">foresta_oscura_immagine_main_activity</string>
@@ -267,10 +269,13 @@
     <string name="red_monster_image">little red monster with open mouth</string>
     <string name="share_icon">image of share action</string>
     <string name="trophy">image of a golden trophy using in score activity</string>
+    <string name="opened_chest">immagine di un forziere aperto</string>
+    <string name="closed_chest">immagine di un forziere chiuso</string>
     <string name="hit_button">hit button icon</string>
     <string name="left_button">left button icon</string>
     <string name="up_button">up button icon</string>
     <string name="right_button">right button icon</string>
     <string name="down_button">down button icon</string>
+
 
 </resources>

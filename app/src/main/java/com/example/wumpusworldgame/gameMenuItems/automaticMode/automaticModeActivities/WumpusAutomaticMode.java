@@ -2,7 +2,9 @@ package com.example.wumpusworldgame.gameMenuItems.automaticMode.automaticModeAct
 //serie di import
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceManager;
@@ -16,8 +18,8 @@ import game.session.configuration.Starter;
 import game.structure.cell.Cell;
 import game.structure.elements.PlayableCharacter;
 import game.structure.map.GameMap;
-/** class HeroAutomaticMode
- *
+/** class WumpusAutomaticMode
+ * giocatore automatico per la modalita' wumpus
  */
 public class WumpusAutomaticMode extends AppCompatActivity {
     //##### attributi di classe #####
@@ -134,16 +136,38 @@ public class WumpusAutomaticMode extends AppCompatActivity {
             //path
             LinkedList<Cell> run_path = new LinkedList<>();
             //la partita nella classe di gioco e' in corso
-            text_message.setText("Risolvo la partita che hai lasciato a metà...");
+            text_message.setText(this.getText(R.string.game_in_progress));
             //game_message.setText("Mappa di gioco:\n"+gameMap);
             //si istanzia il giocatore automatico
             int status = AutomaticPlayer.solveGame(gameMap, expMap,run_path);
             //percorso compiuto
             String path = AutomaticPlayer.runPathToString(run_path);
             //visualizzazione del percorso
-            game_message.setText("Percorso:\n"+path);
-            run_box.setText(""+AutomaticPlayer.printStatusMessage(status)+
-                    "\nMappa di esplorazione:\n"+expMap);
+            run_box.setText(this.getText(R.string.run_path_title)+":\n\n"+path);
+            //visualizzazione della mappa per debug
+            //game_message.setText(""+AutomaticPlayer.printStatusMessage(status)+"\nMappa di esplorazione:\n"+expMap);
+            //si preleva il messaggio di fine partita
+            String status_message = AutomaticPlayer.printStatusMessage(status);
+            //si preleva il campo di testo associato al messaggio di fine partita
+            TextView status_text = (TextView) findViewById(R.id.automatic_game_status);
+            //si controlla il valore
+            if(status_message.equals("winner")) {
+                //si identifica l'immagine del forziere aperto
+                ImageView chest = (ImageView) findViewById(R.id.opened_chest_image);
+                //si rende visibile
+                chest.setVisibility(View.VISIBLE);
+                //si visualizza il messaggio di vittoria
+                status_text.setText(R.string.automatic_mode_win);
+            }//fi
+            else {
+                //partita persa
+                //si identifica l'immagine del forziere chiuso
+                ImageView chest = (ImageView) findViewById(R.id.closed_chest_image);
+                //si rende visibile
+                chest.setVisibility(View.VISIBLE);
+                //si visualizza il messaggio di vittoria
+                status_text.setText(R.string.automatic_mode_lose);
+            }//esle
             //si disabilita la possibilita' di continuare la partita una volta
             //che l'utente ritorna alla schermata della sessione di gioco
             Starter.setGameStart(false);

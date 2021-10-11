@@ -2,7 +2,9 @@ package com.example.wumpusworldgame.gameMenuItems.automaticMode.automaticModeAct
 //serie di import
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceManager;
@@ -143,10 +145,32 @@ public class HeroAutomaticMode extends AppCompatActivity {
             run_box.setText(this.getText(R.string.run_path_title)+":\n\n"+path);
             //visualizzazione della mappa per debug
             //game_message.setText(""+AutomaticPlayer.printStatusMessage(status)+"\nMappa di esplorazione:\n"+expMap);
+            //si preleva il messaggio di fine partita
+            String status_message = AutomaticPlayer.printStatusMessage(status);
+            //si preleva il campo di testo associato al messaggio di fine partita
+            TextView status_text = (TextView) findViewById(R.id.automatic_game_status);
+            //si controlla il valore
+            if(status_message.equals("winner")) {
+                //si identifica l'immagine del forziere aperto
+                ImageView chest = (ImageView) findViewById(R.id.opened_chest_image);
+                //si rende visibile
+                chest.setVisibility(View.VISIBLE);
+                //si visualizza il messaggio di vittoria
+                status_text.setText(R.string.automatic_mode_win);
+            }//fi
+            else {
+                //partita persa
+                //si identifica l'immagine del forziere chiuso
+                ImageView chest = (ImageView) findViewById(R.id.closed_chest_image);
+                //si rende visibile
+                chest.setVisibility(View.VISIBLE);
+                //si visualizza il messaggio di vittoria
+                status_text.setText(R.string.automatic_mode_lose);
+            }//esle
             //si disabilita la possibilita' di continuare la partita una volta
             //che l'utente ritorna alla schermata della sessione di gioco
             Starter.setGameStart(false);
-        }
+        }//
 
         //###### visualizzazione  ######
 

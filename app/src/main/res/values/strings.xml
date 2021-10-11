@@ -251,6 +251,8 @@
     <string name="nothing_to_do">There\'s nothing to solve\nUgh...</string>
     <string name="game_in_progress">Solving the game you\'ve left pending...</string>
     <string name="solution">Here is your solution</string>
+    <string name="automatic_mode_win">Yuppie, I win!</string>
+    <string name="automatic_mode_lose">Ouch, I lose :(</string>
 
     <!-- Images -->
     <string name="dark_forest">dark_forest_main_activity_image</string>
@@ -266,6 +268,8 @@
     <string name="red_monster_image">little red monster with open mouth</string>
     <string name="share_icon">image of share action</string>
     <string name="trophy">image of a golden trophy using in score activity</string>
+    <string name="opened_chest">image of an opened chest</string>
+    <string name="closed_chest">image of a closed chest</string>
     <string name="hit_button">hit button icon</string>
     <string name="left_button">left button icon</string>
     <string name="up_button">up button icon</string>
