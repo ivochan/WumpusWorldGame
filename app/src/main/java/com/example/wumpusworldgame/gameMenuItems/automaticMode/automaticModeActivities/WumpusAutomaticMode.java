@@ -20,6 +20,9 @@ import game.structure.elements.PlayableCharacter;
 import game.structure.map.GameMap;
 /** class WumpusAutomaticMode
  * giocatore automatico per la modalita' wumpus
+ * che risolvera' la partita
+ * utilizzando la mappa con cui stava giocando l'utente
+ * prima di richiedere la soluzione
  */
 public class WumpusAutomaticMode extends AppCompatActivity {
     //##### attributi di classe #####
@@ -114,6 +117,7 @@ public class WumpusAutomaticMode extends AppCompatActivity {
         //matrice di esplorazione
         expMap = (GameMap)getIntent().getSerializableExtra("exp_map");
 
+        /*
         //indice riga del pg
         int i_pg_pos = getIntent().getIntExtra("i_pg_pos",-1);
         //indice colonna del pg
@@ -122,6 +126,7 @@ public class WumpusAutomaticMode extends AppCompatActivity {
         int [] pg_pos = { i_pg_pos,j_pg_pos};
         //si modifica la posizione del pg ripristinandola al suo valore iniziale
         PlayableCharacter.setPGposition(pg_pos);
+        */
 
         //##### risoluzione #####
 
@@ -144,6 +149,8 @@ public class WumpusAutomaticMode extends AppCompatActivity {
             String path = AutomaticPlayer.runPathToString(run_path);
             //visualizzazione del percorso
             run_box.setText(this.getText(R.string.run_path_title)+":\n\n"+path);
+            //aggiornamento della mappa di esplorazione per la grafica
+            AutomaticPlayer.updateExplorationMap(expMap);
             //visualizzazione della mappa per debug
             //game_message.setText(""+AutomaticPlayer.printStatusMessage(status)+"\nMappa di esplorazione:\n"+expMap);
             //si preleva il messaggio di fine partita

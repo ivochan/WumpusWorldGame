@@ -21,7 +21,6 @@ import com.example.wumpusworldgame.services.Utility;
 import java.util.ArrayList;
 import game.session.controller.Direction;;
 import game.session.score.Score;
-import game.structure.elements.PlayableCharacter;
 import game.structure.map.GameMap;
 import game.structure.map.MapConfiguration;
 /** class HeroSide
@@ -43,13 +42,6 @@ public class HeroSide extends AppCompatActivity {
     private GameMap gm;
     //matrice di esplorazione
     private GameMap em;
-    //matrice di esplorazione pulita
-    private GameMap clear_em;
-    //posizione del pg
-    private int[] pg_pos;
-    //indici della posizione iniziale del pg
-    private int i_pg_pos;
-    private int j_pg_pos;
     //valore del punteggio
     private Score score;
     //per la matrice di esplorazione
@@ -142,10 +134,6 @@ public class HeroSide extends AppCompatActivity {
         gm = new GameMap();
         //creazione della matrice di esplorazione
         em = new GameMap();
-        //creazione della matrice di esplorazione pulita
-        clear_em = new GameMap();
-        //inizializzazione della posizione del pg
-        pg_pos = new int[2];
         //si inizializza il punteggio
         score = new Score();
         //se il nome scelto dal giocatore e' vuoto, si imposta il valore di default
@@ -156,23 +144,9 @@ public class HeroSide extends AppCompatActivity {
         //riempimento delle matrici
         MapConfiguration.init(gm, em);
 
-        //si memorizza la posizione del pg
-        pg_pos = PlayableCharacter.getPGposition();
-        //si salva l'indice di riga
-        i_pg_pos=pg_pos[0];
-        //si salva l'indice di colonna
-        j_pg_pos=pg_pos[1];
-
         //dimensioni della matrice di gioco, analoghe a quelle della matrice di esplorazione
         int rows = gm.getRows();
         int columns = gm.getColumns();
-
-        //copio la matrice di esplorazione nella matrice di eplorazione da tenere pulita
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < columns; j++) {
-                clear_em.getMapCell(i,j).copyCellSpecs(em.getMapCell(i,j));
-            }//for colonne
-        }//for righe
 
         //##### riempimento delle matrici #####
 
@@ -241,6 +215,75 @@ public class HeroSide extends AppCompatActivity {
         });//setOnClickListener(View.OnClickListener())
 
     }//onCreate(Bundle)
+
+    //##### metodi per la gestione del menu #####
+
+    /** metodo onCreateOptionsMenu(Menu): boolean
+     * questo metodo serve per visualizzare il menu
+     * nella activity corrente
+     * @param menu: Menu, oggetto che costituisce il menu
+     * @return true: boolean
+     */
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        //si preleva l'oggetto inflater associato al menu
+        MenuInflater inflater = getMenuInflater();
+        //si definisce il layout del menu
+        inflater.inflate(R.menu.game_menu,menu);
+        //si visualizza il menu nel layout (tre puntini in alto a destra)
+        return true;
+    }//onCreateOptionsMenu(Menu)
+
+    /** metodo onOptionsItemSelected(MenuItem): boolean
+     * questo metodo si occupa di gestire le azioni che
+     * devono essere svolte quando si seleziona una delle
+     * voci del menu.
+     * @param item: MenuItem, voce del menu;
+     * @return true: boolean, per qualsiasi voce del menu che
+     *                        e' stata gestita, altrimenti
+     *                        super.onOptionsItemSelected(item).
+     */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        //variabile ausiliaria per la nuova activity
+        Intent intent;
+        //id della voce del menu che e' stata selezionata
+        int itemId = item.getItemId();
+        //switch case sulle varie voci del menu
+        switch(itemId){
+            //NUOVA PARTITA
+            case R.id.item_new_game:
+                //si chiude l'activity corrente
+                this.finish();
+                //si esegue un'altra istanza di questa activity, richiamando il metodo onCreate()
+                startActivity(starterIntent);
+                //si poteva usare recreate() ma ha l'animazione per la transizione
+                return true;
+            //RISOLVI
+            case R.id.item_solve_game:
+                //creazione dell'intent
+                intent = new Intent(this, HeroAutomaticMode.class);
+                //invio della mappa di gioco
+                intent.putExtra("game_map",gm);
+                //invio della matrice di esplorazione
+                intent.putExtra("exp_map",em);
+                //si avvia l'istanza dell'activity corrispondente
+                startActivity(intent);
+                //si interrompe il metodo corrente con successo
+                return true;
+            //TUTORIAL
+            case R.id.item_game_tutorial:
+                //creazione dell'intent
+                intent = new Intent(this, HeroModeTutorial.class);
+                //si avvia l'istanza dell'activity corrispondente
+                startActivity(intent);
+                //si interrompe il metodo corrente con successo
+                return true;
+            default:
+                //caso di default
+                return super.onOptionsItemSelected(item);
+        }//end switch
+    }//onOptionsItemSelected(MenuItem)
 
     //##### metodi per la gestione dell'activity #####
 
@@ -324,77 +367,5 @@ public class HeroSide extends AppCompatActivity {
         //si invoca il metodo della super classe
         super.onBackPressed();
     }//onBackPressed()
-
-    //##### metodi per la gestione del menu #####
-
-    /** metodo onCreateOptionsMenu(Menu): boolean
-     * questo metodo serve per visualizzare il menu
-     * nella activity corrente
-     * @param menu: Menu, oggetto che costituisce il menu
-     * @return true: boolean
-     */
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu){
-        //si preleva l'oggetto inflater associato al menu
-        MenuInflater inflater = getMenuInflater();
-        //si definisce il layout del menu
-        inflater.inflate(R.menu.game_menu,menu);
-        //si visualizza il menu nel layout (tre puntini in alto a destra)
-        return true;
-    }//onCreateOptionsMenu(Menu)
-
-    /** metodo onOptionsItemSelected(MenuItem): boolean
-     * questo metodo si occupa di gestire le azioni che
-     * devono essere svolte quando si seleziona una delle
-     * voci del menu.
-     * @param item: MenuItem, voce del menu;
-     * @return true: boolean, per qualsiasi voce del menu che
-     *                        e' stata gestita, altrimenti
-     *                        super.onOptionsItemSelected(item).
-     */
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item){
-        //variabile ausiliaria per la nuova activity
-        Intent intent;
-        //id della voce del menu che e' stata selezionata
-        int itemId = item.getItemId();
-        //switch case sulle varie voci del menu
-        switch(itemId){
-            //NUOVA PARTITA
-            case R.id.item_new_game:
-                //si chiude l'activity corrente
-                this.finish();
-                //si esegue un'altra istanza di questa activity, richiamando il metodo onCreate()
-                startActivity(starterIntent);
-                //si poteva usare recreate() ma ha l'animazione per la transizione
-                return true;
-            //RISOLVI
-            case R.id.item_solve_game:
-                //creazione dell'intent
-                intent = new Intent(this, HeroAutomaticMode.class);
-                //invio della mappa di gioco
-                intent.putExtra("game_map",gm);
-                //invio della matrice di esplorazione pulita (senza le mosse del giocatore)
-                intent.putExtra("exp_map",clear_em);
-                //invio della posizione del pg
-                intent.putExtra("i_pg_pos",i_pg_pos);
-                intent.putExtra("j_pg_pos",j_pg_pos);
-                //si avvia l'istanza dell'activity corrispondente
-                startActivity(intent);
-                //si interrompe il metodo corrente con successo
-                return true;
-            //TUTORIAL
-            case R.id.item_game_tutorial:
-                //creazione dell'intent
-                intent = new Intent(this, HeroModeTutorial.class);
-                //si avvia l'istanza dell'activity corrispondente
-                startActivity(intent);
-                //si interrompe il metodo corrente con successo
-                return true;
-            default:
-                //caso di default
-                return super.onOptionsItemSelected(item);
-        }//end switch
-    }//onOptionsItemSelected(MenuItem)
 
 }//end HeroSide

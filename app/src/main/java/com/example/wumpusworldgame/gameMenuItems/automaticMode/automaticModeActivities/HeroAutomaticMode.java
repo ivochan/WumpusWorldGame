@@ -16,10 +16,11 @@ import java.util.LinkedList;
 import game.automatic_player.AutomaticPlayer;
 import game.session.configuration.Starter;
 import game.structure.cell.Cell;
-import game.structure.elements.PlayableCharacter;
 import game.structure.map.GameMap;
 /** class HeroAutomaticMode
- * giocatore automatico
+ * giocatore automatico che risolvera' la partita
+ * utilizzando la mappa con cui stava giocando l'utente
+ * prima di richiedere la soluzione
  */
 public class HeroAutomaticMode extends AppCompatActivity {
     //##### attributi di classe #####
@@ -113,15 +114,6 @@ public class HeroAutomaticMode extends AppCompatActivity {
         //matrice di esplorazione
         expMap = (GameMap)getIntent().getSerializableExtra("exp_map");
 
-        //indice riga del pg
-        int i_pg_pos = getIntent().getIntExtra("i_pg_pos",-1);
-        //indice colonna del pg
-        int j_pg_pos = getIntent().getIntExtra("j_pg_pos",-1);
-        //si inseriscono gli indici in un vettore posizione
-        int [] pg_pos = { i_pg_pos,j_pg_pos};
-        //si modifica la posizione del pg ripristinandola al suo valore iniziale
-        PlayableCharacter.setPGposition(pg_pos);
-
         //##### risoluzione #####
 
         //controllo
@@ -143,6 +135,8 @@ public class HeroAutomaticMode extends AppCompatActivity {
             String path = AutomaticPlayer.runPathToString(run_path);
             //visualizzazione del percorso
             run_box.setText(this.getText(R.string.run_path_title)+":\n\n"+path);
+            //aggiornamento della mappa di esplorazione per la grafica
+            AutomaticPlayer.updateExplorationMap(expMap);
             //visualizzazione della mappa per debug
             //game_message.setText(""+AutomaticPlayer.printStatusMessage(status)+"\nMappa di esplorazione:\n"+expMap);
             //si preleva il messaggio di fine partita
