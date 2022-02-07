@@ -13,7 +13,7 @@ import android.widget.Button;
 import com.example.wumpusworldgame.R;
 import com.example.wumpusworldgame.gameActivities.HeroSide;
 import com.example.wumpusworldgame.gameActivities.WumpusSide;
-import com.example.wumpusworldgame.mainMenuItems.GameInformationActivity;
+import com.example.wumpusworldgame.mainMenuItems.info.GameInformationActivity;
 import com.example.wumpusworldgame.mainMenuItems.score.RankActivity;
 import com.example.wumpusworldgame.mainMenuItems.tutorial.MainTutorialActivity;
 import com.example.wumpusworldgame.mainMenuItems.settings.GameSettingsActivity;
@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
         //##### inizializzazioni #####
 
         //testo animato
-        typeWriter = findViewById(R.id.storia);
+        typeWriter = findViewById(R.id.story);
 
         //riproduttore audio
         mp = MediaPlayer.create(MainActivity.this,R.raw.fato_shadow_main_menu);

@@ -142,6 +142,3 @@ In questa versione del gioco √® stata prevista, per il giocatore, la possibilit√
   - ~~aggiornare il campo di testo della disponibilita' del colpo;~~
 
 
-
-
-

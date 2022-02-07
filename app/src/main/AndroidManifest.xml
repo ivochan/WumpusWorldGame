@@ -12,7 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.DayNight">
         <!-- activity principale, launcher dell'app -->
-        <activity android:name=".appLaunch.MainActivity">
+        <activity android:name=".appLaunch.MainActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -36,7 +37,7 @@
             android:parentActivityName=".appLaunch.MainActivity" />
         <!-- Menu Activity -->
         <activity
-            android:name=".mainMenuItems.GameInformationActivity"
+            android:name=".mainMenuItems.info.GameInformationActivity"
             android:label="@string/game_info_title"
             android:parentActivityName=".appLaunch.MainActivity" />
         <activity

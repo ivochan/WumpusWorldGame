@@ -28,16 +28,15 @@
 
     <!-- MainActivity Elements -->
     <string name="game_title">Hunt the Wumpus...or not?</string>
-    <string name="game_intro">Hi...iiiiiih...Uh... Hello!
-        \n\nYou have been carried in the Wumpus\' world, a dark and dangerous place...
-        \nDo you want to test yourself?
-        \nAre you looking for glory and richness?
-        \nWill you find out where the monster is and steal its treasures?
+    <string name="game_intro">
+        Hi...iiiiiih...Uh... Hello!
+        \n\nYou\'ve been carried in the Wumpus\' world, a dark and dangerous place...
+        \nDo you want to test yourself?Are you looking for glory and richness?
+        \nWell, let\'s find out where the monster is and steal its treasures.
         \nWill you capable of survive his anger?
-        \n\nOr wait...Are you the creature that is been chased by the hunter?Yep, it is you!
-        \nWill you protect your lair? \nWill survive the hunt?
-        \n\nThe choice is yours…
-        \n\nExperience history as it has already been written or live into the world of the Wumpus
+        \n\nOr wait...Are you the creature that\'s been chased by the hunter?Yep, it\'s you!
+        \nWill you protect your lair?Will survive the hunt?
+        \n\nExperience history as it\'s already been written or live into the world of the Wumpus
             that now is upside down!</string>
     <string name="hero">HERO</string>
     <string name="hero_text">Here you are! Let\'s go on adventure, brave hero!</string>

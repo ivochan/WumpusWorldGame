@@ -32,17 +32,12 @@
     <string name="game_intro">
         Cia....aaaaargh...Ehm...Ciao!
         \n\nSei stato trasportato nel mondo del Wumpus, una foresta oscura e pericolosa...
-        \nVuoi metterti alla prova?
-        \nSei alla ricerca di gloria e ricchezze?
+        \nVuoi metterti alla prova?Sei alla ricerca di gloria e ricchezze?
         \nAllora scopri dove si nasconde il mostro e saccheggia la sua caverna piena di tesori!
-        \n\nOh, un momento...
-        \nMa sei tu, il Wumpus, povera creatura!
-        \nDifenderai la tua tana?
-        \nSfuggirai al cacciatore?
-        \n\nA te la scelta…
+        \n\nOh, un momento...Ma sei tu, il Wumpus, povera creatura!
+        \nDifenderai la tua tana?Sfuggirai al cacciatore?
         \n\nVivi la storia come già è stata scritta oppure buttati a capofitto
-        in un mondo del Wumpus tutto sotto sopra!
-    </string>
+        in un mondo del Wumpus tutto sotto sopra!</string>
     <string name="hero">AVVENTURIERO</string>
     <string name="hero_text">Inizia l\'avventura, coraggioso eroe!</string>
     <string name="wumpus">WUMPUS</string>

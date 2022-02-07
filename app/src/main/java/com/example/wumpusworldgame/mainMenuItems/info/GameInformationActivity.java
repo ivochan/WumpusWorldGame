@@ -1,4 +1,4 @@
-package com.example.wumpusworldgame.mainMenuItems;
+package com.example.wumpusworldgame.mainMenuItems.info;
 //serie di import
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -14,7 +14,7 @@ public class GameInformationActivity extends AppCompatActivity {
     //##### attributi di classe #####
 
    //riproduttore audio
-    MediaPlayer mp;
+    private MediaPlayer mp;
 
     //questo metodo viene invocato alla creazione dell'Activity
     /** metodo onCreate()

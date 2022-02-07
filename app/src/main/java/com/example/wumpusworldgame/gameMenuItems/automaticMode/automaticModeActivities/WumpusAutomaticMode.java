@@ -13,10 +13,9 @@ import com.example.wumpusworldgame.gameMenuItems.automaticMode.AutomaticModeGrid
 import com.example.wumpusworldgame.services.Utility;
 import java.util.ArrayList;
 import java.util.LinkedList;
-import game.automatic_player.AutomaticPlayer;
+import game.session.player.AutomaticPlayer;
 import game.session.configuration.Starter;
 import game.structure.cell.Cell;
-import game.structure.elements.PlayableCharacter;
 import game.structure.map.GameMap;
 /** class WumpusAutomaticMode
  * giocatore automatico per la modalita' wumpus

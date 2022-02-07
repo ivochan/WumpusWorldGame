@@ -1,13 +1,2 @@
-include ':huntthewumpusgame'
-include ':huntthewumpusornot'
-include ':huntthewumpusornot'
-include ':huntthewumpus'
-include ':huntthewumpus'
-include ':huntthewumpusgame'
-include ':huntthewumpus'
-include ':huntthewumpusgame'
-include ':huntthewumpus'
-include ':hunt_the_wumpus'
-include ':wumpus_world_game_java'
 include ':app'
 rootProject.name = "WumpusWorldGame"
