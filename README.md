@@ -1,6 +1,6 @@
-# Wumpus World Game
+## Wumpus World Game
 
-## Introduzione
+### Introduzione
 
 Questo progetto rappresenta l'implementazione, in **Android** e **Java**, del videogioco conosciuto con il nome di "**Hunt the Wumpus**", realizzato nel 1972 da Gregory Yob.
 
@@ -14,17 +14,38 @@ Inoltre, bisogna evitare le stanze con i pozzi, in cui si corre il rischio di ca
 
 
 
-## Struttura del progetto
+### Struttura del progetto
 
-Il codice utilizzato per implementare il back-end questa versione del gioco è stato scritto in Java.
-
-Per quanto riguarda, la parte grafica dell'applicazione, ovvero l'interfaccia utente, è stata realizzata in Android.
-
+L’applicazione è stata progettata in maniera tale che fosse semplice ed intuitiva per l’utente, implementando due differenti modalità di gioco e mettendo a disposizione la possibilità di vedere la soluzione di ogni partita avviata, lasciando che sia un agente software a concludere la sessione di gioco corrente.
+Per quanto riguarda la struttura del progetto, si è cercato di rispettare quelle che sono le convenzioni adottate nello sviluppo di applicazioni Android, suddividendo nei rispettivi package i componenti dello stesso tipo, come si è fatto, ad esempio, per la definizione dell’aspetto di ogni activity, descritto in un file .xml contenuto in layout o per la memorizzazione delle immagini utilizzate, contenute nella cartella drawable, insieme ai file .xml che realizzano gli sfondi delle attività e dei loro componenti.
+Il codice utilizzato per implementare il back-end questa versione del gioco è stato scritto in **Java**.
+Per quanto riguarda, la parte grafica dell'applicazione, ovvero l'interfaccia utente, è stata realizzata in **Android**.
 In questa versione del gioco è stata prevista, per il giocatore, la possibilità di interpretare, indifferentemente, il ruolo del **Wumpus** o del cacciatore, a cui ci si riferisce come **Avventuriero**.
 
 
+### Organizzazione delle classi
 
-## TODO
+Per quanto riguarda le relazioni tra le classi scritte in Java e quelle fornite dalle librerie Android, si avranno le seguenti dipendenze:
+•	Le classi di tipo Activity, ovvero quelle che rappresentano le schermate visualizzate dall’utente, estendono AppCompatActivity;
+•	Le classi che definiscono un componente di tipo Adapter, come AutomaticGridViewAdapter e GridViewCustomAdapter, utilizzate per creare degli adapter, cioè dei widget che consentono di visualizzare le informazioni che contengono sullo schermo del dispositivo, che siano personalizzati per l’applicazione sviluppata, dovranno estendere la classe BaseAdapter;
+•	La classe GameSettingsFragment, utilizzata per definire la schermata delle impostazioni richiamata dall’activity GameSetting, essendo implementata adottando le convezioni stabilite dalla maggior parte degli sviluppatori Android, estende la classe astratta PreferenceFragmentCompat;
+•	La classe TypeWriter, scritta per realizzare un testo animato, che viene visualizzato, carattere per carattere, nell’attività principale, estende la classe AppCompatTextView, del package widget;
+
+
+### Organizzazione delle risorse
+
+Le risorse esterne, come i messaggi visualizzati nell’interfaccia utente o il layout definito per ciascuna activity, sono gestite tramite una determinata struttura, che ne prevede l’organizzazione ed il raggruppamento in specifiche cartelle, quali:
+•	Src, per quanto riguarda i package e le classi che realizzano l’applicazione vera e propria, dal punto di vista implementativo;
+•	Res, che racchiude le risorse esterne, come immagini e clip audio, utilizzate dall’applicazione.
+Per quanto riguarda la cartella res, questa è costituita, nello specifico, da alcune sottodirectory, ovvero:
+•	Drawable, che contiene le immagini e i file .xml che descrivono gli sfondi e l’aspetto dei componenti;
+•	Layout, in cui si trovano i file .xml utilizzati per definire i layout delle attività e dei widget;
+•	Values, che contiene gli stili ed i colori che sono stati impiegati nella definizione dei componenti dell’interfaccia utente, i messaggi di testo riportati nel file strings.xml per ogni lingua prevista e la cartella “themes”, in cui sono raccolti il tema chiaro (light mode) e quello scuro (night mode);
+•	Raw, la cartella dove sono memorizzate le clip audio;
+•	Menu, in cui si trovano i file .xml che definiscono gli stili, rispettivamente, del menu principale e del menu della sessione di gioco;
+•	Xml, che contiene il file “PreferenceScreen” dedito alla creazione della schermata delle impostazioni;
+
+### TODO
 
 - ~~scegliere clip audio per la modalità wumpus;~~
 - inserire nella main activity il menu con:
