@@ -146,11 +146,6 @@ Per quanto riguarda la cartella res, questa è costituita, nello specifico, da a
 - ~~applicare lo stile personalizzato alla dialog del feedback~~
 - ~~aggiungere i permessi di lettura e scrittura della memoria esterna~~
 - ~~aggiungere il provider per la condivisione dei file nei dispositivi con sdk superiori alla 23~~
-- Disegnare elementi grafici, quali:
-  - icona PG
-  - icone NPG
-  - sfondi
-  - icona app
 - activity per la risoluzione automatica della partita:
 
   - test del giocatore automatico;
@@ -161,5 +156,15 @@ Per quanto riguarda la cartella res, questa è costituita, nello specifico, da a
   - ~~creare un adapter distinto da quello delle classi di gioco interattive;~~
   - ~~inserire dei flag per gestire il tentativo di sparo, in modo da disambiguare le risorse con le classi di gioco interattivo;~~
   - ~~aggiornare il campo di testo della disponibilita' del colpo;~~
+- Disegnare elementi grafici, quali:
+  - icona PG
+  - icone NPG
+  - sfondi
+  - icona app
+- Implementare un nuovo algoritmo di risoluzione automatica
+- Creare delle colonne sonore originali
+- Pubblicare sull'app store
+- Evidenziare nei menu la voce che viene selezionata
+- Tradurre in inglese la presentazione sugli agenti software
 
 
